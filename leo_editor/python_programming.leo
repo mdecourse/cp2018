@@ -12,8 +12,13 @@
 <v t="leo.20180628214148.1" a="E"><vh>執行以下程式, 按下 ctrl+b</vh>
 <v t="leo.20180628214744.1" a="E"><vh>基本程式語法</vh>
 <v t="leo.20180628214804.1"><vh>print 範例</vh></v>
+<v t="leo.20180629092205.1"><vh>newHeadline</vh></v>
 </v>
 <v t="leo.20180628215611.1" a="E"><vh>PyQt5 程式範例</vh>
+<v t="leo.20180628231335.1"><vh>QWidget 範例</vh></v>
+<v t="leo.20180629100654.1" a="E"><vh>QSlider 範例</vh>
+<v t="leo.20180629101330.1"><vh>QSlider 物件導向範例</vh></v>
+</v>
 <v t="leo.20180628221909.1"><vh>Calculator</vh></v>
 <v t="leo.20180628221051.1"><vh>PyQt5 參考資料</vh></v>
 </v>
@@ -210,8 +215,11 @@ from leo.core.leoQt import QtCore
 # 在 Leo Editor 中開發, 必須以 g.app.gui.qtApp 取代上列中的 QApplication
 from leo.core.leoQt import QtWidgets
 
+# Button 類別繼承 QtWidgets.QToolButton
 class Button(QtWidgets.QToolButton):
+    # 建構子接受 text 輸入變數與 parent 變數, 其中 parent 內建為 None
     def __init__(self, text, parent=None):
+        # 此 Button 將具備所有 parent 的起始建構子內容
         super(Button, self).__init__(parent)
 
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -518,5 +526,90 @@ if __name__ == '__main__':
     calc.show()
     #sys.exit(app.exec_())
     g.app.my_widgets = [calc]</t>
+<t tx="leo.20180628231335.1">import sys 
+#from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton) 
+from leo.core.leoQt import QtWidgets
+#from PyQt5.QtGui import QFont    
+from leo.core.leoQt import QtGui 
+ 
+class Example(QtWidgets.QWidget):
+    def __init__(self):
+        super(Example,self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        QtWidgets.QToolTip.setFont(QtGui.QFont('SansSerif', 10))
+        self.setToolTip('This is a &lt;b&gt;QWidget&lt;/b&gt; widget')
+        btn = QtWidgets.QPushButton('Button', self)
+        btn.setToolTip('This is a &lt;b&gt;QPushButton&lt;/b&gt; widget')
+        btn.resize(btn.sizeHint())
+        btn.move(50, 50) 
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Tooltips')
+        self.show()
+        
+ex = Example() </t>
+<t tx="leo.20180629092205.1">g.es(help(int))</t>
+<t tx="leo.20180629100654.1">#import sys
+
+from leo.core.leoQt import QtWidgets  
+from leo.core.leoQt import QtCore
+
+#app = QApplication(sys.argv)
+app = g.app.gui.qtApp
+
+spinBox = QtWidgets.QSpinBox()
+spinBox.setPrefix("$")
+spinBox.setRange(0, 100)
+
+slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+slider.setRange(0, 100)
+
+spinBox.valueChanged.connect(slider.setValue)
+slider.valueChanged.connect(spinBox.setValue)
+
+layout = QtWidgets.QHBoxLayout()
+layout.addWidget(spinBox)
+layout.addWidget(slider)
+
+widget = QtWidgets.QWidget()
+widget.setLayout(layout)
+widget.show()
+
+#app.exec()
+g.app.my_widgets = [widget]</t>
+<t tx="leo.20180629101330.1">#import sys
+from leo.core.leoQt import QtWidgets  
+from leo.core.leoQt import QtCore
+
+class MyWidget(QtWidgets.QWidget):
+    def __init__(self, parent = None):
+        super().__init__()
+        self.createLayout()
+        self.spinBox.valueChanged.connect(self.slider.setValue)
+        self.slider.valueChanged.connect(self.spinBox.setValue)
+    
+    def createLayout(self):
+        self.spinBox = QtWidgets.QSpinBox()
+        self.spinBox.setPrefix("$")
+        self.spinBox.setRange(0, 100)
+        
+        self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.slider.setRange(0, 100)
+        
+        layout = QtWidgets.QHBoxLayout()
+        layout.addWidget(self.spinBox)
+        layout.addWidget(self.slider)
+        self.setLayout(layout)
+
+
+#app = QApplication(sys.argv)
+app = g.app.gui.qtApp
+
+widget = MyWidget()
+widget.show()
+
+#app.exec()
+g.app.my_widgets = [widget]</t>
 </tnodes>
 </leo_file>
