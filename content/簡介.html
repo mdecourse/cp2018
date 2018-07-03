@@ -1,0 +1,247 @@
+<!doctype html>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>CMSimply - Simple Cloud CMS in Python 3</title> <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- for LaTeX equations -->
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+<script src="./../static/fengari-web.js"></script>
+<script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../static/gearUtils-05.js"></script>
+<!-- for Brython -->
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+
+<script src="./../static/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
+    $("ul.topmenu > li ul li:has(ul) > a").append('<div class="arrow-right"></div>');
+});
+</script>
+
+</head><header><h1>2018 計算機程式教學手冊</h1> <confmenu>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
+
+</ul>
+</confmenu></header>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='解讀網頁內容.html'>解讀網頁內容</a><li><a href='V-rep.html'>V-rep</a><li><a href='輔助設計套件.html'>輔助設計套件</a></li></ul><li><a href='分組專題.html'>分組專題</a></li></ul></nav><section> <a href='工具.html'>Next</a> >> 工具<br /><h1>簡介</h1>
+<p><a href="https://coggle.it/diagram/WzOQWjCAbuRWow6A/t/%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A8%8B%E5%BC%8F/544030eebbbe4f0d10aff84c8ee2e10a8c36faa1270808c275dc189d98cfcc3e">2018 Fall 計算機程式課程規劃心智圖</a>&nbsp;(under scrum1 At mde)</p>
+<p>計算機程式課程想要解決的問題:</p>
+<ol>
+<li>本課程完全不需要使用紙本資料, 所有教材都以數位形式存在.</li>
+<li>要求學員編寫紙本筆記的目的, 在訓練手到學習, 至少寫紙本筆記時, 手可以暫時離開手機:-)</li>
+<li>數位資料處理: 能夠保存各階段的版本, 完成呈現事件的歷程資料.</li>
+<li>透過網路協同: 多人可同步或非同步執行專案, 突破時間與空間的限制.</li>
+<li>實作前模擬: 將機械與電子電機相關整合系統, 以資訊科技模擬呈現.</li>
+<li>人工智慧應用: 車牌辨識、專家系統與創新設計, 計算機程式經歷輔助、引導, 已經逐步進入自主創新世代.</li>
+</ol>
+<p>學習 Python 與 PyQt 用於視窗程式開發:</p>
+<p>利用 Python 與 PyQt 可開發 Windows 10 環境執行的視窗程式.&nbsp;</p>
+<p>課程採用可攜程式系統, 使用者可以從 <a href="https://drive.google.com/open?id=1OBDoW2aYhN6jsf67dXSvV0wwnwXuJmYR">leo1807</a> 下載初步所需的隨身系統. 由於此系統採用最新的 Python 3.7.0 解譯器, 目前尚無法直接以 pip 安裝 pyqt5-tools 模組, 因此無法使用 Qt Designer 的圖形介面工具. 使得 Eric6 IDE 的導入暫時無法使用.</p>
+<p>學習 C 用於 <a href="https://www.tinkercad.com/">Tinkercad</a> Arduino 控制卡模擬:</p>
+<p>學習 Lua 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
+<p>學習 Javascript 與&nbsp; <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 用於網頁動態模擬:</p>
+<p>
+<script>
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./']});
+}
+</script>
+</p>
+<p><canvas id="cango_gear" width="700" height="400"></canvas></p>
+<p>
+<script type="text/python">
+# 將 導入的 document 設為 doc 主要原因在於與舊程式碼相容
+from browser import document as doc
+# 由於 Python3 與 Javascript 程式碼已經不再混用, 因此來自 Javascript 的變數, 必須居中透過 window 物件轉換
+from browser import window
+import math
+
+# 主要用來取得畫布大小
+canvas = doc["cango_gear"]
+# 此程式採用 Cango Javascript 程式庫繪圖, 因此無需 ctx
+ctx = canvas.getContext("2d")
+cango = window.Cango.new
+# 針對變數的轉換, shapeDefs 在 Cango 中資料型別為變數, 可以透過 window 轉換
+shapedefs = window.shapeDefs
+# 目前 Cango 結合 Animation 在 Brython 尚無法運作, 此刻只能繪製靜態圖形
+# in CangoAnimation.js
+#interpolate1 = window.interpolate
+# Cobi 與 createGearTooth 都是 Cango Javascript 程式庫中的物件
+#cobj = window.Cobj.new
+shape = window.Shape.new
+path = window.Path.new
+creategeartooth = window.createGearTooth.new
+
+tweener = window.Tweener.new
+# 經由 Cango 轉換成 Brython 的 cango, 指定將圖畫在 id="cango_gear" 的 canvas 上
+cgo = cango("cango_gear")
+
+######################################
+# 畫正齒輪輪廓
+#####################################
+def cangoGear(n, m, pa):
+    # n 為齒數
+    #n = 17
+    # pa 為壓力角
+    #pa = 25
+    # m 為模數, 根據畫布的寬度, 計算適合的模數大小
+    # Module = mm of pitch diameter per tooth
+    #m = 0.8*canvas.width/n
+    # pr 為節圓半徑
+    pr = n*m/2 # gear Pitch radius
+    # generate gear
+    data = creategeartooth(m, n, pa)
+    # Brython 程式中的 print 會將資料印在 Browser 的 console 區
+    #print(data)
+    gearTooth = path(data, {
+      "fillColor":"#ddd0dd",
+      "border": True,
+      "strokeColor": "#606060" })
+    gearTooth.rotate(180/n) # rotate gear 1/2 tooth to mesh
+    # 單齒的齒形資料經過旋轉後, 將資料複製到 gear 物件中
+    gear = gearTooth.dup()
+    # gear 為單一齒的輪廓資料
+    #cgo.render(gearTooth)
+
+    # 利用單齒輪廓旋轉, 產生整個正齒輪外形
+    for i in range(1, n):
+        # 將 gearTooth 中的資料複製到 newTooth
+        newTooth = gearTooth.dup()
+        # 配合迴圈, newTooth 的齒形資料進行旋轉, 然後利用 appendPath 方法, 將資料併入 gear
+        newTooth.rotate(360*i/n)
+        # appendPath 為 Cango 程式庫中的方法, 第二個變數為 True, 表示要刪除最前頭的 Move to SVG Path 標註符號
+        #gear.appendPath(newTooth, True) # trim move command = True old
+        gear.appendPath(newTooth)
+
+    # 建立軸孔
+    # add axle hole, hr 為 hole radius
+    hr = 0.6*pr # diameter of gear shaft
+    shaft = path(shapedefs.circle(hr))
+    #shaft.revWinding()
+    gear.appendPath(shaft) # retain the 'moveTo' command for shaft sub path
+
+    # setup the animation
+    # backlash (mm)
+    bklsh = 0.04*m
+    # centre shift to make backlash
+    dC = bklsh/(2*math.tan(math.pi*pa/180))
+    # np 為小齒輪齒數
+    np = 13
+    # gear ratio
+    gr = n/np              
+    gearConfig = {'cx':-pr, 'cy':0, 'degs':[0, 360]}
+    # gr*0.666 rpm
+    #pinionConfig = {'cx':pr+dC, 'cy':0, 'degs':[0, -gr*360]}
+    # 0.666 rpm
+    # 目前並非以 tweener 執行動畫
+    #twnr = tweener(0, 90000, "loop")
+    return gear
+
+# 設定兩齒齒數
+n = 17
+n2 = 11
+n3 = 17
+reduced_ratio = 0.5
+# 使用 80% 的畫布寬度
+m = 0.8*canvas.width/((n+n2+n3)*reduced_ratio)
+# 設定共同的壓力角
+pa = 25
+# n 齒輪的節圓半徑
+pr = n*m/2
+# n2 齒輪的節圓半徑
+pr2 = n2*m/2
+pr3 = n3*m/2
+# 建立 gear
+gear = cangoGear(n, m, pa)
+cx = canvas.width/2
+cy = canvas.height/2
+#gear.translate(cx, cy)
+# render 繪出靜態正齒輪輪廓
+#cgo.render(gear)
+# 利用 gear 資料複製一份, 命名為 gear1
+#gear1 = gear.dup()
+# 建立 gear1
+gear1 = cangoGear(n2, m, pa)
+gear2 = cangoGear(n3, m, pa)
+
+
+from time import time
+from browser.timer import request_animation_frame as raf
+from browser.timer import set_interval
+
+deg = math.pi/180
+
+def draw():
+    cgo.clearCanvas()
+    rotate_speed = 6*deg
+    gear.rotate(rotate_speed)
+    # 在特定位置, 以特定 scale, 特定 degs 執行 render
+    # 設定囓合點在畫布正中央
+    # 囓合點往左偏 pr/2 即為 n 齒輪的圓心 x 座標
+    #cgo.render(gear, {'x':cx-pr*reduced_ratio, 'y':cy, 'scl':reduced_ratio, 'degs':0})
+    gear.transform.translate(cx-(pr+pr2)*reduced_ratio, cy)
+    gear.transform.scale(reduced_ratio)
+    gear.transform.rotate(0)
+    cgo.render(gear)
+    #cgo.render(gear, {'x':cx-(pr+pr2)*reduced_ratio, 'y':cy, 'scl':0.5, 'degs':0})
+    # 根據兩齒輪齒數比決定 n2 齒輪轉速
+    
+    gear1.rotate(-(rotate_speed)*n/n2)
+    gear1.transform.translate(cx, cy)
+    gear1.transform.scale(reduced_ratio)
+    gear1.transform.rotate(180+(360/n2/2))
+    cgo.render(gear1)
+    
+    gear2.rotate(((rotate_speed)*n/n2)*(n2/n3))
+    gear2.transform.translate(cx+(pr2+pr3)*reduced_ratio, cy)
+    gear2.transform.scale(reduced_ratio)
+    gear2.transform.rotate(180+(360/n3/2)+(180+(360/n2/2))*n2/n3)
+    cgo.render(gear2)
+    
+    # 囓合點往右偏 pr2/2 即為 n2 齒輪的圓心 x 座標, 且 n2 齒轉 180 加一齒角度後囓合
+    #cgo.render(gear1, {'x':cx, 'y':cy, 'scl':reduced_ratio, 'degs':180+(360/n2/2)})
+    #cgo.render(gear2, {'x':cx+(pr2+pr3)*reduced_ratio, 'y':cy, 'scl':reduced_ratio, 'degs':180+(360/n3/2)+(180+(360/n2/2))*n2/n3})
+    
+set_interval(draw, 2)
+</script>
+</p>
+<br /> <a href='工具.html'>Next</a> >> 工具</section></div></body></html>
