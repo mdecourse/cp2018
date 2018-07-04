@@ -248,7 +248,7 @@ if uwsgi:
     application = flaskapp.app
 else:
     # 表示在近端執行, 以 python3 wsgi.py 執行
-    flaskapp.app.run(host='127.0.0.1', port=9443, debug=True, ssl_context=context)
+    flaskapp.app.run(host='127.0.0.1', port=8443, debug=True, ssl_context=context)
 
 </t>
 <t tx="amd.20160714230833.1"></t>
@@ -813,7 +813,7 @@ def set_admin_css():
 '''+syntaxhighlight()
 
     outstring += '''
-&lt;script src="static/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="/static/jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 $(function(){
     $("ul.topmenu&gt; li:has(ul) &gt; a").append('&lt;div class="arrow-right"&gt;&lt;/div&gt;');
