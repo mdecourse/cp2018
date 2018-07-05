@@ -885,34 +885,38 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;link type="text/css" rel="stylesheet" href="/static/syntaxhighlighter/css/shCoreDefault.css"/&gt;
 &lt;script type="text/javascript"&gt;SyntaxHighlighter.all();&lt;/script&gt;
 
-&lt;!-- for LaTeX equations --&gt;
-&lt;script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-init_mathjax = function() {
-    if (window.MathJax) {
-        // MathJax loaded
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [ ['$','$'], ["\\\\(","\\\\)"] ],
-                displayMath: [ ['$$','$$'], ["\\\\[","\\\\]"] ]
-            },
-            displayAlign: 'left', // Change this to 'center' to center equations.
-            "HTML-CSS": {
-                styles: {'.MathJax_Display': {"margin": 0}}
-            }
-        });
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+&lt;!-- for LaTeX equations 暫時不用
+    &lt;script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+    init_mathjax = function() {
+        if (window.MathJax) {
+            // MathJax loaded
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\\\(","\\\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\\\[","\\\\]"] ]
+                },
+                displayAlign: 'left', // Change this to 'center' to center equations.
+                "HTML-CSS": {
+                    styles: {'.MathJax_Display': {"margin": 0}}
+                }
+            });
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
     }
-}
-init_mathjax();
-&lt;/script&gt;
+    init_mathjax();
+    &lt;/script&gt;
+ --&gt;
+ &lt;!-- 暫時不用
 &lt;script src="/static/fengari-web.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="/static/Cango-13v08-min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="/static/CangoAxes-4v01-min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="/static/gearUtils-05.js"&gt;&lt;/script&gt;
-&lt;!-- for Brython --&gt;
+--&gt;
+&lt;!-- for Brython 暫時不用
 &lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
 &lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
+--&gt;
 '''
 </t>
 <t tx="amd.20160714232140.1"># 與 file_selector 搭配的取檔程式
@@ -2238,7 +2242,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/&gt;
 &lt;script type="text/javascript"&gt;SyntaxHighlighter.all();&lt;/script&gt;
 
-&lt;!-- for LaTeX equations --&gt;
+&lt;!-- for LaTeX equations 暫時不用
 &lt;script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 init_mathjax = function() {
@@ -2259,13 +2263,17 @@ init_mathjax = function() {
 }
 init_mathjax();
 &lt;/script&gt;
+--&gt;
+&lt;!-- 暫時不用
 &lt;script src="./../static/fengari-web.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="./../static/Cango-13v08-min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="./../static/gearUtils-05.js"&gt;&lt;/script&gt;
-&lt;!-- for Brython --&gt;
+--&gt;
+&lt;!-- for Brython 暫時不用
 &lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
 &lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
+--&gt;
 '''
 </t>
 <t tx="leo.20180701102916.1">去除 OpenShift 相關程式碼

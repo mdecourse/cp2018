@@ -17,7 +17,7 @@
 <link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
 <script type="text/javascript">SyntaxHighlighter.all();</script>
 
-<!-- for LaTeX equations -->
+<!-- for LaTeX equations 暫時不用
 <script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
 <script type="text/javascript">
 init_mathjax = function() {
@@ -38,13 +38,17 @@ init_mathjax = function() {
 }
 init_mathjax();
 </script>
+-->
+<!-- 暫時不用
 <script src="./../static/fengari-web.js"></script>
 <script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
 <script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
 <script type="text/javascript" src="./../static/gearUtils-05.js"></script>
-<!-- for Brython -->
+-->
+<!-- for Brython 暫時不用
 <script src="https://scrum-3.github.io/web/brython/brython.js"></script>
 <script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
 
 <script src="./../static/jquery.js"></script>
 <script type="text/javascript">
@@ -61,7 +65,7 @@ $(function(){
 
 </ul>
 </confmenu></header>
-<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='機械設計.html'>機械設計</a></li></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='解讀網頁內容.html'>解讀網頁內容</a><li><a href='V-rep.html'>V-rep</a><li><a href='輔助設計套件.html'>輔助設計套件</a></li></ul><li><a href='分組專題.html'>分組專題</a></li></ul></nav><section>工具 << <a href='工具.html'>Previous</a> <a href='Leo Editor.html'>Next</a> >> Leo Editor<br /><h1>Git</h1>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='機械設計.html'>機械設計</a></li></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='解讀網頁內容.html'>解讀網頁內容</a><li><a href='查英文單字.html'>查英文單字</a><li><a href='網際繪圖.html'>網際繪圖</a><li><a href='V-rep.html'>V-rep</a><li><a href='輔助設計套件.html'>輔助設計套件</a></li></ul><li><a href='分組專題.html'>分組專題</a></li></ul></nav><section>工具 << <a href='工具.html'>Previous</a> <a href='Leo Editor.html'>Next</a> >> Leo Editor<br /><h1>Git</h1>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a>&nbsp;</p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>&nbsp;</p>
 <p><a href="https://github.com/">https://github.com/</a>&nbsp;</p>
@@ -86,6 +90,10 @@ $(function(){
 <p>若網路直接連線過慢, 可以透過 proxy 執行 git</p>
 <p>git config --global http.proxy http://proxy.kmol.info:3128</p>
 <p>以上的 git config 會將設定存入 Y:/home/.gitconfig 檔案中</p>
-<p>接下來測試以協同模式共同編輯純文字檔, 以第一組為例:</p>
-<p>bg1.txt 內容先由組長建立, 並加入自己的學號後, 新增提交推送到遠端倉儲,</p>
-<p>之後其他組員以 git clone 各組倉儲後, 開始在近端同時編輯 bg1.txt, 然後加入自己的 學號後, 從近端進行新增提交與推送, 將改版資料傳到遠端, 此時只有第一位組員可以直接 提交推送, 其他組員則必須先 git pull 後處理衝突, 合併資料後, 再提交推送.</p><br />工具 << <a href='工具.html'>Previous</a> <a href='Leo Editor.html'>Next</a> >> Leo Editor</section></div></body></html>
+<p>刪除近端與遠端的 Git 分支.</p>
+<p>To delete a local branch</p>
+<p>git branch -D the_local_branch</p>
+<p>To remove a remote branch</p>
+<p>git push origin :the_remote_branch</p>
+<p>or</p>
+<p>git push origin --delete the_remote_branch</p><br />工具 << <a href='工具.html'>Previous</a> <a href='Leo Editor.html'>Next</a> >> Leo Editor</section></div></body></html>

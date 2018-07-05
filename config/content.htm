@@ -18,178 +18,17 @@
 <p>學習 Lua 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
 <p><span>Lua is a powerful, fast, lightweight, embeddable scripting language.</span></p>
 <p>學習 Javascript 與&nbsp; <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 用於網頁動態模擬:</p>
-<p>
-<script>
-window.onload=function(){
-// 設定 data/py 為共用程式路徑
-brython({debug:1, pythonpath:['./']});
-}
-</script>
-</p>
-<p><canvas id="cango_gear" width="700" height="400"></canvas></p>
-<p>
-<script type="text/python">
-# 將 導入的 document 設為 doc 主要原因在於與舊程式碼相容
-from browser import document as doc
-# 由於 Python3 與 Javascript 程式碼已經不再混用, 因此來自 Javascript 的變數, 必須居中透過 window 物件轉換
-from browser import window
-import math
-
-# 主要用來取得畫布大小
-canvas = doc["cango_gear"]
-# 此程式採用 Cango Javascript 程式庫繪圖, 因此無需 ctx
-ctx = canvas.getContext("2d")
-cango = window.Cango.new
-# 針對變數的轉換, shapeDefs 在 Cango 中資料型別為變數, 可以透過 window 轉換
-shapedefs = window.shapeDefs
-# 目前 Cango 結合 Animation 在 Brython 尚無法運作, 此刻只能繪製靜態圖形
-# in CangoAnimation.js
-#interpolate1 = window.interpolate
-# Cobi 與 createGearTooth 都是 Cango Javascript 程式庫中的物件
-#cobj = window.Cobj.new
-shape = window.Shape.new
-path = window.Path.new
-creategeartooth = window.createGearTooth.new
-
-tweener = window.Tweener.new
-# 經由 Cango 轉換成 Brython 的 cango, 指定將圖畫在 id="cango_gear" 的 canvas 上
-cgo = cango("cango_gear")
-
-######################################
-# 畫正齒輪輪廓
-#####################################
-def cangoGear(n, m, pa):
-    # n 為齒數
-    #n = 17
-    # pa 為壓力角
-    #pa = 25
-    # m 為模數, 根據畫布的寬度, 計算適合的模數大小
-    # Module = mm of pitch diameter per tooth
-    #m = 0.8*canvas.width/n
-    # pr 為節圓半徑
-    pr = n*m/2 # gear Pitch radius
-    # generate gear
-    data = creategeartooth(m, n, pa)
-    # Brython 程式中的 print 會將資料印在 Browser 的 console 區
-    #print(data)
-    gearTooth = path(data, {
-      "fillColor":"#ddd0dd",
-      "border": True,
-      "strokeColor": "#606060" })
-    gearTooth.rotate(180/n) # rotate gear 1/2 tooth to mesh
-    # 單齒的齒形資料經過旋轉後, 將資料複製到 gear 物件中
-    gear = gearTooth.dup()
-    # gear 為單一齒的輪廓資料
-    #cgo.render(gearTooth)
-
-    # 利用單齒輪廓旋轉, 產生整個正齒輪外形
-    for i in range(1, n):
-        # 將 gearTooth 中的資料複製到 newTooth
-        newTooth = gearTooth.dup()
-        # 配合迴圈, newTooth 的齒形資料進行旋轉, 然後利用 appendPath 方法, 將資料併入 gear
-        newTooth.rotate(360*i/n)
-        # appendPath 為 Cango 程式庫中的方法, 第二個變數為 True, 表示要刪除最前頭的 Move to SVG Path 標註符號
-        #gear.appendPath(newTooth, True) # trim move command = True old
-        gear.appendPath(newTooth)
-
-    # 建立軸孔
-    # add axle hole, hr 為 hole radius
-    hr = 0.6*pr # diameter of gear shaft
-    shaft = path(shapedefs.circle(hr))
-    #shaft.revWinding()
-    gear.appendPath(shaft) # retain the 'moveTo' command for shaft sub path
-
-    # setup the animation
-    # backlash (mm)
-    bklsh = 0.04*m
-    # centre shift to make backlash
-    dC = bklsh/(2*math.tan(math.pi*pa/180))
-    # np 為小齒輪齒數
-    np = 13
-    # gear ratio
-    gr = n/np              
-    gearConfig = {'cx':-pr, 'cy':0, 'degs':[0, 360]}
-    # gr*0.666 rpm
-    #pinionConfig = {'cx':pr+dC, 'cy':0, 'degs':[0, -gr*360]}
-    # 0.666 rpm
-    # 目前並非以 tweener 執行動畫
-    #twnr = tweener(0, 90000, "loop")
-    return gear
-
-# 設定兩齒齒數
-n = 17
-n2 = 11
-n3 = 17
-reduced_ratio = 0.5
-# 使用 80% 的畫布寬度
-m = 0.8*canvas.width/((n+n2+n3)*reduced_ratio)
-# 設定共同的壓力角
-pa = 25
-# n 齒輪的節圓半徑
-pr = n*m/2
-# n2 齒輪的節圓半徑
-pr2 = n2*m/2
-pr3 = n3*m/2
-# 建立 gear
-gear = cangoGear(n, m, pa)
-cx = canvas.width/2
-cy = canvas.height/2
-#gear.translate(cx, cy)
-# render 繪出靜態正齒輪輪廓
-#cgo.render(gear)
-# 利用 gear 資料複製一份, 命名為 gear1
-#gear1 = gear.dup()
-# 建立 gear1
-gear1 = cangoGear(n2, m, pa)
-gear2 = cangoGear(n3, m, pa)
-
-
-from time import time
-from browser.timer import request_animation_frame as raf
-from browser.timer import set_interval
-
-deg = math.pi/180
-
-def draw():
-    cgo.clearCanvas()
-    rotate_speed = 6*deg
-    gear.rotate(rotate_speed)
-    # 在特定位置, 以特定 scale, 特定 degs 執行 render
-    # 設定囓合點在畫布正中央
-    # 囓合點往左偏 pr/2 即為 n 齒輪的圓心 x 座標
-    #cgo.render(gear, {'x':cx-pr*reduced_ratio, 'y':cy, 'scl':reduced_ratio, 'degs':0})
-    gear.transform.translate(cx-(pr+pr2)*reduced_ratio, cy)
-    gear.transform.scale(reduced_ratio)
-    gear.transform.rotate(0)
-    cgo.render(gear)
-    #cgo.render(gear, {'x':cx-(pr+pr2)*reduced_ratio, 'y':cy, 'scl':0.5, 'degs':0})
-    # 根據兩齒輪齒數比決定 n2 齒輪轉速
-    
-    gear1.rotate(-(rotate_speed)*n/n2)
-    gear1.transform.translate(cx, cy)
-    gear1.transform.scale(reduced_ratio)
-    gear1.transform.rotate(180+(360/n2/2))
-    cgo.render(gear1)
-    
-    gear2.rotate(((rotate_speed)*n/n2)*(n2/n3))
-    gear2.transform.translate(cx+(pr2+pr3)*reduced_ratio, cy)
-    gear2.transform.scale(reduced_ratio)
-    gear2.transform.rotate(180+(360/n3/2)+(180+(360/n2/2))*n2/n3)
-    cgo.render(gear2)
-    
-    # 囓合點往右偏 pr2/2 即為 n2 齒輪的圓心 x 座標, 且 n2 齒轉 180 加一齒角度後囓合
-    #cgo.render(gear1, {'x':cx, 'y':cy, 'scl':reduced_ratio, 'degs':180+(360/n2/2)})
-    #cgo.render(gear2, {'x':cx+(pr2+pr3)*reduced_ratio, 'y':cy, 'scl':reduced_ratio, 'degs':180+(360/n3/2)+(180+(360/n2/2))*n2/n3})
-    
-set_interval(draw, 2)
-</script>
-</p><h2>機械設計</h2>
+<p><img src="/images/three_gears.png" width="790" height="367" alt=""></p><h2>機械設計</h2>
 <p>機械設計與表達</p>
 <p>設計是一種明確與具體的表達, 而且是在仔細思考、多方考量後所完成的表達, 表達具有六種形式, 包括口語、文字、2D、3D、數學與實體表達, 設計的結果可以讓執行者有所依循, 根據指示執行後, 可得預期之結果.</p>
 <p>機械是一種器物, 而且是由固體、流體與軟體元件精巧組合而成, 可互動運作, 達成特定功能之器物.</p>
 <p>因此機械設計就是靈活運用六種表達, 明確說明如何透過固體、流體與軟體元件之互動運作, 而能達成預定結果之明確與具體表達.</p>
 <p>參與機械設計的工程師, 為順利完成任務, 解決產品開發過程所面臨的各項問題, 展現創造力的三種必備能力: 自學能力、執行能力與想像能力.</p>
-<p>由於機械設計流程牽涉許多固體、流體與軟體元件配置, 而且當多名成員在協同設計過程中, 會於不同時間納入各種機械設計組成及六種表達內容, 因此必須要設法運用組態管理 (Configuration Management) 系統, 呈現各時間點詳細的組成內容與狀態.</p><h1>工具</h1><p>USB 可攜程式開發系統</p><p>可解譯 ANSI C</p><p>可解譯 Python</p><p>可解譯 Lua</p><h2>Git</h2>
+<p>由於機械設計流程牽涉許多固體、流體與軟體元件配置, 而且當多名成員在協同設計過程中, 會於不同時間納入各種機械設計組成及六種表達內容, 因此必須要設法運用組態管理 (Configuration Management) 系統, 呈現各時間點詳細的組成內容與狀態.</p><h1>工具</h1>
+<p>USB 可攜程式開發系統</p>
+<p>可解譯 ANSI C</p>
+<p>可解譯 Python</p>
+<p>可解譯 Lua</p><h2>Git</h2>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a>&nbsp;</p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>&nbsp;</p>
 <p><a href="https://github.com/">https://github.com/</a>&nbsp;</p>
@@ -1607,142 +1446,7 @@ for item in top:
 
 檔案.write(all_text)
 print("done")</pre>
-<p></p><h2>網際繪圖</h2>
-<!-- 啟動 brython() -->
-<p>
-<script>
-window.onload=function(){
-brython(1);
-}
-</script>
-</p>
-<!-- 以下利用 Brython 程式執行繪圖 -->
-<p><canvas id="taiwan_flag" width="300" height="200"></canvas></p>
-<p>
-<script type="text/python3">
-# 導入 doc
-from browser import document as doc
-import math
-
-# 準備繪圖畫布
-canvas = doc["taiwan_flag"]
-ctx = canvas.getContext("2d")
-# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
-# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
-# 以下採用 canvas 原始座標繪圖
-flag_w = canvas.width
-flag_h = canvas.height
-circle_x = flag_w/4
-circle_y = flag_h/4
-# 先畫滿地紅
-ctx.fillStyle='rgb(255, 0, 0)'
-ctx.fillRect(0,0,flag_w,flag_h)
-# 再畫青天
-ctx.fillStyle='rgb(0, 0, 150)'
-ctx.fillRect(0,0,flag_w/2,flag_h/2)
-# 畫十二道光芒白日
-ctx.beginPath()
-star_radius = flag_w/8
-angle = 0
-for i in range(24):
-    angle += 5*math.pi*2/12
-    toX = circle_x + math.cos(angle)*star_radius
-    toY = circle_y + math.sin(angle)*star_radius
-    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
-    if (i):
-        ctx.lineTo(toX, toY)
-    else:
-        ctx.moveTo(toX, toY)
-ctx.closePath()
-# 將填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-# 白日:藍圈
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為藍色
-ctx.fillStyle = 'rgb(0, 0, 149)'
-ctx.fill()
-# 白日:白心
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-</script>
-</p>
-<p>上圖原始碼:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;
-&lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
-&lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
-&lt;!-- 啟動 brython() --&gt;
-&lt;p&gt;
-&lt;script&gt;
-window.onload=function(){
-brython(1);
-}
-&lt;/script&gt;
-&lt;/p&gt;
-&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;
-&lt;p&gt;&lt;canvas id="taiwan_flag" width="300" height="200"&gt;&lt;/canvas&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;script type="text/python3"&gt;
-# 導入 doc
-from browser import document as doc
-import math
-
-# 準備繪圖畫布
-canvas = doc["taiwan_flag"]
-ctx = canvas.getContext("2d")
-# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
-# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
-# 以下採用 canvas 原始座標繪圖
-flag_w = canvas.width
-flag_h = canvas.height
-circle_x = flag_w/4
-circle_y = flag_h/4
-# 先畫滿地紅
-ctx.fillStyle='rgb(255, 0, 0)'
-ctx.fillRect(0,0,flag_w,flag_h)
-# 再畫青天
-ctx.fillStyle='rgb(0, 0, 150)'
-ctx.fillRect(0,0,flag_w/2,flag_h/2)
-# 畫十二道光芒白日
-ctx.beginPath()
-star_radius = flag_w/8
-angle = 0
-for i in range(24):
-    angle += 5*math.pi*2/12
-    toX = circle_x + math.cos(angle)*star_radius
-    toY = circle_y + math.sin(angle)*star_radius
-    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
-    if (i):
-        ctx.lineTo(toX, toY)
-    else:
-        ctx.moveTo(toX, toY)
-ctx.closePath()
-# 將填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-# 白日:藍圈
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為藍色
-ctx.fillStyle = 'rgb(0, 0, 149)'
-ctx.fill()
-# 白日:白心
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-&lt;/script&gt;
-&lt;/p&gt;</pre>
-<p></p><h2>V-rep</h2>
+<p></p><h2>網際繪圖</h2><!-- 啟動 brython() 暫時不用<p><script>window.onload=function(){brython(1);}</script>--><!-- 以下利用 Brython 程式執行繪圖 暫時不用<p><canvas id="taiwan_flag" width="300" height="200"></canvas></p><p><script type="text/python3"># 導入 docfrom browser import document as docimport math# 準備繪圖畫布canvas = doc["taiwan_flag"]ctx = canvas.getContext("2d")# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)# 以下採用 canvas 原始座標繪圖flag_w = canvas.widthflag_h = canvas.heightcircle_x = flag_w/4circle_y = flag_h/4# 先畫滿地紅ctx.fillStyle='rgb(255, 0, 0)'ctx.fillRect(0,0,flag_w,flag_h)# 再畫青天ctx.fillStyle='rgb(0, 0, 150)'ctx.fillRect(0,0,flag_w/2,flag_h/2)# 畫十二道光芒白日ctx.beginPath()star_radius = flag_w/8angle = 0for i in range(24):    angle += 5*math.pi*2/12    toX = circle_x + math.cos(angle)*star_radius    toY = circle_y + math.sin(angle)*star_radius    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo    if (i):        ctx.lineTo(toX, toY)    else:        ctx.moveTo(toX, toY)ctx.closePath()# 將填色設為白色ctx.fillStyle = '#fff'ctx.fill()# 白日:藍圈ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)ctx.closePath()# 填色設為藍色ctx.fillStyle = 'rgb(0, 0, 149)'ctx.fill()# 白日:白心ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)ctx.closePath()# 填色設為白色ctx.fillStyle = '#fff'ctx.fill()</script>--><p><img src="/images/taiwan_flag.png" width="500" height="333" alt=""></p><p>上圖原始碼:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;&lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;&lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;&lt;!-- 啟動 brython() --&gt;&lt;p&gt;&lt;script&gt;window.onload=function(){brython(1);}&lt;/script&gt;&lt;/p&gt;&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;&lt;p&gt;&lt;canvas id="taiwan_flag" width="300" height="200"&gt;&lt;/canvas&gt;&lt;/p&gt;&lt;p&gt;&lt;script type="text/python3"&gt;# 導入 docfrom browser import document as docimport math# 準備繪圖畫布canvas = doc["taiwan_flag"]ctx = canvas.getContext("2d")# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)# 以下採用 canvas 原始座標繪圖flag_w = canvas.widthflag_h = canvas.heightcircle_x = flag_w/4circle_y = flag_h/4# 先畫滿地紅ctx.fillStyle='rgb(255, 0, 0)'ctx.fillRect(0,0,flag_w,flag_h)# 再畫青天ctx.fillStyle='rgb(0, 0, 150)'ctx.fillRect(0,0,flag_w/2,flag_h/2)# 畫十二道光芒白日ctx.beginPath()star_radius = flag_w/8angle = 0for i in range(24):    angle += 5*math.pi*2/12    toX = circle_x + math.cos(angle)*star_radius    toY = circle_y + math.sin(angle)*star_radius    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo    if (i):        ctx.lineTo(toX, toY)    else:        ctx.moveTo(toX, toY)ctx.closePath()# 將填色設為白色ctx.fillStyle = '#fff'ctx.fill()# 白日:藍圈ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)ctx.closePath()# 填色設為藍色ctx.fillStyle = 'rgb(0, 0, 149)'ctx.fill()# 白日:白心ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)ctx.closePath()# 填色設為白色ctx.fillStyle = '#fff'ctx.fill()&lt;/script&gt;&lt;/p&gt;</pre><p></p><h2>V-rep</h2>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html</a>&nbsp;</p><h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a>&nbsp;</p>
