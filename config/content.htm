@@ -140,9 +140,7 @@ def domake():
 make = threading.Thread(target=domake)
 make.start()</pre>
 <p></p>
-</div><h2>TinyCC</h2>
-<p><a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>&nbsp;</p>
-<h2>CMSimfly</h2>
+</div><h2>TinyCC</h2><p><a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>&nbsp;</p><p><a href="https://github.com/jerch/python-tinycc">https://github.com/jerch/python-tinycc</a>&nbsp;</p><p><a href="https://github.com/SasView/tinycc">https://github.com/SasView/tinycc</a>&nbsp;</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;/* a struct with some bytes and a length */typedef struct Test {    int length;    unsigned char *bytes;} Test;/* some globals */#ifdef STANDALONETest test = {10, "standalone"};#elseTest test = {26, "abcdefghijklmnopqrstuvwxyz"};#endifint value = 12345;int main(int argc, char **argv) {    int i;    char **pos = argv;    printf("Hello Tiny C!\n");    /* list arguments */    for (i=0; i&lt;argc; ++i, ++pos) {        printf("arg %d: %s\n", i, *pos);    }    /* byte printing the hard way ;) */    printf("test.value: '");    for (i=0; i&lt;test.length; ++i)        printf("%c", *(test.bytes+i));    printf("'");    if (*test.bytes == 'a')        printf(" - not so impressive.\n");    else if (*test.bytes == 's')        printf(" - ok.\n");    else        printf(" - Busted!\n");    return 0;}</pre><p>利用 Tiny C 編譯 Tiny C</p><p>利用 Tiny C compiler 編譯 Windows 10 64 位元 dll 動態連結庫, 並由 Python 程式呼叫執行.</p><p><span>從&nbsp;</span><a href="http://download.savannah.gnu.org/releases/tinycc/">http://download.savannah.gnu.org/releases/tinycc/</a><span>&nbsp;</span><a href="http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip">下載</a><span>&nbsp;Win64 C 程式編譯器, 並</span><a href="http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27.tar.bz2">下載</a><span>&nbsp;Tiny C compiler 0.9.27版程式原始碼. 利用下列批次檔案進行編譯.</span></p><p><span>compile.bat 檔案內容:</span></p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">echo Use TCC to compile TCCset /p VERSION= &lt; VERSIONecho &gt; config.h #define TCC_VERSION "%VERSION%" echo Set CC=tcc set CC=tccset target=-DTCC_TARGET_PE -DTCC_TARGET_X86_64set P=64 echo tools: tiny_impdef.exe, tiny_libmaker.exe %CC% %target% win32/tools/tiny_impdef.c -o tiny_impdef.exe%CC% %target% win32/tools/tiny_libmaker.c -o tiny_libmaker.exe echo Compile libtcc.dll if not exist libtcc\nul mkdir libtcc%CC% %target% -w -shared -DLIBTCC_AS_DLL -DONE_SOURCE libtcc.c -o libtcc.dlltiny_impdef libtcc.dll -o libtcc/libtcc.def echo Compile tcc.exe %CC% %target% tcc.c -o tcc.exe -ltcc -Llibtcc echo Compile libcc1.a %CC% %target% -c lib/libtcc1.c%CC% %target% -c win32/lib/crt1.c%CC% %target% -c win32/lib/wincrt1.c%CC% %target% -c win32/lib/dllcrt1.c%CC% %target% -c win32/lib/dllmain.c%CC% %target% -c win32/lib/chkstk.S%CC% %target% -c lib/alloca86_64.Stiny_libmaker lib/libtcc1.a libtcc1.o alloca86_64.o crt1.o wincrt1.o dllcrt1.o dllmain.o chkstk.o</pre><p>編譯 dll 動態程式庫</p><p><span>首先, 建立一個 multiply.c 程式:</span></p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt; int multiply(int, int); __declspec(dllexport) intmultiply(int num1, int num2){return num1 * num2;}</pre><p>利用下列指令, 將 multiply.c 編譯為動態連結庫 myltiply.dll</p><p>tcc -w -shared -DLIBTCC_AS_DLL -DONE_SOURCE multiply.c -o multiply.dll</p><p>接著利用下列 Python3 程式, 透過 ctypes 模組導入 multiply.dll, 並且執行動態連結程式庫中的 multiply() 函式.</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ctypes lib = ctypes.CDLL('multiply.dll')result = lib.multiply(3, 2)print(result)</pre><p>因為<span>&nbsp;</span><a href="https://docs.python.org/3/library/ctypes.html">ctypes</a><span>&nbsp;</span>內建傳回值為 int, 因此若 C 對應動態連結庫輸入或傳回值為浮點數, 就必須手動宣告.</p><p>例如, 將上述函式的輸入與輸出均由 int 改為 float 如下:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">// multiply2.c#include &lt;stdio.h&gt; float multiply(float, float); __declspec(dllexport) floatmultiply(float num1, float num2){return num1 * num2;}</pre><p>可利用下列指令, 將 multiply2.c 編譯為動態連結庫 myltiply2.dll</p><p>tcc -w -shared -DLIBTCC_AS_DLL -DONE_SOURCE multiply2.c -o multiply2.dll</p><p>但是 Python3 程式部份就必須改為:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ctypes lib = ctypes.CDLL('multiply2.dll')# By default functions are assumed to return the C int type. Other return types can be specified by setting the restype attribute of the function object.lib.multiply.restype = ctypes.c_floatresult = lib.multiply(ctypes.c_float(3.0), ctypes.c_float(2.0))print(result)</pre><p>有關 Tiny C Compiler 資料位於&nbsp;<a href="https://github.com/mdecourse/cp2018/tinyc">https://github.com/mdecourse/cp2018/tinyc</a></p><p></p><h2>CMSimfly</h2>
 <p><a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a></p><h1>應用範例</h1>
 <p>學習計算機程式的目的在利用數位科技技術解決問題, 所謂數位科技技術包括程式套件、網路與資料庫等元件的組合.</p>
 <p>基本流程為:</p>
@@ -859,7 +857,175 @@ delay(15);                        // 等待 15ms 讓 servo 走到指定位置
 <p><a href="http://www.instructables.com/id/Magnetic-Levitation/">http://www.instructables.com/id/Magnetic-Levitation/</a><span>&nbsp;</span>(<a href="https://www.amazon.com/Electromagnet-Solenoid-Electric-Mechanical-Experimental/dp/B008OENGU0/">電磁鐵1</a>,<span>&nbsp;</span><a href="http://goods.ruten.com.tw/item/show?21620739232041">電磁鐵2</a>)</p>
 <p><a href="http://embeddedlaboratory.blogspot.tw/2017/04/design-gui-in-python-using-pyqt5.html">Arduino and PyQt5</a></p>
 <p><a href="http://embeddedlaboratory.blogspot.tw/search/label/Arduino">http://embeddedlaboratory.blogspot.tw/search/label/Arduino</a></p>
-<p><a href="http://electronut.in/plotting-real-time-data-from-arduino-using-python/">Arduino and Matplotlib</a></p><h2>讀寫網頁內容</h2><p>Onshape 教學影片</p><p><a href="https://www.onshape.com/video">https://www.onshape.com/video</a><span>&nbsp;</span>為 Onshpae 官方網站所提供的教學影片區, 請各班以每人兩個影片的方式進行分配, 分別以中文說明影片內容操作過程, 並上傳到個人的 Vimeo 與 Youtube 影片區.</p><p>預計分配的影片:</p><p><a href="https://www.onshape.com/videos/topic/tech-tips">https://www.onshape.com/videos/topic/tech-tips</a></p><p><a href="https://www.onshape.com/videos/topic/intro-to-cad">https://www.onshape.com/videos/topic/intro-to-cad</a></p><p><a href="https://www.onshape.com/videos/topic/tutorials">https://www.onshape.com/videos/topic/tutorials</a></p><p><a href="https://www.onshape.com/videos/topic/essential-training">https://www.onshape.com/videos/topic/essential-training</a></p><p><a href="https://www.onshape.com/videos/topic/drawings">https://www.onshape.com/videos/topic/drawings</a></p><p>請各組討論:</p><p>如何分配影片?如何集合管理各學員所上傳的教學操作影片?</p><p>利用 Python3, urllib 與 bs4 解讀上述網頁內容, 取出各影片的連結, 然後放入數列中:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from urllib.request import urlopenfrom bs4 import BeautifulSoupfile = urlopen("https://www.onshape.com/videos/topic/intro-to-cad")#print(file.read().decode())soup = BeautifulSoup(file, 'html.parser')links = []for link in soup.find_all('a', href=True):    if 'videos' in link['href']:        if 'https' in link['href']:            #print(link['href'])            links.append(link['href'])result = list(set(links))for i in range(len(result)):    print(i+1, result[i])</pre><p><span>納入上述所有影片網頁連結, 利用程式取出各影片的連結字串:</span></p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 從 urllib 模組中導入 urlopenfrom urllib.request import urlopen# 從 bs4 模組中導入 BeautirulSoupfrom bs4 import BeautifulSoup# 將要取出影片連結的網站 url,  放入數列中, 取名為 sourcessources = ['https://www.onshape.com/videos/topic/tech-tips', 'https://www.onshape.com/videos/topic/intro-to-cad', 'https://www.onshape.com/videos/topic/tutorials', 'https://www.onshape.com/videos/topic/essential-training', 'https://www.onshape.com/videos/topic/drawings']#tech-tips (60)#intro-to-cad (26)#tutorials (14)#essential-training (6)#drawings (5)# 按照網頁中的影片數計算, 共有 111 部影片, 但分類中可能重複print(60+26+14+6+5)# 設 links 變數與空數列對應links = []# 利用 for 迴圈一一取出各網頁的 html 後, 進行解讀# 只取出有 videos 與 https 連結的資料, 但避開 all 與 topic 類別連結for url in sources:    file = urlopen(url)    # 因為 urlopen 出來的資料為二位元檔案, 若要讀出列印    # 必須要先 decode() 為字串    #print(file.read().decode())    # 使用 html 解讀各連結的網頁內容    soup = BeautifulSoup(file, 'html.parser')    # 利用 Beautifulsoup 物件中的 find_all 方法尋找 anchor    for link in soup.find_all('a', href=True):        # 從各 anchor 資料篩選所需的影片連結        if ('videos' or 'https') in link['href']:            if 'all' not in link['href']:                if 'topic' not in link['href']:                    links.append(link['href'])                    # 為避免列出重複資料, 將數列轉為集合後, 再轉回數列result = list(set(links))# 逐一列出所取得的影片連結for i in range(len(result)):    print(i+1, result[i])</pre><p>從<span>&nbsp;</span><a href="http://www.rfc-editor.org/search/rfc_search_detail.php?page=All&amp;title=ipv6&amp;pubstatus%5B%5D=Any&amp;pub_date_type=any&amp;sortkey=Number&amp;sorting=ASC%22">IPV6 相關 RFCs 查詢</a>得到的資料中, 如何在各組的網誌中整理一份能夠連結到各個未過時 (non-obsolete) 的 RFC 文件?</p><p>參考程式碼:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">data = open("midterm_list.txt").read()line_list = data.splitlines()count = 0for line in line_list:    each_line_list = line.split("\t")    try:        if "Obsoleted" in each_line_list[5]:            count = count + 1            print(each_line_list[0])    except:        passprint(count)</pre><p>若以 Brython 改寫, 可以直接將結果列在網頁上:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;div id="container"&gt;&lt;/div&gt; &lt;script type="text/python3" id="script1"&gt;from browser import document, htmlcontainer = document['container']data = open("./../midterm_list.txt").read()line_list = data.splitlines()count = 0output = ""for line in line_list:    each_line_list = line.split("\t")    try:        if "Obsoleted" not in each_line_list[5]:            count = count + 1            output += html.A(each_line_list[0], href="http://www.rfc-editor.org/info/"+ each_line_list[0].lower().replace(" ", "")) + " | "            if count%10 == 0:                output += html.BR()    except:        passoutput += html.BR() + html.BR()  + "共有 " + str(count)+ " 份文件尚未失效!"container &lt;= output&lt;/script&gt;</pre><p>以下則利用 Brython 讀取網站上的資料檔, 進行處理後, 將結果插入網頁:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 導入 Brython 標準程式庫 --&gt;&lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;&lt;/script&gt; &lt;!-- 啟動 Brython --&gt;&lt;script&gt;window.onload=function(){brython(1);}&lt;/script&gt; &lt;!-- 以下利用 Brython 程式執行檔案讀取與比對流程 --&gt;&lt;!-- 假如需要用圖型表示數字, 則利用 canvas 繪圖 --&gt;&lt;!-- &lt;canvas id="plotarea" width="600" height="400"&gt;&lt;/canvas&gt; --&gt; 甲班學員投影片: &lt;div id="container1"&gt;&lt;/div&gt; &lt;script type="text/python3" id="script1"&gt;from browser import document, htmlcontainer1 = document['container1']adata = open("./../users/a.txt").read()alist = adata.splitlines()n = 0for stud_num in alist:    if stud_num == "40523148":        mlink = html.A(stud_num, href="http://ss"+str(stud_num)+".github.io/2016fallcp_hw")    else:        mlink = html.A(stud_num, href="http://s"+str(stud_num)+".github.io/2016fallcp_hw")    mlink += " | "    n = n +1    if n%8 == 0:        mlink += html.BR()    container1 &lt;= mlink&lt;/script&gt; &lt;br&gt;甲班學員網誌: &lt;div id="container2"&gt;&lt;/div&gt; &lt;script type="text/python3" id="script2"&gt;from browser import document, html# 學員選課名單直接從 id 為 script1 的程式段中導入from script1 import alistcontainer2 = document['container2']n = 0for stud_num in alist:    if stud_num == "40523148":        mlink = html.A(stud_num, href="http://ss"+str(stud_num)+".github.io/2016fallcp_hw/blog")    else:        mlink = html.A(stud_num, href="http://s"+str(stud_num)+".github.io/2016fallcp_hw/blog")    mlink += " | "    n = n +1    if n%8 == 0:        mlink += html.BR()    container2 &lt;= mlink&lt;/script&gt;</pre><p></p><h2>查英文單字</h2>
+<p><a href="http://electronut.in/plotting-real-time-data-from-arduino-using-python/">Arduino and Matplotlib</a></p><h2>讀寫網頁內容</h2>
+<p>Onshape 教學影片</p>
+<p><a href="https://www.onshape.com/video">https://www.onshape.com/video</a><span>&nbsp;</span>為 Onshpae 官方網站所提供的教學影片區, 請各班以每人兩個影片的方式進行分配, 分別以中文說明影片內容操作過程, 並上傳到個人的 Vimeo 與 Youtube 影片區.</p>
+<p>預計分配的影片:</p>
+<p><a href="https://www.onshape.com/videos/topic/tech-tips">https://www.onshape.com/videos/topic/tech-tips</a></p>
+<p><a href="https://www.onshape.com/videos/topic/intro-to-cad">https://www.onshape.com/videos/topic/intro-to-cad</a></p>
+<p><a href="https://www.onshape.com/videos/topic/tutorials">https://www.onshape.com/videos/topic/tutorials</a></p>
+<p><a href="https://www.onshape.com/videos/topic/essential-training">https://www.onshape.com/videos/topic/essential-training</a></p>
+<p><a href="https://www.onshape.com/videos/topic/drawings">https://www.onshape.com/videos/topic/drawings</a></p>
+<p>請各組討論:</p>
+<p>如何分配影片?如何集合管理各學員所上傳的教學操作影片?</p>
+<p>利用 Python3, urllib 與 bs4 解讀上述網頁內容, 取出各影片的連結, 然後放入數列中:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+file = urlopen("https://www.onshape.com/videos/topic/intro-to-cad")
+#print(file.read().decode())
+
+soup = BeautifulSoup(file, 'html.parser')
+
+links = []
+for link in soup.find_all('a', href=True):
+    if 'videos' in link['href']:
+        if 'https' in link['href']:
+            #print(link['href'])
+            links.append(link['href'])
+result = list(set(links))
+for i in range(len(result)):
+    print(i+1, result[i])</pre>
+<p><span>納入上述所有影片網頁連結, 利用程式取出各影片的連結字串:</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 從 urllib 模組中導入 urlopen
+from urllib.request import urlopen
+# 從 bs4 模組中導入 BeautirulSoup
+from bs4 import BeautifulSoup
+
+# 將要取出影片連結的網站 url,  放入數列中, 取名為 sources
+sources = ['https://www.onshape.com/videos/topic/tech-tips', 'https://www.onshape.com/videos/topic/intro-to-cad', 'https://www.onshape.com/videos/topic/tutorials', 'https://www.onshape.com/videos/topic/essential-training', 'https://www.onshape.com/videos/topic/drawings']
+
+#tech-tips (60)
+#intro-to-cad (26)
+#tutorials (14)
+#essential-training (6)
+#drawings (5)
+
+# 按照網頁中的影片數計算, 共有 111 部影片, 但分類中可能重複
+print(60+26+14+6+5)
+
+# 設 links 變數與空數列對應
+links = []
+# 利用 for 迴圈一一取出各網頁的 html 後, 進行解讀
+# 只取出有 videos 與 https 連結的資料, 但避開 all 與 topic 類別連結
+for url in sources:
+    file = urlopen(url)
+    # 因為 urlopen 出來的資料為二位元檔案, 若要讀出列印
+    # 必須要先 decode() 為字串
+    #print(file.read().decode())
+    # 使用 html 解讀各連結的網頁內容
+    soup = BeautifulSoup(file, 'html.parser')
+    # 利用 Beautifulsoup 物件中的 find_all 方法尋找 anchor
+    for link in soup.find_all('a', href=True):
+        # 從各 anchor 資料篩選所需的影片連結
+        if ('videos' or 'https') in link['href']:
+            if 'all' not in link['href']:
+                if 'topic' not in link['href']:
+                    links.append(link['href'])
+                    
+# 為避免列出重複資料, 將數列轉為集合後, 再轉回數列
+result = list(set(links))
+# 逐一列出所取得的影片連結
+for i in range(len(result)):
+    print(i+1, result[i])</pre>
+<p>從<span>&nbsp;</span><a href="http://www.rfc-editor.org/search/rfc_search_detail.php?page=All&amp;title=ipv6&amp;pubstatus%5B%5D=Any&amp;pub_date_type=any&amp;sortkey=Number&amp;sorting=ASC%22">IPV6 相關 RFCs 查詢</a>得到的資料中, 如何在各組的網誌中整理一份能夠連結到各個未過時 (non-obsolete) 的 RFC 文件?</p>
+<p>參考程式碼:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">data = open("midterm_list.txt").read()
+line_list = data.splitlines()
+count = 0
+for line in line_list:
+    each_line_list = line.split("\t")
+    try:
+        if "Obsoleted" in each_line_list[5]:
+            count = count + 1
+            print(each_line_list[0])
+    except:
+        pass
+print(count)</pre>
+<p>若以 Brython 改寫, 可以直接將結果列在網頁上:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;div id="container"&gt;&lt;/div&gt;
+ 
+&lt;script type="text/python3" id="script1"&gt;
+from browser import document, html
+container = document['container']
+data = open("./../midterm_list.txt").read()
+line_list = data.splitlines()
+count = 0
+output = ""
+for line in line_list:
+    each_line_list = line.split("\t")
+    try:
+        if "Obsoleted" not in each_line_list[5]:
+            count = count + 1
+            output += html.A(each_line_list[0], href="http://www.rfc-editor.org/info/"+ each_line_list[0].lower().replace(" ", "")) + " | "
+            if count%10 == 0:
+                output += html.BR()
+    except:
+        pass
+output += html.BR() + html.BR()  + "共有 " + str(count)+ " 份文件尚未失效!"
+container &lt;= output
+&lt;/script&gt;</pre>
+<p>以下則利用 Brython 讀取網站上的資料檔, 進行處理後, 將結果插入網頁:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 導入 Brython 標準程式庫 --&gt;
+&lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;
+&lt;/script&gt;
+ 
+&lt;!-- 啟動 Brython --&gt;
+&lt;script&gt;
+window.onload=function(){
+brython(1);
+}
+&lt;/script&gt;
+ 
+&lt;!-- 以下利用 Brython 程式執行檔案讀取與比對流程 --&gt;
+&lt;!-- 假如需要用圖型表示數字, 則利用 canvas 繪圖 --&gt;
+&lt;!-- &lt;canvas id="plotarea" width="600" height="400"&gt;&lt;/canvas&gt; --&gt;
+ 
+甲班學員投影片:
+ 
+&lt;div id="container1"&gt;&lt;/div&gt;
+ 
+&lt;script type="text/python3" id="script1"&gt;
+from browser import document, html
+container1 = document['container1']
+adata = open("./../users/a.txt").read()
+alist = adata.splitlines()
+n = 0
+for stud_num in alist:
+    if stud_num == "40523148":
+        mlink = html.A(stud_num, href="http://ss"+str(stud_num)+".github.io/2016fallcp_hw")
+    else:
+        mlink = html.A(stud_num, href="http://s"+str(stud_num)+".github.io/2016fallcp_hw")
+    mlink += " | "
+    n = n +1
+    if n%8 == 0:
+        mlink += html.BR()
+    container1 &lt;= mlink
+&lt;/script&gt;
+ 
+&lt;br&gt;
+甲班學員網誌:
+ 
+&lt;div id="container2"&gt;&lt;/div&gt;
+ 
+&lt;script type="text/python3" id="script2"&gt;
+from browser import document, html
+# 學員選課名單直接從 id 為 script1 的程式段中導入
+from script1 import alist
+container2 = document['container2']
+n = 0
+for stud_num in alist:
+    if stud_num == "40523148":
+        mlink = html.A(stud_num, href="http://ss"+str(stud_num)+".github.io/2016fallcp_hw/blog")
+    else:
+        mlink = html.A(stud_num, href="http://s"+str(stud_num)+".github.io/2016fallcp_hw/blog")
+    mlink += " | "
+    n = n +1
+    if n%8 == 0:
+        mlink += html.BR()
+    container2 &lt;= mlink
+&lt;/script&gt;</pre>
+<p></p><h2>查英文單字</h2>
 <p>利用 Python 程式協助查英文單字</p>
 <p>查單字程式碼:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import urllib.request
