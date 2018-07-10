@@ -1,0 +1,163 @@
+<!doctype html>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>2018 計算機程式教學手冊</title> <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- for LaTeX equations 暫時不用
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+-->
+<!-- 暫時不用
+<script src="./../static/fengari-web.js"></script>
+<script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../static/gearUtils-05.js"></script>
+-->
+<!-- for Brython 暫時不用
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
+
+<script src="./../static/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
+    $("ul.topmenu > li ul li:has(ul) > a").append('<div class="arrow-right"></div>');
+});
+</script>
+
+</head><header><h1>2018 計算機程式教學手冊</h1> <confmenu>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
+
+</ul>
+</confmenu></header>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='機械設計.html'>機械設計</a><li><a href='ANSI C.html'>ANSI C</a><li><a href='指標教材.html'>指標教材</a><ul><li><a href='ch1何謂指標.html'>ch1何謂指標</a><li><a href='ch2指標型別與陣列.html'>ch2指標型別與陣列</a><li><a href='ch3指標與字串.html'>ch3指標與字串</a><li><a href='ch4更多關於字串的用法.html'>ch4更多關於字串的用法</a><li><a href='ch5指標與結構.html'>ch5指標與結構</a><li><a href='ch6字串與字串陣列.html'>ch6字串與字串陣列</a><li><a href='ch7多維陣列.html'>ch7多維陣列</a><li><a href='ch8指向陣列的指標.html'>ch8指向陣列的指標</a><li><a href='ch9指標與動態記憶體配置.html'>ch9指標與動態記憶體配置</a><li><a href='ch10指向函式的指標.html'>ch10指向函式的指標</a><li><a href='ch11結語.html'>ch11結語</a></li></li></ul></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='Qt.html'>Qt</a><li><a href='Eirc IDE.html'>Eirc IDE</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='讀寫網頁內容.html'>讀寫網頁內容</a><li><a href='查英文單字.html'>查英文單字</a><li><a href='docx 轉 pdf.html'>docx 轉 pdf</a><li><a href='網際繪圖.html'>網際繪圖</a><li><a href='V-rep.html'>V-rep</a><li><a href='輔助設計套件.html'>輔助設計套件</a></li></ul><li><a href='分組專題.html'>分組專題</a><ul><li><a href='分組題目.html'>分組題目</a><li><a href='符號式推導.html'>符號式推導</a><li><a href='網際平面連桿模擬.html'>網際平面連桿模擬</a></li></ul></nav><section>指標教材 << <a href='指標教材.html'>Previous</a> <a href='ch2指標型別與陣列.html'>Next</a> >> ch2指標型別與陣列<br /><h1>ch1何謂指標</h1>
+<p>C 語言初學者必須面對的難題之一, 就是指標的用法.</p>
+<p>這份教材的目的, 就是針對初學者簡介指標及其應用.</p>
+<p>其實初學者會對指標產生疑惑, 大多源自於在學習 C 語言時, 對於變數的概念經常一知半解.</p>
+<p>因此這裡就由C 變數的一般用法說起.</p>
+<p>程式中的變數都必須加以命名, 以便存放數值.</p>
+<p>而編譯器與連結器在處理變數時, 就會挪出電腦記憶體中的特定區域, 以存放變數的值.</p>
+<p>這些特定區域的大小, 取決於變數允許存放值的範圍.</p>
+<p>例如, 在 32 位元電腦, 一個整數變數的存放範圍, 需要為 4 位元. 而在舊的 16 位元電腦, 整數存放需要 2 位元.</p>
+<p>C 程式中的整數變數存放範圍大小, 在各種機器上不一定相同.</p>
+<p>並且 C 程式中的整數變數也不只一種, 在許多 C 程式教科數中,可以發現有整數, 長整數, 短整數等. 這裡則假設使用 32 位元系統, 因此整數需要 4 位元的存放空間.</p>
+<p>可以採用下列程式碼,在您所使用的系統中, 查探特定整數型別所需要的記憶體空間:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+int main()
+{
+printf("size of a short is %d\n", sizeof(short));
+printf("size of a int is %d\n", sizeof(int));
+printf("size of a long is %d\n", sizeof(long));
+}</pre>
+<p><a href="http://codepad.org/iQqRmLnh">在 codepad.org 執行上述 C 程式</a></p>
+<p><span>當我們宣告一個變數時, 亦即告知編譯器兩件事, 變數名稱與變數型別. 例如, 可以透過:</span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int k;</pre>
+<p>宣告名稱為 k 的整數型別變數. 當編譯器看到 "int" 的敘述值, 就會在電腦的記憶體中, 保留 4 位元的空間, 以便存放整數變數 k 的值.</p>
+<p>此外, 電腦也會設置一個符號表, 註明符號 k 與其在記憶體中用來存放 4 位元資料的相對位址.</p>
+<p>因此, 若在變數宣告後, 使用:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">k = 2;</pre>
+<p>2 這個數值, 就會在程式執行時, 被放在保留給 k 變數的記憶體位址中.</p>
+<p>在 C 語言中, 整數 k 變數, 可視為一個物件. 其中有兩個值與物件 k 有關, 也就是存放的數值與存放的位址. 有些參考書中將者兩個數值稱為"右值"與"左值". (2 為右值, 而變數位址為左值)</p>
+<p>在某些語言中, 左值只能放在指定"等號"的左邊, 而右值則只能放在右邊. 位置放錯, 例如:&nbsp;</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">2 = k;</pre>
+<p>就會出錯.</p>
+<p>其實, C 語言中有關左值得定義, 根據 K&amp;R II (page 197): [1], 則有些變動.</p>
+<p>"物件為儲存區域的名稱, 而左值則為指向該物件的表示式."</p>
+<p>這裡先採引用的定義加以說明, 後續將會進一步針對指標加以說明.</p>
+<p>接著, 假如程式碼為:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">int j, k;
+k = 2; 
+j = 7;    &lt;-- line 1 
+k = j;    &lt;-- line 2</pre>
+<p>編譯器會將第一行 (line 1) 的 j 解讀為變數 j 的位址 (也就是左值), 並且將值 7 放到該位址. 在第二行 (line 2), 則會將 j 視為右值 (因為在"指定"運算子的右方), 指的則是存放在 j 記憶體中的 7 這個數值. 因此第二行執行過後, 存放在 j 的 7 這個數值, 就會被放到 k 變數所對應的"左值" (記憶體位址) 中.</p>
+<p>在這些範例中, 採用的都是將右值從一個儲存位址, 經由複製將 4 位元的資料複製到另外一個儲存位址. 假如使用 2 位元整數, 則會複製 2 位元資料.</p>
+<p>這裡, 就會需要一種變數, 用來存放左值 (記憶體位址). 存放此一變數的值, 隨系統而異, 舊的桌上電腦總共只有 64K 的記憶體, 每存放一個整數位址會佔去 2 位元.</p>
+<p>更多位元數的電腦 (例如 64 位元電腦), 則需要更多的位元位址來存放一個整數資料.</p>
+<p>實際需要的記憶體大小並不重要, 需要的則是一種方法, 通知編譯器在哪一位址存放哪些資料.</p>
+<p>這樣的變數稱為"指標變數" (隨後將說明得更清楚). 在 C 語言中定義指標變數時, 必須在變數名稱前方, 加上一個 * 符號. 而這些指標變數的型別, 隨著要存放在指標位址中的資料型別而定, 例如, 假如宣告:</p>
+<p>int *ptr;</p>
+<p>ptr 為變數名稱 (與之前的整數變數名稱 k 相同). 而 "*" 符號則告知編譯器, 此一宣告為指標變數, 亦即保留出足夠的記憶體存放位址. 最前方的 int 則表示, 希望此一指標變數用來存放整數. 而此一指標稱為"指向整數". 需要特別注意的是, 當使用 int k; 時並沒有給 k 初始值, 只有在任何符合 ANSI 規範的編譯器中, 會將宣告在函式外的變數通通以 0 初始.</p>
+<p>同樣地, ptr 也沒有初始值, 亦即, 還沒有在上述宣告之後, 在保留的位址空間上, 放入任何值. 這裡若宣告是在任何函式之外, 就會被賦予初值, 並且保證不會指向任何 C 物件或函式. 以這種方式初始的指標, 被稱為 "空"指標 (null pointer).</p>
+<p>而空指標並不一定會被放入 "0" 值, 因為這取決於特定系統中的設定. 為了在不同系統中的不同編譯器彼此相容, 就會利用巨集 (macro) 來表示空指標. 此巨集以 NULL 命名. 因此, 若以 NULL 設定指標值, 則可以確定在不同機器上, 這些指標變數一定是空指標.</p>
+<p>與整數是否為 0 的判斷式 if(k ==0) 相類似, 可以利用 if(ptr == NULL) 判斷是否 ptr 為空指標.</p>
+<p>但是, 回到新變數 ptr 的應用, 假設要將整數變數 k 所對應的位址, 存入 ptr, 就必須使用"位址運算子", 寫成:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">ptr = &amp;k;</pre>
+<p>"位址運算子"的作用是用來取 k 的左值 (位址), 即使這時 k 位於等號右邊, 上述程式會將 k 的值複製到指標 ptr 的儲存空間中. 這時, ptr 稱為"指向" k.</p>
+<p>接著再討論另外一個運算子.</p>
+<p>也就是所謂的"取值運算子" (dereferencing operator), 就是一個 * 符號. 使用方法如下:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">*ptr = 7;</pre>
+<p>這一行程式會將 7 這個數值,複製到 ptr 變數所指向的位址. 也就是說, 假如 ptr 指向 k (ptr 為 k 存放資料的記憶體位址), 這行程式就會將 k 的值設為 7. 換言之, * 運算子可用來改變 ptr 所指向的值, 而不是指標本身的值. (註:指標本身為位址, 也就是所謂的左變數)</p>
+<p>因此, 可以利用:</p>
+<p>printf("%d\n",*ptr);</p>
+<p>將目前存放在 ptr 所指向位址的整數值, 透過 printf() 函式印到螢幕.</p>
+<p>要釐清上述說明, 可以執行下列程式, 並仔細探討程式碼與其輸出.</p>
+<p><span>------------ Program 1.1 ---------------------------------</span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 1.1 from PTRTUT10.TXT   6/10/97 */
+ 
+#include &lt;stdio.h&gt;
+ 
+int j, k;
+int *ptr;
+ 
+int main(void)
+{
+    j = 1;
+    k = 2;
+    ptr = &amp;k;
+    printf("\n");
+    printf("j has the value %d and is stored at %p\n", j, (void *)&amp;j);
+    printf("k has the value %d and is stored at %p\n", k, (void *)&amp;k);
+    printf("ptr has the value %p and is stored at %p\n", ptr, (void *)&amp;ptr);
+    printf("The value of the integer pointed to by ptr is %d\n", *ptr);
+ 
+    return 0;
+}</pre>
+<p><a href="http://codepad.org/w8R9mp9h">在 codepad.org 執行 Program 1.1</a></p>
+<p>請注意: 我們還沒有談到 C 程式中的 (void *) 表示式. 這裡可以先納入您的測試程式碼中, 隨後將會加以說明.</p>
+<p>結論:</p>
+<ol>
+<li><span class="nt">變數宣告必須指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="nt">k</span><span class="o">;)</span></li>
+<li><span class="nt">指標變數宣告也是指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">;),</span> <span class="nt">其中的</span> <span class="o">*</span> <span class="nt">告知編譯器</span><span class="o">,</span> <span class="nt">該名稱為</span> <span class="nt">ptr</span> <span class="nt">的變數</span><span class="o">,</span> <span class="nt">為一個指標變數</span><span class="o">,</span> <span class="nt">而其型別為該指標指向的資料型別</span> <span class="o">(</span><span class="nt">這裡為整數</span><span class="o">).</span></li>
+<li><span class="nt">一旦變數已經宣告</span><span class="o">,</span> <span class="nt">可以透過變數前方的位址運算子</span><span class="o">,</span> <span class="nt">取得其位址</span><span class="o">,</span> <span class="nt">例如</span> <span class="o">&amp;</span><span class="nt">k</span><span class="o">.</span></li>
+<li><span class="nt">可以由指標中</span><span class="s2">"取值"</span><span class="o">,</span> <span class="nt">亦即</span><span class="o">,</span> <span class="nt">以</span> <span class="o">*</span> <span class="nt">指定到指標所參照的值</span><span class="o">,</span> <span class="nt">例如</span><span class="o">:</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">.</span></li>
+<li><span class="nt">變數的左值為被用來存放在記憶體中的位址值</span><span class="o">,</span> <span class="nt">而變數的右值則式被存放在該位址的數值</span><span class="o">.</span></li>
+</ol>
+<p>參考資料:</p>
+<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p>
+<br />指標教材 << <a href='指標教材.html'>Previous</a> <a href='ch2指標型別與陣列.html'>Next</a> >> ch2指標型別與陣列</section></div></body></html>

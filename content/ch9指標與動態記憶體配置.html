@@ -1,0 +1,329 @@
+<!doctype html>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>2018 計算機程式教學手冊</title> <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- for LaTeX equations 暫時不用
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+-->
+<!-- 暫時不用
+<script src="./../static/fengari-web.js"></script>
+<script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../static/gearUtils-05.js"></script>
+-->
+<!-- for Brython 暫時不用
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
+
+<script src="./../static/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
+    $("ul.topmenu > li ul li:has(ul) > a").append('<div class="arrow-right"></div>');
+});
+</script>
+
+</head><header><h1>2018 計算機程式教學手冊</h1> <confmenu>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
+
+</ul>
+</confmenu></header>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='機械設計.html'>機械設計</a><li><a href='ANSI C.html'>ANSI C</a><li><a href='指標教材.html'>指標教材</a><ul><li><a href='ch1何謂指標.html'>ch1何謂指標</a><li><a href='ch2指標型別與陣列.html'>ch2指標型別與陣列</a><li><a href='ch3指標與字串.html'>ch3指標與字串</a><li><a href='ch4更多關於字串的用法.html'>ch4更多關於字串的用法</a><li><a href='ch5指標與結構.html'>ch5指標與結構</a><li><a href='ch6字串與字串陣列.html'>ch6字串與字串陣列</a><li><a href='ch7多維陣列.html'>ch7多維陣列</a><li><a href='ch8指向陣列的指標.html'>ch8指向陣列的指標</a><li><a href='ch9指標與動態記憶體配置.html'>ch9指標與動態記憶體配置</a><li><a href='ch10指向函式的指標.html'>ch10指向函式的指標</a><li><a href='ch11結語.html'>ch11結語</a></li></li></ul></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='Qt.html'>Qt</a><li><a href='Eirc IDE.html'>Eirc IDE</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='讀寫網頁內容.html'>讀寫網頁內容</a><li><a href='查英文單字.html'>查英文單字</a><li><a href='docx 轉 pdf.html'>docx 轉 pdf</a><li><a href='網際繪圖.html'>網際繪圖</a><li><a href='V-rep.html'>V-rep</a><li><a href='輔助設計套件.html'>輔助設計套件</a></li></ul><li><a href='分組專題.html'>分組專題</a><ul><li><a href='分組題目.html'>分組題目</a><li><a href='符號式推導.html'>符號式推導</a><li><a href='網際平面連桿模擬.html'>網際平面連桿模擬</a></li></ul></nav><section>ch8指向陣列的指標 << <a href='ch8指向陣列的指標.html'>Previous</a> <a href='ch10指向函式的指標.html'>Next</a> >> ch10指向函式的指標<br /><h1>ch9指標與動態記憶體配置</h1>
+<p>There are times when it is convenient to allocate memory at run time using malloc(), calloc(), or other allocation functions. Using this approach permits postponing the decision on the size of the memory block need to store an array, for example, until run time. Or it permits using a section of memory for the storage of an array of integers at one point in time, and then when that memory is no longer needed it can be freed up for other uses, such as the storage of an array of structures.</p>
+<p>When memory is allocated, the allocating function (such as malloc(), calloc(), etc.) returns a pointer. The type of this pointer depends on whether you are using an older K&amp;R compiler or the newer ANSI type compiler. With the older compiler the type of the returned pointer is char, with the ANSI compiler it is void.</p>
+<p>If you are using an older compiler, and you want to allocate memory for an array of integers you will have to cast the char pointer returned to an integer pointer. For example, to allocate space for 10 integers we might write:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int *iptr;
+iptr = (int *)malloc(10 * sizeof(int));
+if (iptr == NULL)
+
+{ .. ERROR ROUTINE GOES HERE .. }</pre>
+<p>If you are using an ANSI compliant compiler, malloc() returns a void pointer and since a void pointer can be assigned to a pointer variable of any object type, the (int *) cast shown above is not needed. The array dimension can be determined at run time and is not needed at compile time. That is, the 10 above could be a variable read in from a data file or keyboard, or calculated based on some need, at run time.</p>
+<p>Because of the equivalence between array and pointer notation, once iptr has been assigned as above, one can use the array notation. For example, one could write:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int k;
+for (k = 0; k &lt; 10; k++)
+   iptr[k] = 2;</pre>
+<p>to set the values of all elements to 2.</p>
+<p>Even with a reasonably good understanding of pointers and arrays, one place the newcomer to C is likely to stumble at first is in the dynamic allocation of multi-dimensional arrays. In general, we would like to be able to access elements of such arrays using array notation, not pointer notation, wherever possible. Depending on the application we may or may not know both dimensions at compile time. This leads to a variety of ways to go about our task.</p>
+<p>As we have seen, when dynamically allocating a one dimensional array its dimension can be determined at run time. Now, when using dynamic allocation of higher order arrays, we never need to know the first dimension at compile time. Whether we need to know the higher dimensions depends on how we go about writing the code. Here I will discuss various methods of dynamically allocating room for 2 dimensional arrays of integers.</p>
+<p>First we will consider cases where the 2nd dimension is known at compile time.</p>
+<p>METHOD 1:</p>
+<p>One way of dealing with the problem is through the use of the typedef keyword. To allocate a 2 dimensional array of integers recall that the following two notations result in the same object code being generated:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">multi[row][col] = 1;     *(*(multi + row) + col) = 1;</pre>
+<p>It is also true that the following two notations generate the same code:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">multi[row]            *(multi + row)</pre>
+<p>Since the one on the right must evaluate to a pointer, the array notation on the left must also evaluate to a pointer. In fact multi[0] will return a pointer to the first integer in the first row, multi[1] a pointer to the first integer of the second row, etc. Actually, multi[n] evaluates to a pointer to that array of integers that make up the n-th row of our 2 dimensional array.</p>
+<p>That is, multi can be thought of as an array of arrays and multi[n] as a pointer to the n-th array of this array of arrays. Here the word pointer is being used to represent an address value. While such usage is common in the literature, when reading such statements one must be careful to distinguish between the constant address of an array and a variable pointer which is a data object in itself. Consider now:</p>
+<p>--------------- Program 9.1 --------------------------------</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 9.1 from PTRTUT10.HTM  6/13/97 */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ 
+#define COLS 5
+ 
+typedef int RowArray[COLS];
+RowArray *rptr;
+ 
+int main(void)
+{
+    int nrows = 10;
+    int row, col;
+    rptr = malloc(nrows * COLS * sizeof(int));
+    for (row = 0; row &lt; nrows; row++)
+    {
+        for (col = 0; col &lt; COLS; col++)
+        {
+            rptr[row][col] = 17;
+        }
+    }
+ 
+    return 0;
+}</pre>
+<p>------------- End of Prog. 9.1 --------------------------------</p>
+<p><a href="http://codepad.org/0TrvKYko">執行 Program 9.1</a></p>
+<p>Here I have assumed an ANSI compiler so a cast on the void pointer returned by malloc() is not required. If you are using an older K&amp;R compiler you will have to cast using:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">rptr = (RowArray *)malloc(.... etc.
+</pre>
+<p>Using this approach, rptr has all the characteristics of an array name name, (except that rptr is modifiable), and array notation may be used throughout the rest of the program. That also means that if you intend to write a function to modify the array contents, you must use COLS as a part of the formal parameter in that function, just as we did when discussing the passing of two dimensional arrays to a function.</p>
+<p>METHOD 2:</p>
+<p>In the METHOD 1 above, rptr turned out to be a pointer to type "one dimensional array of COLS integers". It turns out that there is syntax which can be used for this type without the need of typedef. If we write:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int (*xptr)[COLS];</pre>
+<p>the variable xptr will have all the same characteristics as the variable rptr in METHOD 1 above, and we need not use the typedef keyword. Here xptr is a pointer to an array of integers and the size of that array is given by the #defined COLS. The parenthesis placement makes the pointer notation predominate, even though the array notation has higher precedence. i.e. had we written</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int *xptr[COLS];</pre>
+<p>we would have defined xptr as an array of pointers holding the number of pointers equal to that #defined by COLS. That is not the same thing at all. However, arrays of pointers have their use in the dynamic allocation of two dimensional arrays, as will be seen in the next 2 methods. METHOD 3:</p>
+<p>Consider the case where we do not know the number of elements in each row at compile time, i.e. both the number of rows and number of columns must be determined at run time. One way of doing this would be to create an array of pointers to type int and then allocate space for each row and point these pointers at each row. Consider:</p>
+<p>-------------- Program 9.2 ------------------------------------</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 9.2 from PTRTUT10.HTM   6/13/97 */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ 
+int main(void)
+{
+    int nrows = 5;     /* Both nrows and ncols could be evaluated */
+    int ncols = 10;    /* or read in at run time */
+    int row;
+    int **rowptr;
+    rowptr = malloc(nrows * sizeof(int *));
+    if (rowptr == NULL)
+    {
+        puts("\nFailure to allocate room for row pointers.\n");
+        exit(0);
+    }
+ 
+    printf("\n\n\nIndex   Pointer(hex)   Pointer(dec)   Diff.(dec)");
+ 
+    for (row = 0; row &lt; nrows; row++)
+    {
+        rowptr[row] = malloc(ncols * sizeof(int));
+        if (rowptr[row] == NULL)
+        {
+            printf("\nFailure to allocate for row[%d]\n",row);
+            exit(0);
+        }
+        printf("\n%d         %p         %d", row, rowptr[row], rowptr[row]);
+        if (row &gt; 0)
+        printf("              %d",(int)(rowptr[row] - rowptr[row-1]));
+    }
+ 
+    return 0;
+}</pre>
+<p>--------------- End 9.2 ------------------------------------</p>
+<p><a href="http://codepad.org/fkwhY5YO">執行 Program 9.2</a></p>
+<p>In the above code rowptr is a pointer to pointer to type int. In this case it points to the first element of an array of pointers to type int. Consider the number of calls to malloc():</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">To get the array of pointers             1     call
+To get space for the rows                5     calls
+                                      -----
+                 Total                   6     calls</pre>
+<p>If you choose to use this approach note that while you can use the array notation to access individual elements of the array, e.g. rowptr[row][col] = 17;, it does not mean that the data in the "two dimensional array" is contiguous in memory. You can, however, use the array notation just as if it were a continuous block of memory. For example, you can write:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">rowptr[row][col] = 176;</pre>
+<p>just as if rowptr were the name of a two dimensional array created at compile time. Of course row and col must be within the bounds of the array you have created, just as with an array created at compile time. If you want to have a contiguous block of memory dedicated to the storage of the elements in the array you can do it as follows:</p>
+<p>METHOD 4:</p>
+<p>In this method we allocate a block of memory to hold the whole array first. We then create an array of pointers to point to each row. Thus even though the array of pointers is being used, the actual array in memory is contiguous. The code looks like this: ----------------- Program 9.3 -----------------------------------</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 9.3 from PTRTUT10.HTM   6/13/97 */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ 
+int main(void)
+{
+    int **rptr;
+    int *aptr;
+    int *testptr;
+    int k;
+    int nrows = 5;     /* Both nrows and ncols could be evaluated */
+    int ncols = 8;    /* or read in at run time */
+    int row, col;
+ 
+    /* we now allocate the memory for the array */
+ 
+    aptr = malloc(nrows * ncols * sizeof(int));
+    if (aptr == NULL)
+    {
+        puts("\nFailure to allocate room for the array");
+        exit(0);
+    }
+ 
+    /* next we allocate room for the pointers to the rows */
+ 
+    rptr = malloc(nrows * sizeof(int *));
+    if (rptr == NULL)
+    {
+        puts("\nFailure to allocate room for pointers");
+        exit(0);
+    }
+ 
+    /* and now we 'point' the pointers */
+ 
+    for (k = 0; k &lt; nrows; k++)
+    {
+        rptr[k] = aptr + (k * ncols);
+    }
+ 
+    /* Now we illustrate how the row pointers are incremented */
+    printf("\n\nIllustrating how row pointers are incremented");
+    printf("\n\nIndex   Pointer(hex)  Diff.(dec)");
+ 
+    for (row = 0; row &lt; nrows; row++)
+    {
+        printf("\n%d         %p", row, rptr[row]);
+        if (row &gt; 0)
+        printf("              %d",(rptr[row] - rptr[row-1]));
+    }
+    printf("\n\nAnd now we print out the array\n");
+    for (row = 0; row &lt; nrows; row++)
+    {
+        for (col = 0; col &lt; ncols; col++)
+        {
+            rptr[row][col] = row + col;
+            printf("%d ", rptr[row][col]);
+        }
+        putchar('\n');
+    }
+ 
+    puts("\n");
+ 
+    /* and here we illustrate that we are, in fact, dealing with
+       a 2 dimensional array in a contiguous block of memory. */
+    printf("And now we demonstrate that they are contiguous in memory\n");
+ 
+    testptr = aptr;
+    for (row = 0; row &lt; nrows; row++)
+    {
+        for (col = 0; col &lt; ncols; col++)
+        {
+            printf("%d ", *(testptr++));
+        }
+        putchar('\n');
+    }
+ 
+    return 0;
+}</pre>
+<p>------------- End Program 9.3 -----------------</p>
+<p><a href="http://codepad.org/TfAnw9wo">執行 Program 9.3</a></p>
+<p>Consider again, the number of calls to malloc() To get room for the array itself 1 call To get room for the array of ptrs 1 call ---- Total 2 calls</p>
+<p>Now, each call to malloc() creates additional space overhead since malloc() is generally implemented by the operating system forming a linked list which contains data concerning the size of the block. But, more importantly, with large arrays (several hundred rows) keeping track of what needs to be freed when the time comes can be more cumbersome. This, combined with the contiguousness of the data block that permits initialization to all zeroes using memset() would seem to make the second alternative the preferred one.</p>
+<p>As a final example on multidimensional arrays we will illustrate the dynamic allocation of a three dimensional array. This example will illustrate one more thing to watch when doing this kind of allocation. For reasons cited above we will use the approach outlined in alternative two. Consider the following code:</p>
+<p><span>------------------- Program 9.4 -------------------------------------</span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 9.4 from PTRTUT10.HTM   6/13/97 */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stddef.h&gt;
+ 
+int X_DIM=16;
+int Y_DIM=5;
+int Z_DIM=3;
+ 
+int main(void)
+{
+    char *space;
+    char ***Arr3D;
+    int y, z;
+    ptrdiff_t diff;
+ 
+    /* first we set aside space for the array itself */
+ 
+    space = malloc(X_DIM * Y_DIM * Z_DIM * sizeof(char));
+ 
+    /* next we allocate space of an array of pointers, each
+       to eventually point to the first element of a
+       2 dimensional array of pointers to pointers */
+ 
+    Arr3D = malloc(Z_DIM * sizeof(char **));
+ 
+    /* and for each of these we assign a pointer to a newly
+       allocated array of pointers to a row */
+ 
+    for (z = 0; z &lt; Z_DIM; z++)
+    {
+        Arr3D[z] = malloc(Y_DIM * sizeof(char *));
+ 
+        /* and for each space in this array we put a pointer to
+           the first element of each row in the array space
+           originally allocated */
+ 
+        for (y = 0; y &lt; Y_DIM; y++)
+        {
+            Arr3D[z][y] = space + (z*(X_DIM * Y_DIM) + y*X_DIM);
+        }
+    }
+ 
+    /* And, now we check each address in our 3D array to see if
+       the indexing of the Arr3d pointer leads through in a
+       continuous manner */
+ 
+    for (z = 0; z &lt; Z_DIM; z++)
+    {
+        printf("Location of array %d is %p\n", z, *Arr3D[z]);
+        for ( y = 0; y &lt; Y_DIM; y++)
+        {
+            printf("  Array %d and Row %d starts at %p", z, y, Arr3D[z][y]);
+            diff = Arr3D[z][y] - space;
+            printf("    diff = %d  ",diff);
+            printf(" z = %d  y = %d\n", z, y);
+        }
+    }
+    return 0;
+}</pre>
+<p>------------------- End of Prog. 9.4 ----------------------------</p>
+<p><a href="http://codepad.org/hFghr4bI">執行 Program 9.4</a></p>
+<p>If you have followed this tutorial up to this point you should have no problem deciphering the above on the basis of the comments alone. There are a couple of points that should be made however. Let's start with the line which reads: Arr3D[z][y] = space + (z(X_DIM * Y_DIM) + yX_DIM);</p>
+<p>Note that here space is a character pointer, which is the same type as Arr3D[z][y]. It is important that when adding an integer, such as that obtained by evaluation of the expression (z(X_DIM * Y_DIM) + yX_DIM), to a pointer, the result is a new pointer value. And when assigning pointer values to pointer variables the data types of the value and variable must match.</p><br />ch8指向陣列的指標 << <a href='ch8指向陣列的指標.html'>Previous</a> <a href='ch10指向函式的指標.html'>Next</a> >> ch10指向函式的指標</section></div></body></html>

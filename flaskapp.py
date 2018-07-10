@@ -1498,7 +1498,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">File Upload</a></li>
 <li><a href="/download_list">File List</a></li>
 <li><a href="/logout">Logout</a></li>
-<li><a href="/generate_pages">generate_pages</a></li>
+<!--<li><a href="/generate_pages">generate_pages</a></li>-->
 '''
     outstring += '''
 </ul>
@@ -1548,7 +1548,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">file upload</a></li>
 <li><a href="/download_list">file list</a></li>
 <li><a href="/logout">logout</a></li>
-<li><a href="/generate_pages">generate_pages</a></li>
+<!--<li><a href="/generate_pages">generate_pages</a></li>-->
 '''
     else:
         outstring += '''

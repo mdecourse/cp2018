@@ -845,7 +845,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;File Upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;File List&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
+&lt;!--&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;--&gt;
 '''
     outstring += '''
 &lt;/ul&gt;
@@ -1052,7 +1052,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;file upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;file list&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;logout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
+&lt;!--&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;--&gt;
 '''
     else:
         outstring += '''
