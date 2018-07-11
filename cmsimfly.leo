@@ -129,7 +129,7 @@
 <v t="amd.20160714232232.1"><vh>unique</vh></v>
 </v>
 </v>
-<v t="leo.20180711113847.1"><vh>編輯 reveal</vh>
+<v t="leo.20180711113847.1" a="E"><vh>編輯 reveal</vh>
 <v t="leo.20180711113949.1" a="E"><vh>@path reveal</vh>
 <v t="leo.20180711113902.1" a="E"><vh>@clean index.html</vh>
 <v t="leo.20180711113902.2" a="E"><vh>html</vh>
@@ -2688,7 +2688,7 @@ make.start()
 Created by [KMOLab](http://lab.kmol.info/)
 &lt;/small&gt;
 
-[計算機程式課程網誌](blog/index.html)
+[計算機程式課程網誌](./../blog/index.html)
 
 
 </t>
