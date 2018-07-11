@@ -1341,6 +1341,15 @@ def render_menu2(head, level, page, sitemap=0):
         current_level = level[index]
     directory += "</li></ul>"
     return directory
+# reveal 方法主要將位於 reveal 目錄下的檔案送回瀏覽器
+@app.route('/reveal/<path:path>')
+def reveal(path):
+  return send_from_directory(_curdir+"/reveal/", path)
+# blog 方法主要將位於 blog目錄下的檔案送回瀏覽器
+@app.route('/blog/<path:path>')
+def blog(path):
+  return send_from_directory(_curdir+"/blog/", path)
+
 @app.route('/saveConfig', methods=['POST'])
 def saveConfig():
     if not isAdmin():
@@ -1499,6 +1508,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/download_list">File List</a></li>
 <li><a href="/logout">Logout</a></li>
 <!--<li><a href="/generate_pages">generate_pages</a></li>-->
+<li><a href="/reveal/index.html">reveal</a></li>
+<li><a href="/blog/index.html">blog</a></li>
 '''
     outstring += '''
 </ul>
@@ -1549,6 +1560,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/download_list">file list</a></li>
 <li><a href="/logout">logout</a></li>
 <!--<li><a href="/generate_pages">generate_pages</a></li>-->
+<li><a href="/reveal/index.html">reveal</a></li>
+<li><a href="/blog/index.html">blog</a></li>
 '''
     else:
         outstring += '''
@@ -1590,6 +1603,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="sitemap.html">Site Map</a></li>
+<li><a href="reveal/index.html">reveal</a></li>
+<li><a href="blog/index.html">blog</a></li>
 '''
     outstring += '''
 </ul>
