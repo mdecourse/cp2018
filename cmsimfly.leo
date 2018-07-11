@@ -22,7 +22,7 @@
 <v t="leo.20180702145458.1"><vh>@button stop http.server</vh></v>
 </v>
 <v t="leo.20180703102027.1"><vh>@edit README.md</vh></v>
-<v t="amd.20160714225245.2"><vh>about cmsimfly</vh>
+<v t="amd.20160714225245.2" a="E"><vh>about cmsimfly</vh>
 <v t="amd.20160714225847.1"><vh>@edit README.md</vh></v>
 <v t="amd.20160714230137.1"><vh>@edit .gitignore</vh></v>
 <v t="amd.20160714230155.1"><vh>@edit LICENSE</vh></v>
@@ -595,7 +595,8 @@ def search_content(head, page, search):
 <t tx="amd.20160714231555.1">def editorhead():
     return '''
     &lt;br /&gt;
-&lt;script src="//cdn.tinymce.com/4/tinymce.min.js"&gt;&lt;/script&gt;
+&lt;!--&lt;script src="//cdn.tinymce.com/4/tinymce.min.js"&gt;&lt;/script&gt;--&gt;
+&lt;script src="/static/tinymce4/tinymce/tinymce.min.js"&gt;&lt;/script&gt;
 &lt;script src="/static/tinymce4/tinymce/plugins/sh4tinymce/plugin.min.js"&gt;&lt;/script&gt;
 &lt;link rel = "stylesheet" href = "/static/tinymce4/tinymce/plugins/sh4tinymce/style/style.css"&gt;
 &lt;script&gt;
@@ -2521,7 +2522,9 @@ def reveal(path):
 </t>
 <t tx="leo.20180711113902.11">&lt;section&gt;
 @others
-&lt;/section&gt;</t>
+&lt;/section&gt;
+
+</t>
 <t tx="leo.20180711113902.12">&lt;section data-markdown&gt;
     &lt;script type="text/template"&gt;
 &lt;!-- 請注意, @others 不可以內縮 --&gt;
@@ -2659,7 +2662,9 @@ make.start()
             ]
         });
 &lt;/script&gt;
-&lt;/body&gt;</t>
+&lt;/body&gt;
+
+</t>
 <t tx="leo.20180711113902.5">&lt;div class="reveal"&gt;
 @others
 &lt;/div&gt;
@@ -2705,6 +2710,8 @@ Created by [KMOLab](http://lab.kmol.info/)
 <t tx="leo.20180711121340.1"># blog 方法主要將位於 blog目錄下的檔案送回瀏覽器
 @app.route('/blog/&lt;path:path&gt;')
 def blog(path):
-  return send_from_directory(_curdir+"/blog/", path)</t>
+  return send_from_directory(_curdir+"/blog/", path)
+
+</t>
 </tnodes>
 </leo_file>

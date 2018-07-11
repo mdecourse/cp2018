@@ -351,7 +351,8 @@ def editorfoot():
 def editorhead():
     return '''
     <br />
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<!--<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>-->
+<script src="/static/tinymce4/tinymce/tinymce.min.js"></script>
 <script src="/static/tinymce4/tinymce/plugins/sh4tinymce/plugin.min.js"></script>
 <link rel = "stylesheet" href = "/static/tinymce4/tinymce/plugins/sh4tinymce/style/style.css">
 <script>
