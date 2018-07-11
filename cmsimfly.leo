@@ -129,7 +129,7 @@
 <v t="amd.20160714232232.1"><vh>unique</vh></v>
 </v>
 </v>
-<v t="leo.20180711113847.1" a="E"><vh>編輯 reveal</vh>
+<v t="leo.20180711113847.1"><vh>編輯 reveal</vh>
 <v t="leo.20180711113949.1" a="E"><vh>@path reveal</vh>
 <v t="leo.20180711113902.1" a="E"><vh>@clean index.html</vh>
 <v t="leo.20180711113902.2" a="E"><vh>html</vh>
@@ -2256,8 +2256,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="sitemap.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./../reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./../blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
 '''
     outstring += '''
 &lt;/ul&gt;

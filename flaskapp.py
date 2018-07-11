@@ -1603,8 +1603,8 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="sitemap.html">Site Map</a></li>
-<li><a href="reveal/index.html">reveal</a></li>
-<li><a href="blog/index.html">blog</a></li>
+<li><a href="./../reveal/index.html">reveal</a></li>
+<li><a href="./../blog/index.html">blog</a></li>
 '''
     outstring += '''
 </ul>
