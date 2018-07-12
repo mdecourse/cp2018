@@ -634,8 +634,7 @@ def generate_pages():
         file.write(get_page2(head[i], 0))
         file.close()
     # generate each page html under content directory
-
-    #return "已經將網站轉為靜態網頁. <a href='/'>Home</a>"
+    return "已經將網站轉為靜態網頁. <a href='/'>Home</a>"
 
 # seperate page need heading and edit variables, if edit=1, system will enter edit mode
 # single page edit will use ssavePage to save content, it means seperate save page
@@ -1390,8 +1389,9 @@ def savePage():
     page_content = page_content.replace("\n","")
     file.write(page_content)
     file.close()
-    
-    generate_pages()
+
+    # if every savePage generate_pages needed
+    #generate_pages()
     '''
     # need to parse_content() to eliminate duplicate heading
     head, level, page = parse_content()
@@ -1508,9 +1508,9 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">File Upload</a></li>
 <li><a href="/download_list">File List</a></li>
 <li><a href="/logout">Logout</a></li>
-<!--<li><a href="/generate_pages">generate_pages</a></li>-->
 <li><a href="/reveal/index.html">reveal</a></li>
 <li><a href="/blog/index.html">blog</a></li>
+<li><a href="/generate_pages">generate_pages</a></li>
 '''
     outstring += '''
 </ul>
@@ -1560,9 +1560,9 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">file upload</a></li>
 <li><a href="/download_list">file list</a></li>
 <li><a href="/logout">logout</a></li>
-<!--<li><a href="/generate_pages">generate_pages</a></li>-->
 <li><a href="/reveal/index.html">reveal</a></li>
 <li><a href="/blog/index.html">blog</a></li>
+<li><a href="/generate_pages">generate_pages</a></li>
 '''
     else:
         outstring += '''
@@ -1663,8 +1663,8 @@ def ssavePage():
         else:
             file.write("<h"+str(level[index])+">"+str(head[index])+"</h"+str(level[index])+">"+str(page[index]))
     file.close()
-    
-    generate_pages()
+    # if every ssavePage generate_pages needed
+    #generate_pages()
 
     # if head[int(page_order)] still existed and equal original_head_title, go back to origin edit status, otherwise go to "/"
     # here the content is modified, we need to parse the new page_content again

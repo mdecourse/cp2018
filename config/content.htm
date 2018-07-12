@@ -1841,7 +1841,452 @@ print(result)</pre>
 <p>位於 markdown 目錄為 Pelican 網誌的原始檔案, 轉檔後將網誌存入 blog 目錄, 並需要 theme 與 plugin 目錄, 以及&nbsp;&nbsp;local_publishconf.py,&nbsp;pelicanconf.py 與&nbsp;publishconf.py 等設定檔案.</p>
 <p>pelican.leo 位於 config/pelican.leo 目錄, 用於 Pelican 靜態網誌 markdown 目錄中輸入 .md&nbsp; 檔案與 Pelican 設定檔案的編輯管理與轉檔.</p><h2>Reveal.js 操作</h2>
 <p>位於 reveal 目錄中為 <a href="https://revealjs.com">reveal.js</a> 網際投影片系統</p>
-<h2>Qt C++ 計算器程式</h2><p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p><p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p><p>calculator.pro</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">#-------------------------------------------------## Project created by QtCreator 2018-07-07T23:49:39##-------------------------------------------------greaterThan(QT_MAJOR_VERSION, 4): QT += widgetsTARGET = calculatorTEMPLATE = app# The following define makes your compiler emit warnings if you use# any feature of Qt which has been marked as deprecated (the exact warnings# depend on your compiler). Please consult the documentation of the# deprecated API in order to know how to port your code away from it.DEFINES += QT_DEPRECATED_WARNINGS# You can also make your code fail to compile if you use deprecated APIs.# In order to do so, uncomment the following line.# You can also select to disable deprecated APIs only up to a certain version of Qt.#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0SOURCES += \        main.cpp \    button.cpp \    calculator.cppHEADERS += \    button.h \    calculator.h</pre><p>main.cpp</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include "calculator.h"#include &lt;QApplication&gt;int main(int argc, char *argv[]){    QApplication a(argc, argv);    Calculator w;    w.show();    return a.exec();}</pre><p>button.h</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#ifndef BUTTON_H#define BUTTON_H#include &lt;QToolButton&gt;class Button : public QToolButton{    Q_OBJECTpublic:    explicit Button(const QString &amp;text, QWidget *parent = 0);    QSize sizeHint() const override;};#endif</pre><p>calculator.h</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#ifndef CALCULATOR_H#define CALCULATOR_H#include &lt;QWidget&gt;class QLineEdit;class Button;class Calculator : public QWidget{    Q_OBJECTpublic:    Calculator(QWidget *parent = 0);private slots:    void digitClicked();    void unaryOperatorClicked();    void additiveOperatorClicked();    void multiplicativeOperatorClicked();    void equalClicked();    void pointClicked();    void changeSignClicked();    void backspaceClicked();    void clear();    void clearAll();    void clearMemory();    void readMemory();    void setMemory();    void addToMemory();private:    Button *createButton(const QString &amp;text, const char *member);    void abortOperation();    bool calculate(double rightOperand, const QString &amp;pendingOperator);    double sumInMemory;    double sumSoFar;    double factorSoFar;    QString pendingAdditiveOperator;    QString pendingMultiplicativeOperator;    bool waitingForOperand;    QLineEdit *display;    enum { NumDigitButtons = 10 };    Button *digitButtons[NumDigitButtons];};#endif</pre><p>button.cpp</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;QtWidgets&gt;#include "button.h"Button::Button(const QString &amp;text, QWidget *parent)    : QToolButton(parent){    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);    setText(text);}QSize Button::sizeHint() const{    QSize size = QToolButton::sizeHint();    size.rheight() += 20;    size.rwidth() = qMax(size.width(), size.height());    return size;}</pre><p>calculator.cpp</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;QtWidgets&gt;#include &lt;cmath&gt;#include "button.h"#include "calculator.h"Calculator::Calculator(QWidget *parent)    : QWidget(parent){    sumInMemory = 0.0;    sumSoFar = 0.0;    factorSoFar = 0.0;    waitingForOperand = true;    display = new QLineEdit("0");    display-&gt;setReadOnly(true);    display-&gt;setAlignment(Qt::AlignRight);    display-&gt;setMaxLength(15);    QFont font = display-&gt;font();    font.setPointSize(font.pointSize() + 8);    display-&gt;setFont(font);    for (int i = 0; i &lt; NumDigitButtons; ++i) {        digitButtons[i] = createButton(QString::number(i), SLOT(digitClicked()));    }    Button *pointButton = createButton(tr("."), SLOT(pointClicked()));    Button *changeSignButton = createButton(tr("\302\261"), SLOT(changeSignClicked()));    Button *backspaceButton = createButton(tr("Backspace"), SLOT(backspaceClicked()));    Button *clearButton = createButton(tr("Clear"), SLOT(clear()));    Button *clearAllButton = createButton(tr("Clear All"), SLOT(clearAll()));    Button *clearMemoryButton = createButton(tr("MC"), SLOT(clearMemory()));    Button *readMemoryButton = createButton(tr("MR"), SLOT(readMemory()));    Button *setMemoryButton = createButton(tr("MS"), SLOT(setMemory()));    Button *addToMemoryButton = createButton(tr("M+"), SLOT(addToMemory()));    Button *divisionButton = createButton(tr("\303\267"), SLOT(multiplicativeOperatorClicked()));    Button *timesButton = createButton(tr("\303\227"), SLOT(multiplicativeOperatorClicked()));    Button *minusButton = createButton(tr("-"), SLOT(additiveOperatorClicked()));    Button *plusButton = createButton(tr("+"), SLOT(additiveOperatorClicked()));    Button *squareRootButton = createButton(tr("Sqrt"), SLOT(unaryOperatorClicked()));    Button *powerButton = createButton(tr("x\302\262"), SLOT(unaryOperatorClicked()));    Button *reciprocalButton = createButton(tr("1/x"), SLOT(unaryOperatorClicked()));    Button *equalButton = createButton(tr("="), SLOT(equalClicked()));    QGridLayout *mainLayout = new QGridLayout;    mainLayout-&gt;setSizeConstraint(QLayout::SetFixedSize);    mainLayout-&gt;addWidget(display, 0, 0, 1, 6);    mainLayout-&gt;addWidget(backspaceButton, 1, 0, 1, 2);    mainLayout-&gt;addWidget(clearButton, 1, 2, 1, 2);    mainLayout-&gt;addWidget(clearAllButton, 1, 4, 1, 2);    mainLayout-&gt;addWidget(clearMemoryButton, 2, 0);    mainLayout-&gt;addWidget(readMemoryButton, 3, 0);    mainLayout-&gt;addWidget(setMemoryButton, 4, 0);    mainLayout-&gt;addWidget(addToMemoryButton, 5, 0);    for (int i = 1; i &lt; NumDigitButtons; ++i) {        int row = ((9 - i) / 3) + 2;        int column = ((i - 1) % 3) + 1;        mainLayout-&gt;addWidget(digitButtons[i], row, column);    }    mainLayout-&gt;addWidget(digitButtons[0], 5, 1);    mainLayout-&gt;addWidget(pointButton, 5, 2);    mainLayout-&gt;addWidget(changeSignButton, 5, 3);    mainLayout-&gt;addWidget(divisionButton, 2, 4);    mainLayout-&gt;addWidget(timesButton, 3, 4);    mainLayout-&gt;addWidget(minusButton, 4, 4);    mainLayout-&gt;addWidget(plusButton, 5, 4);    mainLayout-&gt;addWidget(squareRootButton, 2, 5);    mainLayout-&gt;addWidget(powerButton, 3, 5);    mainLayout-&gt;addWidget(reciprocalButton, 4, 5);    mainLayout-&gt;addWidget(equalButton, 5, 5);    setLayout(mainLayout);    setWindowTitle(tr("Calculator"));}void Calculator::digitClicked(){    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());    int digitValue = clickedButton-&gt;text().toInt();    if (display-&gt;text() == "0" &amp;&amp; digitValue == 0.0)        return;    if (waitingForOperand) {        display-&gt;clear();        waitingForOperand = false;    }    display-&gt;setText(display-&gt;text() + QString::number(digitValue));}void Calculator::unaryOperatorClicked(){    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());    QString clickedOperator = clickedButton-&gt;text();    double operand = display-&gt;text().toDouble();    double result = 0.0;    if (clickedOperator == tr("Sqrt")) {        if (operand &lt; 0.0) {            abortOperation();            return;        }        result = std::sqrt(operand);    } else if (clickedOperator == tr("x\302\262")) {        result = std::pow(operand, 2.0);    } else if (clickedOperator == tr("1/x")) {        if (operand == 0.0) {            abortOperation();            return;        }        result = 1.0 / operand;    }    display-&gt;setText(QString::number(result));    waitingForOperand = true;}void Calculator::additiveOperatorClicked(){    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());    QString clickedOperator = clickedButton-&gt;text();    double operand = display-&gt;text().toDouble();    if (!pendingMultiplicativeOperator.isEmpty()) {        if (!calculate(operand, pendingMultiplicativeOperator)) {            abortOperation();            return;        }        display-&gt;setText(QString::number(factorSoFar));        operand = factorSoFar;        factorSoFar = 0.0;        pendingMultiplicativeOperator.clear();    }    if (!pendingAdditiveOperator.isEmpty()) {        if (!calculate(operand, pendingAdditiveOperator)) {            abortOperation();            return;        }        display-&gt;setText(QString::number(sumSoFar));    } else {        sumSoFar = operand;    }    pendingAdditiveOperator = clickedOperator;    waitingForOperand = true;}void Calculator::multiplicativeOperatorClicked(){    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());    QString clickedOperator = clickedButton-&gt;text();    double operand = display-&gt;text().toDouble();    if (!pendingMultiplicativeOperator.isEmpty()) {        if (!calculate(operand, pendingMultiplicativeOperator)) {            abortOperation();            return;        }        display-&gt;setText(QString::number(factorSoFar));    } else {        factorSoFar = operand;    }    pendingMultiplicativeOperator = clickedOperator;    waitingForOperand = true;}void Calculator::equalClicked(){    double operand = display-&gt;text().toDouble();    if (!pendingMultiplicativeOperator.isEmpty()) {        if (!calculate(operand, pendingMultiplicativeOperator)) {            abortOperation();            return;        }        operand = factorSoFar;        factorSoFar = 0.0;        pendingMultiplicativeOperator.clear();    }    if (!pendingAdditiveOperator.isEmpty()) {        if (!calculate(operand, pendingAdditiveOperator)) {            abortOperation();            return;        }        pendingAdditiveOperator.clear();    } else {        sumSoFar = operand;    }    display-&gt;setText(QString::number(sumSoFar));    sumSoFar = 0.0;    waitingForOperand = true;}void Calculator::pointClicked(){    if (waitingForOperand)        display-&gt;setText("0");    if (!display-&gt;text().contains('.'))        display-&gt;setText(display-&gt;text() + tr("."));    waitingForOperand = false;}void Calculator::changeSignClicked(){    QString text = display-&gt;text();    double value = text.toDouble();    if (value &gt; 0.0) {        text.prepend(tr("-"));    } else if (value &lt; 0.0) {        text.remove(0, 1);    }    display-&gt;setText(text);}void Calculator::backspaceClicked(){    if (waitingForOperand)        return;    QString text = display-&gt;text();    text.chop(1);    if (text.isEmpty()) {        text = "0";        waitingForOperand = true;    }    display-&gt;setText(text);}void Calculator::clear(){    if (waitingForOperand)        return;    display-&gt;setText("0");    waitingForOperand = true;}void Calculator::clearAll(){    sumSoFar = 0.0;    factorSoFar = 0.0;    pendingAdditiveOperator.clear();    pendingMultiplicativeOperator.clear();    display-&gt;setText("0");    waitingForOperand = true;}void Calculator::clearMemory(){    sumInMemory = 0.0;}void Calculator::readMemory(){    display-&gt;setText(QString::number(sumInMemory));    waitingForOperand = true;}void Calculator::setMemory(){    equalClicked();    sumInMemory = display-&gt;text().toDouble();}void Calculator::addToMemory(){    equalClicked();    sumInMemory += display-&gt;text().toDouble();}Button *Calculator::createButton(const QString &amp;text, const char *member){    Button *button = new Button(text);    connect(button, SIGNAL(clicked()), this, member);    return button;}void Calculator::abortOperation(){    clearAll();    display-&gt;setText(tr("####"));}bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperator){    if (pendingOperator == tr("+")) {        sumSoFar += rightOperand;    } else if (pendingOperator == tr("-")) {        sumSoFar -= rightOperand;    } else if (pendingOperator == tr("\303\227")) {        factorSoFar *= rightOperand;    } else if (pendingOperator == tr("\303\267")) {        if (rightOperand == 0.0)            return false;        factorSoFar /= rightOperand;    }    return true;}</pre><p></p><h2>PyQt 計算器程式</h2>
+<h2>Qt C++ 計算器程式</h2>
+<p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
+<p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
+<p>calculator.pro</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">#-------------------------------------------------
+#
+# Project created by QtCreator 2018-07-07T23:49:39
+#
+#-------------------------------------------------
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = calculator
+TEMPLATE = app
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+
+SOURCES += \
+        main.cpp \
+    button.cpp \
+    calculator.cpp
+
+HEADERS += \
+    button.h \
+    calculator.h</pre>
+<p>main.cpp</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include "calculator.h"
+#include &lt;QApplication&gt;
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    Calculator w;
+    w.show();
+
+    return a.exec();
+}</pre>
+<p>button.h</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#ifndef BUTTON_H
+#define BUTTON_H
+
+#include &lt;QToolButton&gt;
+
+class Button : public QToolButton
+{
+    Q_OBJECT
+
+public:
+    explicit Button(const QString &amp;text, QWidget *parent = 0);
+
+    QSize sizeHint() const override;
+};
+
+#endif</pre>
+<p>calculator.h</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#ifndef CALCULATOR_H
+#define CALCULATOR_H
+
+#include &lt;QWidget&gt;
+
+class QLineEdit;
+
+class Button;
+
+class Calculator : public QWidget
+{
+    Q_OBJECT
+
+public:
+    Calculator(QWidget *parent = 0);
+
+private slots:
+    void digitClicked();
+    void unaryOperatorClicked();
+    void additiveOperatorClicked();
+    void multiplicativeOperatorClicked();
+    void equalClicked();
+    void pointClicked();
+    void changeSignClicked();
+    void backspaceClicked();
+    void clear();
+    void clearAll();
+    void clearMemory();
+    void readMemory();
+    void setMemory();
+    void addToMemory();
+
+private:
+    Button *createButton(const QString &amp;text, const char *member);
+    void abortOperation();
+    bool calculate(double rightOperand, const QString &amp;pendingOperator);
+
+    double sumInMemory;
+    double sumSoFar;
+    double factorSoFar;
+    QString pendingAdditiveOperator;
+    QString pendingMultiplicativeOperator;
+    bool waitingForOperand;
+
+    QLineEdit *display;
+
+    enum { NumDigitButtons = 10 };
+    Button *digitButtons[NumDigitButtons];
+};
+
+#endif</pre>
+<p>button.cpp</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;QtWidgets&gt;
+
+#include "button.h"
+
+Button::Button(const QString &amp;text, QWidget *parent)
+    : QToolButton(parent)
+{
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    setText(text);
+}
+
+QSize Button::sizeHint() const
+{
+    QSize size = QToolButton::sizeHint();
+    size.rheight() += 20;
+    size.rwidth() = qMax(size.width(), size.height());
+    return size;
+}</pre>
+<p>calculator.cpp</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;QtWidgets&gt;
+
+#include &lt;cmath&gt;
+
+#include "button.h"
+#include "calculator.h"
+
+Calculator::Calculator(QWidget *parent)
+    : QWidget(parent)
+{
+    sumInMemory = 0.0;
+    sumSoFar = 0.0;
+    factorSoFar = 0.0;
+    waitingForOperand = true;
+
+    display = new QLineEdit("0");
+    display-&gt;setReadOnly(true);
+    display-&gt;setAlignment(Qt::AlignRight);
+    display-&gt;setMaxLength(15);
+
+    QFont font = display-&gt;font();
+    font.setPointSize(font.pointSize() + 8);
+    display-&gt;setFont(font);
+
+    for (int i = 0; i &lt; NumDigitButtons; ++i) {
+        digitButtons[i] = createButton(QString::number(i), SLOT(digitClicked()));
+    }
+
+    Button *pointButton = createButton(tr("."), SLOT(pointClicked()));
+    Button *changeSignButton = createButton(tr("\302\261"), SLOT(changeSignClicked()));
+
+    Button *backspaceButton = createButton(tr("Backspace"), SLOT(backspaceClicked()));
+    Button *clearButton = createButton(tr("Clear"), SLOT(clear()));
+    Button *clearAllButton = createButton(tr("Clear All"), SLOT(clearAll()));
+
+    Button *clearMemoryButton = createButton(tr("MC"), SLOT(clearMemory()));
+    Button *readMemoryButton = createButton(tr("MR"), SLOT(readMemory()));
+    Button *setMemoryButton = createButton(tr("MS"), SLOT(setMemory()));
+    Button *addToMemoryButton = createButton(tr("M+"), SLOT(addToMemory()));
+
+    Button *divisionButton = createButton(tr("\303\267"), SLOT(multiplicativeOperatorClicked()));
+    Button *timesButton = createButton(tr("\303\227"), SLOT(multiplicativeOperatorClicked()));
+    Button *minusButton = createButton(tr("-"), SLOT(additiveOperatorClicked()));
+    Button *plusButton = createButton(tr("+"), SLOT(additiveOperatorClicked()));
+
+    Button *squareRootButton = createButton(tr("Sqrt"), SLOT(unaryOperatorClicked()));
+    Button *powerButton = createButton(tr("x\302\262"), SLOT(unaryOperatorClicked()));
+    Button *reciprocalButton = createButton(tr("1/x"), SLOT(unaryOperatorClicked()));
+    Button *equalButton = createButton(tr("="), SLOT(equalClicked()));
+
+    QGridLayout *mainLayout = new QGridLayout;
+    mainLayout-&gt;setSizeConstraint(QLayout::SetFixedSize);
+    mainLayout-&gt;addWidget(display, 0, 0, 1, 6);
+    mainLayout-&gt;addWidget(backspaceButton, 1, 0, 1, 2);
+    mainLayout-&gt;addWidget(clearButton, 1, 2, 1, 2);
+    mainLayout-&gt;addWidget(clearAllButton, 1, 4, 1, 2);
+
+    mainLayout-&gt;addWidget(clearMemoryButton, 2, 0);
+    mainLayout-&gt;addWidget(readMemoryButton, 3, 0);
+    mainLayout-&gt;addWidget(setMemoryButton, 4, 0);
+    mainLayout-&gt;addWidget(addToMemoryButton, 5, 0);
+
+    for (int i = 1; i &lt; NumDigitButtons; ++i) {
+        int row = ((9 - i) / 3) + 2;
+        int column = ((i - 1) % 3) + 1;
+        mainLayout-&gt;addWidget(digitButtons[i], row, column);
+    }
+
+    mainLayout-&gt;addWidget(digitButtons[0], 5, 1);
+    mainLayout-&gt;addWidget(pointButton, 5, 2);
+    mainLayout-&gt;addWidget(changeSignButton, 5, 3);
+
+    mainLayout-&gt;addWidget(divisionButton, 2, 4);
+    mainLayout-&gt;addWidget(timesButton, 3, 4);
+    mainLayout-&gt;addWidget(minusButton, 4, 4);
+    mainLayout-&gt;addWidget(plusButton, 5, 4);
+
+    mainLayout-&gt;addWidget(squareRootButton, 2, 5);
+    mainLayout-&gt;addWidget(powerButton, 3, 5);
+    mainLayout-&gt;addWidget(reciprocalButton, 4, 5);
+    mainLayout-&gt;addWidget(equalButton, 5, 5);
+    setLayout(mainLayout);
+
+    setWindowTitle(tr("Calculator"));
+}
+
+void Calculator::digitClicked()
+{
+    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());
+    int digitValue = clickedButton-&gt;text().toInt();
+    if (display-&gt;text() == "0" &amp;&amp; digitValue == 0.0)
+        return;
+
+    if (waitingForOperand) {
+        display-&gt;clear();
+        waitingForOperand = false;
+    }
+    display-&gt;setText(display-&gt;text() + QString::number(digitValue));
+}
+
+void Calculator::unaryOperatorClicked()
+{
+    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());
+    QString clickedOperator = clickedButton-&gt;text();
+    double operand = display-&gt;text().toDouble();
+    double result = 0.0;
+
+    if (clickedOperator == tr("Sqrt")) {
+        if (operand &lt; 0.0) {
+            abortOperation();
+            return;
+        }
+        result = std::sqrt(operand);
+    } else if (clickedOperator == tr("x\302\262")) {
+        result = std::pow(operand, 2.0);
+    } else if (clickedOperator == tr("1/x")) {
+        if (operand == 0.0) {
+            abortOperation();
+            return;
+        }
+        result = 1.0 / operand;
+    }
+    display-&gt;setText(QString::number(result));
+    waitingForOperand = true;
+}
+
+void Calculator::additiveOperatorClicked()
+{
+    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());
+    QString clickedOperator = clickedButton-&gt;text();
+    double operand = display-&gt;text().toDouble();
+
+    if (!pendingMultiplicativeOperator.isEmpty()) {
+        if (!calculate(operand, pendingMultiplicativeOperator)) {
+            abortOperation();
+            return;
+        }
+        display-&gt;setText(QString::number(factorSoFar));
+        operand = factorSoFar;
+        factorSoFar = 0.0;
+        pendingMultiplicativeOperator.clear();
+    }
+
+    if (!pendingAdditiveOperator.isEmpty()) {
+        if (!calculate(operand, pendingAdditiveOperator)) {
+            abortOperation();
+            return;
+        }
+        display-&gt;setText(QString::number(sumSoFar));
+    } else {
+        sumSoFar = operand;
+    }
+
+    pendingAdditiveOperator = clickedOperator;
+    waitingForOperand = true;
+}
+
+void Calculator::multiplicativeOperatorClicked()
+{
+    Button *clickedButton = qobject_cast&lt;Button *&gt;(sender());
+    QString clickedOperator = clickedButton-&gt;text();
+    double operand = display-&gt;text().toDouble();
+
+    if (!pendingMultiplicativeOperator.isEmpty()) {
+        if (!calculate(operand, pendingMultiplicativeOperator)) {
+            abortOperation();
+            return;
+        }
+        display-&gt;setText(QString::number(factorSoFar));
+    } else {
+        factorSoFar = operand;
+    }
+
+    pendingMultiplicativeOperator = clickedOperator;
+    waitingForOperand = true;
+}
+
+void Calculator::equalClicked()
+{
+    double operand = display-&gt;text().toDouble();
+
+    if (!pendingMultiplicativeOperator.isEmpty()) {
+        if (!calculate(operand, pendingMultiplicativeOperator)) {
+            abortOperation();
+            return;
+        }
+        operand = factorSoFar;
+        factorSoFar = 0.0;
+        pendingMultiplicativeOperator.clear();
+    }
+    if (!pendingAdditiveOperator.isEmpty()) {
+        if (!calculate(operand, pendingAdditiveOperator)) {
+            abortOperation();
+            return;
+        }
+        pendingAdditiveOperator.clear();
+    } else {
+        sumSoFar = operand;
+    }
+
+    display-&gt;setText(QString::number(sumSoFar));
+    sumSoFar = 0.0;
+    waitingForOperand = true;
+}
+
+void Calculator::pointClicked()
+{
+    if (waitingForOperand)
+        display-&gt;setText("0");
+    if (!display-&gt;text().contains('.'))
+        display-&gt;setText(display-&gt;text() + tr("."));
+    waitingForOperand = false;
+}
+
+void Calculator::changeSignClicked()
+{
+    QString text = display-&gt;text();
+    double value = text.toDouble();
+
+    if (value &gt; 0.0) {
+        text.prepend(tr("-"));
+    } else if (value &lt; 0.0) {
+        text.remove(0, 1);
+    }
+    display-&gt;setText(text);
+}
+
+void Calculator::backspaceClicked()
+{
+    if (waitingForOperand)
+        return;
+
+    QString text = display-&gt;text();
+    text.chop(1);
+    if (text.isEmpty()) {
+        text = "0";
+        waitingForOperand = true;
+    }
+    display-&gt;setText(text);
+}
+
+void Calculator::clear()
+{
+    if (waitingForOperand)
+        return;
+
+    display-&gt;setText("0");
+    waitingForOperand = true;
+}
+
+void Calculator::clearAll()
+{
+    sumSoFar = 0.0;
+    factorSoFar = 0.0;
+    pendingAdditiveOperator.clear();
+    pendingMultiplicativeOperator.clear();
+    display-&gt;setText("0");
+    waitingForOperand = true;
+}
+
+void Calculator::clearMemory()
+{
+    sumInMemory = 0.0;
+}
+
+void Calculator::readMemory()
+{
+    display-&gt;setText(QString::number(sumInMemory));
+    waitingForOperand = true;
+}
+
+void Calculator::setMemory()
+{
+    equalClicked();
+    sumInMemory = display-&gt;text().toDouble();
+}
+
+void Calculator::addToMemory()
+{
+    equalClicked();
+    sumInMemory += display-&gt;text().toDouble();
+}
+Button *Calculator::createButton(const QString &amp;text, const char *member)
+{
+    Button *button = new Button(text);
+    connect(button, SIGNAL(clicked()), this, member);
+    return button;
+}
+
+void Calculator::abortOperation()
+{
+    clearAll();
+    display-&gt;setText(tr("####"));
+}
+
+bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperator)
+{
+    if (pendingOperator == tr("+")) {
+        sumSoFar += rightOperand;
+    } else if (pendingOperator == tr("-")) {
+        sumSoFar -= rightOperand;
+    } else if (pendingOperator == tr("\303\227")) {
+        factorSoFar *= rightOperand;
+    } else if (pendingOperator == tr("\303\267")) {
+        if (rightOperand == 0.0)
+            return false;
+        factorSoFar /= rightOperand;
+    }
+    return true;
+}</pre>
+<p></p><h2>PyQt 計算器程式</h2>
 <p><a href="/downloads/cpw10.7z">cpw10_calculator.7z</a></p>
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一甲第十週第三部分</yt-formatted-string></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/CK96oD_N73M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
@@ -3268,13 +3713,23 @@ print(data)
 
 
 </pre>
-<h2>RigitBody library</h2>
+<h2>CMSimfly 解析</h2>
+<p>CMSimfly 的設計概念源自&nbsp;<a href="https://www.cmsimple.org/en/">https://www.cmsimple.org/en/</a>, CMSimple&nbsp;不需要使用資料庫,所有的頁面資料都以一個超文件檔案格式, 名稱為content.htm, 存於全球資訊網伺服器上.純文字檔的資料設計使得安裝與備份工作相對較為簡單.</p>
+<p>CMSimple主要的程式功能分為頁面展示與後台管理. 其頁面展示功能是利用超文件中的 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;, 與 &lt;h3&gt;&lt;/h3&gt; 標註（可後續延伸至 &lt;h4&gt;&lt;/h4&gt;等）, 進行分頁. CMSimple程式會將 content.htm 中的 &lt;h1&gt;&lt;/h1&gt; 當作第一層頁面的標題, 緊跟其後之 &lt;h2&gt;&lt;/h2&gt; 則將被視為第二層頁面的標題, 而 &lt;h3&gt;&lt;/h3&gt; 所涵蓋的內容則為第三層頁面的標題. 各層標題則依照其位於content.htm文件中的順序而定. 由於CMSimple利用 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;，與&lt;h3&gt;&lt;/h3&gt; 標註進行分頁，因此其文件內容無法出現標題標註（header）所對應的粗體文字. 使用者必須透過其他方式產生類似粗體文字的效果.</p>
+<p>CMSimple的後台管理, 僅允許單一用戶使用. 透過後台管理, 可設定各種與頁面展示相關的參數. 與許多內容管理系統相同, CMSimple提供延伸程式開發架構的設計, 可以讓程式開發者自行建構原始CMSimple以外的功能.</p>
+<p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
+<p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p><h2>Pygrouf 解析</h2>
+<p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>&nbsp; 為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
+<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2>
+<p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p><h2>Pyquino 解析</h2>
+<p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p><h2>Solvespace 解析</h2><p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p><h2>V-rep 解析</h2>
+<p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p><h2>FreeCAD 解析</h2>
+<p><a href="https://www.freecadweb.org/">https://www.freecadweb.org/</a>&nbsp;</p><h2>RigitBody library</h2>
 <p>Rigit Body Dynamic Library</p>
 <p><a href="https://rbdl.bitbucket.io">https://rbdl.bitbucket.io</a>&nbsp;</p>
 <p><a href="https://bitbucket.org/rbdl/rbdl">https://bitbucket.org/rbdl/rbdl</a>&nbsp;</p>
 <p>RBDL - an Efficient Rigid-Body Dynamics Library using Recursive Algorithms</p>
-<p><a href="https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf">https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf</a>&nbsp; or <a href="/downloads/RBDL%20- an Efficient Rigid-Body Dynamics Library using Recursive Algorithms.pdf">local</a></p>
-<h2>FiniteElement library</h2>
+<p><a href="https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf">https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf</a>&nbsp; or <a href="/downloads/RBDL%20- an Efficient Rigid-Body Dynamics Library using Recursive Algorithms.pdf">local</a></p><h2>FiniteElement library</h2>
 <p><a href="http://mfem.org/">http://mfem.org/</a>&nbsp;</p>
 <p><a href="https://fenicsproject.org/">https://fenicsproject.org/</a>&nbsp;</p>
 <p><a href="https://github.com/ali7line/awesome-fem">https://github.com/ali7line/awesome-fem</a>&nbsp;</p><h2>網際平面連桿模擬</h2>

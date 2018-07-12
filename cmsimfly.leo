@@ -26,7 +26,7 @@
 <v t="amd.20160714225847.1"><vh>@edit README.md</vh></v>
 <v t="amd.20160714230137.1"><vh>@edit .gitignore</vh></v>
 <v t="amd.20160714230155.1"><vh>@edit LICENSE</vh></v>
-<v t="amd.20160715000709.1"><vh>註解</vh>
+<v t="amd.20160715000709.1" a="E"><vh>註解</vh>
 <v t="amd.20160715211540.1"><vh>處理 url 與 edit</vh></v>
 <v t="amd.20160715213810.1"><vh>必須處理 downloads 與 images 目錄</vh></v>
 <v t="leo.20180625155103.1"><vh>改為 pybean based</vh>
@@ -34,6 +34,7 @@
 </v>
 <v t="leo.20180630135634.1" a="E"><vh>新增 generate_pages 功能</vh>
 <v t="leo.20180630211407.1"><vh>必須修改頁面內容</vh></v>
+<v t="leo.20180712144340.1"><vh>改回手動轉靜態網頁</vh></v>
 </v>
 </v>
 <v t="leo.20180701102916.1" a="E"><vh>2018Summer 改版</vh>
@@ -880,9 +881,9 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;File Upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;File List&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-&lt;!--&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;--&gt;
 &lt;li&gt;&lt;a href="/reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
 '''
     outstring += '''
 &lt;/ul&gt;
@@ -1089,9 +1090,9 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;file upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;file list&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;logout&lt;/a&gt;&lt;/li&gt;
-&lt;!--&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;--&gt;
 &lt;li&gt;&lt;a href="/reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
 '''
     else:
         outstring += '''
@@ -1214,8 +1215,9 @@ def savePage():
     page_content = page_content.replace("\n","")
     file.write(page_content)
     file.close()
-    
-    generate_pages()
+
+    # if every savePage generate_pages needed
+    #generate_pages()
     '''
     # need to parse_content() to eliminate duplicate heading
     head, level, page = parse_content()
@@ -1246,8 +1248,8 @@ def ssavePage():
         else:
             file.write("&lt;h"+str(level[index])+"&gt;"+str(head[index])+"&lt;/h"+str(level[index])+"&gt;"+str(page[index]))
     file.close()
-    
-    generate_pages()
+    # if every ssavePage generate_pages needed
+    #generate_pages()
 
     # if head[int(page_order)] still existed and equal original_head_title, go back to origin edit status, otherwise go to "/"
     # here the content is modified, we need to parse the new page_content again
@@ -2101,8 +2103,7 @@ def generate_pages():
         file.write(get_page2(head[i], 0))
         file.close()
     # generate each page html under content directory
-
-    #return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"
+    return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"
 
 </t>
 <t tx="leo.20180630144325.1"># seperate page need heading and edit variables, if edit=1, system will enter edit mode
@@ -2713,5 +2714,6 @@ def blog(path):
   return send_from_directory(_curdir+"/blog/", path)
 
 </t>
+<t tx="leo.20180712144340.1">因為每次 generate_pages 必須將 content 目錄中的所有檔案刪除後, 再從 content.htm 轉為靜態網頁, 因此從負擔較重的每次存檔都自動轉檔, 改回必要時再以手動呼叫 generate_pages 進行轉檔.</t>
 </tnodes>
 </leo_file>
