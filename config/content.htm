@@ -1492,7 +1492,8 @@ python wsgi.py</pre>
 <p style="padding-left: 30px;">Eric IDE: PyQt 程式整合開發環境.</p>
 <p style="padding-left: 30px;">CMSimfly: 網際內容管理系統, 屬於電子書章節明確的三層次網際資料管理.</p>
 <p style="padding-left: 30px;">Pelican: 靜態網誌產生系統, 可分類, 以關鍵字架構及時間序建立的網際流程紀錄.</p>
-<p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用&nbsp; CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p><h2>Git</h2>
+<p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用&nbsp; CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p>
+<p>Python 非官方 Windows 模組:&nbsp;<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a>&nbsp;</p><h2>Git</h2>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a>&nbsp;</p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>&nbsp;</p>
 <p><a href="https://github.com/">https://github.com/</a>&nbsp;</p>
@@ -3720,9 +3721,9 @@ print(data)
 <p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
 <p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p><h2>Pygrouf 解析</h2>
 <p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>&nbsp; 為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
-<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2>
-<p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p><h2>Pyquino 解析</h2>
-<p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p><h2>Solvespace 解析</h2><p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p><h2>V-rep 解析</h2>
+<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2><p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p><p>採用 PyQt5 建立, 核心&nbsp;<a href="https://github.com/KmolYuan/pyslvs">https://github.com/KmolYuan/pyslvs</a>&nbsp;</p><p>演化運算模組: Adesign:&nbsp;<a href="https://github.com/KmolYuan/Adesign">https://github.com/KmolYuan/Adesign</a>&nbsp;</p><p>因為倉儲帶有子模組與子模組下的子模組, 因此必須利用 --recurse-submodules 取下倉儲檔案:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-PyQt5</pre><p>編譯 Pyslvs 所需模組:</p><p>requests<br>pyqt5&gt;=5.10<br>pyqtchart&gt;=5.1<br>ezdxf==0.8.8<br>numpy<br>cython<br>openpyxl<br>psutil<br>peewee<br>lark-parser<br>networkx<br>pydot<br>pygments</p><p>以&nbsp;</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">pip install -r requirements.txt</pre><p>安裝所需 Python 模組.</p><p>另外, 使用 Msys2 編譯前提必須設定:</p><p>y:\Python36\Lib\distutils\distutils.cfg</p><p>內容為:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]compiler=mingw32</pre><p>表示要使用 mingw32-make 執行編譯.</p><p>編譯指令:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">mingw32-make cleanmingw32-make</pre><p></p><h2>Pyquino 解析</h2>
+<p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p><h2>Solvespace 解析</h2>
+<p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p><h2>V-rep 解析</h2>
 <p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p><h2>FreeCAD 解析</h2>
 <p><a href="https://www.freecadweb.org/">https://www.freecadweb.org/</a>&nbsp;</p><h2>RigitBody library</h2>
 <p>Rigit Body Dynamic Library</p>
