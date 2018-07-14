@@ -70,6 +70,7 @@ app.secret_key = 'A0Zr9@8j/3yX R~XHH!jmN]LWX/,?R@T'
 
 @app.route('/checkLogin', methods=['POST'])
 def checkLogin():
+    """Check user login process."""
     password = request.form["password"]
     site_title, saved_password = parse_config()
     hashed_password = hashlib.sha512(password.encode('utf-8')).hexdigest()
@@ -80,6 +81,7 @@ def checkLogin():
     
 @app.route('/delete_file', methods=['POST'])
 def delete_file():
+    """Delete user uploaded files."""
     if not isAdmin():
         return redirect("/login")
     head, level, page = parse_content()
@@ -104,6 +106,7 @@ def delete_file():
         directory+"</nav><section><h1>Download List</h1>"+outstring+"<br/><br /></body></html>"
 @app.route('/doDelete', methods=['POST'])
 def doDelete():
+    """Action to delete user uploaded files."""
     if not isAdmin():
         return redirect("/login")
     # delete files
@@ -133,6 +136,7 @@ def doDelete():
 
 @app.route('/doSearch', methods=['POST'])
 def doSearch():
+    """Action to search content.htm using keyword"""
     if not isAdmin():
         return redirect("/login")
     else:
@@ -151,6 +155,7 @@ def doSearch():
      </section></div></body></html>"
 @app.route('/download/', methods=['GET'])
 def download():
+    """Download file using URL."""
     filename = request.args.get('filename')
     type = request.args.get('type')
     if type == "files":
@@ -166,6 +171,7 @@ def download():
 @app.route('/download_list', methods=['GET'])
 #def download_list(edit, item_per_page=5, page=1, keyword=None):
 def download_list():
+    """List files in downloads directory."""
     if not isAdmin():
         return redirect("/login")
     else:
@@ -269,6 +275,7 @@ def download_list():
         directory+"</nav><section><h1>Download List</h1>"+outstring+"<br/><br /></body></html>"
 
 def downloadlist_access_list(files, starti, endi):
+    """List files function for download_list."""
     # different extension files, associated links were provided
     # popup window to view images, video or STL files, other files can be downloaded directly
     # files are all the data to list, from starti to endi
@@ -298,10 +305,12 @@ def downloadlist_access_list(files, starti, endi):
 # downloads 方法主要將位於 downloads 目錄下的檔案送回瀏覽器
 @app.route('/downloads/<path:path>')
 def downloads(path):
-  return send_from_directory(_curdir+"/downloads/", path)
+    """Send files in downloads directory."""
+    return send_from_directory(_curdir+"/downloads/", path)
 
 # 與 file_selector 搭配的取檔程式
 def downloadselect_access_list(files, starti, endi):
+    """Accompanied with file_selector."""
     outstring = ""
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
@@ -314,6 +323,7 @@ def downloadselect_access_list(files, starti, endi):
 @app.route('/edit_config', defaults={'edit': 1})
 @app.route('/edit_config/<path:edit>')
 def edit_config(edit):
+    """Config edit html form."""
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
     if not isAdmin():
@@ -336,6 +346,7 @@ def edit_config(edit):
 @app.route('/edit_page', defaults={'edit': 1})
 @app.route('/edit_page/<path:edit>')
 def edit_page(edit):
+    """Page edit html form."""
     # check if administrator
     if not isAdmin():
         return redirect('/login')

@@ -1389,7 +1389,96 @@ int compare_long(const void *m, const void *n)
 <p>References for Chapter 10:</p>
 <p>"Algorithms in C" Robert Sedgewick Addison-Wesley ISBN 0-201-51425-7</p><h3>ch11結語</h3>
 <p>I have written the preceding material to provide an introduction to pointers for newcomers to C. In C, the more one understands about pointers the greater flexibility one has in the writing of code. The above expands on my first effort at this which was entitled ptr_help.txt and found in an early version of Bob Stout's collection of C code SNIPPETS. The content in this version has been updated from that in PTRTUTOT.ZIP included in SNIP9510.ZIP.</p>
-<p>I am always ready to accept constructive criticism on this material, or review requests for the addition of other relevant material. Therefore, if you have questions, comments, criticisms, etc. concerning that which has been presented, I would greatly appreciate your contacting me via email me at tjensen@ix.netcom.com.</p><h1>工具</h1>
+<p>I am always ready to accept constructive criticism on this material, or review requests for the addition of other relevant material. Therefore, if you have questions, comments, criticisms, etc. concerning that which has been presented, I would greatly appreciate your contacting me via email me at tjensen@ix.netcom.com.</p><h2>Python</h2>
+<h3>what is new</h3><p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.6.html">https://docs.python.org/3/whatsnew/3.6.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.7.html">https://docs.python.org/3/whatsnew/3.7.html</a>&nbsp;</p><h3>style guide</h3><p>Python docstring conventions:</p><p><a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a>&nbsp;</p><p>One line docstring:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def kos_root():    """Return the pathname of the KOS root directory."""    global _kos_root    if _kos_root: return _kos_root    ...</pre><p>Multiline docstring:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def complex(real=0.0, imag=0.0):    """Form a complex number.    Keyword arguments:    real -- the real part (default 0.0)    imag -- the imaginary part (default 0.0)    """    if imag == 0.0 and real == 0.0:        return complex_zero    ...</pre><p>Aligned with opening delimiter.</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">foo = long_function_name(var_one, var_two,                         var_three, var_four)</pre><p>List:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">my_list = [    1, 2, 3,    4, 5, 6,    ]</pre><pre class="literal-block"></pre><p>Easy to match operators with operands:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">income = (gross_wages          + taxable_interest          + (dividends - qualified_dividends)          - ira_deduction          - student_loan_interest)</pre><p><br>Surround top-level function and class definitions with two blank lines.</p><p>Method definitions inside a class are surrounded by a single blank line.</p><p>Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).</p><p>Use blank lines in functions, sparingly, to indicate logical sections.</p><p>Python style guide:</p><p><a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>&nbsp;</p><p>Type hins:</p><p><a href="https://www.python.org/dev/peps/pep-0484/">https://www.python.org/dev/peps/pep-0484/</a>&nbsp;</p><h3>typing</h3>
+<p>Python 3.5 之後才支援 typing 模組:</p>
+<p><a href="https://docs.python.org/3.6/library/typing.html">https://docs.python.org/3.6/library/typing.html</a>&nbsp;</p>
+<h3>dunder</h3>
+<p>Module level "dunders" (i.e. names with two leading and two trailing underscores) such as __all__, __author__, __version__, etc. should be placed after the module docstring but before any import statements except from __future__ imports. Python mandates that future-imports must appear in the module before any other code except docstrings:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""This is the example module.
+
+This module does stuff.
+"""
+
+from __future__ import barry_as_FLUFL
+
+__all__ = ['a', 'b', 'c']
+__version__ = '0.1'
+__author__ = 'Cardinal Biggles'
+
+import os
+import sys</pre>
+<p>What Are Dunder Methods?</p>
+<p>In Python, special methods are a set of predefined methods you can use to enrich your classes. They are easy to recognize because they start and end with double underscores, for example __init__ or __str__.</p>
+<p>As it quickly became tiresome to say under-under-method-under-under Pythonistas adopted the term &ldquo;dunder methods&rdquo;, a short form of &ldquo;double under.&rdquo;</p>
+<p>These &ldquo;dunders&rdquo; or &ldquo;special methods&rdquo; in Python are also sometimes called &ldquo;magic methods.&rdquo; But using this terminology can make them seem more complicated than they really are&mdash;at the end of the day there&rsquo;s nothing &ldquo;magical&rdquo; about them. You should treat these methods like a normal language feature.</p>
+<p>Dunder methods let you emulate the behavior of built-in types. For example, to get the length of a string you can call len('string'). But an empty class definition doesn&rsquo;t support this behavior out of the box:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class NoLenSupport:
+    pass
+
+&gt;&gt;&gt; obj = NoLenSupport()
+&gt;&gt;&gt; len(obj)
+TypeError: "object of type 'NoLenSupport' has no len()"</pre>
+<p>To fix this, you can add a __len__ dunder method to your class:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class LenSupport:
+    def __len__(self):
+        return 42
+
+&gt;&gt;&gt; obj = LenSupport()
+&gt;&gt;&gt; len(obj)
+42</pre>
+<p>Another example is slicing. You can implement a __getitem__ method which allows you to use Python&rsquo;s list slicing syntax: obj[start:stop].</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#括號後與括號前不要有空白)
+spam(ham[1], {eggs: 2}) 
+
+#逗點後不要有空白
+foo = (0,)
+
+# 冒號緊接在 4 之後
+if x == 4: print x, y; x, y = y, x
+
+ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+ham[lower:upper], ham[lower:upper:], ham[lower::step]
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+ham[lower + offset : upper + offset]
+
+spam(1)
+
+x = 1
+y = 2
+long_variable = 3
+
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+
+def munge(input: AnyStr): ...
+def munge() -&gt; AnyStr: ...
+
+def munge(sep: AnyStr = None): ...
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+
+FILES = [
+    'setup.cfg',
+    'tox.ini',
+    ]
+initialize(FILES,
+           error=True,
+           )</pre>
+<p>Reference</p>
+<p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p><h1>工具</h1>
 <p>USB 可攜程式開發系統</p>
 <p>可解譯 ANSI C</p>
 <p>可解譯 Python</p>
@@ -3721,7 +3810,27 @@ print(data)
 <p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
 <p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p><h2>Pygrouf 解析</h2>
 <p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>&nbsp; 為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
-<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2><p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p><p>採用 PyQt5 建立, 核心&nbsp;<a href="https://github.com/KmolYuan/pyslvs">https://github.com/KmolYuan/pyslvs</a>&nbsp;</p><p>演化運算模組: Adesign:&nbsp;<a href="https://github.com/KmolYuan/Adesign">https://github.com/KmolYuan/Adesign</a>&nbsp;</p><p>因為倉儲帶有子模組與子模組下的子模組, 因此必須利用 --recurse-submodules 取下倉儲檔案:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-PyQt5</pre><p>編譯 Pyslvs 所需模組:</p><p>requests<br>pyqt5&gt;=5.10<br>pyqtchart&gt;=5.1<br>ezdxf==0.8.8<br>numpy<br>cython<br>openpyxl<br>psutil<br>peewee<br>lark-parser<br>networkx<br>pydot<br>pygments</p><p>以&nbsp;</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">pip install -r requirements.txt</pre><p>安裝所需 Python 模組.</p><p>另外, 使用 Msys2 編譯前提必須設定:</p><p>y:\Python36\Lib\distutils\distutils.cfg</p><p>內容為:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]compiler=mingw32</pre><p>表示要使用 mingw32-make 執行編譯.</p><p>編譯指令:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">mingw32-make cleanmingw32-make</pre><p></p><h2>Pyquino 解析</h2>
+<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2>
+<p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p>
+<p>採用 PyQt5 建立, 核心&nbsp;<a href="https://github.com/KmolYuan/pyslvs">https://github.com/KmolYuan/pyslvs</a>&nbsp;</p>
+<p>演化運算模組: Adesign:&nbsp;<a href="https://github.com/KmolYuan/Adesign">https://github.com/KmolYuan/Adesign</a>&nbsp;</p>
+<p>因為倉儲帶有子模組與子模組下的子模組, 因此必須利用 --recurse-submodules 取下倉儲檔案:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-PyQt5</pre>
+<p>編譯 Pyslvs 所需模組:</p>
+<p>requests<br>pyqt5&gt;=5.10<br>pyqtchart&gt;=5.1<br>ezdxf==0.8.8<br>numpy<br>cython<br>openpyxl<br>psutil<br>peewee<br>lark-parser<br>networkx<br>pydot<br>pygments</p>
+<p>以&nbsp;</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">pip install -r requirements.txt</pre>
+<p>安裝所需 Python 模組.</p>
+<p>另外, 使用 Msys2 編譯前提必須設定:</p>
+<p>y:\Python36\Lib\distutils\distutils.cfg</p>
+<p>內容為:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]
+compiler=mingw32</pre>
+<p>表示要使用 mingw32-make 執行編譯.</p>
+<p>編譯指令:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">mingw32-make clean
+mingw32-make</pre>
+<p></p><h2>Pyquino 解析</h2>
 <p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p><h2>Solvespace 解析</h2>
 <p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p><h2>V-rep 解析</h2>
 <p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p><h2>FreeCAD 解析</h2>

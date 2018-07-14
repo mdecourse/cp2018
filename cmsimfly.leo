@@ -289,6 +289,7 @@ else:
 <t tx="amd.20160714230833.1"></t>
 <t tx="amd.20160714230833.16">@app.route('/download/', methods=['GET'])
 def download():
+    """Download file using URL."""
     filename = request.args.get('filename')
     type = request.args.get('type')
     if type == "files":
@@ -787,6 +788,7 @@ def file_lister(directory, type=None, page=1, item_per_page=10):
 
 </t>
 <t tx="amd.20160714231903.1">def downloadlist_access_list(files, starti, endi):
+    """List files function for download_list."""
     # different extension files, associated links were provided
     # popup window to view images, video or STL files, other files can be downloaded directly
     # files are all the data to list, from starti to endi
@@ -959,6 +961,7 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 </t>
 <t tx="amd.20160714232140.1"># 與 file_selector 搭配的取檔程式
 def downloadselect_access_list(files, starti, endi):
+    """Accompanied with file_selector."""
     outstring = ""
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
@@ -1125,6 +1128,7 @@ def login():
 </t>
 <t tx="amd.20160714233131.1">@app.route('/checkLogin', methods=['POST'])
 def checkLogin():
+    """Check user login process."""
     password = request.form["password"]
     site_title, saved_password = parse_config()
     hashed_password = hashlib.sha512(password.encode('utf-8')).hexdigest()
@@ -1138,6 +1142,7 @@ def checkLogin():
 @app.route('/edit_page', defaults={'edit': 1})
 @app.route('/edit_page/&lt;path:edit&gt;')
 def edit_page(edit):
+    """Page edit html form."""
     # check if administrator
     if not isAdmin():
         return redirect('/login')
@@ -1421,6 +1426,7 @@ def file_selector():
 @app.route('/download_list', methods=['GET'])
 #def download_list(edit, item_per_page=5, page=1, keyword=None):
 def download_list():
+    """List files in downloads directory."""
     if not isAdmin():
         return redirect("/login")
     else:
@@ -1745,6 +1751,7 @@ def image_delete_file():
 </t>
 <t tx="amd.20160715161158.1">@app.route('/doDelete', methods=['POST'])
 def doDelete():
+    """Action to delete user uploaded files."""
     if not isAdmin():
         return redirect("/login")
     # delete files
@@ -1819,6 +1826,7 @@ def search_form(edit):
 </t>
 <t tx="amd.20160715161508.1">@app.route('/doSearch', methods=['POST'])
 def doSearch():
+    """Action to search content.htm using keyword"""
     if not isAdmin():
         return redirect("/login")
     else:
@@ -1839,6 +1847,7 @@ def doSearch():
 <t tx="amd.20160715161642.1">@app.route('/edit_config', defaults={'edit': 1})
 @app.route('/edit_config/&lt;path:edit&gt;')
 def edit_config(edit):
+    """Config edit html form."""
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
     if not isAdmin():
@@ -2020,6 +2029,7 @@ def get_page(heading, edit):
 <t tx="amd.20160717222221.1"></t>
 <t tx="amd.20160717235504.1">@app.route('/delete_file', methods=['POST'])
 def delete_file():
+    """Delete user uploaded files."""
     if not isAdmin():
         return redirect("/login")
     head, level, page = parse_content()
@@ -2051,7 +2061,8 @@ http://stackoverflow.com/questions/12247681/tinymce-is-adding-nbsp-instead-of-th
 <t tx="amd.20160718212924.1"># downloads 方法主要將位於 downloads 目錄下的檔案送回瀏覽器
 @app.route('/downloads/&lt;path:path&gt;')
 def downloads(path):
-  return send_from_directory(_curdir+"/downloads/", path)
+    """Send files in downloads directory."""
+    return send_from_directory(_curdir+"/downloads/", path)
 
 </t>
 <t tx="leo.20180625155103.1">2018.06.25 啟動
