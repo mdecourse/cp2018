@@ -1,7 +1,7 @@
 <h1>簡介</h1>
 <p><span style="background-color: #ffff00;">請注意: 在 2018.09 正式開課前, 本網站資料內容均尚未定案, 僅為參考草案.</span></p>
 <p>課程目標:</p>
-<p>計算機程式課程在導引學員學習如何利用電腦協助工程師進行機械設計流程.</p>
+<p>計算機程式課程在導引學員學習如何利用電腦程式輔助進行機械設計.</p>
 <p>需要自學技術:</p>
 <ol>
 <li><a href="http://indiatyping.com/index.php/typing-tutor/english-typing-tutor">電腦英文輸入</a></li>
@@ -16,7 +16,8 @@
 <li>Python: 含 PyQt5 圖形介面程式開發</li>
 <li>Lua: 以能與 C/C++ 結合, 並在 <a href="http://www.coppeliarobotics.com/">V-rep</a> 環境中使用為目標.</li>
 <li>Javascript: 含 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 網際環境導入.</li>
-</ol><h2>課程規劃</h2>
+</ol>
+<h2>課程規劃</h2>
 <p>課程目標:</p>
 <p>為了讓機械設計工程師了解, 該如何利用電腦與網路進行機械設計. 總共安排了四門課程:</p>
 <p>計算機程式 - 每一組六人, 分為 C, Python, Lua, Html5, CSS, Javascript 等六項學習任務, 並以共同任務: 可攜系統, Git, Fossil SCM, Windows 10 電腦, Ubuntu 電腦 與網路的技術學習, 利用計算機程式進行各種問題的解決.</p>
@@ -41,7 +42,8 @@
 <p>學習 Lua 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
 <p><span>Lua is a powerful, fast, lightweight, embeddable scripting language.</span></p>
 <p>學習 Javascript 與&nbsp; <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 用於網頁動態模擬:</p>
-<p><img src="/images/three_gears.png" width="790" height="367" alt=""></p><h2>機械設計</h2>
+<p><img src="/images/three_gears.png" width="790" height="367" alt=""></p>
+<h2>機械設計</h2>
 <p>機械設計與表達</p>
 <p>設計是一種明確與具體的表達, 而且是在仔細思考、多方考量後所完成的表達, 表達具有六種形式, 包括口語、文字、2D、3D、數學與實體表達, 設計的結果可以讓執行者有所依循, 根據指示執行後, 可得預期之結果.</p>
 <p>機械是一種器物, 而且是由固體、流體與軟體元件精巧組合而成, 可互動運作, 達成特定功能之器物.</p>
@@ -52,7 +54,8 @@
 <p><a href="https://github.com/m2n037/awesome-mecheng">https://github.com/m2n037/awesome-mecheng</a>&nbsp;&nbsp;</p>
 <p><a href="https://www.scipy-lectures.org/intro/intro.html">https://www.scipy-lectures.org/intro/intro.html</a>&nbsp;</p>
 <p><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html</a>&nbsp;</p>
-<p><a href="http://open.umn.edu/opentextbooks/">http://open.umn.edu/opentextbooks/</a>&nbsp;</p><h2>ANSI C</h2>
+<p><a href="http://open.umn.edu/opentextbooks/">http://open.umn.edu/opentextbooks/</a>&nbsp;</p>
+<h2>ANSI C</h2>
 <p>Hello ANSIC:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 
@@ -63,7 +66,7 @@ int main()
     return 0;
 }</pre>
 <p>存為 hello.c</p>
-<p>然後啟動 <a href="/get_page/ANSI%20C/Qt.html">Qt</a> 隨身程式系統 (<a href="http://wcmg3.kmol.info/downloads/Qt.tar.gz">http://wcmg3.kmol.info/downloads/Qt.tar.gz</a>&nbsp;(下載解開後容量為 20GB), 可以擷取到 <a href="https://www.msys2.org/">MSYS2</a> 64 位元的 <a href="https://gcc.gnu.org/onlinedocs/gcc.pdf">gcc</a> 編譯器, 以隨身系統啟動的命令列執行:</p>
+<p>然後啟動 <a href="/get_page/ANSI%20C/Qt.html">Qt</a> 隨身程式系統 (<a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> (下載解開後容量為 20GB)), 可以擷取到 <a href="https://www.msys2.org/">MSYS2</a> 64 位元的 <a href="https://gcc.gnu.org/onlinedocs/gcc.pdf">gcc</a> 編譯器, 以隨身系統啟動的命令列執行:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">gcc -o hello hello.c</pre>
 <p>進行編譯後, 可以得到 hello.exe, 執行 hello.exe 後, 可以列印出 Hello ANSI C!<br><br></p>
 <p>上述程式碼也可以直接複製到 SCiTE中, 存為 hello.c 後, 以 Tools-&gt;Go 執行.</p>
@@ -74,14 +77,15 @@ int main()
 <p><a href="https://www.codestepbystep.com/about">https://www.codestepbystep.com/about</a>&nbsp;</p>
 <p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a>&nbsp;</p><h2>指標教材</h2>
 <p>指標:&nbsp;<a href="http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html">http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html</a>&nbsp;</p>
-<p><a href="/downloads/pointers.pdf">指標教材.pdf</a>&nbsp;(英文)</p><h3>ch1何謂指標</h3>
-<p>C 語言初學者必須面對的難題之一, 就是指標的用法.</p>
+<p><a href="/downloads/pointers.pdf">指標教材.pdf</a>&nbsp;(英文)</p>
+<h3>ch1何謂指標</h3>
+<p>C 語言初學者必須面對的難題之一, 就是指標 (pointer) 的用法.</p>
 <p>這份教材的目的, 就是針對初學者簡介指標及其應用.</p>
 <p>其實初學者會對指標產生疑惑, 大多源自於在學習 C 語言時, 對於變數的概念經常一知半解.</p>
 <p>因此這裡就由C 變數的一般用法說起.</p>
-<p>程式中的變數都必須加以命名, 以便存放數值.</p>
-<p>而編譯器與連結器在處理變數時, 就會挪出電腦記憶體中的特定區域, 以存放變數的值.</p>
-<p>這些特定區域的大小, 取決於變數允許存放值的範圍.</p>
+<p>程式中的變數都必須加以命名, 以便存放資料.</p>
+<p>而編譯器與連結器在處理變數時, 就會挪出電腦記憶體中的特定區域, 以存放變數的資料.</p>
+<p>這些特定區域的大小, 取決於變數允許存放資料的範圍.</p>
 <p>例如, 在 32 位元電腦, 一個整數變數的存放範圍, 需要為 4 位元. 而在舊的 16 位元電腦, 整數存放需要 2 位元.</p>
 <p>C 程式中的整數變數存放範圍大小, 在各種機器上不一定相同.</p>
 <p>並且 C 程式中的整數變數也不只一種, 在許多 C 程式教科數中,可以發現有整數, 長整數, 短整數等. 這裡則假設使用 32 位元系統, 因此整數需要 4 位元的存放空間.</p>
@@ -97,7 +101,7 @@ printf("size of a long is %d\n", sizeof(long));
 <p><a href="http://codepad.org/iQqRmLnh">在 codepad.org 執行上述 C 程式</a></p>
 <p><span>當我們宣告一個變數時, 亦即告知編譯器兩件事, 變數名稱與變數型別. 例如, 可以透過:</span></p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int k;</pre>
-<p>宣告名稱為 k 的整數型別變數. 當編譯器看到 "int" 的敘述值, 就會在電腦的記憶體中, 保留 4 位元的空間, 以便存放整數變數 k 的值.</p>
+<p>宣告名稱為 k 的整數型別變數. 當編譯器看到 "int" 的敘述時, 就會在電腦的記憶體中, 保留 4 位元的空間, 以便存放整數變數 k 的數值.</p>
 <p>此外, 電腦也會設置一個符號表, 註明符號 k 與其在記憶體中用來存放 4 位元資料的相對位址.</p>
 <p>因此, 若在變數宣告後, 使用:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">k = 2;</pre>
@@ -168,8 +172,7 @@ int main(void)
 <li><span class="nt">變數的左值為被用來存放在記憶體中的位址值</span><span class="o">,</span> <span class="nt">而變數的右值則式被存放在該位址的數值</span><span class="o">.</span></li>
 </ol>
 <p>參考資料:</p>
-<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p>
-<h3>ch2指標型別與陣列</h3>
+<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p><h3>ch2指標型別與陣列</h3>
 <p>接著讓我們來看看, 為何需要指定指標指向變數的型別, 例如: int *ptr; 原因之一是, 宣告之後, 可以透過指向, 寫成:</p>
 <p>*ptr = 2;</p>
 <p>編譯器就會知道要配置多少記憶體給 ptr 變數, 假如 ptr 宣告為指向整數, 電腦就會複製 4 位元的資料, 其它的浮點與雙浮點變數也是相同. 定義指向變數型別的另外一個用途就是編譯器可以解譯程式碼. 例如, 記憶區中存放 10 個連續的整數資料時, 需要 40 位元的記憶體.</p>
@@ -626,7 +629,8 @@ int multi[ROWS][COLS];</pre>
 <p>Now, within the function we have used the values #defined by ROWS and COLS that set the limits on the for loops. But, these #defines are just constants as far as the compiler is concerned, i.e. there is nothing to connect them to the array size within the function. row and col are local variables, of course. The formal parameter definition permits the compiler to determine the characteristics associated with the pointer value that will be passed at run time.</p>
 <p>We really don&rsquo;t need the first dimension and, as will be seen later, there are occasions where we would prefer not to define it within the parameter definition, out of habit or consistency, I have not used it here. But, the second dimension must be used as has been shown in the expression for the parameter. The reason is that we need this in the evaluation of m_array[row][col] as has been described.</p>
 <p>While the parameter defines the data type (int in this case) and the automatic variables for row and column are defined in the for loops, only one value can be passed using a single parameter. In this case, that is the value of multi as noted in the call statement, i.e. the address of the first element, often referred to as a pointer to the array. Thus, the only way we have of informing the compiler of the 2nd dimension is by explicitly including it in the parameter definition.</p>
-<p>In fact, in general all dimensions of higher order than one are needed when dealing with multi-dimensional arrays. That is if we are talking about 3 dimensional arrays, the 2nd and 3rd dimension must be specified in the parameter definition.</p><h3>ch8指向陣列的指標</h3>
+<p>In fact, in general all dimensions of higher order than one are needed when dealing with multi-dimensional arrays. That is if we are talking about 3 dimensional arrays, the 2nd and 3rd dimension must be specified in the parameter definition.</p>
+<h3>ch8指向陣列的指標</h3>
 <p>Pointers, of course, can be "pointed at" any type of data object, including arrays. While that was evident when we discussed program 3.1, it is important to expand on how we do this when it comes to multi-dimensional arrays. To review, in Chapter 2 we stated that given an array of integers we could point an integer pointer at that array using:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int *ptr;
 ptr = &amp;my_array[0];       /* point our pointer at the first
@@ -653,7 +657,8 @@ void a_func(int *p);</pre>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int (*p1d)[10];</pre>
 <p>is the proper declaration, i.e. p1d here is a pointer to an array of 10 integers just as it was under the declaration using the Array type. Note that this is different from</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int *p1d[10];</pre>
-<p>which would make p1d the name of an array of 10 pointers to type int.</p><h3>ch9指標與動態記憶體配置</h3>
+<p>which would make p1d the name of an array of 10 pointers to type int.</p>
+<h3>ch9指標與動態記憶體配置</h3>
 <p>There are times when it is convenient to allocate memory at run time using malloc(), calloc(), or other allocation functions. Using this approach permits postponing the decision on the size of the memory block need to store an array, for example, until run time. Or it permits using a section of memory for the storage of an array of integers at one point in time, and then when that memory is no longer needed it can be freed up for other uses, such as the storage of an array of structures.</p>
 <p>When memory is allocated, the allocating function (such as malloc(), calloc(), etc.) returns a pointer. The type of this pointer depends on whether you are using an older K&amp;R compiler or the newer ANSI type compiler. With the older compiler the type of the returned pointer is char, with the ANSI compiler it is void.</p>
 <p>If you are using an older compiler, and you want to allocate memory for an array of integers you will have to cast the char pointer returned to an integer pointer. For example, to allocate space for 10 integers we might write:</p>
@@ -914,7 +919,8 @@ int main(void)
 <p>------------------- End of Prog. 9.4 ----------------------------</p>
 <p><a href="http://codepad.org/hFghr4bI">執行 Program 9.4</a></p>
 <p>If you have followed this tutorial up to this point you should have no problem deciphering the above on the basis of the comments alone. There are a couple of points that should be made however. Let's start with the line which reads: Arr3D[z][y] = space + (z(X_DIM * Y_DIM) + yX_DIM);</p>
-<p>Note that here space is a character pointer, which is the same type as Arr3D[z][y]. It is important that when adding an integer, such as that obtained by evaluation of the expression (z(X_DIM * Y_DIM) + yX_DIM), to a pointer, the result is a new pointer value. And when assigning pointer values to pointer variables the data types of the value and variable must match.</p><h3>ch10指向函式的指標</h3>
+<p>Note that here space is a character pointer, which is the same type as Arr3D[z][y]. It is important that when adding an integer, such as that obtained by evaluation of the expression (z(X_DIM * Y_DIM) + yX_DIM), to a pointer, the result is a new pointer value. And when assigning pointer values to pointer variables the data types of the value and variable must match.</p>
+<h3>ch10指向函式的指標</h3>
 <p>Up to this point we have been discussing pointers to data objects. C also permits the declaration of pointers to functions. Pointers to functions have a variety of uses and some of them will be discussed here.</p>
 <p>Consider the following real problem. You want to write a function that is capable of sorting virtually any collection of data that can be stored in an array. This might be an array of strings, or integers, or floats, or even structures. The sorting algorithm can be the same for all. For example, it could be a simple bubble sort algorithm, or the more complex shell or quick sort algorithm. We'll use a simple bubble sort for demonstration purposes.</p>
 <p>Sedgewick [1] has described the bubble sort using C code by setting up a function which when passed a pointer to the array would sort it. If we call that function bubble(), a sort program is described by bubble_1.c, which follows:</p>
@@ -1387,9 +1393,11 @@ int compare_long(const void *m, const void *n)
 /*----------------- end of bubble7.c -----------------*/</pre>
 <p><a href="http://codepad.org/Z1E8guTH">執行 bubble7.c</a></p>
 <p>References for Chapter 10:</p>
-<p>"Algorithms in C" Robert Sedgewick Addison-Wesley ISBN 0-201-51425-7</p><h3>ch11結語</h3>
+<p>"Algorithms in C" Robert Sedgewick Addison-Wesley ISBN 0-201-51425-7</p>
+<h3>ch11結語</h3>
 <p>I have written the preceding material to provide an introduction to pointers for newcomers to C. In C, the more one understands about pointers the greater flexibility one has in the writing of code. The above expands on my first effort at this which was entitled ptr_help.txt and found in an early version of Bob Stout's collection of C code SNIPPETS. The content in this version has been updated from that in PTRTUTOT.ZIP included in SNIP9510.ZIP.</p>
-<p>I am always ready to accept constructive criticism on this material, or review requests for the addition of other relevant material. Therefore, if you have questions, comments, criticisms, etc. concerning that which has been presented, I would greatly appreciate your contacting me via email me at tjensen@ix.netcom.com.</p><h2>Python</h2>
+<p>I am always ready to accept constructive criticism on this material, or review requests for the addition of other relevant material. Therefore, if you have questions, comments, criticisms, etc. concerning that which has been presented, I would greatly appreciate your contacting me via email me at tjensen@ix.netcom.com.</p>
+<h2>Python</h2>
 <h3>what is new</h3>
 <p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p>
 <p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
@@ -1438,7 +1446,8 @@ int compare_long(const void *m, const void *n)
 <p>Python style guide:</p>
 <p><a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>&nbsp;</p>
 <p>Type hins:</p>
-<p><a href="https://www.python.org/dev/peps/pep-0484/">https://www.python.org/dev/peps/pep-0484/</a>&nbsp;</p><h3>typing</h3>
+<p><a href="https://www.python.org/dev/peps/pep-0484/">https://www.python.org/dev/peps/pep-0484/</a>&nbsp;</p>
+<h3>typing</h3>
 <p>Python 3.5 之後才支援 typing 模組:</p>
 <p><a href="https://docs.python.org/3.6/library/typing.html">https://docs.python.org/3.6/library/typing.html</a>&nbsp;</p>
 <h3>dunder</h3>
@@ -1526,7 +1535,8 @@ initialize(FILES,
            error=True,
            )</pre>
 <p>Reference</p>
-<p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p><h1>工具</h1>
+<p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p>
+<h1>工具</h1>
 <p>USB 可攜程式開發系統</p>
 <p>可解譯 ANSI C</p>
 <p>可解譯 Python</p>
@@ -1630,7 +1640,8 @@ python wsgi.py</pre>
 <p style="padding-left: 30px;">CMSimfly: 網際內容管理系統, 屬於電子書章節明確的三層次網際資料管理.</p>
 <p style="padding-left: 30px;">Pelican: 靜態網誌產生系統, 可分類, 以關鍵字架構及時間序建立的網際流程紀錄.</p>
 <p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用&nbsp; CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p>
-<p>Python 非官方 Windows 模組:&nbsp;<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a>&nbsp;</p><h2>Git</h2>
+<p>Python 非官方 Windows 模組:&nbsp;<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a>&nbsp;</p>
+<h2>Git</h2>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a>&nbsp;</p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>&nbsp;</p>
 <p><a href="https://github.com/">https://github.com/</a>&nbsp;</p>
@@ -1662,39 +1673,7 @@ python wsgi.py</pre>
 <p>git push origin :the_remote_branch</p>
 <p>or</p>
 <p>git push origin --delete the_remote_branch</p>
-<h2>Fossil SCM</h2>
-<p><a href="https://www.fossil-scm.org">https://www.fossil-scm.org</a>&nbsp;</p>
-<p>Fossil SCM 是一套簡潔可靠的分散式組態管理工具, 內建網際介面, 臭蟲追蹤, 快記與技術筆記功能的單一可執行檔.</p>
-<p>Fossil SCM 為自由開放源軟體, 使用者可以自行在 Windows 或 Linux 環境中編譯. 例如: 在 Windows 環境, 以 <a href="https://www.msys2.org/">MSYS2</a> 編譯:&nbsp;<a href="http://lab.kmol.info/blog/msys2_compile_fossil_scm.html">http://lab.kmol.info/blog/msys2_compile_fossil_scm.html</a>&nbsp;</p>
-<p>在 Windows 單機環境使用:</p>
-<p>下載 fossil.exe:&nbsp;<a href="https://www.fossil-scm.org/index.html/uv/download.html">https://www.fossil-scm.org/index.html/uv/download.html</a>&nbsp;</p>
-<p>解開壓縮檔案後, 可以直接在 Windows 命令列中執行 fossil.exe</p>
-<p>目前 Fossil SCM 最新版為 2.6, 若配合遠端 Ubuntu 伺服器使用,&nbsp; 必須確認客戶端與伺服器端的 fossil 版本一致, 否則將可能造成使用上的問題.</p>
-<p>查核 fossil.exe 版本:</p>
-<p>fossil version</p>
-<p>利用 fossil help 可以列出常用指令.</p>
-<p>Fossil SCM 單機基本操作:</p>
-<p>建立倉儲檔案</p>
-<p>fossil init foo.fossil</p>
-<p>表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關<span>&nbsp;</span><a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki">fossil 密碼管理</a>), 當使用者在近端以網際模式啟動該倉儲時 (以<span>&nbsp;</span><a href="http://fossil-scm.org/index.html/help?cmd=ui">fossil ui</a><span>&nbsp;</span>指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.</p>
-<p>以 fossil sql 指令擷取 .fossil 檔案內容</p>
-<p>使用者以 fossil init foo.fossil 建立倉儲檔案後, 可以利用 fossil 指令查驗倉儲資料庫檔案的內容.</p>
-<p>fossil sql -R foo.fossil</p>
-<p>進入 sqlite 指令環境後, 可以利用 .schema user 查驗 user 資料表的欄位設計.</p>
-<p>以 select login, pw, cap from user;</p>
-<p>可以查詢目前 foo.fossil 檔案中 user 資料表 login, pw 與 cap 等3個欄位的資料內容.</p>
-<p>若要更改特定 login 登入帳號的 pw 或 cap 可以使用下列 sqlite3 SQL 語法:</p>
-<p>update user set pw='mynewpassword' where login='myloginaccount';</p>
-<p>update user set cap='s' where login='myloginaccount';</p>
-<p>倉儲&nbsp; clone</p>
-<div class="line number1 index0 alt2"><code class="jscript plain">$ fossil clone http:</code><code class="jscript comments">//your_domain_name ~/fossils/yourdb.fossil</code></div>
-<div class="line number2 index1 alt1"><code class="jscript plain">$ fossil open ~/fossils/foo.fossil</code></div>
-<div>
-<div id="highlighter_133709" class="syntaxhighlighter  jscript"></div>
-</div>
-<p>上述 fossil 指令表示要從 http://your_domain_name fossil 伺服器中, clone 倉儲檔案, 然後存在近端的 ~/fossils/yourdb.fossil 檔案中.</p>
-<p>接下來則可以選擇適當的目錄, 以 fossil open 將 .fossil 檔案解開, 此所在目錄即為該 .fossil 倉儲的 近端工作目錄.</p>
-<h2>Leo Editor</h2>
+<h2>Fossil SCM</h2><p><a href="https://www.fossil-scm.org">https://www.fossil-scm.org</a>&nbsp;</p><p>Fossil SCM 是一套簡潔可靠的分散式組態管理工具, 內建網際介面, 臭蟲追蹤, 快記與技術筆記功能的單一可執行檔.</p><p>Fossil SCM 為自由開放源軟體, 使用者可以自行在 Windows 或 Linux 環境中編譯. 例如: 在 Windows 環境, 以 <a href="https://www.msys2.org/">MSYS2</a> 編譯:&nbsp;<a href="http://lab.kmol.info/blog/msys2_compile_fossil_scm.html">http://lab.kmol.info/blog/msys2_compile_fossil_scm.html</a>&nbsp;</p><p>在 Windows 單機環境使用:</p><p>下載 fossil.exe:&nbsp;<a href="https://www.fossil-scm.org/index.html/uv/download.html">https://www.fossil-scm.org/index.html/uv/download.html</a>&nbsp;</p><p>解開壓縮檔案後, 可以直接在 Windows 命令列中執行 fossil.exe</p><p>目前 Fossil SCM 最新版為 2.6, 若配合遠端 Ubuntu 伺服器使用,&nbsp; 必須確認客戶端與伺服器端的 fossil 版本一致, 否則將可能造成使用上的問題.</p><p>查核 fossil.exe 版本:</p><p>fossil version</p><p>利用 fossil help 可以列出常用指令.</p><p>Fossil SCM 單機基本操作:</p><p>建立倉儲檔案</p><p>fossil init foo.fossil</p><p>表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關<span>&nbsp;</span><a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki">fossil 密碼管理</a>), 當使用者在近端以網際模式啟動該倉儲時 (以<span>&nbsp;</span><a href="http://fossil-scm.org/index.html/help?cmd=ui">fossil ui</a><span>&nbsp;</span>指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.</p><p>以 fossil sql 指令擷取 .fossil 檔案內容</p><p>使用者以 fossil init foo.fossil 建立倉儲檔案後, 可以利用 fossil 指令查驗倉儲資料庫檔案的內容.</p><p>fossil sql -R foo.fossil</p><p>進入 sqlite 指令環境後, 可以利用 .schema user 查驗 user 資料表的欄位設計.</p><p>以 select login, pw, cap from user;</p><p>可以查詢目前 foo.fossil 檔案中 user 資料表 login, pw 與 cap 等3個欄位的資料內容.</p><p>若要更改特定 login 登入帳號的 pw 或 cap 可以使用下列 sqlite3 SQL 語法:</p><p>update user set pw='mynewpassword' where login='myloginaccount';</p><p>update user set cap='s' where login='myloginaccount';</p><p>倉儲&nbsp; clone</p><div class="line number1 index0 alt2"><code class="jscript plain"><code class="jscript plain"></code></code><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">$ fossil clone http://your_domain_name ~/fossils/yourdb.fossil$ fossil open ~/fossils/foo.fossil</pre><p>上述 fossil 指令表示要從 http://your_domain_name fossil 伺服器中, clone 倉儲檔案, 然後存在近端的 ~/fossils/yourdb.fossil 檔案中.</p></div><p>接下來則可以選擇適當的目錄, 以 fossil open 將 .fossil 檔案解開, 此所在目錄即為該 .fossil 倉儲的 近端工作目錄.</p><h2>Leo Editor</h2>
 <p><a href="http://www.leoeditor.com/">http://www.leoeditor.com/</a>&nbsp;</p>
 <h2>SCiTE</h2>
 <p><a href="https://www.scintilla.org/SciTE.html">https://www.scintilla.org/SciTE.html</a>&nbsp;</p>
@@ -1917,13 +1896,15 @@ print(result)</pre>
 <p><a href="http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/">http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/</a>&nbsp;</p>
 <p><a href="https://wiki.qt.io/MSYS2">https://wiki.qt.io/MSYS2</a>&nbsp;</p>
 <p>&nbsp;編程指南:&nbsp;<a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a>&nbsp;</p>
-<p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp;</p><h2>Eirc IDE</h2>
+<p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp;</p>
+<h2>Eirc IDE</h2>
 <p>目前 Eric6 18.07 只能配合使用 Python 3.6.5, 一方面 Python 3.7.0 尚無法以 pip install pyqt5-tools 安裝, 且 Python3.7.0 在 Eric6 18.07 尚存 bugs.</p>
 <p>這與 Qt 目前還無法使用 Jdk 9 與 10 的情況相同, 許多工具仍然尚未配合最新版本的 Python 與 Java 解譯或編譯工具進行更改.</p>
 <h2>CMSimfly</h2>
 <p><a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a></p>
 <h1>實際操作</h1>
-<p>上課實際操作影片, 將會送到 <a href="https://www.youtube.com/channel/UCJ0Ye3mhMApH0yxAcwCXs5g/videos">Youtube mdecourse 教學影片區</a>.</p><h2>hello.c 與 Github</h2>
+<p>上課實際操作影片, 將會送到 <a href="https://www.youtube.com/channel/UCJ0Ye3mhMApH0yxAcwCXs5g/videos">Youtube mdecourse 教學影片區</a>.</p>
+<h2>hello.c 與 Github</h2>
 <p>第一週操作影片拍攝與上傳</p>
 <p>下載 USB 可攜檔案</p>
 <p>申請 Github 帳號</p>
@@ -1975,14 +1956,17 @@ print(result)</pre>
 <p>修改 hello.c 後, 以 fossil add . 及 fossil commit -m "改版訊息" 改版</p>
 <p>新增 index.html 後, 以 fossil add, commit 改版後, 再以 fossil ui hello.fossil 啟動網際介面後, 以 localhost:8080/doc/trunk/index.html 擷取 index.html 內容.</p>
 <p>Fossil SCM 基本設定</p>
-<p>Fossil SCM Wiki Timeline 與 upload 檔案</p><h2>CMSimfly 操作</h2>
+<p>Fossil SCM Wiki Timeline 與 upload 檔案</p>
+<h2>CMSimfly 操作</h2>
 <p><span>取得&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 檔案後, 解開後容量約 21 GB. 放入 USB 隨身碟, 以 start.bat (必須配合修改 CMSimfly 所在位置)啟動系統.</span></p>
 <p>以瀏覽器開啟 https://localhost:8443&nbsp;後, 以管理者密碼登入 CMSimfly.</p>
 <p>由於 CMSimfly 頁面依照 h1, h2, h3 標註循序存入 content.htm, 使用者必須按照由上到下的順序建立所需頁面.</p>
 <p>完成各階段改版後, 必須點擊 generate_pages 進行轉檔, 將 content.htm 內容分頁存靜態網站於 content 目錄中.</p>
-<p>CMSimfly 靜態網頁模式將從根目錄的 index.html 跳轉頁面至 content 目錄中的 index.html, 顯示網際內容管理中的資料, 並由 blog 目錄導引網誌內容, reveal 目錄則導引網際投影片內容.</p><h2>Pelican 操作</h2>
+<p>CMSimfly 靜態網頁模式將從根目錄的 index.html 跳轉頁面至 content 目錄中的 index.html, 顯示網際內容管理中的資料, 並由 blog 目錄導引網誌內容, reveal 目錄則導引網際投影片內容.</p>
+<h2>Pelican 操作</h2>
 <p>位於 markdown 目錄為 Pelican 網誌的原始檔案, 轉檔後將網誌存入 blog 目錄, 並需要 theme 與 plugin 目錄, 以及&nbsp;&nbsp;local_publishconf.py,&nbsp;pelicanconf.py 與&nbsp;publishconf.py 等設定檔案.</p>
-<p>pelican.leo 位於 config/pelican.leo 目錄, 用於 Pelican 靜態網誌 markdown 目錄中輸入 .md&nbsp; 檔案與 Pelican 設定檔案的編輯管理與轉檔.</p><h2>Reveal.js 操作</h2>
+<p>pelican.leo 位於 config/pelican.leo 目錄, 用於 Pelican 靜態網誌 markdown 目錄中輸入 .md&nbsp; 檔案與 Pelican 設定檔案的編輯管理與轉檔.</p>
+<h2>Reveal.js 操作</h2>
 <p>位於 reveal 目錄中為 <a href="https://revealjs.com">reveal.js</a> 網際投影片系統, 改版時利用 cmsimfly.leo 中的 "編輯 reveal" 節點進行.</p>
 <p>啟動 Leo Editor, 以 SciTE 編輯器開啟 y:\launchLeo.py 後, 用 Tools -&gt; Go 執行, 接著以 File -&gt; Open-Outline 開啟 cmsimfly.leo</p>
 <p>投影片內容:</p>
@@ -2000,7 +1984,8 @@ print(result)</pre>
 * 按 o 鍵可以切換單張或全域檢視 (overview)
 * 按 b 或 . 鍵可以切換螢幕黑屏 (black)
 * 按 Esc 可以退出全螢幕或全域檢視 (Escape)</pre>
-<p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p><h2>Qt C++ 計算器程式</h2>
+<p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p>
+<h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
 <p>calculator.pro</p>
@@ -2445,7 +2430,8 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
     }
     return true;
 }</pre>
-<p></p><h2>PyQt 計算器程式</h2>
+<p></p>
+<h2>PyQt 計算器程式</h2>
 <p><a href="/downloads/cpw10.7z">cpw10_calculator.7z</a></p>
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一甲第十週第三部分</yt-formatted-string></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/CK96oD_N73M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
@@ -2456,7 +2442,8 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一甲第十二週第二部分</yt-formatted-string></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/6khFEGRDQ7E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一乙第十二週第二部分</yt-formatted-string></p>
-<p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p><h1>應用範例</h1>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
+<h1>應用範例</h1>
 <p>學習計算機程式的目的在利用數位科技技術解決問題, 所謂數位科技技術包括程式套件、網路與資料庫等元件的組合.</p>
 <p>基本流程為:</p>
 <ol>
@@ -3719,7 +3706,8 @@ ctx.fillStyle = '#fff'
 ctx.fill()
 &lt;/script&gt;
 &lt;/p&gt;</pre>
-<p></p><h2>GUI 繪圖</h2>
+<p></p>
+<h2>GUI 繪圖</h2>
 <p>PyQt5 與 matplotlib:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
 #-*- coding:utf-8 -*-
@@ -4282,7 +4270,652 @@ class Screenshot(QWebEngineView):
         self._loaded = True</pre>
 <p>Reference:</p>
 <p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p>
-<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>STetris</h3><p>StApp.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom StTetris import StTetrisfrom PyQt5.QtWidgets import QApplicationif __name__ == '__main__':    app = QApplication(sys.argv)    stetris = StTetris()    stetris.start()    sys.exit(app.exec())</pre><p>StTetris.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StPlay import StPlayfrom StScore import StScorefrom PyQt5.QtCore import QBasicTimer, QRect, Qtfrom PyQt5.QtGui import QBrush, QColor, QFont, QPainterfrom PyQt5.QtWidgets import QWidgetclass StTetris(QWidget):    ST_WINDOW_WIDTH = 800    ST_WINDOW_HEIGHT = 600    ST_BLOCK_WIDTH = 30    ST_BLOCK_HEIGHT = 30    ST_BOARD_POS_X = 200    ST_BOARD_POS_Y = 0    ST_NEXT_BLOCK_POS_X = 650    ST_NEXT_BLOCK_POS_Y = 150    ST_SCORE_POS_X = 550    ST_SCORE_POS_Y = 30    ST_HIGHSCORE_POS_X = 650    ST_HIGHSCORE_POS_Y = 30    ST_BLOCK_COLOR = ["#000000", "#C71585", "#FFA500", "#FFD700", "#228B22", "#1E90FF", "#483D8B", "#9932CC"]    ST_BACKGROUND_COLOR = "#FFFFFF"    ST_DOWN_INTERVAL = 500    # Constructor    def __init__(self):        super().__init__()        # Show widget        super().resize(self.ST_WINDOW_WIDTH, self.ST_WINDOW_HEIGHT)        super().setWindowTitle("STetris")        super().show()        # Painter        self.painter = QPainter()        # Play        self.play = StPlay(self)        # Score        self.score = StScore()        # High Score        self.highScore = StScore()        # Load high score        # highScore = sessionStorage.getItem("highscore")        # if (highScore):        #   Set high score        #   self.highScore.setScore(highScore)        # Play interval        self.playInterval = 500        # Play timer        self.playTimer = QBasicTimer()    # Start    def start(self):        # Set interval        self.playTimer.start(self.ST_DOWN_INTERVAL, self)    # Stop    def stop(self):        self.playTimer.stop()    def timerEvent(self, e):        self.play.moveDown()    def keyPressEvent(self, e):        key = e.key()        if key == Qt.Key_Left:            self.play.moveLeft()        elif key == Qt.Key_Right:            self.play.moveRight()        elif key == Qt.Key_Down:            self.play.moveDown()        elif key == Qt.Key_Up:            self.play.rotate()        elif key == Qt.Key_Space:            self.play.drop()    # Notify    def notify(self, message, param=None):        if (message == StPlay.ST_NOTIFY_DOWN):            self.score.setScore(self.score.getScore() + 100)        elif (message == StPlay.ST_NOTIFY_DROP):            self.score.setScore(self.score.getScore() + 100)        elif (message == StPlay.ST_NOTIFY_CLEAR):            self.score.setScore(self.score.getScore()                                + param.cleared_lines * 1000)        elif (message == StPlay.ST_NOTIFY_TETRISOVER):            self.stop()        # Update high score        #if self.highScore.getScore() &lt; self.score.getScore():        #    self.highScore.setScore(self.score.getScore())        #    sessionStorage.setItem("highscore", self.highScore.getScore())        self.update()    def paintEvent(self, e):        self.painter.begin(self)        self.drawTetris(self.painter)        self.painter.end()    # Draw tetris    def drawTetris(self, painter):        # Draw background        rect = {            "x" : 0,            "y" : 0,            "width" : self.ST_WINDOW_WIDTH,            "height" : self.ST_WINDOW_HEIGHT        }        self.drawBackground(painter, rect)        # Draw board        boardRect = {            "x" : self.ST_BOARD_POS_X,            "y" : self.ST_BOARD_POS_Y,            "width" : self.ST_BLOCK_WIDTH * self.play.getBoard().getXSize(),            "height" : self.ST_BLOCK_HEIGHT * self.play.getBoard().getYSize()        }        self.drawBoard(painter, boardRect, self.play.getBoard())        # Draw current block        self.drawBlock(painter, boardRect, self.play.getCurrentBlock())        # Draw next block        nextBlockRect = {            "x" : self.ST_NEXT_BLOCK_POS_X,            "y" : self.ST_NEXT_BLOCK_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 4,            "height" : self.ST_BLOCK_HEIGHT * 4,        }        self.drawBlock(painter, nextBlockRect, self.play.getNextBlock())        # Draw score        scoreRect = {            "x" : self.ST_SCORE_POS_X,            "y" : self.ST_SCORE_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 7,            "height" : self.ST_BLOCK_HEIGHT * 2        }        self.drawScore(painter, scoreRect, "SCORE", self.score)        # Draw high score        highScoreRect = {            "x" : self.ST_HIGHSCORE_POS_X,            "y" : self.ST_HIGHSCORE_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 7,            "height" : self.ST_BLOCK_HEIGHT * 2        }        self.drawScore(painter, highScoreRect, "HIGH SCORE", self.highScore)    # Draw background    def drawBackground(self, painter, rect):        painter.fillRect(QRect(rect["x"], rect["y"], rect["width"], rect["height"]), QColor(self.ST_BACKGROUND_COLOR))    # Draw board    def drawBoard(self, painter, rect, board):        # Draw board        for boardY in range(board.getYSize()):            for boardX in range(board.getXSize()):                rectBlock = {                    "x" : rect["x"] + boardX * StTetris.ST_BLOCK_WIDTH,                    "y" : rect["y"] + boardY * StTetris.ST_BLOCK_HEIGHT,                    "width" : StTetris.ST_BLOCK_WIDTH,                    "height" : StTetris.ST_BLOCK_HEIGHT                }                fillColor = StTetris.ST_BLOCK_COLOR[self.play.getBoard().getBlock(boardX, boardY)]                painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))    # Draw block    def drawBlock(self, painter, rect, block):        # Draw block        for blockY in range(block.getYSize()):            for blockX in range(block.getXSize()):                if block.getBlock(blockX, blockY):                    rectBlock = {                        "x" : rect["x"] + (block.getXPos() + blockX) * StTetris.ST_BLOCK_WIDTH,                        "y" : rect["y"] + (block.getYPos() + blockY) * StTetris.ST_BLOCK_HEIGHT,                        "width" : StTetris.ST_BLOCK_WIDTH,                        "height" : StTetris.ST_BLOCK_HEIGHT                    }                    fillColor = StTetris.ST_BLOCK_COLOR[block.getBlock(blockX, blockY)]                    painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))    # Draw score    def drawScore(self, painter, rect, title, score):        # Draw title        painter.textAligh = "right"        painter.fillStyle = "red"        painter.drawText(rect["x"], rect["y"], title)        # Draw score        painter.drawText(rect["x"], rect["y"] + rect["height"] // 2, str(score.getScore()))</pre><p>StPlay.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StBoard import StBoardfrom StBlock import StBlockclass StPlay:    ST_NOTIFY_LEFT = "NOTIFY_LEFT"    ST_NOTIFY_RIGHT = "NOTIFY_RIGHT"    ST_NOTIFY_DOWN = "NOTIFY_DOWN"            ST_NOTIFY_DROP = "NOTIFY_DROP"    ST_NOTIFY_ROTATE = "NOTIFY_ROTATE"    ST_NOTIFY_CLEAR = "NOTIFY_CLEAR"    ST_NOTIFY_TETRISOVER = "NOTIFY_TETRISOVER"    # Constructor    def __init__(self, notify):        # Board        self.board = StBoard()        # Current block        self.currentBlock = StBlock()        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)        self.currentBlock.setYPos(0 - self.currentBlock.getYSize())        # Next block        self.nextBlock = StBlock()        # Notify        self.notify = notify    # Get board    def getBoard(self):        return self.board    # Get current block    def getCurrentBlock(self):        return self.currentBlock    # Get next block    def getNextBlock(self):        return self.nextBlock    # Move left    def moveLeft(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() - 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):            # Set current X position to left            self.currentBlock.setXPos(self.currentBlock.getXPos() - 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_LEFT)    # Move right    def moveRight(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() + 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):            # Set current X position to right            self.currentBlock.setXPos(self.currentBlock.getXPos() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_RIGHT)    # Move down    def moveDown(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):            # Set current Y position to down            self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_DOWN)        # Block is not movable        else:            # Set current block to board            self.setCurrentBlockToBoard()            # Change current block            self.changeCurrentBlock()            # Clear completed line            cleared_lines = self.board.clearCompleteLines()            if cleared_lines:                # Notify                self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })            # Tetris is over            if self.isTetrisOver():                # Notify                self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)    # Drop    def drop(self):        while True:            # Block is movable            if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):                # Set current Y position to down                self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)            # Block is not movable            else:                # Notify                self.notify.notify(StPlay.ST_NOTIFY_DROP)                break        # Set current block to board        self.setCurrentBlockToBoard()        # Change current block        self.changeCurrentBlock()        # Clear completed line        cleared_lines = self.board.clearCompleteLines()        if cleared_lines:            # Notify            self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })        # Tetris is over        if self.isTetrisOver():            # Notify            self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)    # Rotate    def rotate(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos(), self.currentBlock.getRotation() + 1):            # Rotate            self.currentBlock.setRotation(self.currentBlock.getRotation() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_ROTATE)    # Is movable    def isMovable(self, block, xPos, yPos, rotation):        # Create block to check and set value to check        checkBlock = StBlock(block)        checkBlock.setXPos(xPos)        checkBlock.setYPos(yPos)        checkBlock.setRotation(rotation)        # Get value of board        for blockX in range(checkBlock.getXSize()):            for blockY in range(checkBlock.getYSize()):                # Check if block to check is empty                if checkBlock.getBlock(blockX, blockY) == 0:                    continue                boardX = checkBlock.getXPos() + blockX                boardY = checkBlock.getYPos() + blockY                # Check X position of block to check                if boardX &lt; 0 or boardX &gt;= self.board.getXSize():                    return False                # Check Y position of block to check                if boardY &gt;= self.board.getYSize():                    return False                # Check if block is already exist                if self.board.getBlock(boardX, boardY) != 0:                    return False        return True    # Set current block to board    def setCurrentBlockToBoard(self):        # Set current block to board        for blockX in range(self.currentBlock.getXSize()):            for blockY in range(self.currentBlock.getYSize()):                if self.currentBlock.getBlock(blockX, blockY) != 0:                    self.board.setBlock(self.currentBlock.getXPos() + blockX, self.currentBlock.getYPos() + blockY, self.currentBlock.getType())    # Check if tetris is over    def isTetrisOver(self):        isTetrisOver = False        for boardX in range(self.board.getXSize()):            if self.board.getBlock(boardX, 0) != 0:                isTetrisOver = True                break        return isTetrisOver    # Change current block    def changeCurrentBlock(self):        # Set next block to current block        self.currentBlock = self.nextBlock        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)        self.currentBlock.setYPos(- self.currentBlock.getYSize())        # Set next block        self.nextBlock = StBlock()</pre><p>StScore.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class StScore:    # Constructor    def __init__(self):        # Score        self.score = 0    # Clear    def clear(self):        self.score = 0    # Add score    def addScore(self, score):        self.score += score    # Set score    def setScore(self, score):        self.score = score    # Get score    def getScore(self):        return self.score</pre><p>StBoard.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import numpyclass StBoard:    # Constructor    def __init__(self):        # Board        self.board = numpy.zeros(shape=(self.getYSize(), self.getXSize()), dtype=int)    # Get X size    def getXSize(self):        return 10    # Get Y size    def getYSize(self):        return 20    # Get block    def getBlock(self, x, y):        if x &lt; 0 or x &gt;= self.getXSize():            return 0        if y &lt; 0 or y &gt;= self.getYSize():            return 0        return self.board[y][x]    # Set block    def setBlock(self, x, y, block):        if x &lt; 0 or x &gt;= self.getXSize():            return        if y &lt; 0 or y &gt;= self.getYSize():            return        self.board[y][x] = block    # Clear complete lines    def clearCompleteLines(self):        complete_lines = 0        for boardY in range(self.getYSize()):            block_count = 0            # Count the number of block            for boardX in range(self.getXSize()):                if (self.board[boardY][boardX]):                    block_count += 1            # The line of board is full of block            if block_count is len(self.board[boardY]):                # Delete line of board                self.board.pop(boardY)                # Add line to the beginning of the board                self.board = numpy.zeros(shape=(1, self.getXSize()), dtype=int) + self.board                complete_lines += 1        return complete_lines</pre><p>StBlock.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import randomclass StBlock:    blocks = [ [                [                    [ 1, 0, 0 ],                    [ 1, 1, 1 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 1, 0 ],                    [ 0, 1, 0 ],                    [ 1, 1, 0 ]                ], [                    [ 0, 0, 0 ],                    [ 1, 1, 1 ],                    [ 0, 0, 1 ]                ], [                    [ 0, 1, 1 ],                    [ 0, 1, 0 ],                    [ 0, 1, 0 ]                ]            ], [                [                    [ 0, 0, 2 ],                    [ 2, 2, 2 ],                    [ 0, 0, 0 ]                ], [                    [ 2, 2, 0 ],                    [ 0, 2, 0 ],                    [ 0, 2, 0 ]                ], [                    [ 0, 0, 0 ],                    [ 2, 2, 2 ],                    [ 2, 0, 0 ]                ], [                    [ 0, 2, 0 ],                    [ 0, 2, 0 ],                    [ 0, 2, 2 ]                ]            ], [                [                    [ 3, 3 ],                    [ 3, 3 ]                ]            ], [                [                    [ 0, 4, 4 ],                    [ 4, 4, 0 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 4, 0 ],                    [ 0, 4, 4 ],                    [ 0, 0, 4 ]                ]            ], [                [                    [ 0, 0, 0 ],                    [ 5, 5, 5 ],                    [ 0, 5, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 0, 5, 5 ],                    [ 0, 5, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 5, 5, 5 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 5, 5, 0 ],                    [ 0, 5, 0 ]                ]            ], [                [                    [ 6, 6, 0 ],                    [ 0, 6, 6 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 0, 6 ],                    [ 0, 6, 6 ],                    [ 0, 6, 0 ]                ]            ], [                [                    [ 0, 0, 0, 0 ],                    [ 0, 0, 0, 0 ],                    [ 7, 7, 7, 7 ],                    [ 0, 0, 0, 0 ]                ], [                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ]                ]            ] ]    def __init__(self, block=None):        if block is None:            # Type            self.type = random.randint(1, len(StBlock.blocks))            # X Position            self.xPos = 0            # Y Position            self.yPos = 0            # Rotation            self.rotation = 0            # Block            self.block = StBlock.blocks[self.type-1]        else:            # Type            self.type = block.type            # X Position            self.xPos = block.xPos            # Y Position            self.yPos = block.yPos            # Rotation            self.rotation = block.rotation            # Block            self.block = block.block    # Get type    def getType(self):        return self.type    # Get X size    def getXSize(self):        return len(self.block[self.rotation][0])    # Get Y size    def getYSize(self):        return len(self.block[self.rotation])    # Get X position    def getXPos(self):        return self.xPos    # Get Y position    def getYPos(self):        return self.yPos    # Get rotation    def getRotation(self):        return self.rotation    # Get block    def getBlock(self, x, y):        if x &lt; 0 or x &gt;= self.getXSize():            return 0        if y &lt; 0 or y &gt;= self.getYSize():            return 0        return self.block[self.rotation][y][x]    # Set X position    def setXPos(self, xPos):        self.xPos = xPos    # Set Y position    def setYPos(self, yPos):        self.yPos = yPos        # Set rotation    def setRotation(self, rotation):        self.rotation = self.rotation % len(self.block)</pre><p>Reference:</p><p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p><h3>Tetrix</h3>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p>
+<h3>STetris</h3>
+<p>StApp.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from StTetris import StTetris
+from PyQt5.QtWidgets import QApplication
+
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    stetris = StTetris()
+    stetris.start()
+    sys.exit(app.exec())</pre>
+<p>StTetris.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StPlay import StPlay
+from StScore import StScore
+from PyQt5.QtCore import QBasicTimer, QRect, Qt
+from PyQt5.QtGui import QBrush, QColor, QFont, QPainter
+from PyQt5.QtWidgets import QWidget
+
+
+class StTetris(QWidget):
+
+    ST_WINDOW_WIDTH = 800
+    ST_WINDOW_HEIGHT = 600
+    ST_BLOCK_WIDTH = 30
+    ST_BLOCK_HEIGHT = 30
+    ST_BOARD_POS_X = 200
+    ST_BOARD_POS_Y = 0
+    ST_NEXT_BLOCK_POS_X = 650
+    ST_NEXT_BLOCK_POS_Y = 150
+    ST_SCORE_POS_X = 550
+    ST_SCORE_POS_Y = 30
+    ST_HIGHSCORE_POS_X = 650
+    ST_HIGHSCORE_POS_Y = 30
+    ST_BLOCK_COLOR = ["#000000", "#C71585", "#FFA500", "#FFD700", "#228B22", "#1E90FF", "#483D8B", "#9932CC"]
+    ST_BACKGROUND_COLOR = "#FFFFFF"
+    ST_DOWN_INTERVAL = 500
+
+    # Constructor
+    def __init__(self):
+        super().__init__()
+
+        # Show widget
+        super().resize(self.ST_WINDOW_WIDTH, self.ST_WINDOW_HEIGHT)
+        super().setWindowTitle("STetris")
+        super().show()
+
+        # Painter
+        self.painter = QPainter()
+
+        # Play
+        self.play = StPlay(self)
+        # Score
+        self.score = StScore()
+        # High Score
+        self.highScore = StScore()
+        # Load high score
+        # highScore = sessionStorage.getItem("highscore")
+        # if (highScore):
+        #   Set high score
+        #   self.highScore.setScore(highScore)
+        # Play interval
+        self.playInterval = 500
+        # Play timer
+        self.playTimer = QBasicTimer()
+
+    # Start
+    def start(self):
+        # Set interval
+        self.playTimer.start(self.ST_DOWN_INTERVAL, self)
+
+    # Stop
+    def stop(self):
+        self.playTimer.stop()
+
+    def timerEvent(self, e):
+        self.play.moveDown()
+
+    def keyPressEvent(self, e):
+        key = e.key()
+
+        if key == Qt.Key_Left:
+            self.play.moveLeft()
+        elif key == Qt.Key_Right:
+            self.play.moveRight()
+        elif key == Qt.Key_Down:
+            self.play.moveDown()
+        elif key == Qt.Key_Up:
+            self.play.rotate()
+        elif key == Qt.Key_Space:
+            self.play.drop()
+
+    # Notify
+    def notify(self, message, param=None):
+        if (message == StPlay.ST_NOTIFY_DOWN):
+            self.score.setScore(self.score.getScore() + 100)
+        elif (message == StPlay.ST_NOTIFY_DROP):
+            self.score.setScore(self.score.getScore() + 100)
+        elif (message == StPlay.ST_NOTIFY_CLEAR):
+            self.score.setScore(self.score.getScore()
+                                + param.cleared_lines * 1000)
+        elif (message == StPlay.ST_NOTIFY_TETRISOVER):
+            self.stop()
+
+        # Update high score
+        #if self.highScore.getScore() &lt; self.score.getScore():
+        #    self.highScore.setScore(self.score.getScore())
+        #    sessionStorage.setItem("highscore", self.highScore.getScore())
+
+        self.update()
+
+    def paintEvent(self, e):
+        self.painter.begin(self)
+        self.drawTetris(self.painter)
+        self.painter.end()
+
+    # Draw tetris
+    def drawTetris(self, painter):
+
+        # Draw background
+        rect = {
+            "x" : 0,
+            "y" : 0,
+            "width" : self.ST_WINDOW_WIDTH,
+            "height" : self.ST_WINDOW_HEIGHT
+        }
+        self.drawBackground(painter, rect)
+
+        # Draw board
+        boardRect = {
+            "x" : self.ST_BOARD_POS_X,
+            "y" : self.ST_BOARD_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * self.play.getBoard().getXSize(),
+            "height" : self.ST_BLOCK_HEIGHT * self.play.getBoard().getYSize()
+        }
+        self.drawBoard(painter, boardRect, self.play.getBoard())
+
+        # Draw current block
+        self.drawBlock(painter, boardRect, self.play.getCurrentBlock())
+
+        # Draw next block
+        nextBlockRect = {
+            "x" : self.ST_NEXT_BLOCK_POS_X,
+            "y" : self.ST_NEXT_BLOCK_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 4,
+            "height" : self.ST_BLOCK_HEIGHT * 4,
+        }
+        self.drawBlock(painter, nextBlockRect, self.play.getNextBlock())
+
+        # Draw score
+        scoreRect = {
+            "x" : self.ST_SCORE_POS_X,
+            "y" : self.ST_SCORE_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 7,
+            "height" : self.ST_BLOCK_HEIGHT * 2
+        }
+        self.drawScore(painter, scoreRect, "SCORE", self.score)
+
+        # Draw high score
+        highScoreRect = {
+            "x" : self.ST_HIGHSCORE_POS_X,
+            "y" : self.ST_HIGHSCORE_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 7,
+            "height" : self.ST_BLOCK_HEIGHT * 2
+        }
+        self.drawScore(painter, highScoreRect, "HIGH SCORE", self.highScore)
+
+    # Draw background
+    def drawBackground(self, painter, rect):
+        painter.fillRect(QRect(rect["x"], rect["y"], rect["width"], rect["height"]), QColor(self.ST_BACKGROUND_COLOR))
+
+    # Draw board
+    def drawBoard(self, painter, rect, board):
+
+        # Draw board
+        for boardY in range(board.getYSize()):
+            for boardX in range(board.getXSize()):
+                rectBlock = {
+                    "x" : rect["x"] + boardX * StTetris.ST_BLOCK_WIDTH,
+                    "y" : rect["y"] + boardY * StTetris.ST_BLOCK_HEIGHT,
+                    "width" : StTetris.ST_BLOCK_WIDTH,
+                    "height" : StTetris.ST_BLOCK_HEIGHT
+                }
+                fillColor = StTetris.ST_BLOCK_COLOR[self.play.getBoard().getBlock(boardX, boardY)]
+                painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))
+
+    # Draw block
+    def drawBlock(self, painter, rect, block):
+
+        # Draw block
+        for blockY in range(block.getYSize()):
+            for blockX in range(block.getXSize()):
+                if block.getBlock(blockX, blockY):
+                    rectBlock = {
+                        "x" : rect["x"] + (block.getXPos() + blockX) * StTetris.ST_BLOCK_WIDTH,
+                        "y" : rect["y"] + (block.getYPos() + blockY) * StTetris.ST_BLOCK_HEIGHT,
+                        "width" : StTetris.ST_BLOCK_WIDTH,
+                        "height" : StTetris.ST_BLOCK_HEIGHT
+                    }
+                    fillColor = StTetris.ST_BLOCK_COLOR[block.getBlock(blockX, blockY)]
+                    painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))
+
+    # Draw score
+    def drawScore(self, painter, rect, title, score):
+        # Draw title
+        painter.textAligh = "right"
+        painter.fillStyle = "red"
+        painter.drawText(rect["x"], rect["y"], title)
+
+        # Draw score
+        painter.drawText(rect["x"], rect["y"] + rect["height"] // 2, str(score.getScore()))</pre>
+<p>StPlay.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StBoard import StBoard
+from StBlock import StBlock
+
+class StPlay:
+    ST_NOTIFY_LEFT = "NOTIFY_LEFT"
+
+    ST_NOTIFY_RIGHT = "NOTIFY_RIGHT"
+
+    ST_NOTIFY_DOWN = "NOTIFY_DOWN"
+        
+    ST_NOTIFY_DROP = "NOTIFY_DROP"
+
+    ST_NOTIFY_ROTATE = "NOTIFY_ROTATE"
+
+    ST_NOTIFY_CLEAR = "NOTIFY_CLEAR"
+
+    ST_NOTIFY_TETRISOVER = "NOTIFY_TETRISOVER"
+
+    # Constructor
+    def __init__(self, notify):
+        # Board
+        self.board = StBoard()
+        # Current block
+        self.currentBlock = StBlock()
+        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)
+        self.currentBlock.setYPos(0 - self.currentBlock.getYSize())
+        # Next block
+        self.nextBlock = StBlock()
+        # Notify
+        self.notify = notify
+
+    # Get board
+    def getBoard(self):
+        return self.board
+
+    # Get current block
+    def getCurrentBlock(self):
+        return self.currentBlock
+
+    # Get next block
+    def getNextBlock(self):
+        return self.nextBlock
+
+    # Move left
+    def moveLeft(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() - 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):
+            # Set current X position to left
+            self.currentBlock.setXPos(self.currentBlock.getXPos() - 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_LEFT)
+
+    # Move right
+    def moveRight(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() + 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):
+            # Set current X position to right
+            self.currentBlock.setXPos(self.currentBlock.getXPos() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_RIGHT)
+
+    # Move down
+    def moveDown(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):
+            # Set current Y position to down
+            self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_DOWN)
+        # Block is not movable
+        else:
+            # Set current block to board
+            self.setCurrentBlockToBoard()
+            # Change current block
+            self.changeCurrentBlock()
+            # Clear completed line
+            cleared_lines = self.board.clearCompleteLines()
+            if cleared_lines:
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })
+            # Tetris is over
+            if self.isTetrisOver():
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)
+
+    # Drop
+    def drop(self):
+
+        while True:
+            # Block is movable
+            if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):
+                # Set current Y position to down
+                self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)
+            # Block is not movable
+            else:
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_DROP)
+                break
+
+        # Set current block to board
+        self.setCurrentBlockToBoard()
+        # Change current block
+        self.changeCurrentBlock()
+        # Clear completed line
+        cleared_lines = self.board.clearCompleteLines()
+        if cleared_lines:
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })
+        # Tetris is over
+        if self.isTetrisOver():
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)
+
+    # Rotate
+    def rotate(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos(), self.currentBlock.getRotation() + 1):
+            # Rotate
+            self.currentBlock.setRotation(self.currentBlock.getRotation() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_ROTATE)
+
+    # Is movable
+    def isMovable(self, block, xPos, yPos, rotation):
+
+        # Create block to check and set value to check
+        checkBlock = StBlock(block)
+        checkBlock.setXPos(xPos)
+        checkBlock.setYPos(yPos)
+        checkBlock.setRotation(rotation)
+
+        # Get value of board
+        for blockX in range(checkBlock.getXSize()):
+            for blockY in range(checkBlock.getYSize()):
+
+                # Check if block to check is empty
+                if checkBlock.getBlock(blockX, blockY) == 0:
+                    continue
+
+                boardX = checkBlock.getXPos() + blockX
+                boardY = checkBlock.getYPos() + blockY
+
+                # Check X position of block to check
+                if boardX &lt; 0 or boardX &gt;= self.board.getXSize():
+                    return False
+
+                # Check Y position of block to check
+                if boardY &gt;= self.board.getYSize():
+                    return False
+
+                # Check if block is already exist
+                if self.board.getBlock(boardX, boardY) != 0:
+                    return False
+
+        return True
+
+    # Set current block to board
+    def setCurrentBlockToBoard(self):
+        # Set current block to board
+        for blockX in range(self.currentBlock.getXSize()):
+            for blockY in range(self.currentBlock.getYSize()):
+                if self.currentBlock.getBlock(blockX, blockY) != 0:
+                    self.board.setBlock(self.currentBlock.getXPos() + blockX, self.currentBlock.getYPos() + blockY, self.currentBlock.getType())
+
+    # Check if tetris is over
+    def isTetrisOver(self):
+        isTetrisOver = False
+        for boardX in range(self.board.getXSize()):
+            if self.board.getBlock(boardX, 0) != 0:
+                isTetrisOver = True
+                break
+        return isTetrisOver
+
+    # Change current block
+    def changeCurrentBlock(self):
+        # Set next block to current block
+        self.currentBlock = self.nextBlock
+        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)
+        self.currentBlock.setYPos(- self.currentBlock.getYSize())
+        # Set next block
+        self.nextBlock = StBlock()</pre>
+<p>StScore.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class StScore:
+    # Constructor
+    def __init__(self):
+        # Score
+        self.score = 0
+
+    # Clear
+    def clear(self):
+        self.score = 0
+
+    # Add score
+    def addScore(self, score):
+        self.score += score
+
+    # Set score
+    def setScore(self, score):
+        self.score = score
+
+    # Get score
+    def getScore(self):
+        return self.score</pre>
+<p>StBoard.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import numpy
+
+class StBoard:
+
+    # Constructor
+    def __init__(self):
+        # Board
+        self.board = numpy.zeros(shape=(self.getYSize(), self.getXSize()), dtype=int)
+
+    # Get X size
+    def getXSize(self):
+        return 10
+
+    # Get Y size
+    def getYSize(self):
+        return 20
+
+    # Get block
+    def getBlock(self, x, y):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return 0
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return 0
+
+        return self.board[y][x]
+
+    # Set block
+    def setBlock(self, x, y, block):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return
+
+        self.board[y][x] = block
+
+    # Clear complete lines
+    def clearCompleteLines(self):
+        complete_lines = 0
+
+        for boardY in range(self.getYSize()):
+            block_count = 0
+
+            # Count the number of block
+            for boardX in range(self.getXSize()):
+                if (self.board[boardY][boardX]):
+                    block_count += 1
+
+            # The line of board is full of block
+            if block_count is len(self.board[boardY]):
+                # Delete line of board
+                self.board.pop(boardY)
+                # Add line to the beginning of the board
+                self.board = numpy.zeros(shape=(1, self.getXSize()), dtype=int) + self.board
+                complete_lines += 1
+
+        return complete_lines</pre>
+<p>StBlock.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import random
+
+class StBlock:
+
+    blocks = [ [
+                [
+                    [ 1, 0, 0 ],
+                    [ 1, 1, 1 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 1, 0 ],
+                    [ 0, 1, 0 ],
+                    [ 1, 1, 0 ]
+                ], [
+                    [ 0, 0, 0 ],
+                    [ 1, 1, 1 ],
+                    [ 0, 0, 1 ]
+                ], [
+                    [ 0, 1, 1 ],
+                    [ 0, 1, 0 ],
+                    [ 0, 1, 0 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 2 ],
+                    [ 2, 2, 2 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 2, 2, 0 ],
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 0 ]
+                ], [
+                    [ 0, 0, 0 ],
+                    [ 2, 2, 2 ],
+                    [ 2, 0, 0 ]
+                ], [
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 2 ]
+                ]
+            ], [
+                [
+                    [ 3, 3 ],
+                    [ 3, 3 ]
+                ]
+            ], [
+                [
+                    [ 0, 4, 4 ],
+                    [ 4, 4, 0 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 4, 0 ],
+                    [ 0, 4, 4 ],
+                    [ 0, 0, 4 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 0 ],
+                    [ 5, 5, 5 ],
+                    [ 0, 5, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 0, 5, 5 ],
+                    [ 0, 5, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 5, 5, 5 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 5, 5, 0 ],
+                    [ 0, 5, 0 ]
+                ]
+            ], [
+                [
+                    [ 6, 6, 0 ],
+                    [ 0, 6, 6 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 0, 6 ],
+                    [ 0, 6, 6 ],
+                    [ 0, 6, 0 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 0, 0 ],
+                    [ 0, 0, 0, 0 ],
+                    [ 7, 7, 7, 7 ],
+                    [ 0, 0, 0, 0 ]
+                ], [
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ]
+                ]
+            ] ]
+
+    def __init__(self, block=None):
+        if block is None:
+            # Type
+            self.type = random.randint(1, len(StBlock.blocks))
+            # X Position
+            self.xPos = 0
+            # Y Position
+            self.yPos = 0
+            # Rotation
+            self.rotation = 0
+            # Block
+            self.block = StBlock.blocks[self.type-1]
+        else:
+            # Type
+            self.type = block.type
+            # X Position
+            self.xPos = block.xPos
+            # Y Position
+            self.yPos = block.yPos
+            # Rotation
+            self.rotation = block.rotation
+            # Block
+            self.block = block.block
+
+    # Get type
+    def getType(self):
+        return self.type
+
+    # Get X size
+    def getXSize(self):
+        return len(self.block[self.rotation][0])
+
+    # Get Y size
+    def getYSize(self):
+        return len(self.block[self.rotation])
+
+    # Get X position
+    def getXPos(self):
+        return self.xPos
+
+    # Get Y position
+    def getYPos(self):
+        return self.yPos
+
+    # Get rotation
+    def getRotation(self):
+        return self.rotation
+
+    # Get block
+    def getBlock(self, x, y):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return 0
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return 0
+
+        return self.block[self.rotation][y][x]
+
+    # Set X position
+    def setXPos(self, xPos):
+        self.xPos = xPos
+
+    # Set Y position
+    def setYPos(self, yPos):
+        self.yPos = yPos
+    
+    # Set rotation
+    def setRotation(self, rotation):
+        self.rotation = self.rotation % len(self.block)</pre>
+<p>Reference:</p>
+<p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p>
+<h3>Tetrix</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import copy
 import random
 
@@ -4743,10 +5376,13 @@ if __name__ == '__main__':
     window.show()
     random.seed(None)
     sys.exit(app.exec_())</pre>
-<p></p><h2>V-rep</h2>
+<p></p>
+<h2>V-rep</h2>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html</a>&nbsp;</p>
-<p><iframe width="560" height="315" src="https://www.youtube.com/embed/JPtW66z0-VQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p><h2>人臉辨識</h2>
-<p><a href="https://github.com/meownoid/face-identification-tpe">https://github.com/meownoid/face-identification-tpe</a>&nbsp;</p><h2>輔助設計套件</h2>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/JPtW66z0-VQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
+<h2>人臉辨識</h2>
+<p><a href="https://github.com/meownoid/face-identification-tpe">https://github.com/meownoid/face-identification-tpe</a>&nbsp;</p>
+<h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a>&nbsp;</p>
 <p>一般常見的機械電腦輔助設計套件包括法國<span>&nbsp;</span><a href="https://www.3ds.com/">Dassault</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.3ds.com/products-services/solidworks/">SolidWorks</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.3ds.com/products-services/catia/">Catia</a>, 美國<span>&nbsp;</span><a href="https://www.autodesk.com.tw/">AutoDesk</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.autodesk.com.tw/products/autocad/">AutoCAD</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.autodesk.com/products/inventor/overview">Inventor</a>, 德國<span>&nbsp;</span><a href="https://www.siemens.com/tw/zh/home.html">Siemens</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/en/products/solid-edge/">Solid Edge</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/zh/products/nx/index.shtml">NX</a>, 美國<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/">PTC</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/cad">Creo</a>, 以及 2015 年推出的<span>&nbsp;</span><a href="https://www.onshape.com/">Onshape</a></p>
@@ -4783,11 +5419,14 @@ if __name__ == '__main__':
 <p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a></p>
 <h3>NURB-Python</h3>
 <p><a href="https://github.com/orbingol/NURBS-Python">https://github.com/orbingol/NURBS-Python</a>&nbsp;</p>
-<p><a href="https://github.com/orbingol/NURBS-Python_Examples">https://github.com/orbingol/NURBS-Python_Examples</a>&nbsp;</p><h3>libfive</h3>
+<p><a href="https://github.com/orbingol/NURBS-Python_Examples">https://github.com/orbingol/NURBS-Python_Examples</a>&nbsp;</p>
+<h3>libfive</h3>
 <p><a href="https://github.com/libfive/libfive">https://github.com/libfive/libfive</a>&nbsp;</p>
 <h3>robovision</h3>
-<p>https://github.com/stoic1979/robovision</p><h3>jsketcher</h3>
-<p>https://github.com/xibyte/jsketcher</p><h3>kmolcad</h3>
+<p>https://github.com/stoic1979/robovision</p>
+<h3>jsketcher</h3>
+<p>https://github.com/xibyte/jsketcher</p>
+<h3>kmolcad</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtGui import QPen, QColor, QImage, QPixmap, QPainter
@@ -5148,7 +5787,8 @@ if __name__ == "__main__":
  &lt;resources/&gt;
  &lt;connections/&gt;
 &lt;/ui&gt;</pre>
-<p></p><h1>分組專題</h1>
+<p></p>
+<h1>分組專題</h1>
 <p>分組專題報告</p>
 <p>章節</p>
 <ul>
@@ -5269,9 +5909,11 @@ print(data)
 <p>CMSimple主要的程式功能分為頁面展示與後台管理. 其頁面展示功能是利用超文件中的 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;, 與 &lt;h3&gt;&lt;/h3&gt; 標註（可後續延伸至 &lt;h4&gt;&lt;/h4&gt;等）, 進行分頁. CMSimple程式會將 content.htm 中的 &lt;h1&gt;&lt;/h1&gt; 當作第一層頁面的標題, 緊跟其後之 &lt;h2&gt;&lt;/h2&gt; 則將被視為第二層頁面的標題, 而 &lt;h3&gt;&lt;/h3&gt; 所涵蓋的內容則為第三層頁面的標題. 各層標題則依照其位於content.htm文件中的順序而定. 由於CMSimple利用 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;，與&lt;h3&gt;&lt;/h3&gt; 標註進行分頁，因此其文件內容無法出現標題標註（header）所對應的粗體文字. 使用者必須透過其他方式產生類似粗體文字的效果.</p>
 <p>CMSimple的後台管理, 僅允許單一用戶使用. 透過後台管理, 可設定各種與頁面展示相關的參數. 與許多內容管理系統相同, CMSimple提供延伸程式開發架構的設計, 可以讓程式開發者自行建構原始CMSimple以外的功能.</p>
 <p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
-<p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p><h2>Pygrouf 解析</h2>
+<p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p>
+<h2>Pygrouf 解析</h2>
 <p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>&nbsp; 為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
-<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p><h2>Pyslvs 解析</h2>
+<p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p>
+<h2>Pyslvs 解析</h2>
 <p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a>&nbsp;</p>
 <p>採用 PyQt5 建立, 核心&nbsp;<a href="https://github.com/KmolYuan/pyslvs">https://github.com/KmolYuan/pyslvs</a>&nbsp;</p>
 <p>演化運算模組: Adesign:&nbsp;<a href="https://github.com/KmolYuan/Adesign">https://github.com/KmolYuan/Adesign</a>&nbsp;</p>
@@ -5291,19 +5933,26 @@ compiler=mingw32</pre>
 <p>編譯指令:</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">mingw32-make clean
 mingw32-make</pre>
-<p></p><h2>Pyquino 解析</h2>
-<p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p><h2>Solvespace 解析</h2>
-<p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p><h2>V-rep 解析</h2>
-<p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p><h2>FreeCAD 解析</h2>
-<p><a href="https://www.freecadweb.org/">https://www.freecadweb.org/</a>&nbsp;</p><h2>RigitBody library</h2>
+<p></p>
+<h2>Pyquino 解析</h2>
+<p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a>&nbsp;</p>
+<h2>Solvespace 解析</h2>
+<p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p>
+<h2>V-rep 解析</h2>
+<p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p>
+<h2>FreeCAD 解析</h2>
+<p><a href="https://www.freecadweb.org/">https://www.freecadweb.org/</a>&nbsp;</p>
+<h2>RigitBody library</h2>
 <p>Rigit Body Dynamic Library</p>
 <p><a href="https://rbdl.bitbucket.io">https://rbdl.bitbucket.io</a>&nbsp;</p>
 <p><a href="https://bitbucket.org/rbdl/rbdl">https://bitbucket.org/rbdl/rbdl</a>&nbsp;</p>
 <p>RBDL - an Efficient Rigid-Body Dynamics Library using Recursive Algorithms</p>
-<p><a href="https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf">https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf</a>&nbsp; or <a href="/downloads/RBDL%20- an Efficient Rigid-Body Dynamics Library using Recursive Algorithms.pdf">local</a></p><h2>FiniteElement library</h2>
+<p><a href="https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf">https://orb.iwr.uni-heidelberg.de/phpref/orb/pdf/Felis2016RBDLPreprint.pdf</a>&nbsp; or <a href="/downloads/RBDL%20- an Efficient Rigid-Body Dynamics Library using Recursive Algorithms.pdf">local</a></p>
+<h2>FiniteElement library</h2>
 <p><a href="http://mfem.org/">http://mfem.org/</a>&nbsp;</p>
 <p><a href="https://fenicsproject.org/">https://fenicsproject.org/</a>&nbsp;</p>
-<p><a href="https://github.com/ali7line/awesome-fem">https://github.com/ali7line/awesome-fem</a>&nbsp;</p><h2>網際平面連桿模擬</h2>
+<p><a href="https://github.com/ali7line/awesome-fem">https://github.com/ali7line/awesome-fem</a>&nbsp;</p>
+<h2>網際平面連桿模擬</h2>
 <p>Brython 程式碼:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 啟動 Brython --&gt;
 
