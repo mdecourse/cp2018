@@ -82,7 +82,7 @@ NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, MirroredLShape 
 
 class TetrixWindow(QWidget):
     def __init__(self):
-        super(TetrixWindow, self).__init__()
+        super().__init__()
 
         self.board = TetrixBoard()
 
@@ -147,7 +147,7 @@ class TetrixBoard(QFrame):
     linesRemovedChanged = pyqtSignal(int)
 
     def __init__(self, parent=None):
-        super(TetrixBoard, self).__init__(parent)
+        super().__init__()
 
         self.timer = QBasicTimer()
         self.nextPieceLabel = None
@@ -527,5 +527,5 @@ if __name__ == '__main__':
     window = TetrixWindow()
     window.show()
     random.seed(None)
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p></p><br />STetris << <a href='STetris.html'>Previous</a> <a href='V-rep.html'>Next</a> >> V-rep</section></div></body></html>

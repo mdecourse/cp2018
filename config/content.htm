@@ -1673,7 +1673,37 @@ python wsgi.py</pre>
 <p>git push origin :the_remote_branch</p>
 <p>or</p>
 <p>git push origin --delete the_remote_branch</p>
-<h2>Fossil SCM</h2><p><a href="https://www.fossil-scm.org">https://www.fossil-scm.org</a>&nbsp;</p><p>Fossil SCM 是一套簡潔可靠的分散式組態管理工具, 內建網際介面, 臭蟲追蹤, 快記與技術筆記功能的單一可執行檔.</p><p>Fossil SCM 為自由開放源軟體, 使用者可以自行在 Windows 或 Linux 環境中編譯. 例如: 在 Windows 環境, 以 <a href="https://www.msys2.org/">MSYS2</a> 編譯:&nbsp;<a href="http://lab.kmol.info/blog/msys2_compile_fossil_scm.html">http://lab.kmol.info/blog/msys2_compile_fossil_scm.html</a>&nbsp;</p><p>在 Windows 單機環境使用:</p><p>下載 fossil.exe:&nbsp;<a href="https://www.fossil-scm.org/index.html/uv/download.html">https://www.fossil-scm.org/index.html/uv/download.html</a>&nbsp;</p><p>解開壓縮檔案後, 可以直接在 Windows 命令列中執行 fossil.exe</p><p>目前 Fossil SCM 最新版為 2.6, 若配合遠端 Ubuntu 伺服器使用,&nbsp; 必須確認客戶端與伺服器端的 fossil 版本一致, 否則將可能造成使用上的問題.</p><p>查核 fossil.exe 版本:</p><p>fossil version</p><p>利用 fossil help 可以列出常用指令.</p><p>Fossil SCM 單機基本操作:</p><p>建立倉儲檔案</p><p>fossil init foo.fossil</p><p>表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關<span>&nbsp;</span><a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki">fossil 密碼管理</a>), 當使用者在近端以網際模式啟動該倉儲時 (以<span>&nbsp;</span><a href="http://fossil-scm.org/index.html/help?cmd=ui">fossil ui</a><span>&nbsp;</span>指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.</p><p>以 fossil sql 指令擷取 .fossil 檔案內容</p><p>使用者以 fossil init foo.fossil 建立倉儲檔案後, 可以利用 fossil 指令查驗倉儲資料庫檔案的內容.</p><p>fossil sql -R foo.fossil</p><p>進入 sqlite 指令環境後, 可以利用 .schema user 查驗 user 資料表的欄位設計.</p><p>以 select login, pw, cap from user;</p><p>可以查詢目前 foo.fossil 檔案中 user 資料表 login, pw 與 cap 等3個欄位的資料內容.</p><p>若要更改特定 login 登入帳號的 pw 或 cap 可以使用下列 sqlite3 SQL 語法:</p><p>update user set pw='mynewpassword' where login='myloginaccount';</p><p>update user set cap='s' where login='myloginaccount';</p><p>倉儲&nbsp; clone</p><div class="line number1 index0 alt2"><code class="jscript plain"><code class="jscript plain"></code></code><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">$ fossil clone http://your_domain_name ~/fossils/yourdb.fossil$ fossil open ~/fossils/foo.fossil</pre><p>上述 fossil 指令表示要從 http://your_domain_name fossil 伺服器中, clone 倉儲檔案, 然後存在近端的 ~/fossils/yourdb.fossil 檔案中.</p></div><p>接下來則可以選擇適當的目錄, 以 fossil open 將 .fossil 檔案解開, 此所在目錄即為該 .fossil 倉儲的 近端工作目錄.</p><h2>Leo Editor</h2>
+<h2>Fossil SCM</h2>
+<p><a href="https://www.fossil-scm.org">https://www.fossil-scm.org</a>&nbsp;</p>
+<p>Fossil SCM 是一套簡潔可靠的分散式組態管理工具, 內建網際介面, 臭蟲追蹤, 快記與技術筆記功能的單一可執行檔.</p>
+<p>Fossil SCM 為自由開放源軟體, 使用者可以自行在 Windows 或 Linux 環境中編譯. 例如: 在 Windows 環境, 以 <a href="https://www.msys2.org/">MSYS2</a> 編譯:&nbsp;<a href="http://lab.kmol.info/blog/msys2_compile_fossil_scm.html">http://lab.kmol.info/blog/msys2_compile_fossil_scm.html</a>&nbsp;</p>
+<p>在 Windows 單機環境使用:</p>
+<p>下載 fossil.exe:&nbsp;<a href="https://www.fossil-scm.org/index.html/uv/download.html">https://www.fossil-scm.org/index.html/uv/download.html</a>&nbsp;</p>
+<p>解開壓縮檔案後, 可以直接在 Windows 命令列中執行 fossil.exe</p>
+<p>目前 Fossil SCM 最新版為 2.6, 若配合遠端 Ubuntu 伺服器使用,&nbsp; 必須確認客戶端與伺服器端的 fossil 版本一致, 否則將可能造成使用上的問題.</p>
+<p>查核 fossil.exe 版本:</p>
+<p>fossil version</p>
+<p>利用 fossil help 可以列出常用指令.</p>
+<p>Fossil SCM 單機基本操作:</p>
+<p>建立倉儲檔案</p>
+<p>fossil init foo.fossil</p>
+<p>表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關<span>&nbsp;</span><a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki">fossil 密碼管理</a>), 當使用者在近端以網際模式啟動該倉儲時 (以<span>&nbsp;</span><a href="http://fossil-scm.org/index.html/help?cmd=ui">fossil ui</a><span>&nbsp;</span>指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.</p>
+<p>以 fossil sql 指令擷取 .fossil 檔案內容</p>
+<p>使用者以 fossil init foo.fossil 建立倉儲檔案後, 可以利用 fossil 指令查驗倉儲資料庫檔案的內容.</p>
+<p>fossil sql -R foo.fossil</p>
+<p>進入 sqlite 指令環境後, 可以利用 .schema user 查驗 user 資料表的欄位設計.</p>
+<p>以 select login, pw, cap from user;</p>
+<p>可以查詢目前 foo.fossil 檔案中 user 資料表 login, pw 與 cap 等3個欄位的資料內容.</p>
+<p>若要更改特定 login 登入帳號的 pw 或 cap 可以使用下列 sqlite3 SQL 語法:</p>
+<p>update user set pw='mynewpassword' where login='myloginaccount';</p>
+<p>update user set cap='s' where login='myloginaccount';</p>
+<p>倉儲&nbsp; clone</p>
+<div class="line number1 index0 alt2"><code class="jscript plain"><code class="jscript plain"></code></code>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">$ fossil clone http://your_domain_name ~/fossils/yourdb.fossil
+$ fossil open ~/fossils/foo.fossil</pre>
+<p>上述 fossil 指令表示要從 http://your_domain_name fossil 伺服器中, clone 倉儲檔案, 然後存在近端的 ~/fossils/yourdb.fossil 檔案中.</p>
+</div>
+<p>接下來則可以選擇適當的目錄, 以 fossil open 將 .fossil 檔案解開, 此所在目錄即為該 .fossil 倉儲的 近端工作目錄.</p><h2>Leo Editor</h2>
 <p><a href="http://www.leoeditor.com/">http://www.leoeditor.com/</a>&nbsp;</p>
 <h2>SCiTE</h2>
 <p><a href="https://www.scintilla.org/SciTE.html">https://www.scintilla.org/SciTE.html</a>&nbsp;</p>
@@ -3566,148 +3596,7 @@ for root, dirs, files in os.walk(os.getcwd()):
 #docx2pdf(in_file, out_file)
 print("done")</pre>
 <p></p>
-<h2>網際繪圖</h2>
-<p>網頁中有三種基本元素 HTML5, CSS 與 Javascript, 透過 <a href="https://brython.info/">Brython</a> 或 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以以 Python 及 Lua 替代 Javascript.</p>
-<p>參考資料:&nbsp;</p>
-<p><a href="https://link.springer.com/book/10.1007/978-1-4842-2463-2">Pro HTML5 with CSS, JavaScript, and Multimedia.pdf</a></p>
-<p><a href="/downloads/Web%20Technology.pdf">web technology.pdf</a></p>
-<p><a href="http://worrydream.com/#!/LearnableProgramming">http://worrydream.com/#!/LearnableProgramming</a>&nbsp;</p>
-<!-- 啟動 brython() 暫時不用
-<p>
-<script>
-window.onload=function(){
-brython(1);
-}
-</script>
---><!-- 以下利用 Brython 程式執行繪圖 暫時不用
-<p><canvas id="taiwan_flag" width="300" height="200"></canvas></p>
-<p>
-<script type="text/python3">
-# 導入 doc
-from browser import document as doc
-import math
-
-# 準備繪圖畫布
-canvas = doc["taiwan_flag"]
-ctx = canvas.getContext("2d")
-# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
-# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
-# 以下採用 canvas 原始座標繪圖
-flag_w = canvas.width
-flag_h = canvas.height
-circle_x = flag_w/4
-circle_y = flag_h/4
-# 先畫滿地紅
-ctx.fillStyle='rgb(255, 0, 0)'
-ctx.fillRect(0,0,flag_w,flag_h)
-# 再畫青天
-ctx.fillStyle='rgb(0, 0, 150)'
-ctx.fillRect(0,0,flag_w/2,flag_h/2)
-# 畫十二道光芒白日
-ctx.beginPath()
-star_radius = flag_w/8
-angle = 0
-for i in range(24):
-    angle += 5*math.pi*2/12
-    toX = circle_x + math.cos(angle)*star_radius
-    toY = circle_y + math.sin(angle)*star_radius
-    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
-    if (i):
-        ctx.lineTo(toX, toY)
-    else:
-        ctx.moveTo(toX, toY)
-ctx.closePath()
-# 將填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-# 白日:藍圈
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為藍色
-ctx.fillStyle = 'rgb(0, 0, 149)'
-ctx.fill()
-# 白日:白心
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-</script>
--->
-<p><img src="/images/taiwan_flag.png" width="500" height="333" alt=""></p>
-<p>上圖原始碼:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;
-&lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
-&lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
-&lt;!-- 啟動 brython() --&gt;
-&lt;p&gt;
-&lt;script&gt;
-window.onload=function(){
-brython(1);
-}
-&lt;/script&gt;
-&lt;/p&gt;
-&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;
-&lt;p&gt;&lt;canvas id="taiwan_flag" width="300" height="200"&gt;&lt;/canvas&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;script type="text/python3"&gt;
-# 導入 doc
-from browser import document as doc
-import math
-
-# 準備繪圖畫布
-canvas = doc["taiwan_flag"]
-ctx = canvas.getContext("2d")
-# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
-# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
-# 以下採用 canvas 原始座標繪圖
-flag_w = canvas.width
-flag_h = canvas.height
-circle_x = flag_w/4
-circle_y = flag_h/4
-# 先畫滿地紅
-ctx.fillStyle='rgb(255, 0, 0)'
-ctx.fillRect(0,0,flag_w,flag_h)
-# 再畫青天
-ctx.fillStyle='rgb(0, 0, 150)'
-ctx.fillRect(0,0,flag_w/2,flag_h/2)
-# 畫十二道光芒白日
-ctx.beginPath()
-star_radius = flag_w/8
-angle = 0
-for i in range(24):
-    angle += 5*math.pi*2/12
-    toX = circle_x + math.cos(angle)*star_radius
-    toY = circle_y + math.sin(angle)*star_radius
-    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
-    if (i):
-        ctx.lineTo(toX, toY)
-    else:
-        ctx.moveTo(toX, toY)
-ctx.closePath()
-# 將填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-# 白日:藍圈
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為藍色
-ctx.fillStyle = 'rgb(0, 0, 149)'
-ctx.fill()
-# 白日:白心
-ctx.beginPath()
-ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
-ctx.closePath()
-# 填色設為白色
-ctx.fillStyle = '#fff'
-ctx.fill()
-&lt;/script&gt;
-&lt;/p&gt;</pre>
-<p></p>
-<h2>GUI 繪圖</h2>
+<h2>網際繪圖</h2><p>網頁中有三種基本元素 HTML5, CSS 與 Javascript, 透過 <a href="https://brython.info/">Brython</a> 或 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以使用 Python 及 Lua 替代 Javascript.</p><p>參考資料:&nbsp;</p><p><a href="https://link.springer.com/book/10.1007/978-1-4842-2463-2">Pro HTML5 with CSS, JavaScript, and Multimedia.pdf</a></p><p><a href="/downloads/Web%20Technology.pdf">web technology.pdf</a></p><p><a href="http://worrydream.com/#!/LearnableProgramming">http://worrydream.com/#!/LearnableProgramming</a>&nbsp;</p><!-- 啟動 brython() 暫時不用<p><script>window.onload=function(){brython(1);}</script>--><!-- 以下利用 Brython 程式執行繪圖 暫時不用<p><canvas id="taiwan_flag" width="300" height="200"></canvas></p><p><script type="text/python3"># 導入 docfrom browser import document as docimport math# 準備繪圖畫布canvas = doc["taiwan_flag"]ctx = canvas.getContext("2d")# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)# 以下採用 canvas 原始座標繪圖flag_w = canvas.widthflag_h = canvas.heightcircle_x = flag_w/4circle_y = flag_h/4# 先畫滿地紅ctx.fillStyle='rgb(255, 0, 0)'ctx.fillRect(0,0,flag_w,flag_h)# 再畫青天ctx.fillStyle='rgb(0, 0, 150)'ctx.fillRect(0,0,flag_w/2,flag_h/2)# 畫十二道光芒白日ctx.beginPath()star_radius = flag_w/8angle = 0for i in range(24):    angle += 5*math.pi*2/12    toX = circle_x + math.cos(angle)*star_radius    toY = circle_y + math.sin(angle)*star_radius    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo    if (i):        ctx.lineTo(toX, toY)    else:        ctx.moveTo(toX, toY)ctx.closePath()# 將填色設為白色ctx.fillStyle = '#fff'ctx.fill()# 白日:藍圈ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)ctx.closePath()# 填色設為藍色ctx.fillStyle = 'rgb(0, 0, 149)'ctx.fill()# 白日:白心ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)ctx.closePath()# 填色設為白色ctx.fillStyle = '#fff'ctx.fill()</script>--><p><img src="/images/taiwan_flag.png" width="500" height="333" alt=""></p><p>上圖原始碼:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;&lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;&lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;&lt;!-- 啟動 brython() --&gt;&lt;p&gt;&lt;script&gt;window.onload=function(){brython(1);}&lt;/script&gt;&lt;/p&gt;&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;&lt;p&gt;&lt;canvas id="taiwan_flag" width="300" height="200"&gt;&lt;/canvas&gt;&lt;/p&gt;&lt;p&gt;&lt;script type="text/python3"&gt;# 導入 docfrom browser import document as docimport math# 準備繪圖畫布canvas = doc["taiwan_flag"]ctx = canvas.getContext("2d")# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)# 以下採用 canvas 原始座標繪圖flag_w = canvas.widthflag_h = canvas.heightcircle_x = flag_w/4circle_y = flag_h/4# 先畫滿地紅ctx.fillStyle='rgb(255, 0, 0)'ctx.fillRect(0,0,flag_w,flag_h)# 再畫青天ctx.fillStyle='rgb(0, 0, 150)'ctx.fillRect(0,0,flag_w/2,flag_h/2)# 畫十二道光芒白日ctx.beginPath()star_radius = flag_w/8angle = 0for i in range(24):    angle += 5*math.pi*2/12    toX = circle_x + math.cos(angle)*star_radius    toY = circle_y + math.sin(angle)*star_radius    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo    if (i):        ctx.lineTo(toX, toY)    else:        ctx.moveTo(toX, toY)ctx.closePath()# 將填色設為白色ctx.fillStyle = '#fff'ctx.fill()# 白日:藍圈ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)ctx.closePath()# 填色設為藍色ctx.fillStyle = 'rgb(0, 0, 149)'ctx.fill()# 白日:白心ctx.beginPath()ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)ctx.closePath()# 填色設為白色ctx.fillStyle = '#fff'ctx.fill()&lt;/script&gt;&lt;/p&gt;</pre><p></p><h2>GUI 繪圖</h2>
 <p>PyQt5 與 matplotlib:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
 #-*- coding:utf-8 -*-
@@ -3722,7 +3611,7 @@ from PyQt5 import QtWidgets
 
 class MatplotlibWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
-        super(MatplotlibWidget, self).__init__(parent)
+        super().__init__()
 
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
@@ -3745,7 +3634,7 @@ class ThreadSample(QtCore.QThread):
 
 class MyWindow(QtWidgets.QWidget):
     def __init__(self, parent=None):
-        super(MyWindow, self).__init__(parent)
+        super().__init__()
 
         self.pushButtonPlot = QtWidgets.QPushButton(self)
         self.pushButtonPlot.setText("Plot")
@@ -3788,19 +3677,8 @@ if __name__ == "__main__":
     main.resize(666, 333)
     main.show()
 
-    sys.exit(app.exec_())</pre>
-<h3>QPainter</h3>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-In this example, we draw text in Russian Cylliric.
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-import sys
+    sys.exit(app.exec())</pre><h3>QPainter</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QColor, QFont
 from PyQt5.QtCore import Qt
@@ -3815,7 +3693,7 @@ class Example(QWidget):
         
     def initUI(self):      
         
-        self.text = "Лев Николаевич Толстой\nАнна Каренина"
+        self.text = "Author"
 
         self.setGeometry(300, 300, 280, 170)
         self.setWindowTitle('Drawing text')
@@ -3843,18 +3721,7 @@ if __name__ == '__main__':
     ex = Example()
     sys.exit(app.exec())</pre>
 <p>Draw points:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-In the example, we draw randomly 1000 red points 
-on the window.
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-from PyQt5.QtWidgets import QWidget, QApplication
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import Qt
 import sys, random
@@ -3897,20 +3764,9 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     ex = Example()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>Colors:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-This example draws three rectangles in three
-#different colours. 
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-from PyQt5.QtWidgets import QWidget, QApplication
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QColor, QBrush
 import sys
 
@@ -3957,20 +3813,9 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     ex = Example()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>QPen:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-In this example we draw 6 lines using
-different pen styles. 
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-from PyQt5.QtWidgets import QWidget, QApplication
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QPen
 from PyQt5.QtCore import Qt
 import sys
@@ -4031,20 +3876,9 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     ex = Example()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>Brush:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-This example draws nine rectangles in different
-brush styles.
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-from PyQt5.QtWidgets import QWidget, QApplication
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QBrush
 from PyQt5.QtCore import Qt
 import sys
@@ -4115,20 +3949,9 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     ex = Example()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>Bezier curve:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
-ZetCode PyQt5 tutorial 
-
-This program draws a B&eacute;zier curve with 
-QPainterPath.
-
-Author: Jan Bodnar
-Website: zetcode.com 
-Last edited: August 2017
-"""
-
-from PyQt5.QtWidgets import QWidget, QApplication
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QPainterPath
 from PyQt5.QtCore import Qt
 import sys
@@ -4170,7 +3993,7 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     ex = Example()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>QPainter:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
@@ -4183,7 +4006,7 @@ class App(QMainWindow):
  
     def __init__(self):
         super().__init__()
-        self.title = 'PyQt paint - pythonspot.com'
+        self.title = 'PyQt paint example'
         self.left = 10
         self.top = 10
         self.width = 440
@@ -4224,7 +4047,7 @@ class PaintWidget(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
-    sys.exit(app.exec_())</pre>
+    sys.exit(app.exec())</pre>
 <p>Screen Shot:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""Screenshot and that kind of stuff."""
 import io
@@ -4270,8 +4093,7 @@ class Screenshot(QWebEngineView):
         self._loaded = True</pre>
 <p>Reference:</p>
 <p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p>
-<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p>
-<h3>STetris</h3>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>STetris</h3>
 <p>StApp.py</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
 from StTetris import StTetris
@@ -4914,8 +4736,7 @@ class StBlock:
     def setRotation(self, rotation):
         self.rotation = self.rotation % len(self.block)</pre>
 <p>Reference:</p>
-<p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p>
-<h3>Tetrix</h3>
+<p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p><h3>Tetrix</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import copy
 import random
 
@@ -4930,7 +4751,7 @@ NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, MirroredLShape 
 
 class TetrixWindow(QWidget):
     def __init__(self):
-        super(TetrixWindow, self).__init__()
+        super().__init__()
 
         self.board = TetrixBoard()
 
@@ -4995,7 +4816,7 @@ class TetrixBoard(QFrame):
     linesRemovedChanged = pyqtSignal(int)
 
     def __init__(self, parent=None):
-        super(TetrixBoard, self).__init__(parent)
+        super().__init__()
 
         self.timer = QBasicTimer()
         self.nextPieceLabel = None
@@ -5375,9 +5196,8 @@ if __name__ == '__main__':
     window = TetrixWindow()
     window.show()
     random.seed(None)
-    sys.exit(app.exec_())</pre>
-<p></p>
-<h2>V-rep</h2>
+    sys.exit(app.exec())</pre>
+<p></p><h2>V-rep</h2>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html</a>&nbsp;</p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/JPtW66z0-VQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <h2>人臉辨識</h2>
