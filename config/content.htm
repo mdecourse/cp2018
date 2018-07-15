@@ -1390,7 +1390,55 @@ int compare_long(const void *m, const void *n)
 <p>"Algorithms in C" Robert Sedgewick Addison-Wesley ISBN 0-201-51425-7</p><h3>ch11結語</h3>
 <p>I have written the preceding material to provide an introduction to pointers for newcomers to C. In C, the more one understands about pointers the greater flexibility one has in the writing of code. The above expands on my first effort at this which was entitled ptr_help.txt and found in an early version of Bob Stout's collection of C code SNIPPETS. The content in this version has been updated from that in PTRTUTOT.ZIP included in SNIP9510.ZIP.</p>
 <p>I am always ready to accept constructive criticism on this material, or review requests for the addition of other relevant material. Therefore, if you have questions, comments, criticisms, etc. concerning that which has been presented, I would greatly appreciate your contacting me via email me at tjensen@ix.netcom.com.</p><h2>Python</h2>
-<h3>what is new</h3><p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.6.html">https://docs.python.org/3/whatsnew/3.6.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.7.html">https://docs.python.org/3/whatsnew/3.7.html</a>&nbsp;</p><h3>style guide</h3><p>Python docstring conventions:</p><p><a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a>&nbsp;</p><p>One line docstring:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def kos_root():    """Return the pathname of the KOS root directory."""    global _kos_root    if _kos_root: return _kos_root    ...</pre><p>Multiline docstring:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def complex(real=0.0, imag=0.0):    """Form a complex number.    Keyword arguments:    real -- the real part (default 0.0)    imag -- the imaginary part (default 0.0)    """    if imag == 0.0 and real == 0.0:        return complex_zero    ...</pre><p>Aligned with opening delimiter.</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">foo = long_function_name(var_one, var_two,                         var_three, var_four)</pre><p>List:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">my_list = [    1, 2, 3,    4, 5, 6,    ]</pre><pre class="literal-block"></pre><p>Easy to match operators with operands:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">income = (gross_wages          + taxable_interest          + (dividends - qualified_dividends)          - ira_deduction          - student_loan_interest)</pre><p><br>Surround top-level function and class definitions with two blank lines.</p><p>Method definitions inside a class are surrounded by a single blank line.</p><p>Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).</p><p>Use blank lines in functions, sparingly, to indicate logical sections.</p><p>Python style guide:</p><p><a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>&nbsp;</p><p>Type hins:</p><p><a href="https://www.python.org/dev/peps/pep-0484/">https://www.python.org/dev/peps/pep-0484/</a>&nbsp;</p><h3>typing</h3>
+<h3>what is new</h3>
+<p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p>
+<p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
+<p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p>
+<p><a href="https://docs.python.org/3/whatsnew/3.6.html">https://docs.python.org/3/whatsnew/3.6.html</a>&nbsp;</p>
+<p><a href="https://docs.python.org/3/whatsnew/3.7.html">https://docs.python.org/3/whatsnew/3.7.html</a>&nbsp;</p>
+<h3>style guide</h3>
+<p>Python docstring conventions:</p>
+<p><a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a>&nbsp;</p>
+<p>One line docstring:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def kos_root():
+    """Return the pathname of the KOS root directory."""
+    global _kos_root
+    if _kos_root: return _kos_root
+    ...</pre>
+<p>Multiline docstring:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def complex(real=0.0, imag=0.0):
+    """Form a complex number.
+
+    Keyword arguments:
+    real -- the real part (default 0.0)
+    imag -- the imaginary part (default 0.0)
+    """
+    if imag == 0.0 and real == 0.0:
+        return complex_zero
+    ...</pre>
+<p>Aligned with opening delimiter.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">foo = long_function_name(var_one, var_two,
+                         var_three, var_four)</pre>
+<p>List:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]</pre>
+<pre class="literal-block"></pre>
+<p>Easy to match operators with operands:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">income = (gross_wages
+          + taxable_interest
+          + (dividends - qualified_dividends)
+          - ira_deduction
+          - student_loan_interest)</pre>
+<p><br>Surround top-level function and class definitions with two blank lines.</p>
+<p>Method definitions inside a class are surrounded by a single blank line.</p>
+<p>Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).</p>
+<p>Use blank lines in functions, sparingly, to indicate logical sections.</p>
+<p>Python style guide:</p>
+<p><a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>&nbsp;</p>
+<p>Type hins:</p>
+<p><a href="https://www.python.org/dev/peps/pep-0484/">https://www.python.org/dev/peps/pep-0484/</a>&nbsp;</p><h3>typing</h3>
 <p>Python 3.5 之後才支援 typing 模組:</p>
 <p><a href="https://docs.python.org/3.6/library/typing.html">https://docs.python.org/3.6/library/typing.html</a>&nbsp;</p>
 <h3>dunder</h3>
@@ -1862,9 +1910,9 @@ print(result)</pre>
 <p>有關 Tiny C Compiler 資料位於&nbsp;<a href="https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc">https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc</a>&nbsp;</p>
 <p></p>
 <h2>Qt</h2>
+<p><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a> 是一個跨平台的 C++ 程式開發框架.&nbsp;</p>
 <p><a href="http://doc.qt.io/qt-5/androidgs.html">Qt for Android</a></p>
 <p>目前只能使用 Jdk 8:&nbsp;<a href="https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed">https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed</a>&nbsp;</p>
-<p>已經將 Qt 可攜程式開發環境上傳到 mde1a1 與 wcmg3</p>
 <p>參考資料:</p>
 <p><a href="http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/">http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/</a>&nbsp;</p>
 <p><a href="https://wiki.qt.io/MSYS2">https://wiki.qt.io/MSYS2</a>&nbsp;</p>
@@ -1892,7 +1940,8 @@ print(result)</pre>
 <h2>hello.c 與 Fossil</h2>
 <p><a href="https://www.fossil-scm.org">Fossil SCM</a> 學習</p>
 <p>有了 git 與 Github, 為何還需要 <a href="https://www.fossil-scm.org">Fossil SCM</a>?</p>
-<p>有了高鐵與台鐵, 為何還需要買車?</p>
+<p>在此將 Github 視為雲端網站式的分散式版次管理應用, 雖然近端也存有對應版本, 且允許無人數限制的免費協同運作, 但是對於 Github 所提供的各項服務依賴性極高,&nbsp;</p>
+<p>若採用 Fossil SCM, 因為檔案小, 使用者的掌握度高, 可以在單機, 區域網路或自架的廣域網路上運行, 適合百人以內的小團隊使用.</p>
 <p>建立倉儲</p>
 <p style="padding-left: 30px;">fossil init hello.fossil</p>
 <p style="padding-left: 30px;">fossil ui hello.fossil 啟動倉儲的近端網際介面</p>
@@ -1927,11 +1976,31 @@ print(result)</pre>
 <p>新增 index.html 後, 以 fossil add, commit 改版後, 再以 fossil ui hello.fossil 啟動網際介面後, 以 localhost:8080/doc/trunk/index.html 擷取 index.html 內容.</p>
 <p>Fossil SCM 基本設定</p>
 <p>Fossil SCM Wiki Timeline 與 upload 檔案</p><h2>CMSimfly 操作</h2>
-<h2>Pelican 操作</h2>
+<p><span>取得&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 檔案後, 解開後容量約 21 GB. 放入 USB 隨身碟, 以 start.bat (必須配合修改 CMSimfly 所在位置)啟動系統.</span></p>
+<p>以瀏覽器開啟 https://localhost:8443&nbsp;後, 以管理者密碼登入 CMSimfly.</p>
+<p>由於 CMSimfly 頁面依照 h1, h2, h3 標註循序存入 content.htm, 使用者必須按照由上到下的順序建立所需頁面.</p>
+<p>完成各階段改版後, 必須點擊 generate_pages 進行轉檔, 將 content.htm 內容分頁存靜態網站於 content 目錄中.</p>
+<p>CMSimfly 靜態網頁模式將從根目錄的 index.html 跳轉頁面至 content 目錄中的 index.html, 顯示網際內容管理中的資料, 並由 blog 目錄導引網誌內容, reveal 目錄則導引網際投影片內容.</p><h2>Pelican 操作</h2>
 <p>位於 markdown 目錄為 Pelican 網誌的原始檔案, 轉檔後將網誌存入 blog 目錄, 並需要 theme 與 plugin 目錄, 以及&nbsp;&nbsp;local_publishconf.py,&nbsp;pelicanconf.py 與&nbsp;publishconf.py 等設定檔案.</p>
 <p>pelican.leo 位於 config/pelican.leo 目錄, 用於 Pelican 靜態網誌 markdown 目錄中輸入 .md&nbsp; 檔案與 Pelican 設定檔案的編輯管理與轉檔.</p><h2>Reveal.js 操作</h2>
-<p>位於 reveal 目錄中為 <a href="https://revealjs.com">reveal.js</a> 網際投影片系統</p>
-<h2>Qt C++ 計算器程式</h2>
+<p>位於 reveal 目錄中為 <a href="https://revealjs.com">reveal.js</a> 網際投影片系統, 改版時利用 cmsimfly.leo 中的 "編輯 reveal" 節點進行.</p>
+<p>啟動 Leo Editor, 以 SciTE 編輯器開啟 y:\launchLeo.py 後, 用 Tools -&gt; Go 執行, 接著以 File -&gt; Open-Outline 開啟 cmsimfly.leo</p>
+<p>投影片內容:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;</pre>
+<p>而 @others&nbsp; 內容:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># 投影片快捷鍵
+
+* 利用箭頭上下前後換頁
+* 按 f 鍵進入全螢幕模式 (full screen)
+* 按 s 鍵可以顯示投影片筆記 (show)
+* 按 o 鍵可以切換單張或全域檢視 (overview)
+* 按 b 或 . 鍵可以切換螢幕黑屏 (black)
+* 按 Esc 可以退出全螢幕或全域檢視 (Escape)</pre>
+<p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p><h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
 <p>calculator.pro</p>
@@ -3650,9 +3719,1034 @@ ctx.fillStyle = '#fff'
 ctx.fill()
 &lt;/script&gt;
 &lt;/p&gt;</pre>
+<p></p><h2>GUI 繪圖</h2>
+<p>PyQt5 與 matplotlib:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+import random
+
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
+
+from PyQt5 import QtCore #conda install pyqt
+from PyQt5 import QtWidgets
+
+class MatplotlibWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(MatplotlibWidget, self).__init__(parent)
+
+        self.figure = Figure()
+        self.canvas = FigureCanvasQTAgg(self.figure)
+
+        self.axis = self.figure.add_subplot(111)
+
+        self.layoutVertical = QtWidgets.QVBoxLayout(self)#QVBoxLayout
+        self.layoutVertical.addWidget(self.canvas)
+
+class ThreadSample(QtCore.QThread):
+    newSample = QtCore.pyqtSignal(list)
+
+    def __init__(self, parent=None):
+        super(ThreadSample, self).__init__(parent)
+
+    def run(self):
+        randomSample = random.sample(range(0, 10), 10)
+
+        self.newSample.emit(randomSample)
+
+class MyWindow(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(MyWindow, self).__init__(parent)
+
+        self.pushButtonPlot = QtWidgets.QPushButton(self)
+        self.pushButtonPlot.setText("Plot")
+        self.pushButtonPlot.clicked.connect(self.on_pushButtonPlot_clicked)
+
+        self.matplotlibWidget = MatplotlibWidget(self)
+
+        self.layoutVertical = QtWidgets.QVBoxLayout(self)
+        self.layoutVertical.addWidget(self.pushButtonPlot)
+        self.layoutVertical.addWidget(self.matplotlibWidget)
+
+        self.threadSample = ThreadSample(self)
+        self.threadSample.newSample.connect(self.on_threadSample_newSample)
+        self.threadSample.finished.connect(self.on_threadSample_finished)
+
+    @QtCore.pyqtSlot()
+    def on_pushButtonPlot_clicked(self):
+        self.samples = 0
+        self.matplotlibWidget.axis.clear()
+        self.threadSample.start()
+
+    @QtCore.pyqtSlot(list)
+    def on_threadSample_newSample(self, sample):
+        self.matplotlibWidget.axis.plot(sample)
+        self.matplotlibWidget.canvas.draw()
+
+    @QtCore.pyqtSlot()
+    def on_threadSample_finished(self):
+        self.samples += 1
+        if self.samples &lt;= 2:
+            self.threadSample.start()
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    app.setApplicationName('MyWindow')
+
+    main = MyWindow()
+    main.resize(666, 333)
+    main.show()
+
+    sys.exit(app.exec_())</pre>
+<h3>QPainter</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+In this example, we draw text in Russian Cylliric.
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+import sys
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QColor, QFont
+from PyQt5.QtCore import Qt
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+        
+        self.text = "Лев Николаевич Толстой\nАнна Каренина"
+
+        self.setGeometry(300, 300, 280, 170)
+        self.setWindowTitle('Drawing text')
+        self.show()
+        
+
+    def paintEvent(self, event):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawText(event, qp)
+        qp.end()
+        
+        
+    def drawText(self, event, qp):
+      
+        qp.setPen(QColor(168, 34, 3))
+        qp.setFont(QFont('Decorative', 10))
+        qp.drawText(event.rect(), Qt.AlignCenter, self.text)        
+                
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>Draw points:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+In the example, we draw randomly 1000 red points 
+on the window.
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter
+from PyQt5.QtCore import Qt
+import sys, random
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 300, 190)
+        self.setWindowTitle('Points')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawPoints(qp)
+        qp.end()
+        
+        
+    def drawPoints(self, qp):
+      
+        qp.setPen(Qt.red)
+        size = self.size()
+        
+        for i in range(1000):
+            x = random.randint(1, size.width()-1)
+            y = random.randint(1, size.height()-1)
+            qp.drawPoint(x, y)     
+                
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())</pre>
+<p>Colors:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+This example draws three rectangles in three
+#different colours. 
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QColor, QBrush
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 350, 100)
+        self.setWindowTitle('Colours')
+        self.show()
+
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawRectangles(qp)
+        qp.end()
+
+        
+    def drawRectangles(self, qp):
+      
+        col = QColor(0, 0, 0)
+        col.setNamedColor('#d4d4d4')
+        qp.setPen(col)
+
+        qp.setBrush(QColor(200, 0, 0))
+        qp.drawRect(10, 15, 90, 60)
+
+        qp.setBrush(QColor(255, 80, 0, 160))
+        qp.drawRect(130, 15, 90, 60)
+
+        qp.setBrush(QColor(25, 0, 90, 200))
+        qp.drawRect(250, 15, 90, 60)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())</pre>
+<p>QPen:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+In this example we draw 6 lines using
+different pen styles. 
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 280, 270)
+        self.setWindowTitle('Pen styles')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawLines(qp)
+        qp.end()
+        
+        
+    def drawLines(self, qp):
+      
+        pen = QPen(Qt.black, 2, Qt.SolidLine)
+
+        qp.setPen(pen)
+        qp.drawLine(20, 40, 250, 40)
+
+        pen.setStyle(Qt.DashLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 80, 250, 80)
+
+        pen.setStyle(Qt.DashDotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 120, 250, 120)
+
+        pen.setStyle(Qt.DotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 160, 250, 160)
+
+        pen.setStyle(Qt.DashDotDotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 200, 250, 200)
+
+        pen.setStyle(Qt.CustomDashLine)
+        pen.setDashPattern([1, 4, 5, 4])
+        qp.setPen(pen)
+        qp.drawLine(20, 240, 250, 240)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())</pre>
+<p>Brush:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+This example draws nine rectangles in different
+brush styles.
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QBrush
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 355, 280)
+        self.setWindowTitle('Brushes')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawBrushes(qp)
+        qp.end()
+        
+        
+    def drawBrushes(self, qp):
+      
+        brush = QBrush(Qt.SolidPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 15, 90, 60)
+
+        brush.setStyle(Qt.Dense1Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 15, 90, 60)
+
+        brush.setStyle(Qt.Dense2Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 15, 90, 60)
+
+        brush.setStyle(Qt.DiagCrossPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 105, 90, 60)
+
+        brush.setStyle(Qt.Dense5Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 105, 90, 60)
+
+        brush.setStyle(Qt.Dense6Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 105, 90, 60)
+
+        brush.setStyle(Qt.HorPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 195, 90, 60)
+
+        brush.setStyle(Qt.VerPattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 195, 90, 60)
+
+        brush.setStyle(Qt.BDiagPattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 195, 90, 60)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())</pre>
+<p>Bezier curve:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""
+ZetCode PyQt5 tutorial 
+
+This program draws a B&eacute;zier curve with 
+QPainterPath.
+
+Author: Jan Bodnar
+Website: zetcode.com 
+Last edited: August 2017
+"""
+
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QPainterPath
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 380, 250)
+        self.setWindowTitle('B&eacute;zier curve')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        qp.setRenderHint(QPainter.Antialiasing)
+        self.drawBezierCurve(qp)
+        qp.end()
+        
+        
+    def drawBezierCurve(self, qp):
+      
+        path = QPainterPath()
+        path.moveTo(30, 30)
+        path.cubicTo(30, 30, 200, 350, 350, 30)
+        
+        qp.drawPath(path)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())</pre>
+<p>QPainter:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
+from PyQt5.QtGui import QPainter, QColor, QPen
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
+import random
+ 
+class App(QMainWindow):
+ 
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt paint - pythonspot.com'
+        self.left = 10
+        self.top = 10
+        self.width = 440
+        self.height = 280
+        self.initUI()
+ 
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+ 
+        # Set window background color
+        self.setAutoFillBackground(True)
+        p = self.palette()
+        p.setColor(self.backgroundRole(), Qt.white)
+        self.setPalette(p)
+ 
+        # Add paint widget and paint
+        self.m = PaintWidget(self)
+        self.m.move(0,0)
+        self.m.resize(self.width,self.height)
+ 
+        self.show()
+ 
+ 
+class PaintWidget(QWidget):
+   def paintEvent(self, event):
+      qp = QPainter(self)
+ 
+      qp.setPen(Qt.black)
+      size = self.size()
+ 
+      for i in range(1024):
+          x = random.randint(1, size.width()-1)
+          y = random.randint(1, size.height()-1)
+          qp.drawPoint(x, y)
+ 
+ 
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = App()
+    sys.exit(app.exec_())</pre>
+<p>Screen Shot:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""Screenshot and that kind of stuff."""
+import io
+from PyQt5.QtCore import QUrl, QIODevice, QBuffer, QByteArray
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QImage, QPainter
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+
+class Screenshot(QWebEngineView):
+    def __init__(self):
+        self.app = QApplication([])
+        QWebEngineView.__init__(self)
+        self._loaded = False
+        self.loadFinished.connect(self._load_finished)
+        print('--finish init')
+
+    def capture(self, url):
+        print('--load')
+        self.load(QUrl(url))
+        self.wait_load()
+        self.show()
+        size = self.page().contentsSize()
+        self.page().view().resize(*[int(s) for s in [size.width(), size.height()]])
+        print('--take image')
+        image = QImage(800, 800, QImage.Format_ARGB32)
+        painter = QPainter(image)
+        print('--render')
+        self.page().view().render(painter)
+        painter.end()
+        print('Saving QImage')
+        img_bytes = QByteArray()
+        bio = QBuffer(img_bytes)
+        bio.open(QIODevice.WriteOnly)
+        image.save(bio, 'PNG')
+        return img_bytes
+
+    def wait_load(self):
+        while not self._loaded:
+            self.app.processEvents()
+        self._loaded = False
+
+    def _load_finished(self, result):
+        self._loaded = True</pre>
+<p>Reference:</p>
+<p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>STetris</h3><p>StApp.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom StTetris import StTetrisfrom PyQt5.QtWidgets import QApplicationif __name__ == '__main__':    app = QApplication(sys.argv)    stetris = StTetris()    stetris.start()    sys.exit(app.exec())</pre><p>StTetris.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StPlay import StPlayfrom StScore import StScorefrom PyQt5.QtCore import QBasicTimer, QRect, Qtfrom PyQt5.QtGui import QBrush, QColor, QFont, QPainterfrom PyQt5.QtWidgets import QWidgetclass StTetris(QWidget):    ST_WINDOW_WIDTH = 800    ST_WINDOW_HEIGHT = 600    ST_BLOCK_WIDTH = 30    ST_BLOCK_HEIGHT = 30    ST_BOARD_POS_X = 200    ST_BOARD_POS_Y = 0    ST_NEXT_BLOCK_POS_X = 650    ST_NEXT_BLOCK_POS_Y = 150    ST_SCORE_POS_X = 550    ST_SCORE_POS_Y = 30    ST_HIGHSCORE_POS_X = 650    ST_HIGHSCORE_POS_Y = 30    ST_BLOCK_COLOR = ["#000000", "#C71585", "#FFA500", "#FFD700", "#228B22", "#1E90FF", "#483D8B", "#9932CC"]    ST_BACKGROUND_COLOR = "#FFFFFF"    ST_DOWN_INTERVAL = 500    # Constructor    def __init__(self):        super().__init__()        # Show widget        super().resize(self.ST_WINDOW_WIDTH, self.ST_WINDOW_HEIGHT)        super().setWindowTitle("STetris")        super().show()        # Painter        self.painter = QPainter()        # Play        self.play = StPlay(self)        # Score        self.score = StScore()        # High Score        self.highScore = StScore()        # Load high score        # highScore = sessionStorage.getItem("highscore")        # if (highScore):        #   Set high score        #   self.highScore.setScore(highScore)        # Play interval        self.playInterval = 500        # Play timer        self.playTimer = QBasicTimer()    # Start    def start(self):        # Set interval        self.playTimer.start(self.ST_DOWN_INTERVAL, self)    # Stop    def stop(self):        self.playTimer.stop()    def timerEvent(self, e):        self.play.moveDown()    def keyPressEvent(self, e):        key = e.key()        if key == Qt.Key_Left:            self.play.moveLeft()        elif key == Qt.Key_Right:            self.play.moveRight()        elif key == Qt.Key_Down:            self.play.moveDown()        elif key == Qt.Key_Up:            self.play.rotate()        elif key == Qt.Key_Space:            self.play.drop()    # Notify    def notify(self, message, param=None):        if (message == StPlay.ST_NOTIFY_DOWN):            self.score.setScore(self.score.getScore() + 100)        elif (message == StPlay.ST_NOTIFY_DROP):            self.score.setScore(self.score.getScore() + 100)        elif (message == StPlay.ST_NOTIFY_CLEAR):            self.score.setScore(self.score.getScore()                                + param.cleared_lines * 1000)        elif (message == StPlay.ST_NOTIFY_TETRISOVER):            self.stop()        # Update high score        #if self.highScore.getScore() &lt; self.score.getScore():        #    self.highScore.setScore(self.score.getScore())        #    sessionStorage.setItem("highscore", self.highScore.getScore())        self.update()    def paintEvent(self, e):        self.painter.begin(self)        self.drawTetris(self.painter)        self.painter.end()    # Draw tetris    def drawTetris(self, painter):        # Draw background        rect = {            "x" : 0,            "y" : 0,            "width" : self.ST_WINDOW_WIDTH,            "height" : self.ST_WINDOW_HEIGHT        }        self.drawBackground(painter, rect)        # Draw board        boardRect = {            "x" : self.ST_BOARD_POS_X,            "y" : self.ST_BOARD_POS_Y,            "width" : self.ST_BLOCK_WIDTH * self.play.getBoard().getXSize(),            "height" : self.ST_BLOCK_HEIGHT * self.play.getBoard().getYSize()        }        self.drawBoard(painter, boardRect, self.play.getBoard())        # Draw current block        self.drawBlock(painter, boardRect, self.play.getCurrentBlock())        # Draw next block        nextBlockRect = {            "x" : self.ST_NEXT_BLOCK_POS_X,            "y" : self.ST_NEXT_BLOCK_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 4,            "height" : self.ST_BLOCK_HEIGHT * 4,        }        self.drawBlock(painter, nextBlockRect, self.play.getNextBlock())        # Draw score        scoreRect = {            "x" : self.ST_SCORE_POS_X,            "y" : self.ST_SCORE_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 7,            "height" : self.ST_BLOCK_HEIGHT * 2        }        self.drawScore(painter, scoreRect, "SCORE", self.score)        # Draw high score        highScoreRect = {            "x" : self.ST_HIGHSCORE_POS_X,            "y" : self.ST_HIGHSCORE_POS_Y,            "width" : self.ST_BLOCK_WIDTH * 7,            "height" : self.ST_BLOCK_HEIGHT * 2        }        self.drawScore(painter, highScoreRect, "HIGH SCORE", self.highScore)    # Draw background    def drawBackground(self, painter, rect):        painter.fillRect(QRect(rect["x"], rect["y"], rect["width"], rect["height"]), QColor(self.ST_BACKGROUND_COLOR))    # Draw board    def drawBoard(self, painter, rect, board):        # Draw board        for boardY in range(board.getYSize()):            for boardX in range(board.getXSize()):                rectBlock = {                    "x" : rect["x"] + boardX * StTetris.ST_BLOCK_WIDTH,                    "y" : rect["y"] + boardY * StTetris.ST_BLOCK_HEIGHT,                    "width" : StTetris.ST_BLOCK_WIDTH,                    "height" : StTetris.ST_BLOCK_HEIGHT                }                fillColor = StTetris.ST_BLOCK_COLOR[self.play.getBoard().getBlock(boardX, boardY)]                painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))    # Draw block    def drawBlock(self, painter, rect, block):        # Draw block        for blockY in range(block.getYSize()):            for blockX in range(block.getXSize()):                if block.getBlock(blockX, blockY):                    rectBlock = {                        "x" : rect["x"] + (block.getXPos() + blockX) * StTetris.ST_BLOCK_WIDTH,                        "y" : rect["y"] + (block.getYPos() + blockY) * StTetris.ST_BLOCK_HEIGHT,                        "width" : StTetris.ST_BLOCK_WIDTH,                        "height" : StTetris.ST_BLOCK_HEIGHT                    }                    fillColor = StTetris.ST_BLOCK_COLOR[block.getBlock(blockX, blockY)]                    painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))    # Draw score    def drawScore(self, painter, rect, title, score):        # Draw title        painter.textAligh = "right"        painter.fillStyle = "red"        painter.drawText(rect["x"], rect["y"], title)        # Draw score        painter.drawText(rect["x"], rect["y"] + rect["height"] // 2, str(score.getScore()))</pre><p>StPlay.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StBoard import StBoardfrom StBlock import StBlockclass StPlay:    ST_NOTIFY_LEFT = "NOTIFY_LEFT"    ST_NOTIFY_RIGHT = "NOTIFY_RIGHT"    ST_NOTIFY_DOWN = "NOTIFY_DOWN"            ST_NOTIFY_DROP = "NOTIFY_DROP"    ST_NOTIFY_ROTATE = "NOTIFY_ROTATE"    ST_NOTIFY_CLEAR = "NOTIFY_CLEAR"    ST_NOTIFY_TETRISOVER = "NOTIFY_TETRISOVER"    # Constructor    def __init__(self, notify):        # Board        self.board = StBoard()        # Current block        self.currentBlock = StBlock()        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)        self.currentBlock.setYPos(0 - self.currentBlock.getYSize())        # Next block        self.nextBlock = StBlock()        # Notify        self.notify = notify    # Get board    def getBoard(self):        return self.board    # Get current block    def getCurrentBlock(self):        return self.currentBlock    # Get next block    def getNextBlock(self):        return self.nextBlock    # Move left    def moveLeft(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() - 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):            # Set current X position to left            self.currentBlock.setXPos(self.currentBlock.getXPos() - 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_LEFT)    # Move right    def moveRight(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() + 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):            # Set current X position to right            self.currentBlock.setXPos(self.currentBlock.getXPos() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_RIGHT)    # Move down    def moveDown(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):            # Set current Y position to down            self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_DOWN)        # Block is not movable        else:            # Set current block to board            self.setCurrentBlockToBoard()            # Change current block            self.changeCurrentBlock()            # Clear completed line            cleared_lines = self.board.clearCompleteLines()            if cleared_lines:                # Notify                self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })            # Tetris is over            if self.isTetrisOver():                # Notify                self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)    # Drop    def drop(self):        while True:            # Block is movable            if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):                # Set current Y position to down                self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)            # Block is not movable            else:                # Notify                self.notify.notify(StPlay.ST_NOTIFY_DROP)                break        # Set current block to board        self.setCurrentBlockToBoard()        # Change current block        self.changeCurrentBlock()        # Clear completed line        cleared_lines = self.board.clearCompleteLines()        if cleared_lines:            # Notify            self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })        # Tetris is over        if self.isTetrisOver():            # Notify            self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)    # Rotate    def rotate(self):        # Is block movable        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos(), self.currentBlock.getRotation() + 1):            # Rotate            self.currentBlock.setRotation(self.currentBlock.getRotation() + 1)            # Notify            self.notify.notify(StPlay.ST_NOTIFY_ROTATE)    # Is movable    def isMovable(self, block, xPos, yPos, rotation):        # Create block to check and set value to check        checkBlock = StBlock(block)        checkBlock.setXPos(xPos)        checkBlock.setYPos(yPos)        checkBlock.setRotation(rotation)        # Get value of board        for blockX in range(checkBlock.getXSize()):            for blockY in range(checkBlock.getYSize()):                # Check if block to check is empty                if checkBlock.getBlock(blockX, blockY) == 0:                    continue                boardX = checkBlock.getXPos() + blockX                boardY = checkBlock.getYPos() + blockY                # Check X position of block to check                if boardX &lt; 0 or boardX &gt;= self.board.getXSize():                    return False                # Check Y position of block to check                if boardY &gt;= self.board.getYSize():                    return False                # Check if block is already exist                if self.board.getBlock(boardX, boardY) != 0:                    return False        return True    # Set current block to board    def setCurrentBlockToBoard(self):        # Set current block to board        for blockX in range(self.currentBlock.getXSize()):            for blockY in range(self.currentBlock.getYSize()):                if self.currentBlock.getBlock(blockX, blockY) != 0:                    self.board.setBlock(self.currentBlock.getXPos() + blockX, self.currentBlock.getYPos() + blockY, self.currentBlock.getType())    # Check if tetris is over    def isTetrisOver(self):        isTetrisOver = False        for boardX in range(self.board.getXSize()):            if self.board.getBlock(boardX, 0) != 0:                isTetrisOver = True                break        return isTetrisOver    # Change current block    def changeCurrentBlock(self):        # Set next block to current block        self.currentBlock = self.nextBlock        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)        self.currentBlock.setYPos(- self.currentBlock.getYSize())        # Set next block        self.nextBlock = StBlock()</pre><p>StScore.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class StScore:    # Constructor    def __init__(self):        # Score        self.score = 0    # Clear    def clear(self):        self.score = 0    # Add score    def addScore(self, score):        self.score += score    # Set score    def setScore(self, score):        self.score = score    # Get score    def getScore(self):        return self.score</pre><p>StBoard.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import numpyclass StBoard:    # Constructor    def __init__(self):        # Board        self.board = numpy.zeros(shape=(self.getYSize(), self.getXSize()), dtype=int)    # Get X size    def getXSize(self):        return 10    # Get Y size    def getYSize(self):        return 20    # Get block    def getBlock(self, x, y):        if x &lt; 0 or x &gt;= self.getXSize():            return 0        if y &lt; 0 or y &gt;= self.getYSize():            return 0        return self.board[y][x]    # Set block    def setBlock(self, x, y, block):        if x &lt; 0 or x &gt;= self.getXSize():            return        if y &lt; 0 or y &gt;= self.getYSize():            return        self.board[y][x] = block    # Clear complete lines    def clearCompleteLines(self):        complete_lines = 0        for boardY in range(self.getYSize()):            block_count = 0            # Count the number of block            for boardX in range(self.getXSize()):                if (self.board[boardY][boardX]):                    block_count += 1            # The line of board is full of block            if block_count is len(self.board[boardY]):                # Delete line of board                self.board.pop(boardY)                # Add line to the beginning of the board                self.board = numpy.zeros(shape=(1, self.getXSize()), dtype=int) + self.board                complete_lines += 1        return complete_lines</pre><p>StBlock.py</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import randomclass StBlock:    blocks = [ [                [                    [ 1, 0, 0 ],                    [ 1, 1, 1 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 1, 0 ],                    [ 0, 1, 0 ],                    [ 1, 1, 0 ]                ], [                    [ 0, 0, 0 ],                    [ 1, 1, 1 ],                    [ 0, 0, 1 ]                ], [                    [ 0, 1, 1 ],                    [ 0, 1, 0 ],                    [ 0, 1, 0 ]                ]            ], [                [                    [ 0, 0, 2 ],                    [ 2, 2, 2 ],                    [ 0, 0, 0 ]                ], [                    [ 2, 2, 0 ],                    [ 0, 2, 0 ],                    [ 0, 2, 0 ]                ], [                    [ 0, 0, 0 ],                    [ 2, 2, 2 ],                    [ 2, 0, 0 ]                ], [                    [ 0, 2, 0 ],                    [ 0, 2, 0 ],                    [ 0, 2, 2 ]                ]            ], [                [                    [ 3, 3 ],                    [ 3, 3 ]                ]            ], [                [                    [ 0, 4, 4 ],                    [ 4, 4, 0 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 4, 0 ],                    [ 0, 4, 4 ],                    [ 0, 0, 4 ]                ]            ], [                [                    [ 0, 0, 0 ],                    [ 5, 5, 5 ],                    [ 0, 5, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 0, 5, 5 ],                    [ 0, 5, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 5, 5, 5 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 5, 0 ],                    [ 5, 5, 0 ],                    [ 0, 5, 0 ]                ]            ], [                [                    [ 6, 6, 0 ],                    [ 0, 6, 6 ],                    [ 0, 0, 0 ]                ], [                    [ 0, 0, 6 ],                    [ 0, 6, 6 ],                    [ 0, 6, 0 ]                ]            ], [                [                    [ 0, 0, 0, 0 ],                    [ 0, 0, 0, 0 ],                    [ 7, 7, 7, 7 ],                    [ 0, 0, 0, 0 ]                ], [                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ],                    [ 0, 7, 0, 0 ]                ]            ] ]    def __init__(self, block=None):        if block is None:            # Type            self.type = random.randint(1, len(StBlock.blocks))            # X Position            self.xPos = 0            # Y Position            self.yPos = 0            # Rotation            self.rotation = 0            # Block            self.block = StBlock.blocks[self.type-1]        else:            # Type            self.type = block.type            # X Position            self.xPos = block.xPos            # Y Position            self.yPos = block.yPos            # Rotation            self.rotation = block.rotation            # Block            self.block = block.block    # Get type    def getType(self):        return self.type    # Get X size    def getXSize(self):        return len(self.block[self.rotation][0])    # Get Y size    def getYSize(self):        return len(self.block[self.rotation])    # Get X position    def getXPos(self):        return self.xPos    # Get Y position    def getYPos(self):        return self.yPos    # Get rotation    def getRotation(self):        return self.rotation    # Get block    def getBlock(self, x, y):        if x &lt; 0 or x &gt;= self.getXSize():            return 0        if y &lt; 0 or y &gt;= self.getYSize():            return 0        return self.block[self.rotation][y][x]    # Set X position    def setXPos(self, xPos):        self.xPos = xPos    # Set Y position    def setYPos(self, yPos):        self.yPos = yPos        # Set rotation    def setRotation(self, rotation):        self.rotation = self.rotation % len(self.block)</pre><p>Reference:</p><p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p><h3>Tetrix</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import copy
+import random
+
+from PyQt5.QtCore import pyqtSignal, QBasicTimer, QSize, Qt
+from PyQt5.QtGui import QColor, QPainter, QPixmap
+from PyQt5.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
+        QLCDNumber, QPushButton, QWidget)
+
+
+NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, MirroredLShape = range(8)
+
+
+class TetrixWindow(QWidget):
+    def __init__(self):
+        super(TetrixWindow, self).__init__()
+
+        self.board = TetrixBoard()
+
+        nextPieceLabel = QLabel()
+        nextPieceLabel.setFrameStyle(QFrame.Box | QFrame.Raised)
+        nextPieceLabel.setAlignment(Qt.AlignCenter)
+        self.board.setNextPieceLabel(nextPieceLabel)
+
+        scoreLcd = QLCDNumber(5)
+        scoreLcd.setSegmentStyle(QLCDNumber.Filled)
+        levelLcd = QLCDNumber(2)
+        levelLcd.setSegmentStyle(QLCDNumber.Filled)
+        linesLcd = QLCDNumber(5)
+        linesLcd.setSegmentStyle(QLCDNumber.Filled)
+
+        startButton = QPushButton("&amp;Start")
+        startButton.setFocusPolicy(Qt.NoFocus)
+        quitButton = QPushButton("&amp;Quit")
+        quitButton.setFocusPolicy(Qt.NoFocus)
+        pauseButton = QPushButton("&amp;Pause")
+        pauseButton.setFocusPolicy(Qt.NoFocus)
+
+        startButton.clicked.connect(self.board.start)
+        pauseButton.clicked.connect(self.board.pause)
+        quitButton.clicked.connect(QApplication.instance().quit)
+        self.board.scoreChanged.connect(scoreLcd.display)
+        self.board.levelChanged.connect(levelLcd.display)
+        self.board.linesRemovedChanged.connect(linesLcd.display)
+
+        layout = QGridLayout()
+        layout.addWidget(self.createLabel("NEXT"), 0, 0)
+        layout.addWidget(nextPieceLabel, 1, 0)
+        layout.addWidget(self.createLabel("LEVEL"), 2, 0)
+        layout.addWidget(levelLcd, 3, 0)
+        layout.addWidget(startButton, 4, 0)
+        layout.addWidget(self.board, 0, 1, 6, 1)
+        layout.addWidget(self.createLabel("SCORE"), 0, 2)
+        layout.addWidget(scoreLcd, 1, 2)
+        layout.addWidget(self.createLabel("LINES REMOVED"), 2, 2)
+        layout.addWidget(linesLcd, 3, 2)
+        layout.addWidget(quitButton, 4, 2)
+        layout.addWidget(pauseButton, 5, 2)
+        self.setLayout(layout)
+
+        self.setWindowTitle("Tetrix")
+        self.resize(550, 370)
+
+    def createLabel(self, text):
+        lbl = QLabel(text)
+        lbl.setAlignment(Qt.AlignHCenter | Qt.AlignBottom)
+        return lbl
+
+
+class TetrixBoard(QFrame):
+    BoardWidth = 10
+    BoardHeight = 22
+
+    scoreChanged = pyqtSignal(int)
+
+    levelChanged = pyqtSignal(int)
+
+    linesRemovedChanged = pyqtSignal(int)
+
+    def __init__(self, parent=None):
+        super(TetrixBoard, self).__init__(parent)
+
+        self.timer = QBasicTimer()
+        self.nextPieceLabel = None
+        self.isWaitingAfterLine = False
+        self.curPiece = TetrixPiece()
+        self.nextPiece = TetrixPiece()
+        self.curX = 0
+        self.curY = 0
+        self.numLinesRemoved = 0
+        self.numPiecesDropped = 0
+        self.score = 0
+        self.level = 0
+        self.board = None
+
+        self.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+        self.setFocusPolicy(Qt.StrongFocus)
+        self.isStarted = False
+        self.isPaused = False
+        self.clearBoard()
+
+        self.nextPiece.setRandomShape()
+
+    def shapeAt(self, x, y):
+        return self.board[(y * TetrixBoard.BoardWidth) + x]
+
+    def setShapeAt(self, x, y, shape):
+        self.board[(y * TetrixBoard.BoardWidth) + x] = shape   
+
+    def timeoutTime(self):
+        return 1000 / (1 + self.level)
+
+    def squareWidth(self):
+        return self.contentsRect().width() / TetrixBoard.BoardWidth
+
+    def squareHeight(self):
+        return self.contentsRect().height() / TetrixBoard.BoardHeight
+
+    def setNextPieceLabel(self, label):
+        self.nextPieceLabel = label
+
+    def sizeHint(self):
+        return QSize(TetrixBoard.BoardWidth * 15 + self.frameWidth() * 2,
+                TetrixBoard.BoardHeight * 15 + self.frameWidth() * 2)
+
+    def minimumSizeHint(self):
+        return QSize(TetrixBoard.BoardWidth * 5 + self.frameWidth() * 2,
+                TetrixBoard.BoardHeight * 5 + self.frameWidth() * 2)
+
+    def start(self):
+        if self.isPaused:
+            return
+
+        self.isStarted = True
+        self.isWaitingAfterLine = False
+        self.numLinesRemoved = 0
+        self.numPiecesDropped = 0
+        self.score = 0
+        self.level = 1
+        self.clearBoard()
+
+        self.linesRemovedChanged.emit(self.numLinesRemoved)
+        self.scoreChanged.emit(self.score)
+        self.levelChanged.emit(self.level)
+
+        self.newPiece()
+        self.timer.start(self.timeoutTime(), self)
+
+    def pause(self):
+        if not self.isStarted:
+            return
+
+        self.isPaused = not self.isPaused
+        if self.isPaused:
+            self.timer.stop()
+        else:
+            self.timer.start(self.timeoutTime(), self)
+
+        self.update()
+
+    def paintEvent(self, event):
+        super(TetrixBoard, self).paintEvent(event)
+
+        painter = QPainter(self)
+        rect = self.contentsRect()
+
+        if self.isPaused:
+            painter.drawText(rect, Qt.AlignCenter, "Pause")
+            return
+
+        boardTop = rect.bottom() - TetrixBoard.BoardHeight * self.squareHeight()
+
+        for i in range(TetrixBoard.BoardHeight):
+            for j in range(TetrixBoard.BoardWidth):
+                shape = self.shapeAt(j, TetrixBoard.BoardHeight - i - 1)
+                if shape != NoShape:
+                    self.drawSquare(painter,
+                            rect.left() + j * self.squareWidth(),
+                            boardTop + i * self.squareHeight(), shape)
+
+        if self.curPiece.shape() != NoShape:
+            for i in range(4):
+                x = self.curX + self.curPiece.x(i)
+                y = self.curY - self.curPiece.y(i)
+                self.drawSquare(painter, rect.left() + x * self.squareWidth(),
+                        boardTop + (TetrixBoard.BoardHeight - y - 1) * self.squareHeight(),
+                        self.curPiece.shape())
+
+    def keyPressEvent(self, event):
+        if not self.isStarted or self.isPaused or self.curPiece.shape() == NoShape:
+            super(TetrixBoard, self).keyPressEvent(event)
+            return
+
+        key = event.key()
+        if key == Qt.Key_Left:
+            self.tryMove(self.curPiece, self.curX - 1, self.curY)
+        elif key == Qt.Key_Right:
+            self.tryMove(self.curPiece, self.curX + 1, self.curY)
+        elif key == Qt.Key_Down:
+            self.tryMove(self.curPiece.rotatedRight(), self.curX, self.curY)
+        elif key == Qt.Key_Up:
+            self.tryMove(self.curPiece.rotatedLeft(), self.curX, self.curY)
+        elif key == Qt.Key_Space:
+            self.dropDown()
+        elif key == Qt.Key_D:
+            self.oneLineDown()
+        else:
+            super(TetrixBoard, self).keyPressEvent(event)
+
+    def timerEvent(self, event):
+        if event.timerId() == self.timer.timerId():
+            if self.isWaitingAfterLine:
+                self.isWaitingAfterLine = False
+                self.newPiece()
+                self.timer.start(self.timeoutTime(), self)
+            else:
+                self.oneLineDown()
+        else:
+            super(TetrixBoard, self).timerEvent(event)
+
+    def clearBoard(self):
+        self.board = [NoShape for i in range(TetrixBoard.BoardHeight * TetrixBoard.BoardWidth)]
+
+    def dropDown(self):
+        dropHeight = 0
+        newY = self.curY
+        while newY &gt; 0:
+            if not self.tryMove(self.curPiece, self.curX, newY - 1):
+                break
+            newY -= 1
+            dropHeight += 1
+
+        self.pieceDropped(dropHeight)
+
+    def oneLineDown(self):
+        if not self.tryMove(self.curPiece, self.curX, self.curY - 1):
+            self.pieceDropped(0)
+
+    def pieceDropped(self, dropHeight):
+        for i in range(4):
+            x = self.curX + self.curPiece.x(i)
+            y = self.curY - self.curPiece.y(i)
+            self.setShapeAt(x, y, self.curPiece.shape())
+
+        self.numPiecesDropped += 1
+        if self.numPiecesDropped % 25 == 0:
+            self.level += 1
+            self.timer.start(self.timeoutTime(), self)
+            self.levelChanged.emit(self.level)
+
+        self.score += dropHeight + 7
+        self.scoreChanged.emit(self.score)
+        self.removeFullLines()
+
+        if not self.isWaitingAfterLine:
+            self.newPiece()
+
+    def removeFullLines(self):
+        numFullLines = 0
+
+        for i in range(TetrixBoard.BoardHeight - 1, -1, -1):
+            lineIsFull = True
+
+            for j in range(TetrixBoard.BoardWidth):
+                if self.shapeAt(j, i) == NoShape:
+                    lineIsFull = False
+                    break
+
+            if lineIsFull:
+                numFullLines += 1
+                for k in range(TetrixBoard.BoardHeight - 1):
+                    for j in range(TetrixBoard.BoardWidth):
+                        self.setShapeAt(j, k, self.shapeAt(j, k + 1))
+
+                for j in range(TetrixBoard.BoardWidth):
+                    self.setShapeAt(j, TetrixBoard.BoardHeight - 1, NoShape)
+
+        if numFullLines &gt; 0:
+            self.numLinesRemoved += numFullLines
+            self.score += 10 * numFullLines
+            self.linesRemovedChanged.emit(self.numLinesRemoved)
+            self.scoreChanged.emit(self.score)
+
+            self.timer.start(500, self)
+            self.isWaitingAfterLine = True
+            self.curPiece.setShape(NoShape)
+            self.update()
+
+    def newPiece(self):
+        self.curPiece = copy.deepcopy(self.nextPiece)
+        self.nextPiece.setRandomShape()
+        self.showNextPiece()
+        self.curX = TetrixBoard.BoardWidth // 2 + 1
+        self.curY = TetrixBoard.BoardHeight - 1 + self.curPiece.minY()
+
+        if not self.tryMove(self.curPiece, self.curX, self.curY):
+            self.curPiece.setShape(NoShape)
+            self.timer.stop()
+            self.isStarted = False
+
+    def showNextPiece(self):
+        if self.nextPieceLabel is None:
+            return
+
+        dx = self.nextPiece.maxX() - self.nextPiece.minX() + 1
+        dy = self.nextPiece.maxY() - self.nextPiece.minY() + 1
+
+        pixmap = QPixmap(dx * self.squareWidth(), dy * self.squareHeight())
+        painter = QPainter(pixmap)
+        painter.fillRect(pixmap.rect(), self.nextPieceLabel.palette().window())
+
+        for i in range(4):
+            x = self.nextPiece.x(i) - self.nextPiece.minX()
+            y = self.nextPiece.y(i) - self.nextPiece.minY()
+            self.drawSquare(painter, x * self.squareWidth(),
+                    y * self.squareHeight(), self.nextPiece.shape())
+
+        painter.end()
+
+        self.nextPieceLabel.setPixmap(pixmap)
+
+    def tryMove(self, newPiece, newX, newY):
+        for i in range(4):
+            x = newX + newPiece.x(i)
+            y = newY - newPiece.y(i)
+            if x &lt; 0 or x &gt;= TetrixBoard.BoardWidth or y &lt; 0 or y &gt;= TetrixBoard.BoardHeight:
+                return False
+            if self.shapeAt(x, y) != NoShape:
+                return False
+
+        self.curPiece = newPiece
+        self.curX = newX
+        self.curY = newY
+        self.update()
+        return True
+
+    def drawSquare(self, painter, x, y, shape):
+        colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
+                      0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
+
+        color = QColor(colorTable[shape])
+        painter.fillRect(x + 1, y + 1, self.squareWidth() - 2,
+                self.squareHeight() - 2, color)
+
+        painter.setPen(color.lighter())
+        painter.drawLine(x, y + self.squareHeight() - 1, x, y)
+        painter.drawLine(x, y, x + self.squareWidth() - 1, y)
+
+        painter.setPen(color.darker())
+        painter.drawLine(x + 1, y + self.squareHeight() - 1,
+                x + self.squareWidth() - 1, y + self.squareHeight() - 1)
+        painter.drawLine(x + self.squareWidth() - 1,
+                y + self.squareHeight() - 1, x + self.squareWidth() - 1, y + 1)
+
+
+class TetrixPiece(object):
+    coordsTable = (
+        ((0, 0),     (0, 0),     (0, 0),     (0, 0)),
+        ((0, -1),    (0, 0),     (-1, 0),    (-1, 1)),
+        ((0, -1),    (0, 0),     (1, 0),     (1, 1)),
+        ((0, -1),    (0, 0),     (0, 1),     (0, 2)),
+        ((-1, 0),    (0, 0),     (1, 0),     (0, 1)),
+        ((0, 0),     (1, 0),     (0, 1),     (1, 1)),
+        ((-1, -1),   (0, -1),    (0, 0),     (0, 1)),
+        ((1, -1),    (0, -1),    (0, 0),     (0, 1))
+    )
+
+    def __init__(self):
+        self.coords = [[0, 0] for _ in range(4)]
+        self.pieceShape = NoShape
+
+        self.setShape(NoShape)
+
+    def shape(self):
+        return self.pieceShape
+
+    def setShape(self, shape):
+        table = TetrixPiece.coordsTable[shape]
+        for i in range(4):
+            for j in range(2):
+                self.coords[i][j] = table[i][j]
+
+        self.pieceShape = shape
+
+    def setRandomShape(self):
+        self.setShape(random.randint(1, 7))
+
+    def x(self, index):
+        return self.coords[index][0]
+
+    def y(self, index):
+        return self.coords[index][1]
+
+    def setX(self, index, x):
+        self.coords[index][0] = x
+
+    def setY(self, index, y):
+        self.coords[index][1] = y
+
+    def minX(self):
+        m = self.coords[0][0]
+        for i in range(4):
+            m = min(m, self.coords[i][0])
+
+        return m
+
+    def maxX(self):
+        m = self.coords[0][0]
+        for i in range(4):
+            m = max(m, self.coords[i][0])
+
+        return m
+
+    def minY(self):
+        m = self.coords[0][1]
+        for i in range(4):
+            m = min(m, self.coords[i][1])
+
+        return m
+
+    def maxY(self):
+        m = self.coords[0][1]
+        for i in range(4):
+            m = max(m, self.coords[i][1])
+
+        return m
+
+    def rotatedLeft(self):
+        if self.pieceShape == SquareShape:
+            return self
+
+        result = TetrixPiece()
+        result.pieceShape = self.pieceShape
+        for i in range(4):
+            result.setX(i, self.y(i))
+            result.setY(i, -self.x(i))
+
+        return result
+
+    def rotatedRight(self):
+        if self.pieceShape == SquareShape:
+            return self
+
+        result = TetrixPiece()
+        result.pieceShape = self.pieceShape
+        for i in range(4):
+            result.setX(i, -self.y(i))
+            result.setY(i, self.x(i))
+
+        return result
+
+
+if __name__ == '__main__':
+
+    import sys
+
+    app = QApplication(sys.argv)
+    window = TetrixWindow()
+    window.show()
+    random.seed(None)
+    sys.exit(app.exec_())</pre>
 <p></p><h2>V-rep</h2>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html</a>&nbsp;</p>
-<h2>輔助設計套件</h2>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/JPtW66z0-VQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p><h2>人臉辨識</h2>
+<p><a href="https://github.com/meownoid/face-identification-tpe">https://github.com/meownoid/face-identification-tpe</a>&nbsp;</p><h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a>&nbsp;</p>
 <p>一般常見的機械電腦輔助設計套件包括法國<span>&nbsp;</span><a href="https://www.3ds.com/">Dassault</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.3ds.com/products-services/solidworks/">SolidWorks</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.3ds.com/products-services/catia/">Catia</a>, 美國<span>&nbsp;</span><a href="https://www.autodesk.com.tw/">AutoDesk</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.autodesk.com.tw/products/autocad/">AutoCAD</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.autodesk.com/products/inventor/overview">Inventor</a>, 德國<span>&nbsp;</span><a href="https://www.siemens.com/tw/zh/home.html">Siemens</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/en/products/solid-edge/">Solid Edge</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/zh/products/nx/index.shtml">NX</a>, 美國<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/">PTC</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/cad">Creo</a>, 以及 2015 年推出的<span>&nbsp;</span><a href="https://www.onshape.com/">Onshape</a></p>
@@ -3687,7 +4781,374 @@ ctx.fill()
 <p>Linkage:<span>&nbsp;</span><a href="http://blog.rectorsquid.com/linkage-mechanism-designer-and-simulator/">http://blog.rectorsquid.com/linkage-mechanism-designer-and-simulator/</a><span>&nbsp;</span>(<a href="https://github.com/rectorsquid/Linkage">Source codes</a>)</p>
 <p>LinkageDesigner (an add-on package to Wolfram's Mathematica):<span>&nbsp;</span><a href="http://www.linkagedesigner.com/">http://www.linkagedesigner.com/</a>,<span>&nbsp;</span><a href="https://www.wolfram.com/products/applications/linkagedesigner/">https://www.wolfram.com/products/applications/linkagedesigner/</a></p>
 <p><a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a></p>
-<h1>分組專題</h1>
+<h3>NURB-Python</h3>
+<p><a href="https://github.com/orbingol/NURBS-Python">https://github.com/orbingol/NURBS-Python</a>&nbsp;</p>
+<p><a href="https://github.com/orbingol/NURBS-Python_Examples">https://github.com/orbingol/NURBS-Python_Examples</a>&nbsp;</p><h3>libfive</h3>
+<p><a href="https://github.com/libfive/libfive">https://github.com/libfive/libfive</a>&nbsp;</p>
+<h3>robovision</h3>
+<p>https://github.com/stoic1979/robovision</p><h3>jsketcher</h3>
+<p>https://github.com/xibyte/jsketcher</p><h3>kmolcad</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, uic
+from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtGui import QPen, QColor, QImage, QPixmap, QPainter
+from PyQt5.QtCore import Qt, QTime, QCoreApplication, QEventLoop, QPoint
+import time
+
+col_one = Qt.black
+col_zero = Qt.white
+
+
+class Window(QtWidgets.QMainWindow):
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        uic.loadUi("window.ui", self)
+        self.scene = myScene(0, 0, 561, 581)
+        self.scene.win = self
+        self.view.setScene(self.scene)
+        self.image = QImage(561, 581, QImage.Format_ARGB32_Premultiplied)
+        self.image.fill(col_zero)
+        self.lock.clicked.connect(lambda: lock(self))
+        self.erase.clicked.connect(lambda: clean_all(self))
+        self.paint.clicked.connect(lambda: fill_xor(self))
+        self.addpoint.clicked.connect(lambda: add_point_by_btn(self))
+        self.edges = []
+        self.point_now = None
+        self.point_lock = None
+        self.pen = QPen(col_one)
+        self.delay.setChecked(False)
+
+
+class myScene(QtWidgets.QGraphicsScene):
+    def mousePressEvent(self, event):
+        add_point(event.scenePos())
+
+
+def add_row(win):
+    win.table.insertRow(win.table.rowCount())
+
+
+def add_point(point):
+    global w
+    if w.point_now is None:
+        w.point_now = point
+        w.point_lock = point
+        add_row(w)
+        i = w.table.rowCount() - 1
+        item_x = QTableWidgetItem("{0}".format(point.x()))
+        item_y = QTableWidgetItem("{0}".format(point.y()))
+        w.table.setItem(i, 0, item_x)
+        w.table.setItem(i, 1, item_y)
+    else:
+        w.edges.append([w.point_now.x(), w.point_now.y(),
+                        point.x(), point.y()])
+        w.point_now = point
+        add_row(w)
+        i = w.table.rowCount() - 1
+        item_x = QTableWidgetItem("{0}".format(point.x()))
+        item_y = QTableWidgetItem("{0}".format(point.y()))
+        w.table.setItem(i, 0, item_x)
+        w.table.setItem(i, 1, item_y)
+        item_x = w.table.item(i-1, 0)
+        item_y = w.table.item(i-1, 1)
+        w.scene.addLine(point.x(), point.y(), float(item_x.text()), float(item_y.text()), w.pen)
+    #print(w.edges)
+
+
+def lock(win):
+    win.edges.append([win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y()])
+    win.scene.addLine(win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y(), w.pen)
+    win.point_now = None
+    #print(win.edges)
+
+
+def clean_all(win):
+    win.scene.clear()
+    win.table.clear()
+    win.edges = []
+    win.point_now = None
+    win.point_lock = None
+    win.image.fill(col_zero)
+    r = win.table.rowCount()
+    for i in range(r, -1, -1):
+        win.table.removeRow(i)
+
+
+def draw_edges(image, edges):
+    p = QPainter()
+    p.begin(image)
+    p.setPen(QPen(col_one))
+    for ed in edges:
+        p.drawLine(ed[0], ed[1], ed[2], ed[3])
+    p.end()
+
+
+def delay():
+    #QCoreApplication.processEvents(QEventLoop.AllEvents, 1)
+    QtWidgets.QApplication.processEvents(QEventLoop.AllEvents, 1)
+    #time.sleep(.005)
+
+    """t = QTime.currentTime().addMSecs(1)
+    while QTime.currentTime() &lt; t:
+        QCoreApplication.processEvents(QEventLoop.AllEvents, 1)"""
+
+
+def find_max_y(ed):
+    x_max = None
+    for i in range(len(ed)):
+        if x_max is None or ed[i][0] &gt; x_max:
+            x_max = ed[i][0]
+
+        if x_max is None or ed[i][2] &gt; x_max:
+            x_max = ed[i][2]
+
+    return x_max
+
+
+def fill_xor(win):
+    pix = QPixmap()
+    p = QPainter()
+
+
+    xm = int(find_max_y(win.edges))
+    for ed in win.edges:
+        p.begin(win.image)
+        # если горизонтальное ребро - дальше
+        if ed[1] == ed[3]:
+            continue
+        # иначе определяем границы сканирования
+        if ed[1] &gt; ed[3]:
+            ed[1], ed[3] = ed[3], ed[1]
+
+            ed[0], ed[2] = ed[2], ed[0]
+            
+
+        y = ed[1]
+        end_y = ed[3]
+        dx = (ed[2] - ed[0]) / (ed[3] - ed[1])
+        start_x = ed[0]
+
+        while y &lt; end_y:
+            # определяем пересечение
+
+            x = start_x
+            while x &lt; xm:
+                col = QColor(win.image.pixel(x, y))
+                if col == col_zero:
+                    p.setPen(QPen(col_one))
+                else:
+                    p.setPen(QPen(col_zero))
+                p.drawPoint(x, y)
+                x += 1
+
+            start_x += dx
+            y += 1
+
+            if win.delay.isChecked():
+                delay()
+                pix.convertFromImage(win.image)
+                win.scene.addPixmap(pix)
+
+        if not win.delay.isChecked():
+            pix.convertFromImage(win.image)
+            win.scene.addPixmap(pix)
+        p.end()
+    draw_edges(win.image, win.edges)
+
+def add_point_by_btn(win):
+    x = win.x.value()
+    y = win.y.value()
+    p = QPoint()
+    p.setX(x)
+    p.setY(y)
+    add_point(p)
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    w = Window()
+    w.show()
+    sys.exit(app.exec_())</pre>
+<p>window.ui</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ui version="4.0"&gt;
+ &lt;class&gt;MainWindow&lt;/class&gt;
+ &lt;widget class="QMainWindow" name="MainWindow"&gt;
+  &lt;property name="geometry"&gt;
+   &lt;rect&gt;
+    &lt;x&gt;0&lt;/x&gt;
+    &lt;y&gt;0&lt;/y&gt;
+    &lt;width&gt;809&lt;/width&gt;
+    &lt;height&gt;605&lt;/height&gt;
+   &lt;/rect&gt;
+  &lt;/property&gt;
+  &lt;property name="windowTitle"&gt;
+   &lt;string&gt;Filling areas&lt;/string&gt;
+  &lt;/property&gt;
+  &lt;widget class="QWidget" name="centralwidget"&gt;
+   &lt;widget class="QGraphicsView" name="view"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;10&lt;/x&gt;
+      &lt;y&gt;10&lt;/y&gt;
+      &lt;width&gt;561&lt;/width&gt;
+      &lt;height&gt;581&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QTableWidget" name="table"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;590&lt;/x&gt;
+      &lt;y&gt;10&lt;/y&gt;
+      &lt;width&gt;211&lt;/width&gt;
+      &lt;height&gt;391&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;column&gt;
+     &lt;property name="text"&gt;
+      &lt;string&gt;X&lt;/string&gt;
+     &lt;/property&gt;
+    &lt;/column&gt;
+    &lt;column&gt;
+     &lt;property name="text"&gt;
+      &lt;string&gt;Y&lt;/string&gt;
+     &lt;/property&gt;
+    &lt;/column&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="paint"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;560&lt;/y&gt;
+      &lt;width&gt;113&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Colorize&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="lock"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;500&lt;/y&gt;
+      &lt;width&gt;113&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Close&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="erase"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;530&lt;/y&gt;
+      &lt;width&gt;113&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Clear&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QCheckBox" name="delay"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;480&lt;/y&gt;
+      &lt;width&gt;141&lt;/width&gt;
+      &lt;height&gt;20&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="font"&gt;
+     &lt;font&gt;
+      &lt;pointsize&gt;13&lt;/pointsize&gt;
+     &lt;/font&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;With a delay&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="addpoint"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;600&lt;/x&gt;
+      &lt;y&gt;410&lt;/y&gt;
+      &lt;width&gt;141&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Add Point&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QSpinBox" name="x"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;440&lt;/y&gt;
+      &lt;width&gt;48&lt;/width&gt;
+      &lt;height&gt;24&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="minimum"&gt;
+     &lt;number&gt;1&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="maximum"&gt;
+     &lt;number&gt;561&lt;/number&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QSpinBox" name="y"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;700&lt;/x&gt;
+      &lt;y&gt;440&lt;/y&gt;
+      &lt;width&gt;48&lt;/width&gt;
+      &lt;height&gt;24&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="minimum"&gt;
+     &lt;number&gt;1&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="maximum"&gt;
+     &lt;number&gt;581&lt;/number&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QLabel" name="label"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;600&lt;/x&gt;
+      &lt;y&gt;440&lt;/y&gt;
+      &lt;width&gt;16&lt;/width&gt;
+      &lt;height&gt;16&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;X&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QLabel" name="label_2"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;680&lt;/x&gt;
+      &lt;y&gt;440&lt;/y&gt;
+      &lt;width&gt;16&lt;/width&gt;
+      &lt;height&gt;16&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Y&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+  &lt;/widget&gt;
+ &lt;/widget&gt;
+ &lt;resources/&gt;
+ &lt;connections/&gt;
+&lt;/ui&gt;</pre>
+<p></p><h1>分組專題</h1>
 <p>分組專題報告</p>
 <p>章節</p>
 <ul>
@@ -4746,7 +6207,7 @@ context.scale(1,-1)
 timer.set_interval(draw,20)
 &lt;/script&gt;</pre>
 <h1>可攜系統</h1>
-<p><span>&nbsp;</span><a href="/get_page/ANSI%20C/Qt.html">Qt</a><span>&nbsp;隨身程式系統 (</span><a href="http://wcmg3.kmol.info/downloads/Qt.tar.gz">http://wcmg3.kmol.info/downloads/Qt.tar.gz</a><span>&nbsp;(下載解開後容量為 20GB))</span></p>
-<p>為能讓 Pelican 正確轉 markdown 目錄中的 .md 檔案為 blog 目錄中的靜態網誌系統, 若出現&nbsp;<span class="pre">No</span><span>&nbsp;</span><span class="pre">valid</span><span>&nbsp;</span><span class="pre">files</span><span>&nbsp;</span><span class="pre">found</span><span>&nbsp;</span><span class="pre">in</span><span>&nbsp;</span><span class="pre">content 錯誤訊息, 表示 Python 必須加裝 Markdown 模組.</span></p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python -m pip install Markdown</pre>
-<p>CMSimfly 中 reveal 與 blog 必須跳出&nbsp; content 目錄, 並且使用相對目錄.</p>
+<p><span>完整&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 約 8GB, 送到 disk1 AT gk 約需 30 分鐘, 製解壓縮需要 2.5 小時, 解開後容量約 21 GB.</span></p>
+<p><span>或從 <a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> 下載.</span><span></span></p>
+<p><span>自行安裝模組:</span></p>
+<p><span>python -m pip install sympy</span></p>

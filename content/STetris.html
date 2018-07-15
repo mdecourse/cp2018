@@ -1,0 +1,713 @@
+<!doctype html>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>2018 計算機程式教學手冊</title> <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- for LaTeX equations 暫時不用
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+-->
+<!-- 暫時不用
+<script src="./../static/fengari-web.js"></script>
+<script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../static/gearUtils-05.js"></script>
+-->
+<!-- for Brython 暫時不用
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
+
+<script src="./../static/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
+    $("ul.topmenu > li ul li:has(ul) > a").append('<div class="arrow-right"></div>');
+});
+</script>
+
+</head><header><h1>2018 計算機程式教學手冊</h1> <confmenu>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
+<li><a href="./../reveal/index.html">reveal</a></li>
+<li><a href="./../blog/index.html">blog</a></li>
+
+</ul>
+</confmenu></header>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='課程規劃.html'>課程規劃</a><li><a href='機械設計.html'>機械設計</a><li><a href='ANSI C.html'>ANSI C</a><li><a href='指標教材.html'>指標教材</a><ul><li><a href='ch1何謂指標.html'>ch1何謂指標</a><li><a href='ch2指標型別與陣列.html'>ch2指標型別與陣列</a><li><a href='ch3指標與字串.html'>ch3指標與字串</a><li><a href='ch4更多關於字串的用法.html'>ch4更多關於字串的用法</a><li><a href='ch5指標與結構.html'>ch5指標與結構</a><li><a href='ch6字串與字串陣列.html'>ch6字串與字串陣列</a><li><a href='ch7多維陣列.html'>ch7多維陣列</a><li><a href='ch8指向陣列的指標.html'>ch8指向陣列的指標</a><li><a href='ch9指標與動態記憶體配置.html'>ch9指標與動態記憶體配置</a><li><a href='ch10指向函式的指標.html'>ch10指向函式的指標</a><li><a href='ch11結語.html'>ch11結語</a></li></ul><li><a href='Python.html'>Python</a><ul><li><a href='what is new.html'>what is new</a><li><a href='style guide.html'>style guide</a><li><a href='typing.html'>typing</a><li><a href='dunder.html'>dunder</a></li></li></ul></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='Qt.html'>Qt</a><li><a href='Eirc IDE.html'>Eirc IDE</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='實際操作.html'>實際操作</a><ul><li><a href='hello.c 與 Github.html'>hello.c 與 Github</a><li><a href='hello.c 與 Fossil.html'>hello.c 與 Fossil</a><li><a href='CMSimfly 操作.html'>CMSimfly 操作</a><li><a href='Pelican 操作.html'>Pelican 操作</a><li><a href='Reveal.js 操作.html'>Reveal.js 操作</a><li><a href='Qt C++ 計算器程式.html'>Qt C++ 計算器程式</a><li><a href='PyQt 計算器程式.html'>PyQt 計算器程式</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='讀寫網頁內容.html'>讀寫網頁內容</a><li><a href='查英文單字.html'>查英文單字</a><li><a href='docx 轉 pdf.html'>docx 轉 pdf</a><li><a href='網際繪圖.html'>網際繪圖</a><li><a href='GUI 繪圖.html'>GUI 繪圖</a><ul><li><a href='QPainter.html'>QPainter</a><li><a href='STetris.html'>STetris</a><li><a href='Tetrix.html'>Tetrix</a></li></ul><li><a href='V-rep.html'>V-rep</a><li><a href='人臉辨識.html'>人臉辨識</a><li><a href='輔助設計套件.html'>輔助設計套件</a><ul><li><a href='NURB-Python.html'>NURB-Python</a><li><a href='libfive.html'>libfive</a><li><a href='robovision.html'>robovision</a><li><a href='jsketcher.html'>jsketcher</a><li><a href='kmolcad.html'>kmolcad</a></li></li></ul></ul><li><a href='分組專題.html'>分組專題</a><ul><li><a href='分組題目.html'>分組題目</a><li><a href='符號式推導.html'>符號式推導</a><li><a href='CMSimfly 解析.html'>CMSimfly 解析</a><li><a href='Pygrouf 解析.html'>Pygrouf 解析</a><li><a href='Pyslvs 解析.html'>Pyslvs 解析</a><li><a href='Pyquino 解析.html'>Pyquino 解析</a><li><a href='Solvespace 解析.html'>Solvespace 解析</a><li><a href='V-rep 解析.html'>V-rep 解析</a><li><a href='FreeCAD 解析.html'>FreeCAD 解析</a><li><a href='RigitBody library.html'>RigitBody library</a><li><a href='FiniteElement library.html'>FiniteElement library</a><li><a href='網際平面連桿模擬.html'>網際平面連桿模擬</a></li></ul><li><a href='可攜系統.html'>可攜系統</a></li></ul></nav><section>QPainter << <a href='QPainter.html'>Previous</a> <a href='Tetrix.html'>Next</a> >> Tetrix<br /><h1>STetris</h1>
+<p>StApp.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from StTetris import StTetris
+from PyQt5.QtWidgets import QApplication
+
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    stetris = StTetris()
+    stetris.start()
+    sys.exit(app.exec())</pre>
+<p>StTetris.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StPlay import StPlay
+from StScore import StScore
+from PyQt5.QtCore import QBasicTimer, QRect, Qt
+from PyQt5.QtGui import QBrush, QColor, QFont, QPainter
+from PyQt5.QtWidgets import QWidget
+
+
+class StTetris(QWidget):
+
+    ST_WINDOW_WIDTH = 800
+    ST_WINDOW_HEIGHT = 600
+    ST_BLOCK_WIDTH = 30
+    ST_BLOCK_HEIGHT = 30
+    ST_BOARD_POS_X = 200
+    ST_BOARD_POS_Y = 0
+    ST_NEXT_BLOCK_POS_X = 650
+    ST_NEXT_BLOCK_POS_Y = 150
+    ST_SCORE_POS_X = 550
+    ST_SCORE_POS_Y = 30
+    ST_HIGHSCORE_POS_X = 650
+    ST_HIGHSCORE_POS_Y = 30
+    ST_BLOCK_COLOR = ["#000000", "#C71585", "#FFA500", "#FFD700", "#228B22", "#1E90FF", "#483D8B", "#9932CC"]
+    ST_BACKGROUND_COLOR = "#FFFFFF"
+    ST_DOWN_INTERVAL = 500
+
+    # Constructor
+    def __init__(self):
+        super().__init__()
+
+        # Show widget
+        super().resize(self.ST_WINDOW_WIDTH, self.ST_WINDOW_HEIGHT)
+        super().setWindowTitle("STetris")
+        super().show()
+
+        # Painter
+        self.painter = QPainter()
+
+        # Play
+        self.play = StPlay(self)
+        # Score
+        self.score = StScore()
+        # High Score
+        self.highScore = StScore()
+        # Load high score
+        # highScore = sessionStorage.getItem("highscore")
+        # if (highScore):
+        #   Set high score
+        #   self.highScore.setScore(highScore)
+        # Play interval
+        self.playInterval = 500
+        # Play timer
+        self.playTimer = QBasicTimer()
+
+    # Start
+    def start(self):
+        # Set interval
+        self.playTimer.start(self.ST_DOWN_INTERVAL, self)
+
+    # Stop
+    def stop(self):
+        self.playTimer.stop()
+
+    def timerEvent(self, e):
+        self.play.moveDown()
+
+    def keyPressEvent(self, e):
+        key = e.key()
+
+        if key == Qt.Key_Left:
+            self.play.moveLeft()
+        elif key == Qt.Key_Right:
+            self.play.moveRight()
+        elif key == Qt.Key_Down:
+            self.play.moveDown()
+        elif key == Qt.Key_Up:
+            self.play.rotate()
+        elif key == Qt.Key_Space:
+            self.play.drop()
+
+    # Notify
+    def notify(self, message, param=None):
+        if (message == StPlay.ST_NOTIFY_DOWN):
+            self.score.setScore(self.score.getScore() + 100)
+        elif (message == StPlay.ST_NOTIFY_DROP):
+            self.score.setScore(self.score.getScore() + 100)
+        elif (message == StPlay.ST_NOTIFY_CLEAR):
+            self.score.setScore(self.score.getScore()
+                                + param.cleared_lines * 1000)
+        elif (message == StPlay.ST_NOTIFY_TETRISOVER):
+            self.stop()
+
+        # Update high score
+        #if self.highScore.getScore() &lt; self.score.getScore():
+        #    self.highScore.setScore(self.score.getScore())
+        #    sessionStorage.setItem("highscore", self.highScore.getScore())
+
+        self.update()
+
+    def paintEvent(self, e):
+        self.painter.begin(self)
+        self.drawTetris(self.painter)
+        self.painter.end()
+
+    # Draw tetris
+    def drawTetris(self, painter):
+
+        # Draw background
+        rect = {
+            "x" : 0,
+            "y" : 0,
+            "width" : self.ST_WINDOW_WIDTH,
+            "height" : self.ST_WINDOW_HEIGHT
+        }
+        self.drawBackground(painter, rect)
+
+        # Draw board
+        boardRect = {
+            "x" : self.ST_BOARD_POS_X,
+            "y" : self.ST_BOARD_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * self.play.getBoard().getXSize(),
+            "height" : self.ST_BLOCK_HEIGHT * self.play.getBoard().getYSize()
+        }
+        self.drawBoard(painter, boardRect, self.play.getBoard())
+
+        # Draw current block
+        self.drawBlock(painter, boardRect, self.play.getCurrentBlock())
+
+        # Draw next block
+        nextBlockRect = {
+            "x" : self.ST_NEXT_BLOCK_POS_X,
+            "y" : self.ST_NEXT_BLOCK_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 4,
+            "height" : self.ST_BLOCK_HEIGHT * 4,
+        }
+        self.drawBlock(painter, nextBlockRect, self.play.getNextBlock())
+
+        # Draw score
+        scoreRect = {
+            "x" : self.ST_SCORE_POS_X,
+            "y" : self.ST_SCORE_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 7,
+            "height" : self.ST_BLOCK_HEIGHT * 2
+        }
+        self.drawScore(painter, scoreRect, "SCORE", self.score)
+
+        # Draw high score
+        highScoreRect = {
+            "x" : self.ST_HIGHSCORE_POS_X,
+            "y" : self.ST_HIGHSCORE_POS_Y,
+            "width" : self.ST_BLOCK_WIDTH * 7,
+            "height" : self.ST_BLOCK_HEIGHT * 2
+        }
+        self.drawScore(painter, highScoreRect, "HIGH SCORE", self.highScore)
+
+    # Draw background
+    def drawBackground(self, painter, rect):
+        painter.fillRect(QRect(rect["x"], rect["y"], rect["width"], rect["height"]), QColor(self.ST_BACKGROUND_COLOR))
+
+    # Draw board
+    def drawBoard(self, painter, rect, board):
+
+        # Draw board
+        for boardY in range(board.getYSize()):
+            for boardX in range(board.getXSize()):
+                rectBlock = {
+                    "x" : rect["x"] + boardX * StTetris.ST_BLOCK_WIDTH,
+                    "y" : rect["y"] + boardY * StTetris.ST_BLOCK_HEIGHT,
+                    "width" : StTetris.ST_BLOCK_WIDTH,
+                    "height" : StTetris.ST_BLOCK_HEIGHT
+                }
+                fillColor = StTetris.ST_BLOCK_COLOR[self.play.getBoard().getBlock(boardX, boardY)]
+                painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))
+
+    # Draw block
+    def drawBlock(self, painter, rect, block):
+
+        # Draw block
+        for blockY in range(block.getYSize()):
+            for blockX in range(block.getXSize()):
+                if block.getBlock(blockX, blockY):
+                    rectBlock = {
+                        "x" : rect["x"] + (block.getXPos() + blockX) * StTetris.ST_BLOCK_WIDTH,
+                        "y" : rect["y"] + (block.getYPos() + blockY) * StTetris.ST_BLOCK_HEIGHT,
+                        "width" : StTetris.ST_BLOCK_WIDTH,
+                        "height" : StTetris.ST_BLOCK_HEIGHT
+                    }
+                    fillColor = StTetris.ST_BLOCK_COLOR[block.getBlock(blockX, blockY)]
+                    painter.fillRect(QRect(rectBlock["x"], rectBlock["y"], rectBlock["width"], rectBlock["height"]), QColor(fillColor))
+
+    # Draw score
+    def drawScore(self, painter, rect, title, score):
+        # Draw title
+        painter.textAligh = "right"
+        painter.fillStyle = "red"
+        painter.drawText(rect["x"], rect["y"], title)
+
+        # Draw score
+        painter.drawText(rect["x"], rect["y"] + rect["height"] // 2, str(score.getScore()))</pre>
+<p>StPlay.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from StBoard import StBoard
+from StBlock import StBlock
+
+class StPlay:
+    ST_NOTIFY_LEFT = "NOTIFY_LEFT"
+
+    ST_NOTIFY_RIGHT = "NOTIFY_RIGHT"
+
+    ST_NOTIFY_DOWN = "NOTIFY_DOWN"
+        
+    ST_NOTIFY_DROP = "NOTIFY_DROP"
+
+    ST_NOTIFY_ROTATE = "NOTIFY_ROTATE"
+
+    ST_NOTIFY_CLEAR = "NOTIFY_CLEAR"
+
+    ST_NOTIFY_TETRISOVER = "NOTIFY_TETRISOVER"
+
+    # Constructor
+    def __init__(self, notify):
+        # Board
+        self.board = StBoard()
+        # Current block
+        self.currentBlock = StBlock()
+        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)
+        self.currentBlock.setYPos(0 - self.currentBlock.getYSize())
+        # Next block
+        self.nextBlock = StBlock()
+        # Notify
+        self.notify = notify
+
+    # Get board
+    def getBoard(self):
+        return self.board
+
+    # Get current block
+    def getCurrentBlock(self):
+        return self.currentBlock
+
+    # Get next block
+    def getNextBlock(self):
+        return self.nextBlock
+
+    # Move left
+    def moveLeft(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() - 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):
+            # Set current X position to left
+            self.currentBlock.setXPos(self.currentBlock.getXPos() - 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_LEFT)
+
+    # Move right
+    def moveRight(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos() + 1, self.currentBlock.getYPos(), self.currentBlock.getRotation()):
+            # Set current X position to right
+            self.currentBlock.setXPos(self.currentBlock.getXPos() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_RIGHT)
+
+    # Move down
+    def moveDown(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):
+            # Set current Y position to down
+            self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_DOWN)
+        # Block is not movable
+        else:
+            # Set current block to board
+            self.setCurrentBlockToBoard()
+            # Change current block
+            self.changeCurrentBlock()
+            # Clear completed line
+            cleared_lines = self.board.clearCompleteLines()
+            if cleared_lines:
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })
+            # Tetris is over
+            if self.isTetrisOver():
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)
+
+    # Drop
+    def drop(self):
+
+        while True:
+            # Block is movable
+            if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos() + 1, self.currentBlock.getRotation()):
+                # Set current Y position to down
+                self.currentBlock.setYPos(self.currentBlock.getYPos() + 1)
+            # Block is not movable
+            else:
+                # Notify
+                self.notify.notify(StPlay.ST_NOTIFY_DROP)
+                break
+
+        # Set current block to board
+        self.setCurrentBlockToBoard()
+        # Change current block
+        self.changeCurrentBlock()
+        # Clear completed line
+        cleared_lines = self.board.clearCompleteLines()
+        if cleared_lines:
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_CLEAR, { cleared_lines : cleared_lines })
+        # Tetris is over
+        if self.isTetrisOver():
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_TETRISOVER)
+
+    # Rotate
+    def rotate(self):
+        # Is block movable
+        if self.isMovable(self.currentBlock, self.currentBlock.getXPos(), self.currentBlock.getYPos(), self.currentBlock.getRotation() + 1):
+            # Rotate
+            self.currentBlock.setRotation(self.currentBlock.getRotation() + 1)
+            # Notify
+            self.notify.notify(StPlay.ST_NOTIFY_ROTATE)
+
+    # Is movable
+    def isMovable(self, block, xPos, yPos, rotation):
+
+        # Create block to check and set value to check
+        checkBlock = StBlock(block)
+        checkBlock.setXPos(xPos)
+        checkBlock.setYPos(yPos)
+        checkBlock.setRotation(rotation)
+
+        # Get value of board
+        for blockX in range(checkBlock.getXSize()):
+            for blockY in range(checkBlock.getYSize()):
+
+                # Check if block to check is empty
+                if checkBlock.getBlock(blockX, blockY) == 0:
+                    continue
+
+                boardX = checkBlock.getXPos() + blockX
+                boardY = checkBlock.getYPos() + blockY
+
+                # Check X position of block to check
+                if boardX &lt; 0 or boardX &gt;= self.board.getXSize():
+                    return False
+
+                # Check Y position of block to check
+                if boardY &gt;= self.board.getYSize():
+                    return False
+
+                # Check if block is already exist
+                if self.board.getBlock(boardX, boardY) != 0:
+                    return False
+
+        return True
+
+    # Set current block to board
+    def setCurrentBlockToBoard(self):
+        # Set current block to board
+        for blockX in range(self.currentBlock.getXSize()):
+            for blockY in range(self.currentBlock.getYSize()):
+                if self.currentBlock.getBlock(blockX, blockY) != 0:
+                    self.board.setBlock(self.currentBlock.getXPos() + blockX, self.currentBlock.getYPos() + blockY, self.currentBlock.getType())
+
+    # Check if tetris is over
+    def isTetrisOver(self):
+        isTetrisOver = False
+        for boardX in range(self.board.getXSize()):
+            if self.board.getBlock(boardX, 0) != 0:
+                isTetrisOver = True
+                break
+        return isTetrisOver
+
+    # Change current block
+    def changeCurrentBlock(self):
+        # Set next block to current block
+        self.currentBlock = self.nextBlock
+        self.currentBlock.setXPos((self.board.getXSize() - self.currentBlock.getXSize()) // 2)
+        self.currentBlock.setYPos(- self.currentBlock.getYSize())
+        # Set next block
+        self.nextBlock = StBlock()</pre>
+<p>StScore.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class StScore:
+    # Constructor
+    def __init__(self):
+        # Score
+        self.score = 0
+
+    # Clear
+    def clear(self):
+        self.score = 0
+
+    # Add score
+    def addScore(self, score):
+        self.score += score
+
+    # Set score
+    def setScore(self, score):
+        self.score = score
+
+    # Get score
+    def getScore(self):
+        return self.score</pre>
+<p>StBoard.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import numpy
+
+class StBoard:
+
+    # Constructor
+    def __init__(self):
+        # Board
+        self.board = numpy.zeros(shape=(self.getYSize(), self.getXSize()), dtype=int)
+
+    # Get X size
+    def getXSize(self):
+        return 10
+
+    # Get Y size
+    def getYSize(self):
+        return 20
+
+    # Get block
+    def getBlock(self, x, y):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return 0
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return 0
+
+        return self.board[y][x]
+
+    # Set block
+    def setBlock(self, x, y, block):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return
+
+        self.board[y][x] = block
+
+    # Clear complete lines
+    def clearCompleteLines(self):
+        complete_lines = 0
+
+        for boardY in range(self.getYSize()):
+            block_count = 0
+
+            # Count the number of block
+            for boardX in range(self.getXSize()):
+                if (self.board[boardY][boardX]):
+                    block_count += 1
+
+            # The line of board is full of block
+            if block_count is len(self.board[boardY]):
+                # Delete line of board
+                self.board.pop(boardY)
+                # Add line to the beginning of the board
+                self.board = numpy.zeros(shape=(1, self.getXSize()), dtype=int) + self.board
+                complete_lines += 1
+
+        return complete_lines</pre>
+<p>StBlock.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import random
+
+class StBlock:
+
+    blocks = [ [
+                [
+                    [ 1, 0, 0 ],
+                    [ 1, 1, 1 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 1, 0 ],
+                    [ 0, 1, 0 ],
+                    [ 1, 1, 0 ]
+                ], [
+                    [ 0, 0, 0 ],
+                    [ 1, 1, 1 ],
+                    [ 0, 0, 1 ]
+                ], [
+                    [ 0, 1, 1 ],
+                    [ 0, 1, 0 ],
+                    [ 0, 1, 0 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 2 ],
+                    [ 2, 2, 2 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 2, 2, 0 ],
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 0 ]
+                ], [
+                    [ 0, 0, 0 ],
+                    [ 2, 2, 2 ],
+                    [ 2, 0, 0 ]
+                ], [
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 0 ],
+                    [ 0, 2, 2 ]
+                ]
+            ], [
+                [
+                    [ 3, 3 ],
+                    [ 3, 3 ]
+                ]
+            ], [
+                [
+                    [ 0, 4, 4 ],
+                    [ 4, 4, 0 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 4, 0 ],
+                    [ 0, 4, 4 ],
+                    [ 0, 0, 4 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 0 ],
+                    [ 5, 5, 5 ],
+                    [ 0, 5, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 0, 5, 5 ],
+                    [ 0, 5, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 5, 5, 5 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 5, 0 ],
+                    [ 5, 5, 0 ],
+                    [ 0, 5, 0 ]
+                ]
+            ], [
+                [
+                    [ 6, 6, 0 ],
+                    [ 0, 6, 6 ],
+                    [ 0, 0, 0 ]
+                ], [
+                    [ 0, 0, 6 ],
+                    [ 0, 6, 6 ],
+                    [ 0, 6, 0 ]
+                ]
+            ], [
+                [
+                    [ 0, 0, 0, 0 ],
+                    [ 0, 0, 0, 0 ],
+                    [ 7, 7, 7, 7 ],
+                    [ 0, 0, 0, 0 ]
+                ], [
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ],
+                    [ 0, 7, 0, 0 ]
+                ]
+            ] ]
+
+    def __init__(self, block=None):
+        if block is None:
+            # Type
+            self.type = random.randint(1, len(StBlock.blocks))
+            # X Position
+            self.xPos = 0
+            # Y Position
+            self.yPos = 0
+            # Rotation
+            self.rotation = 0
+            # Block
+            self.block = StBlock.blocks[self.type-1]
+        else:
+            # Type
+            self.type = block.type
+            # X Position
+            self.xPos = block.xPos
+            # Y Position
+            self.yPos = block.yPos
+            # Rotation
+            self.rotation = block.rotation
+            # Block
+            self.block = block.block
+
+    # Get type
+    def getType(self):
+        return self.type
+
+    # Get X size
+    def getXSize(self):
+        return len(self.block[self.rotation][0])
+
+    # Get Y size
+    def getYSize(self):
+        return len(self.block[self.rotation])
+
+    # Get X position
+    def getXPos(self):
+        return self.xPos
+
+    # Get Y position
+    def getYPos(self):
+        return self.yPos
+
+    # Get rotation
+    def getRotation(self):
+        return self.rotation
+
+    # Get block
+    def getBlock(self, x, y):
+        if x &lt; 0 or x &gt;= self.getXSize():
+            return 0
+
+        if y &lt; 0 or y &gt;= self.getYSize():
+            return 0
+
+        return self.block[self.rotation][y][x]
+
+    # Set X position
+    def setXPos(self, xPos):
+        self.xPos = xPos
+
+    # Set Y position
+    def setYPos(self, yPos):
+        self.yPos = yPos
+    
+    # Set rotation
+    def setRotation(self, rotation):
+        self.rotation = self.rotation % len(self.block)</pre>
+<p>Reference:</p>
+<p><a href="https://github.com/siprikorea/stetris-python">https://github.com/siprikorea/stetris-python</a>&nbsp;</p><br />QPainter << <a href='QPainter.html'>Previous</a> <a href='Tetrix.html'>Next</a> >> Tetrix</section></div></body></html>
