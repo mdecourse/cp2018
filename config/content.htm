@@ -78,101 +78,7 @@ int main()
 <p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a>&nbsp;</p><h2>指標教材</h2>
 <p>指標:&nbsp;<a href="http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html">http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html</a>&nbsp;</p>
 <p><a href="/downloads/pointers.pdf">指標教材.pdf</a>&nbsp;(英文)</p>
-<h3>ch1何謂指標</h3>
-<p>C 語言初學者必須面對的難題之一, 就是指標 (pointer) 的用法.</p>
-<p>這份教材的目的, 就是針對初學者簡介指標及其應用.</p>
-<p>其實初學者會對指標產生疑惑, 大多源自於在學習 C 語言時, 對於變數的概念經常一知半解.</p>
-<p>因此這裡就由C 變數的一般用法說起.</p>
-<p>程式中的變數都必須加以命名, 以便存放資料.</p>
-<p>而編譯器與連結器在處理變數時, 就會挪出電腦記憶體中的特定區域, 以存放變數的資料.</p>
-<p>這些特定區域的大小, 取決於變數允許存放資料的範圍.</p>
-<p>例如, 在 32 位元電腦, 一個整數變數的存放範圍, 需要為 4 位元. 而在舊的 16 位元電腦, 整數存放需要 2 位元.</p>
-<p>C 程式中的整數變數存放範圍大小, 在各種機器上不一定相同.</p>
-<p>並且 C 程式中的整數變數也不只一種, 在許多 C 程式教科數中,可以發現有整數, 長整數, 短整數等. 這裡則假設使用 32 位元系統, 因此整數需要 4 位元的存放空間.</p>
-<p>可以採用下列程式碼,在您所使用的系統中, 查探特定整數型別所需要的記憶體空間:</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
- 
-int main()
-{
-printf("size of a short is %d\n", sizeof(short));
-printf("size of a int is %d\n", sizeof(int));
-printf("size of a long is %d\n", sizeof(long));
-}</pre>
-<p><a href="http://codepad.org/iQqRmLnh">在 codepad.org 執行上述 C 程式</a></p>
-<p><span>當我們宣告一個變數時, 亦即告知編譯器兩件事, 變數名稱與變數型別. 例如, 可以透過:</span></p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int k;</pre>
-<p>宣告名稱為 k 的整數型別變數. 當編譯器看到 "int" 的敘述時, 就會在電腦的記憶體中, 保留 4 位元的空間, 以便存放整數變數 k 的數值.</p>
-<p>此外, 電腦也會設置一個符號表, 註明符號 k 與其在記憶體中用來存放 4 位元資料的相對位址.</p>
-<p>因此, 若在變數宣告後, 使用:</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">k = 2;</pre>
-<p>2 這個數值, 就會在程式執行時, 被放在保留給 k 變數的記憶體位址中.</p>
-<p>在 C 語言中, 整數 k 變數, 可視為一個物件. 其中有兩個值與物件 k 有關, 也就是存放的數值與存放的位址. 有些參考書中將者兩個數值稱為"右值"與"左值". (2 為右值, 而變數位址為左值)</p>
-<p>在某些語言中, 左值只能放在指定"等號"的左邊, 而右值則只能放在右邊. 位置放錯, 例如:&nbsp;</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">2 = k;</pre>
-<p>就會出錯.</p>
-<p>其實, C 語言中有關左值得定義, 根據 K&amp;R II (page 197): [1], 則有些變動.</p>
-<p>"物件為儲存區域的名稱, 而左值則為指向該物件的表示式."</p>
-<p>這裡先採引用的定義加以說明, 後續將會進一步針對指標加以說明.</p>
-<p>接著, 假如程式碼為:</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">int j, k;
-k = 2; 
-j = 7;    &lt;-- line 1 
-k = j;    &lt;-- line 2</pre>
-<p>編譯器會將第一行 (line 1) 的 j 解讀為變數 j 的位址 (也就是左值), 並且將值 7 放到該位址. 在第二行 (line 2), 則會將 j 視為右值 (因為在"指定"運算子的右方), 指的則是存放在 j 記憶體中的 7 這個數值. 因此第二行執行過後, 存放在 j 的 7 這個數值, 就會被放到 k 變數所對應的"左值" (記憶體位址) 中.</p>
-<p>在這些範例中, 採用的都是將右值從一個儲存位址, 經由複製將 4 位元的資料複製到另外一個儲存位址. 假如使用 2 位元整數, 則會複製 2 位元資料.</p>
-<p>這裡, 就會需要一種變數, 用來存放左值 (記憶體位址). 存放此一變數的值, 隨系統而異, 舊的桌上電腦總共只有 64K 的記憶體, 每存放一個整數位址會佔去 2 位元.</p>
-<p>更多位元數的電腦 (例如 64 位元電腦), 則需要更多的位元位址來存放一個整數資料.</p>
-<p>實際需要的記憶體大小並不重要, 需要的則是一種方法, 通知編譯器在哪一位址存放哪些資料.</p>
-<p>這樣的變數稱為"指標變數" (隨後將說明得更清楚). 在 C 語言中定義指標變數時, 必須在變數名稱前方, 加上一個 * 符號. 而這些指標變數的型別, 隨著要存放在指標位址中的資料型別而定, 例如, 假如宣告:</p>
-<p>int *ptr;</p>
-<p>ptr 為變數名稱 (與之前的整數變數名稱 k 相同). 而 "*" 符號則告知編譯器, 此一宣告為指標變數, 亦即保留出足夠的記憶體存放位址. 最前方的 int 則表示, 希望此一指標變數用來存放整數. 而此一指標稱為"指向整數". 需要特別注意的是, 當使用 int k; 時並沒有給 k 初始值, 只有在任何符合 ANSI 規範的編譯器中, 會將宣告在函式外的變數通通以 0 初始.</p>
-<p>同樣地, ptr 也沒有初始值, 亦即, 還沒有在上述宣告之後, 在保留的位址空間上, 放入任何值. 這裡若宣告是在任何函式之外, 就會被賦予初值, 並且保證不會指向任何 C 物件或函式. 以這種方式初始的指標, 被稱為 "空"指標 (null pointer).</p>
-<p>而空指標並不一定會被放入 "0" 值, 因為這取決於特定系統中的設定. 為了在不同系統中的不同編譯器彼此相容, 就會利用巨集 (macro) 來表示空指標. 此巨集以 NULL 命名. 因此, 若以 NULL 設定指標值, 則可以確定在不同機器上, 這些指標變數一定是空指標.</p>
-<p>與整數是否為 0 的判斷式 if(k ==0) 相類似, 可以利用 if(ptr == NULL) 判斷是否 ptr 為空指標.</p>
-<p>但是, 回到新變數 ptr 的應用, 假設要將整數變數 k 所對應的位址, 存入 ptr, 就必須使用"位址運算子", 寫成:</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">ptr = &amp;k;</pre>
-<p>"位址運算子"的作用是用來取 k 的左值 (位址), 即使這時 k 位於等號右邊, 上述程式會將 k 的值複製到指標 ptr 的儲存空間中. 這時, ptr 稱為"指向" k.</p>
-<p>接著再討論另外一個運算子.</p>
-<p>也就是所謂的"取值運算子" (dereferencing operator), 就是一個 * 符號. 使用方法如下:</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">*ptr = 7;</pre>
-<p>這一行程式會將 7 這個數值,複製到 ptr 變數所指向的位址. 也就是說, 假如 ptr 指向 k (ptr 為 k 存放資料的記憶體位址), 這行程式就會將 k 的值設為 7. 換言之, * 運算子可用來改變 ptr 所指向的值, 而不是指標本身的值. (註:指標本身為位址, 也就是所謂的左變數)</p>
-<p>因此, 可以利用:</p>
-<p>printf("%d\n",*ptr);</p>
-<p>將目前存放在 ptr 所指向位址的整數值, 透過 printf() 函式印到螢幕.</p>
-<p>要釐清上述說明, 可以執行下列程式, 並仔細探討程式碼與其輸出.</p>
-<p><span>------------ Program 1.1 ---------------------------------</span></p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 1.1 from PTRTUT10.TXT   6/10/97 */
- 
-#include &lt;stdio.h&gt;
- 
-int j, k;
-int *ptr;
- 
-int main(void)
-{
-    j = 1;
-    k = 2;
-    ptr = &amp;k;
-    printf("\n");
-    printf("j has the value %d and is stored at %p\n", j, (void *)&amp;j);
-    printf("k has the value %d and is stored at %p\n", k, (void *)&amp;k);
-    printf("ptr has the value %p and is stored at %p\n", ptr, (void *)&amp;ptr);
-    printf("The value of the integer pointed to by ptr is %d\n", *ptr);
- 
-    return 0;
-}</pre>
-<p><a href="http://codepad.org/w8R9mp9h">在 codepad.org 執行 Program 1.1</a></p>
-<p>請注意: 我們還沒有談到 C 程式中的 (void *) 表示式. 這裡可以先納入您的測試程式碼中, 隨後將會加以說明.</p>
-<p>結論:</p>
-<ol>
-<li><span class="nt">變數宣告必須指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="nt">k</span><span class="o">;)</span></li>
-<li><span class="nt">指標變數宣告也是指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">;),</span> <span class="nt">其中的</span> <span class="o">*</span> <span class="nt">告知編譯器</span><span class="o">,</span> <span class="nt">該名稱為</span> <span class="nt">ptr</span> <span class="nt">的變數</span><span class="o">,</span> <span class="nt">為一個指標變數</span><span class="o">,</span> <span class="nt">而其型別為該指標指向的資料型別</span> <span class="o">(</span><span class="nt">這裡為整數</span><span class="o">).</span></li>
-<li><span class="nt">一旦變數已經宣告</span><span class="o">,</span> <span class="nt">可以透過變數前方的位址運算子</span><span class="o">,</span> <span class="nt">取得其位址</span><span class="o">,</span> <span class="nt">例如</span> <span class="o">&amp;</span><span class="nt">k</span><span class="o">.</span></li>
-<li><span class="nt">可以由指標中</span><span class="s2">"取值"</span><span class="o">,</span> <span class="nt">亦即</span><span class="o">,</span> <span class="nt">以</span> <span class="o">*</span> <span class="nt">指定到指標所參照的值</span><span class="o">,</span> <span class="nt">例如</span><span class="o">:</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">.</span></li>
-<li><span class="nt">變數的左值為被用來存放在記憶體中的位址值</span><span class="o">,</span> <span class="nt">而變數的右值則式被存放在該位址的數值</span><span class="o">.</span></li>
-</ol>
-<p>參考資料:</p>
-<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p><h3>ch2指標型別與陣列</h3>
+<h3>ch1何謂指標</h3><p>C 語言初學者必須面對的難題之一, 就是指標 (pointer) 的用法.</p><p>這份教材的目的, 就是針對初學者簡介指標及其應用.</p><p>其實初學者會對指標產生疑惑, 大多源自於在學習 C 語言時, 對於變數的概念經常一知半解.</p><p>因此這裡就由 C 變數的一般用法說起.</p><p>程式中的變數都必須加以命名, 以便存放資料.</p><p>而編譯器與連結器在處理變數時, 就會挪出電腦記憶體中的特定區域, 以存放變數的資料.</p><p>這些特定區域的大小, 取決於變數允許存放資料的範圍.</p><p>例如, 在 32 位元電腦, 一個整數變數的存放範圍, 需要 4 位元. 而在舊的 16 位元電腦, 整數存放需要 2 位元.</p><p>C 程式中的整數變數存放範圍大小, 在各種機器上不一定相同.</p><p>並且 C 程式中的整數變數也不只一種, 在許多 C 程式教科數中,可以發現有整數, 長整數, 短整數等. 這裡則假設使用 32 位元系統, 因此整數需要 4 位元的存放空間.</p><p>可以採用下列程式碼,在您所使用的系統中, 查探特定整數型別所需要的記憶體空間:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt; int main(){printf("size of a short is %d\n", sizeof(short));printf("size of a int is %d\n", sizeof(int));printf("size of a long is %d\n", sizeof(long));}</pre><p><a href="http://codepad.org/iQqRmLnh">在 codepad.org 執行上述 C 程式</a></p><p><span>當我們宣告一個變數時, 亦即告知編譯器兩件事, 變數名稱與變數型別. 例如, 可以透過:</span></p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">int k;</pre><p>宣告名稱為 k 的整數型別變數. 當編譯器看到 "int" 的敘述時, 就會在電腦的記憶體中, 保留 4 位元的空間, 以便存放整數變數 k 的數值.</p><p>此外, 電腦也會設置一個符號表, 註明符號 k 與其在記憶體中用來存放 4 位元資料的相對位址.</p><p>因此, 若在變數宣告後, 使用:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">k = 2;</pre><p>2 這個數值, 就會在程式執行時, 被放在保留給 k 變數的記憶體位址中.</p><p>在 C 語言中, 整數 k 變數, 可視為一個物件. 其中有兩個值與物件 k 有關, 也就是存放的數值與存放的位址. 有些參考書中將者兩個數值稱為"右值"與"左值". (2 為右值, 而變數位址為左值)</p><p>在某些語言中, 左值只能放在指定"等號"的左邊, 而右值則只能放在右邊. 位置放錯, 例如:&nbsp;</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">2 = k;</pre><p>就會出錯.</p><p>其實, C 語言中有關左值的定義, 根據 K&amp;R II (page 197): [1], 則有些變動.</p><p>"物件為儲存區域的名稱, 而左值則為指向該物件的表示式."</p><p>這裡先採引用的定義加以說明, 後續將會進一步針對指標加以說明.</p><p>接著, 假如程式碼為:</p><pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">int j, k;k = 2; j = 7;    &lt;-- line 1 k = j;    &lt;-- line 2</pre><p>編譯器會將第一行 (line 1) 的 j 解讀為變數 j 的位址 (也就是左值), 並且將值 7 放到該位址. 在第二行 (line 2), 則會將 j 視為右值 (因為在"指定"運算子的右方), 指的則是存放在 j 記憶體中的 7 這個數值. 因此第二行執行過後, 存放在 j 的 7 這個數值, 就會被放到 k 變數所對應的"左值" (記憶體位址) 中.</p><p>在這些範例中, 採用的都是將右值從一個儲存位址, 經由複製將 4 位元的資料複製到另外一個儲存位址. 假如使用 2 位元整數, 則會複製 2 位元資料.</p><p>這裡, 就會需要一種變數, 用來存放左值 (記憶體位址). 存放此一變數的值, 隨系統而異, 舊的桌上電腦總共只有 64K 的記憶體, 每存放一個整數位址會佔去 2 位元.</p><p>更多位元數的電腦 (例如 64 位元電腦), 則需要更多的位元位址來存放一個整數資料.</p><p>實際需要的記憶體大小並不重要, 需要的則是一種方法, 通知編譯器在哪一位址存放哪些資料.</p><p>這樣的變數稱為"指標變數" (隨後將說明得更清楚). 在 C 語言中定義指標變數時, 必須在變數名稱前方, 加上一個 * 符號. 而這些指標變數的型別, 隨著要存放在指標位址中的資料型別而定, 例如, 假如宣告:</p><p>int *ptr;</p><p>ptr 為變數名稱 (與之前的整數變數名稱 k 相同). 而 "*" 符號則告知編譯器, 此一宣告為指標變數, 亦即保留出足夠的記憶體存放位址. 最前方的 int 則表示, 希望此一指標變數用來存放整數. 而此一指標稱為"指向整數". 需要特別注意的是, 當使用 int k; 時並沒有給 k 初始值, 只有在任何符合 ANSI 規範的編譯器中, 會將宣告在函式外的變數通通以 0 初始.</p><p>同樣地, ptr 也沒有初始值, 亦即, 還沒有在上述宣告之後, 在保留的位址空間上, 放入任何值. 這裡若宣告是在任何函式之外, 就會被賦予初值, 並且保證不會指向任何 C 物件或函式. 以這種方式初始的指標, 被稱為 "空"指標 (null pointer).</p><p>而空指標並不一定會被放入 "0" 值, 因為這取決於特定系統中的設定. 為了在不同系統中的不同編譯器彼此相容, 就會利用巨集 (macro) 來表示空指標. 此巨集以 NULL 命名. 因此, 若以 NULL 設定指標值, 則可以確定在不同機器上, 這些指標變數一定是空指標.</p><p>與整數是否為 0 的判斷式 if(k ==0) 相類似, 可以利用 if(ptr == NULL) 判斷是否 ptr 為空指標.</p><p>但是, 回到新變數 ptr 的應用, 假設要將整數變數 k 所對應的位址, 存入 ptr, 就必須使用"位址運算子", 寫成:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">ptr = &amp;k;</pre><p>"位址運算子"的作用是用來取 k 的左值 (位址), 即使這時 k 位於等號右邊, 上述程式會將 k 的值複製到指標 ptr 的儲存空間中. 這時, ptr 稱為"指向" k.</p><p>接著再討論另外一個運算子.</p><p>也就是所謂的"取值運算子" (dereferencing operator), 就是一個 * 符號. 使用方法如下:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">*ptr = 7;</pre><p>這一行程式會將 7 這個數值,複製到 ptr 變數所指向的位址. 也就是說, 假如 ptr 指向 k (ptr 為 k 存放資料的記憶體位址), 這行程式就會將 k 的值設為 7. 換言之, * 運算子可用來改變 ptr 所指向的值, 而不是指標本身的值. (註:指標本身為位址, 也就是所謂的左變數)</p><p>因此, 可以利用:</p><p>printf("%d\n",*ptr);</p><p>將目前存放在 ptr 所指向位址的整數值, 透過 printf() 函式印到螢幕.</p><p>要釐清上述說明, 可以執行下列程式, 並仔細探討程式碼與其輸出.</p><p><span>------------ Program 1.1 ---------------------------------</span></p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Program 1.1 from PTRTUT10.TXT   6/10/97 */ #include &lt;stdio.h&gt; int j, k;int *ptr; int main(void){    j = 1;    k = 2;    ptr = &amp;k;    printf("\n");    printf("j has the value %d and is stored at %p\n", j, (void *)&amp;j);    printf("k has the value %d and is stored at %p\n", k, (void *)&amp;k);    printf("ptr has the value %p and is stored at %p\n", ptr, (void *)&amp;ptr);    printf("The value of the integer pointed to by ptr is %d\n", *ptr);     return 0;}</pre><p><a href="http://codepad.org/w8R9mp9h">在 codepad.org 執行 Program 1.1</a></p><p>請注意: 我們還沒有談到 C 程式中的 (void *) 表示式. 這裡可以先納入您的測試程式碼中, 隨後將會加以說明.</p><p>結論:</p><ol><li><span class="nt">變數宣告必須指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="nt">k</span><span class="o">;)</span></li><li><span class="nt">指標變數宣告也是指定名稱與型別</span><span class="o">.</span> <span class="o">(</span><span class="nt">例如</span><span class="o">:</span> <span class="nt">int</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">;),</span> <span class="nt">其中的</span> <span class="o">*</span> <span class="nt">告知編譯器</span><span class="o">,</span> <span class="nt">該名稱為</span> <span class="nt">ptr</span> <span class="nt">的變數</span><span class="o">,</span> <span class="nt">為一個指標變數</span><span class="o">,</span> <span class="nt">而其型別為該指標指向的資料型別</span> <span class="o">(</span><span class="nt">這裡為整數</span><span class="o">).</span></li><li><span class="nt">一旦變數已經宣告</span><span class="o">,</span> <span class="nt">可以透過變數前方的位址運算子</span><span class="o">,</span> <span class="nt">取得其位址</span><span class="o">,</span> <span class="nt">例如</span> <span class="o">&amp;</span><span class="nt">k</span><span class="o">.</span></li><li><span class="nt">可以由指標中</span><span class="s2">"取值"</span><span class="o">,</span> <span class="nt">亦即</span><span class="o">,</span> <span class="nt">以</span> <span class="o">*</span> <span class="nt">指定到指標所參照的值</span><span class="o">,</span> <span class="nt">例如</span><span class="o">:</span> <span class="o">*</span><span class="nt">ptr</span><span class="o">.</span></li><li><span class="nt">變數的左值為被用來存放在記憶體中的位址值</span><span class="o">,</span> <span class="nt">而變數的右值則式被存放在該位址的數值</span><span class="o">.</span></li></ol><p>參考資料:</p><p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p><h3>ch2指標型別與陣列</h3>
 <p>接著讓我們來看看, 為何需要指定指標指向變數的型別, 例如: int *ptr; 原因之一是, 宣告之後, 可以透過指向, 寫成:</p>
 <p>*ptr = 2;</p>
 <p>編譯器就會知道要配置多少記憶體給 ptr 變數, 假如 ptr 宣告為指向整數, 電腦就會複製 4 位元的資料, 其它的浮點與雙浮點變數也是相同. 定義指向變數型別的另外一個用途就是編譯器可以解譯程式碼. 例如, 記憶區中存放 10 個連續的整數資料時, 需要 40 位元的記憶體.</p>
@@ -2015,7 +1921,203 @@ print(result)</pre>
 * 按 b 或 . 鍵可以切換螢幕黑屏 (black)
 * 按 Esc 可以退出全螢幕或全域檢視 (Escape)</pre>
 <p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p>
-<h2>Qt C++ 計算器程式</h2>
+<h2>數值分析</h2>
+<p>Numerical Analysis</p>
+<p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p>
+<p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p>
+<p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p>
+<p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p>
+<p>解微分方程式:</p>
+<p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p>
+<p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p>
+<p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+ 
+#define N 2 /* number of first order equations */
+#define dist 0.1 /* stepsize in t*/
+#define MAX 30.0 /* max for t */
+ 
+FILE *output; /* internal filename */
+FILE *output1; /* internal filename */
+// 利用 pipe 呼叫 gnuplot 繪圖
+FILE *pipe;
+ 
+void runge4(double x, double y[], double step); /* Runge-Kutta function */
+double f(double x, double y[], int i); /* function for derivatives */
+ 
+void main(){
+ 
+  double t, y[N];
+  int j;
+ 
+  output=fopen("osc.dat", "w"); /* external filename */
+  output1=fopen("osc1.dat", "w"); /* external filename */
+ 
+  y[0]=1.0; /* initial position */
+  y[1]=0.0; /* initial velocity */
+ 
+  //fprintf(output, "0\t%f\n", y[0]);
+ 
+  for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{
+ 
+    t=j*dist;
+    runge4(t, y, dist);
+    fprintf(output, "%f\t%f\n", t, y[0]);
+    fprintf(output1, "%f\t%f\n", t, y[1]);
+  }
+ 
+  fclose(output);
+  fclose(output1);
+ 
+  pipe = popen("gnuplot -persist","w");
+  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");
+  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");
+  //fprintf(pipe,"set yrange [68:70]\n");
+  fprintf(pipe,"set output \"test.png\"\n");
+  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");
+  fprintf(pipe,"quit\n");
+
+  fprintf(pipe,"quit\n");
+  pclose(pipe);
+}
+ 
+void runge4(double x, double y[], double step){
+ 
+  double h=step/2.0, /* the midpoint */
+  t1[N], t2[N], t3[N], /* temporary storage arrays */
+  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */
+  int i;
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    k4[i]= step*f(x+step, t3, i);
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;
+  }
+}
+ 
+double f(double x, double y[], int i){
+ 
+  if (i==0)
+    x=y[1]; /* derivative of first equation */
+  if (i==1)
+    x=-y[0]-0.5*y[1];
+  return x;
+}</pre>
+<p>Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt
+ 
+def rk4(f, x0, y0, x1, n):
+    vx = [0] * (n + 1)
+    vy = [0] * (n + 1)
+    print(vx, vy)
+    h = (x1 - x0) / float(n)
+    vx[0] = x = x0
+    vy[0] = y = y0
+    for i in range(1, n + 1):
+        k1 = h * f(x, y)
+        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)
+        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)
+        k4 = h * f(x + h, y + k3)
+        vx[i] = x = x0 + i * h
+        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6
+    return vx, vy
+ 
+def f(x, y):
+    return x * sqrt(y)
+ 
+vx, vy = rk4(f, 0, 1, 10, 100)
+for x, y in list(zip(vx, vy))[::10]:
+    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre>
+<p>也是 Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):
+    """Returns final (position, velocity) tuple after
+    time dt has passed.
+
+    x: initial position (number-like object)
+    v: initial velocity (number-like object)
+    a: acceleration function a(x,v,dt) (must be callable)
+    dt: timestep (number)"""
+    x1 = x
+    v1 = v
+    a1 = a(x1, v1, 0)
+
+    x2 = x + 0.5*v1*dt
+    v2 = v + 0.5*a1*dt
+    a2 = a(x2, v2, dt/2.0)
+
+    x3 = x + 0.5*v2*dt
+    v3 = v + 0.5*a2*dt
+    a3 = a(x3, v3, dt/2.0)
+
+    x4 = x + v3*dt
+    v4 = v + a3*dt
+    a4 = a(x4, v4, dt)
+
+    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)
+    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)
+
+    return xf, vf
+    
+def accel(x, v, dt):
+    """Determines acceleration from current position,
+    velocity, and timestep. This particular acceleration
+    function models a spring."""
+    stiffness = 1
+    damping = -0.005
+    return -stiffness*x - damping*v
+
+t = 0
+dt = 1.0/4000 # Timestep of 1/40 second
+state = 50, 5 # Position, velocity
+euler = 50, 5 # For comparison with Euler integration
+
+print("Initial    -position: %6.2f, velocity: %6.2f"%state)
+
+# Run for 100 seconds
+while t &lt; 100:
+    t += dt
+    state = rk4(state[0], state[1], accel, dt)
+    #print(t, state)
+
+    # Integrate using Euler's method
+    euler = (
+        euler[0] + euler[1]*dt,
+        euler[1] + accel(euler[0],euler[1],dt)*dt
+    )
+
+print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)
+print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre>
+<p>練習步驟:</p>
+<ol>
+<li>請說明何謂微分方程式?</li>
+<li>微分方程式用在機械設計的哪個領域?</li>
+<li>何謂微分方程式的解析解與數值分析解?</li>
+<li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li>
+<li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li>
+<li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li>
+</ol><h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
 <p>calculator.pro</p>
@@ -2460,8 +2562,7 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
     }
     return true;
 }</pre>
-<p></p>
-<h2>PyQt 計算器程式</h2>
+<p></p><h2>PyQt 計算器程式</h2>
 <p><a href="/downloads/cpw10.7z">cpw10_calculator.7z</a></p>
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一甲第十週第三部分</yt-formatted-string></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/CK96oD_N73M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
@@ -6815,4 +6916,9 @@ context.scale(1,-1)
 #以間隔 20 micro seconds 重複呼叫 draw()
 timer.set_interval(draw,20)
 &lt;/script&gt;</pre>
-<h1>可攜系統</h1><p>初階 <a href="https://drive.google.com/open?id=1BKp25MGVEmKWWczD-WpxgHi8ZqDaATXC">p37.7z</a> 約 105MB, 解開後容量約 425MB, 可以執行基本 Python3, ANSI C, 與 Lua 程式, ˋ並且內含 git, Fossil SCM 與 gnuplot.</p><p><span>完整&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 約 8GB, 送到 disk1 AT gk 約需 30 分鐘, 製解壓縮需要 2.5 小時, 解開後容量約 21 GB.</span></p><p><span>或從 <a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> 下載.</span><span></span></p><p><span>自行安裝模組:</span></p><p><span>python -m pip install sympy</span></p>
+<h1>可攜系統</h1>
+<p>初階 <a href="https://drive.google.com/open?id=1BKp25MGVEmKWWczD-WpxgHi8ZqDaATXC">p37.7z</a> 約 105MB, 解開後容量約 425MB, 可以執行基本 Python3, ANSI C, 與 Lua 程式, ˋ並且內含 git, Fossil SCM 與 gnuplot.</p>
+<p><span>完整&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 約 8GB, 送到 disk1 AT gk 約需 30 分鐘, 製解壓縮需要 2.5 小時, 解開後容量約 21 GB.</span></p>
+<p><span>或從 <a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> 下載.</span><span></span></p>
+<p><span>自行安裝模組:</span></p>
+<p><span>python -m pip install sympy</span></p>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>2018 計算機程式教學手冊</title> <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
+
+<script type="text/javascript" src="./../static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../static/syntaxhighlighter/shBrushCSharp.js"></script>
+<link type="text/css" rel="stylesheet" href="./../static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- for LaTeX equations 暫時不用
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+-->
+<!-- 暫時不用
+<script src="./../static/fengari-web.js"></script>
+<script type="text/javascript" src="./../static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../static/gearUtils-05.js"></script>
+-->
+<!-- for Brython 暫時不用
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
+
+<script src="./../static/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("ul.topmenu> li:has(ul) > a").append('<div class="arrow-right"></div>');
+    $("ul.topmenu > li ul li:has(ul) > a").append('<div class="arrow-right"></div>');
+});
+</script>
+
+</head><header><h1>2018 計算機程式教學手冊</h1> <confmenu>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="sitemap.html">Site Map</a></li>
+<li><a href="./../reveal/index.html">reveal</a></li>
+<li><a href="./../blog/index.html">blog</a></li>
+
+</ul>
+</confmenu></header>
+<div class='container'><nav><ul id='css3menu1' class='topmenu'><li><a href='簡介.html'>簡介</a><ul><li><a href='課程規劃.html'>課程規劃</a><li><a href='機械設計.html'>機械設計</a><li><a href='ANSI C.html'>ANSI C</a><li><a href='指標教材.html'>指標教材</a><ul><li><a href='ch1何謂指標.html'>ch1何謂指標</a><li><a href='ch2指標型別與陣列.html'>ch2指標型別與陣列</a><li><a href='ch3指標與字串.html'>ch3指標與字串</a><li><a href='ch4更多關於字串的用法.html'>ch4更多關於字串的用法</a><li><a href='ch5指標與結構.html'>ch5指標與結構</a><li><a href='ch6字串與字串陣列.html'>ch6字串與字串陣列</a><li><a href='ch7多維陣列.html'>ch7多維陣列</a><li><a href='ch8指向陣列的指標.html'>ch8指向陣列的指標</a><li><a href='ch9指標與動態記憶體配置.html'>ch9指標與動態記憶體配置</a><li><a href='ch10指向函式的指標.html'>ch10指向函式的指標</a><li><a href='ch11結語.html'>ch11結語</a></li></ul><li><a href='Python.html'>Python</a><ul><li><a href='what is new.html'>what is new</a><li><a href='style guide.html'>style guide</a><li><a href='typing.html'>typing</a><li><a href='dunder.html'>dunder</a></li></li></ul></ul><li><a href='工具.html'>工具</a><ul><li><a href='Git.html'>Git</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Leo Editor.html'>Leo Editor</a><li><a href='SCiTE.html'>SCiTE</a><li><a href='TinyCC.html'>TinyCC</a><li><a href='Qt.html'>Qt</a><li><a href='Eirc IDE.html'>Eirc IDE</a><li><a href='CMSimfly.html'>CMSimfly</a></li></ul><li><a href='實際操作.html'>實際操作</a><ul><li><a href='hello.c 與 Github.html'>hello.c 與 Github</a><li><a href='hello.c 與 Fossil.html'>hello.c 與 Fossil</a><li><a href='CMSimfly 操作.html'>CMSimfly 操作</a><li><a href='Pelican 操作.html'>Pelican 操作</a><li><a href='Reveal.js 操作.html'>Reveal.js 操作</a><li><a href='數值分析.html'>數值分析</a><li><a href='Qt C++ 計算器程式.html'>Qt C++ 計算器程式</a><li><a href='PyQt 計算器程式.html'>PyQt 計算器程式</a></li></ul><li><a href='應用範例.html'>應用範例</a><ul><li><a href='計算器.html'>計算器</a><li><a href='Tinkercad.html'>Tinkercad</a><li><a href='讀寫網頁內容.html'>讀寫網頁內容</a><li><a href='查英文單字.html'>查英文單字</a><li><a href='docx 轉 pdf.html'>docx 轉 pdf</a><li><a href='網際繪圖.html'>網際繪圖</a><li><a href='GUI 繪圖.html'>GUI 繪圖</a><ul><li><a href='QPainter.html'>QPainter</a><li><a href='STetris.html'>STetris</a><li><a href='Tetrix.html'>Tetrix</a></li></ul><li><a href='V-rep.html'>V-rep</a><li><a href='人臉辨識.html'>人臉辨識</a><li><a href='輔助設計套件.html'>輔助設計套件</a><ul><li><a href='NURB-Python.html'>NURB-Python</a><li><a href='libfive.html'>libfive</a><li><a href='robovision.html'>robovision</a><li><a href='jsketcher.html'>jsketcher</a><li><a href='kmolcad.html'>kmolcad</a></li></li></ul></ul><li><a href='分組專題.html'>分組專題</a><ul><li><a href='分組題目.html'>分組題目</a><li><a href='符號式推導.html'>符號式推導</a><li><a href='CMSimfly 解析.html'>CMSimfly 解析</a><li><a href='Pygrouf 解析.html'>Pygrouf 解析</a><li><a href='Pyslvs 解析.html'>Pyslvs 解析</a><li><a href='Pyquino 解析.html'>Pyquino 解析</a><li><a href='Solvespace 解析.html'>Solvespace 解析</a><li><a href='V-rep 解析.html'>V-rep 解析</a><li><a href='FreeCAD 解析.html'>FreeCAD 解析</a><li><a href='RigitBody library.html'>RigitBody library</a><li><a href='FiniteElement library.html'>FiniteElement library</a><li><a href='網際平面連桿模擬.html'>網際平面連桿模擬</a></li></ul><li><a href='可攜系統.html'>可攜系統</a></li></ul></nav><section>Reveal.js 操作 << <a href='Reveal.js 操作.html'>Previous</a> <a href='Qt C++ 計算器程式.html'>Next</a> >> Qt C++ 計算器程式<br /><h1>數值分析</h1>
+<p>Numerical Analysis</p>
+<p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p>
+<p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p>
+<p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p>
+<p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p>
+<p>解微分方程式:</p>
+<p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p>
+<p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p>
+<p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+ 
+#define N 2 /* number of first order equations */
+#define dist 0.1 /* stepsize in t*/
+#define MAX 30.0 /* max for t */
+ 
+FILE *output; /* internal filename */
+FILE *output1; /* internal filename */
+// 利用 pipe 呼叫 gnuplot 繪圖
+FILE *pipe;
+ 
+void runge4(double x, double y[], double step); /* Runge-Kutta function */
+double f(double x, double y[], int i); /* function for derivatives */
+ 
+void main(){
+ 
+  double t, y[N];
+  int j;
+ 
+  output=fopen("osc.dat", "w"); /* external filename */
+  output1=fopen("osc1.dat", "w"); /* external filename */
+ 
+  y[0]=1.0; /* initial position */
+  y[1]=0.0; /* initial velocity */
+ 
+  //fprintf(output, "0\t%f\n", y[0]);
+ 
+  for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{
+ 
+    t=j*dist;
+    runge4(t, y, dist);
+    fprintf(output, "%f\t%f\n", t, y[0]);
+    fprintf(output1, "%f\t%f\n", t, y[1]);
+  }
+ 
+  fclose(output);
+  fclose(output1);
+ 
+  pipe = popen("gnuplot -persist","w");
+  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");
+  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");
+  //fprintf(pipe,"set yrange [68:70]\n");
+  fprintf(pipe,"set output \"test.png\"\n");
+  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");
+  fprintf(pipe,"quit\n");
+
+  fprintf(pipe,"quit\n");
+  pclose(pipe);
+}
+ 
+void runge4(double x, double y[], double step){
+ 
+  double h=step/2.0, /* the midpoint */
+  t1[N], t2[N], t3[N], /* temporary storage arrays */
+  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */
+  int i;
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    k4[i]= step*f(x+step, t3, i);
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;
+  }
+}
+ 
+double f(double x, double y[], int i){
+ 
+  if (i==0)
+    x=y[1]; /* derivative of first equation */
+  if (i==1)
+    x=-y[0]-0.5*y[1];
+  return x;
+}</pre>
+<p>Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt
+ 
+def rk4(f, x0, y0, x1, n):
+    vx = [0] * (n + 1)
+    vy = [0] * (n + 1)
+    print(vx, vy)
+    h = (x1 - x0) / float(n)
+    vx[0] = x = x0
+    vy[0] = y = y0
+    for i in range(1, n + 1):
+        k1 = h * f(x, y)
+        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)
+        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)
+        k4 = h * f(x + h, y + k3)
+        vx[i] = x = x0 + i * h
+        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6
+    return vx, vy
+ 
+def f(x, y):
+    return x * sqrt(y)
+ 
+vx, vy = rk4(f, 0, 1, 10, 100)
+for x, y in list(zip(vx, vy))[::10]:
+    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre>
+<p>也是 Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):
+    """Returns final (position, velocity) tuple after
+    time dt has passed.
+
+    x: initial position (number-like object)
+    v: initial velocity (number-like object)
+    a: acceleration function a(x,v,dt) (must be callable)
+    dt: timestep (number)"""
+    x1 = x
+    v1 = v
+    a1 = a(x1, v1, 0)
+
+    x2 = x + 0.5*v1*dt
+    v2 = v + 0.5*a1*dt
+    a2 = a(x2, v2, dt/2.0)
+
+    x3 = x + 0.5*v2*dt
+    v3 = v + 0.5*a2*dt
+    a3 = a(x3, v3, dt/2.0)
+
+    x4 = x + v3*dt
+    v4 = v + a3*dt
+    a4 = a(x4, v4, dt)
+
+    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)
+    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)
+
+    return xf, vf
+    
+def accel(x, v, dt):
+    """Determines acceleration from current position,
+    velocity, and timestep. This particular acceleration
+    function models a spring."""
+    stiffness = 1
+    damping = -0.005
+    return -stiffness*x - damping*v
+
+t = 0
+dt = 1.0/4000 # Timestep of 1/40 second
+state = 50, 5 # Position, velocity
+euler = 50, 5 # For comparison with Euler integration
+
+print("Initial    -position: %6.2f, velocity: %6.2f"%state)
+
+# Run for 100 seconds
+while t &lt; 100:
+    t += dt
+    state = rk4(state[0], state[1], accel, dt)
+    #print(t, state)
+
+    # Integrate using Euler's method
+    euler = (
+        euler[0] + euler[1]*dt,
+        euler[1] + accel(euler[0],euler[1],dt)*dt
+    )
+
+print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)
+print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre>
+<p>練習步驟:</p>
+<ol>
+<li>請說明何謂微分方程式?</li>
+<li>微分方程式用在機械設計的哪個領域?</li>
+<li>何謂微分方程式的解析解與數值分析解?</li>
+<li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li>
+<li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li>
+<li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li>
+</ol><br />Reveal.js 操作 << <a href='Reveal.js 操作.html'>Previous</a> <a href='Qt C++ 計算器程式.html'>Next</a> >> Qt C++ 計算器程式</section></div></body></html>
