@@ -675,7 +675,7 @@ function cmsFilePicker(callback, value, meta) {
         # default password is admin
         password="admin"
         hashed_password = hashlib.sha512(password.encode('utf-8')).hexdigest()
-        file.write("siteTitle:CMSimply - Simple Cloud CMS in Python 3\npassword:"+hashed_password)
+        file.write("siteTitle:2018 計算機程式\npassword:"+hashed_password)
         file.close()
     config = file_get_contents(config_dir+"config")
     config_data = config.split("\n")
@@ -846,7 +846,7 @@ def set_admin_css():
     outstring = '''&lt;!doctype html&gt;
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
-&lt;title&gt;CMSimply - Simple Cloud CMS in Python 3&lt;/title&gt; \
+&lt;title&gt;2018 計算機程式&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
 '''+syntaxhighlight()
 
