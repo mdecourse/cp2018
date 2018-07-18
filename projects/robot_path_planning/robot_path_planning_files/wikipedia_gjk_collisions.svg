@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svg2" sodipodi:docname="Two types of collisions and corresponding CSO faces.svg" inkscape:version="0.46" sodipodi:version="0.32" inkscape:output_extension="org.inkscape.output.svg.inkscape" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="244 -6.9 1020.9 804.3"
+	 enable-background="new 244 -6.9 1020.9 804.3" xml:space="preserve">
+<defs>
+	
+	
+		<inkscape:perspective  inkscape:persp3d-origin="372.04724 : 350.78739 : 1" inkscape:vp_x="0 : 526.18109 : 1" inkscape:vp_z="744.09448 : 526.18109 : 1" sodipodi:type="inkscape:persp3d" id="perspective9" inkscape:vp_y="6.1230318e-14 : 1000 : 0">
+		</inkscape:perspective>
+</defs>
+<sodipodi:namedview  inkscape:current-layer="svg2" inkscape:window-y="-8" inkscape:window-x="-8" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-width="1440" inkscape:window-height="850" inkscape:zoom="0.70710678" showgrid="false" inkscape:cy="414.93927" inkscape:cx="771.03453" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" objecttolerance="10.0" gridtolerance="10.0" guidetolerance="10.0" id="base">
+	<inkscape:grid  type="xygrid" enabled="true" visible="true" id="grid2382"></inkscape:grid>
+</sodipodi:namedview>
+<path id="path3164" fill="none" stroke="#808080" d="M540.4,278.4c0-6.7,0-13.3,0-20c0-11.8,0-206.3,0-140c0,157.2,0,25.6,0-40
+	c-66.7,0-133.3,0-200,0c0-13.3,0,26.7,0,40c0,53.3,0,106.7,0,160C340.4,278.4,525.7,278.4,540.4,278.4z"/>
+<path id="path3168" fill="none" stroke="#000000" stroke-width="1.5" d="M480.4,338.4c0-6.7,0-13.3,0-20c0-11.8,0-206.3,0-140
+	c0,157.2,0,25.6,0-40c-66.7,0-133.3,0-200,0c0-13.3,0,26.7,0,40c0,53.3,0,106.7,0,160C280.4,338.4,465.7,338.4,480.4,338.4z"/>
+<path id="path3176" fill="none" stroke="#000000" d="M280.4,138.4l60-60"/>
+<path id="path3180" fill="none" stroke="#000000" d="M480.4,138.4l60-60"/>
+<path id="path3182" fill="none" stroke="#000000" d="M480.4,338.4l60-60"/>
+<path id="path3184" fill="none" stroke="#808080" d="M280.4,338.4l60-60"/>
+<path id="path3186" inkscape:transform-center-y="66.711584" inkscape:transform-center-x="-76.361019" fill="none" stroke="#000000" d="
+	M752.2,286.7c3.3-5.8,6.7-11.5,10-17.3c5.9-10.2,103.2-178.7,70-121.2c-78.6,136.2-12.8,22.2,20-34.6
+	c-57.5-33.7-115-67.4-172.6-101.1c6.7-11.5-13.3,23.1-20,34.6c-26.7,46.2-53.4,92.4-80,138.6C579.6,185.6,739.5,279.3,752.2,286.7z"
+	/>
+<path id="path3188" inkscape:transform-center-y="88.347475" inkscape:transform-center-x="5.4199757" fill="none" stroke="#000000" d="
+	M670.4,308.4c3.3-5.8,6.7-11.5,10-17.3c5.9-10.2,103.2-178.7,70-121.2c-78.6,136.2-12.8,22.2,20-34.6
+	c-57.5-33.7-115-67.4-172.6-101.1c6.7-11.5-13.3,23.1-20,34.6c-26.7,46.2-53.4,92.4-80,138.6C497.8,207.3,657.7,300.9,670.4,308.4z"
+	/>
+<path id="path3190" inkscape:transform-center-y="-58.446605" inkscape:transform-center-x="0.79831554" fill="none" stroke="#000000" d="
+	M597.9,34.1l81.8-21.6"/>
+<path id="path3192" inkscape:transform-center-y="42.631683" inkscape:transform-center-x="-171.7722" fill="none" stroke="#000000" d="
+	M770.4,135.2l81.8-21.6"/>
+<path id="path3194" inkscape:transform-center-y="215.82959" inkscape:transform-center-x="-71.739362" fill="none" stroke="#000000" d="
+	M670.4,308.4l81.8-21.6"/>
+<path id="path3196" inkscape:transform-center-y="114.75131" inkscape:transform-center-x="100.83116" fill="none" stroke="#000000" d="
+	M497.8,207.3l81.8-21.6"/>
+<text transform="matrix(1 0 0 1 260.7038 138.6383)" font-family="'LucidaSans'" font-size="16">p3</text>
+<text transform="matrix(1 0 0 1 328.8791 74.742)" font-family="'LucidaSans'" font-size="16">p2</text>
+<text transform="matrix(1 0 0 1 537.63 73.926)" font-family="'LucidaSans'" font-size="16">p1</text>
+<text transform="matrix(1 0 0 1 462.9819 131.2043)" font-family="'LucidaSans'" font-size="16">p0</text>
+<text transform="matrix(1 0 0 1 478.1941 351.1425)" font-family="'LucidaSans'" font-size="16">p4</text>
+<text transform="matrix(1 0 0 1 541.4558 285.8683)" font-family="'LucidaSans'" font-size="16">p5</text>
+<text transform="matrix(1 0 0 1 345.2339 271.0002)" font-family="'LucidaSans'" font-size="16">p6</text>
+<text transform="matrix(1 0 0 1 271.8549 350.5806)" font-family="'LucidaSans'" font-size="16">p7</text>
+<text transform="matrix(1 0 0 1 481.4671 209.1292)" font-family="'LucidaSans'" font-size="16">q7</text>
+<text transform="matrix(1 0 0 1 587.7737 185.3403)" font-family="'LucidaSans'" font-size="16">q6</text>
+<text transform="matrix(1 0 0 1 580.4122 31.3834)" font-family="'LucidaSans'" font-size="16">q3</text>
+<text transform="matrix(1 0 0 1 675.4589 6.8875)" font-family="'LucidaSans'" font-size="16">q2</text>
+<text transform="matrix(1 0 0 1 764.6672 126.5026)" font-family="'LucidaSans'" font-size="16">q0</text>
+<text transform="matrix(1 0 0 1 855.3986 118.4703)" font-family="'LucidaSans'" font-size="16">q1</text>
+<text transform="matrix(1 0 0 1 663.6007 321.3829)" font-family="'LucidaSans'" font-size="16">q4</text>
+<text transform="matrix(1 0 0 1 752.7365 298.2285)" font-family="'LucidaSans'" font-size="16">q5</text>
+<path id="path2532" fill="none" stroke="#808080" stroke-width="0.9673" d="M290.4,638.4h131"/>
+<path id="path2536" fill="none" stroke="#808080" stroke-width="1.5" d="M420.5,638.4l141.4,141.4l141.4-141.4L561.9,497
+	L420.5,638.4z"/>
+<path id="path3314" fill="none" stroke="#000000" stroke-width="1.4462" d="M430.3,497h132"/>
+<path id="path3316" fill="none" stroke="#000000" stroke-width="1.4565" d="M430.4,779.4h132"/>
+<path id="path3336" fill="none" stroke="#000000" stroke-width="1.5" d="M675.4,738.4l-60-20"/>
+<path id="path3354" fill="none" stroke="#808080" d="M615.4,718.4l200-20v-120l-200-20"/>
+<path id="path3358" fill="none" stroke="#808080" d="M875.4,558.4l-60,20"/>
+<path id="path3360" fill="none" stroke="#808080" d="M815.4,698.4l60,20"/>
+<path id="path3364" fill="none" stroke="#000000" stroke-width="1.5" d="M675.4,738.4v-200l200,20v160L675.4,738.4z"/>
+<path id="path3366" fill="#FFFFFF" stroke="#000000" stroke-width="2" d="M430.4,778.4l-140-140l140-140l150,140L430.4,778.4z"/>
+<path id="path3376" fill="none" stroke="#808080" d="M650.4,638.4h52"/>
+<path id="path3380" fill="none" stroke="#000000" stroke-width="1.4" d="M615.4,618.4l15,20l-15,20"/>
+<path id="path3384" fill="none" stroke="#000000" stroke-width="1.5" d="M675.4,538.4l-60,20v60"/>
+<path id="path3386" fill="none" stroke="#000000" stroke-width="1.5" d="M615.4,658.4v60"/>
+<path id="path3390" fill="none" stroke="#808080" d="M615.4,618.4v40"/>
+<path id="path3392" fill="none" stroke="#000000" d="M580.4,638.4h50"/>
+<path id="path3394" fill="none" stroke="#000000" d="M675.4,633.4v10"/>
+<path id="path3396" fill="none" stroke="#808080" d="M615.4,618.4l35,20l-35,20"/>
+<text transform="matrix(1 0 0 1 421.9825 490.8519)" font-family="'LucidaSans'" font-size="16">p3</text>
+<text transform="matrix(1 0 0 1 556.0261 490.8519)" font-family="'LucidaSans'" font-size="16">p2</text>
+<text transform="matrix(1 0 0 1 270.3158 641.5186)" font-family="'LucidaSans'" font-size="16">p7</text>
+<text transform="matrix(1 0 0 1 404.3595 630.5978)" font-family="'LucidaSans'" font-size="16">p6</text>
+<text transform="matrix(1 0 0 1 422.5917 792.4502)" font-family="'LucidaSans'" font-size="16">p4</text>
+<text transform="matrix(1 0 0 1 558.4727 794)" font-family="'LucidaSans'" font-size="16">p5</text>
+<text transform="matrix(1 0 0 1 553.0261 643.565)" font-family="'LucidaSans'" font-size="16">p0</text>
+<text transform="matrix(1 0 0 1 705.3021 641.3464)" font-family="'LucidaSans'" font-size="16">p1</text>
+<text transform="matrix(1 0 0 1 666.5261 531.8929)" font-family="'LucidaSans'" font-size="16">q0</text>
+<text transform="matrix(1 0 0 1 873.466 552.9995)" font-family="'LucidaSans'" font-size="16">q1</text>
+<text transform="matrix(1 0 0 1 876.466 729.6469)" font-family="'LucidaSans'" font-size="16">q5</text>
+<text transform="matrix(1 0 0 1 667.354 751.8)" font-family="'LucidaSans'" font-size="16">q4</text>
+<text transform="matrix(1 0 0 1 821.2392 692.5732)" font-family="'LucidaSans'" font-size="16">q6</text>
+<text transform="matrix(1 0 0 1 618.1736 711.4147)" font-family="'LucidaSans'" font-size="16">q7</text>
+<text transform="matrix(1 0 0 1 593.0671 563.9202)" font-family="'LucidaSans'" font-size="16">q3</text>
+<path id="path3468" fill="none" stroke="#000000" d="M525,159.9v62.8"/>
+<path id="path3470" fill="none" stroke="#808080" d="M525.2,160.5l12.5,36l-12.8,26.3"/>
+<path id="path3476" fill="none" stroke="#808080" stroke-width="1.5" d="M560.3,498.4l-140,140"/>
+<path id="path3482" fill="none" stroke="#808080" stroke-width="1.5" d="M535.4,753.3l-115-115"/>
+<path id="path3484" fill="none" stroke="#808080" stroke-width="1.5" d="M290.4,638.4h130"/>
+<path id="path3488" fill="none" stroke="#000000" stroke-width="1.5" d="M496,559.5l3,3"/>
+<path id="path3490" fill="none" stroke="#000000" stroke-width="1.5" d="M499,714.3l-2.3,2.2"/>
+<path id="path3259" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="1.5,6" d="M560.4,498.4l-140,140"/>
+<path id="path3261" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="1.5,4.5" d="M300.4,638.4h120"/>
+<path id="path3263" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="1.5,6" d="M420.4,638.4l140,140"/>
+<path id="path3269" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,4.4" d="M875.4,558.4l-60,20"/>
+<path id="path3273" fill="none" stroke="#000000" d="M874.4,557.9l1,1.4"/>
+<path id="path3277" fill="none" stroke="#000000" d="M875.4,559.4c0-0.1,0-0.2,0-0.2"/>
+<path id="path3279" fill="none" stroke="#000000" d="M875.2,558l0.2,0.9"/>
+<path id="path3285" fill="none" stroke="#000000" d="M873.8,558.4h1.7"/>
+<path id="path3287" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,4.4" d="M815.4,698.4l60,20"/>
+<path id="path3289" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,6.6" d="M815.4,578.4v120"/>
+<path id="path3291" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,6.6" d="M615.4,558.4l200,20"/>
+<path id="path3293" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,6.6" d="M615.4,718.4l200-20"/>
+<path id="path3299" fill="none" stroke="#000000" stroke-width="1.5044" d="M561.2,496.3l60.2,60.2"/>
+<path id="path3301" fill="none" stroke="#000000" stroke-width="1.4999" d="M561.4,780.4l60-60"/>
+<path id="path3363" fill="none" stroke="#000000" d="M540.4,78.4v200"/>
+<path id="path3365" fill="none" stroke="#000000" d="M340.4,78.4h200"/>
+<path id="path3367" fill="none" stroke="#FFFFFF" stroke-width="1.1" stroke-dasharray="1.1,4.4" d="M340.4,78.4v200"/>
+<path id="path3369" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="1.2,4.8" d="M280.4,338.4l60-60h200"/>
+<path id="path3435" fill="none" stroke="#000000" stroke-width="1.5" d="M1080.4,58.4l-80,220l200-20L1080.4,58.4"/>
+<text transform="matrix(1 0 0 1 1054.2942 52.1058)" font-family="'LucidaSans'" font-size="16">(p0, q7)</text>
+<text transform="matrix(1 0 0 1 971.9289 292.653)" font-family="'LucidaSans'" font-size="16">(p4, q7)</text>
+<text transform="matrix(1 0 0 1 1204 264.0169)" font-family="'LucidaSans'" font-size="16">(p5, q7)</text>
+<path id="path3449" fill="none" stroke="#000000" stroke-width="1.5" d="M1090.4,558.4l-70,170l170-50L1090.4,558.4z"/>
+<text transform="matrix(1 0 0 1 991.4142 742.3581)" font-family="'LucidaSans'" font-size="16">(p1, q3)</text>
+<text transform="matrix(1 0 0 1 1193.0392 683.735)" font-family="'LucidaSans'" font-size="16">(p0, q3)</text>
+<text transform="matrix(1 0 0 1 1068.4142 552.36)" font-family="'LucidaSans'" font-size="16">(p0, q7)</text>
+<path id="path3469" fill="none" stroke="#808080" stroke-width="1.09" d="M679.4,13.1l-99.8,172.6"/>
+<path id="path3471" fill="none" stroke="#FFFFFF" stroke-width="1.188" stroke-dasharray="1.188,4.752" d="M679.3,13.3l-99.6,172.3"
+	/>
+<path id="path3473" fill="none" stroke="#000000" d="M648.7,63.9l1.9,1.1"/>
+<path id="path3477" fill="none" stroke="#808080" stroke-width="1.182" d="M579.8,185.8l172.1,100.6"/>
+<path id="path3479" fill="none" stroke="#FFFFFF" stroke-width="1.277" stroke-dasharray="1.277,5.108" d="M580.4,186.1l171.3,100.2
+	"/>
+<path id="path3481" fill="none" stroke="#000000" d="M699.8,257.4l1.2-2"/>
+<path id="path3483" fill="none" stroke="#808080" stroke-width="1.1272" d="M498.9,207.1l81-21.5"/>
+<path id="path3485" fill="none" stroke="#FFFFFF" stroke-width="1.227" stroke-dasharray="1.227,7.362" d="M499.3,207l81-21.5"/>
+<path id="path3487" fill="none" stroke="#000000" d="M524.9,199v2.2"/>
+<path id="path2558" fill="none" stroke="#B3B3B3" stroke-width="2" d="M244,424h1020"/>
+</svg>
