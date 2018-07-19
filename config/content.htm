@@ -1542,112 +1542,7 @@ initialize(FILES,
            )</pre>
 <p>Reference</p>
 <p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p>
-<h1>工具</h1>
-<p>USB 可攜程式開發系統</p>
-<p>可解譯 ANSI C</p>
-<p>可解譯 Python</p>
-<p>可解譯 Lua</p>
-<p>可攜啟動設定:</p>
-<p>start.bat</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
-REM 設定 y 硬碟代號與 data 目錄對應
-set Disk=y
-subst %Disk%: "data"
-REM 設定 leo 相關對應 Home 位置
-set HomePath=%Disk%:\home
-set HomeDrive=%Disk%:\home
-set Home=%Disk%:\home
-REM 將系統 Python 程式的 io 設為 utf-8
-set PYTHONIOENCODING="utf-8"
-REM 將後續的指令執行, 以 %Disk% 為主
-%Disk%:
-REM 設定 PYTHONPATH
-set PYTHONPATH=%Disk%:\python36\DLLs;%Disk%:\python36\Lib;%Disk%:\python36\Lib\site-packages;
-set PYTHONHOME=%Disk%:\python36
-REM for Qt and Qt Creator
-set LLVM_INSTALL_DIR=%Disk%:\LLVM;
-set QBS_INSTALL_DIR=%Disk%:\qbs-windows-x86_64-1.10.0;
-REM for TCL
-set TCL_LIBRARY=%Disk%:\python36\tcl\tcl8.6
-set TK_LIBRARY=%Disk%:\python36\tcl\tcl8.6
-REM 設定 Leo 所用的編輯器
-set LEO_EDITOR=%Disk%:\scite\bin\Sc1.exe;
-set BOOST_ROOT=%Disk%:\boost_1_66_0\;
-REM set CMAKE_PREFIX_PATH=%Disk%:\msys64\mingw64\
-REM for fossil https 連線設定
-REM 若在近端使用 fossil ui 則要蓋掉
-REM set HTTPS=on
-REM 指令搜尋路徑設定
-REM set path1=%PATH%;%Disk%:;%Disk%:\python36;%Disk%:\git\bin;%Disk%:\stunnel\bin;%Disk%:\sqlite-tools;%Disk%:\python36\Scripts;%Disk%:\Git\bin;%Disk%:\vrep331;
-REM path1 is base of this portable Python3.6 system
-set path1=%Disk%:;%Disk%:\python36;%Disk%:\git\bin;%Disk%:\stunnel\bin;%Disk%:\sqlite-tools;%Disk%:\python36\Scripts;%Disk%:\Git\bin;%Disk%:\vrep331;%Disk%:\python36\Lib\site-packages\PyQt5\Qt\bin;
-REM path2 is for pandoc and miktex
-set path2=%Disk%:\pandoc-2.0.2;%Disk%:\miktex_portable\texmfs\install\miktex\bin;%Disk%:\lua-5.3.4\bin;%Disk%:\coreutils-5.3.0\bin;%Disk%:\qtcreator-4.7.0-rc1\bin;
-REM path3 is for gcc development 
-set path3=%Disk%:\msys64\mingw64\bin;%Disk%:\swigwin-3.0.12;%Disk%:\cmake-3.10.1-win64-x64\bin;%Disk%:\diffutils-2.8.7-1\bin;%Disk%:\patch-2.5.9-7\bin;%Disk%:\graphviz-2.38\bin;
-set path4=%Disk%:\boost_1_66_0\;%Disk%:\Strawberry\perl\bin;%D%:\jom_1_1_2;%Disk%:\LLVM\bin;%Disk%:\QtCreator\bin;%Disk%:\vrep340_rev1;%Disk%:\python36\tcl\tcl8.6;%Disk%:\xsltproc;
-set path5=%Disk%:\ffmpeg-20180504-dc7a8f7-win64-static\bin;%Disk%:\oce-0.18.1\bin\;%Disk%:\oce-0.18.1\lib\;%Disk%:\gnuplot\bin;
-set JAVA_HOME=%Disk%:\Java\jdk1.8.0_172;
-set ANDROID_HOME=%Disk%:\Android\sdk;
-set path6=%Disk%:\Java\jdk1.8.0_172\bin;%Disk%:\Java\jre1.8.0_172\bin;%Disk%:\Android\AndroidStudio\bin;%Disk%:\Android\sdk\tools;%Disk%:\Android\sdk\platform-tools;
-REM for Pythonocc under MSYS2 according to https://groups.google.com/forum/?utm_medium=email&amp;utm_source=footer#!msg/pythonocc/z-NI9A-Vyic/8QjD81q-AwAJ
-set CSF_GraphicShr=%Disk%:\oce-0.18.1\bin\TKOpenGl.dll
-path=%path%;%path1%;%path2%;%path3%;%path4%;%path5%;%path6%;
-start /MIN %Disk%:\scite\bin\Sc1.exe
-start /MIN %Disk%:\scite\bin\Sc1.exe
-start /MIN cmd.exe
-start /MIN cmd.exe
-start /MIN cmd.exe /k "y:\cp2018.bat"
-start /MIN cmd.exe /k "y:\cadp2018.bat"
-REM 啟動 Leo 編輯器
-REM %Disk%:\python36\python.exe %Disk%:\launchLeo.py
-REM 啟動 stunnel
-REM start /MIN fossil.exe server -P 127.0.0.1:8080 %Disk%:\tmp\fossil_repo
-REM start /MIN stunnel.exe
-start qtcreator
-Exit</pre>
-<p>stop.bat</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
-set Disk=y
-REM 關閉 SciTE
-taskkill /IM Sc1.exe /F
-REM 關閉 python
-taskkill /IM python.exe /F
-taskkill /IM pythonw.exe /F
-REM 關閉 stunnel
-taskkill /IM stunnel.exe /F
-REM 關閉 fossil
-taskkill /IM fossil.exe /F
-taskkill /IM sharex.exe /F
-REM 清除 log 資料
-path=%PATH%;
-REM del /Q /F  V:\tmp\*.*
-REM 終止虛擬硬碟與目錄的對應
-subst %Disk%: /D
-REM 關閉 cmd 指令視窗
-taskkill /IM cmd.exe /F
-REM taskkill /IM mingw32 /F
-EXIT</pre>
-<p>在 start.bat 啟動中的:</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">start /MIN cmd.exe /k "y:\cp2018.bat"
-start /MIN cmd.exe /k "y:\cadp2018.bat"</pre>
-<p>需要 cp2018.bat 與 cadp2018.bat, 目的在隨身系統啟動時, 可以直接開啟近端網際內容管理系統.</p>
-<p>cp2018.bat</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">cd /d c:\2018\cp2018
-python wsgi.py</pre>
-<p>cadp2018.bat</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">cd /d c:\2018\cadp2018
-python wsgi.py</pre>
-<p>隨身系統資料管理:</p>
-<p style="padding-left: 30px;">SciTE: 文字檔案編輯器與 Python, ANSI C, 及 Lua 程式解譯器.</p>
-<p style="padding-left: 30px;">Leo Editor: 大綱管理器與整合程式開發環境, Python 程式解譯器.</p>
-<p style="padding-left: 30px;">Qt Creator: Qt C++ 程式整合開發環境.</p>
-<p style="padding-left: 30px;">Eric IDE: PyQt 程式整合開發環境.</p>
-<p style="padding-left: 30px;">CMSimfly: 網際內容管理系統, 屬於電子書章節明確的三層次網際資料管理.</p>
-<p style="padding-left: 30px;">Pelican: 靜態網誌產生系統, 可分類, 以關鍵字架構及時間序建立的網際流程紀錄.</p>
-<p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用&nbsp; CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p>
-<p>Python 非官方 Windows 模組:&nbsp;<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a>&nbsp;</p>
-<h2>Git</h2>
+<h1>工具</h1><p>USB 可攜程式開發系統</p><p>可解譯 ANSI C</p><p>可解譯 Python</p><p>可解譯 Lua</p><p>可攜啟動設定:</p><p>start.bat</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo offREM 設定 y 硬碟代號與 data 目錄對應set Disk=ysubst %Disk%: "data"REM 設定 leo 相關對應 Home 位置set HomePath=%Disk%:\homeset HomeDrive=%Disk%:\homeset Home=%Disk%:\homeREM 將系統 Python 程式的 io 設為 utf-8set PYTHONIOENCODING="utf-8"REM 將後續的指令執行, 以 %Disk% 為主%Disk%:REM 設定 PYTHONPATHset PYTHONPATH=%Disk%:\python36\DLLs;%Disk%:\python36\Lib;%Disk%:\python36\Lib\site-packages;set PYTHONHOME=%Disk%:\python36REM for Qt and Qt Creatorset LLVM_INSTALL_DIR=%Disk%:\LLVM;set QBS_INSTALL_DIR=%Disk%:\qbs-windows-x86_64-1.10.0;REM for TCLset TCL_LIBRARY=%Disk%:\python36\tcl\tcl8.6set TK_LIBRARY=%Disk%:\python36\tcl\tcl8.6REM 設定 Leo 所用的編輯器set LEO_EDITOR=%Disk%:\scite\bin\Sc1.exe;set BOOST_ROOT=%Disk%:\boost_1_66_0\;REM set CMAKE_PREFIX_PATH=%Disk%:\msys64\mingw64\REM for fossil https 連線設定REM 若在近端使用 fossil ui 則要蓋掉REM set HTTPS=onREM 指令搜尋路徑設定REM set path1=%PATH%;%Disk%:;%Disk%:\python36;%Disk%:\git\bin;%Disk%:\stunnel\bin;%Disk%:\sqlite-tools;%Disk%:\python36\Scripts;%Disk%:\Git\bin;%Disk%:\vrep331;REM path1 is base of this portable Python3.6 systemset path1=%Disk%:;%Disk%:\python36;%Disk%:\git\bin;%Disk%:\stunnel\bin;%Disk%:\sqlite-tools;%Disk%:\python36\Scripts;%Disk%:\Git\bin;%Disk%:\vrep331;%Disk%:\python36\Lib\site-packages\PyQt5\Qt\bin;REM path2 is for pandoc and miktexset path2=%Disk%:\pandoc-2.0.2;%Disk%:\miktex_portable\texmfs\install\miktex\bin;%Disk%:\lua-5.3.4\bin;%Disk%:\coreutils-5.3.0\bin;%Disk%:\qtcreator-4.7.0-rc1\bin;REM path3 is for gcc development set path3=%Disk%:\msys64\mingw64\bin;%Disk%:\swigwin-3.0.12;%Disk%:\cmake-3.10.1-win64-x64\bin;%Disk%:\diffutils-2.8.7-1\bin;%Disk%:\patch-2.5.9-7\bin;%Disk%:\graphviz-2.38\bin;set path4=%Disk%:\boost_1_66_0\;%Disk%:\Strawberry\perl\bin;%D%:\jom_1_1_2;%Disk%:\LLVM\bin;%Disk%:\QtCreator\bin;%Disk%:\vrep340_rev1;%Disk%:\python36\tcl\tcl8.6;%Disk%:\xsltproc;set path5=%Disk%:\ffmpeg-20180504-dc7a8f7-win64-static\bin;%Disk%:\oce-0.18.1\bin\;%Disk%:\oce-0.18.1\lib\;%Disk%:\gnuplot\bin;set JAVA_HOME=%Disk%:\Java\jdk1.8.0_172;set ANDROID_HOME=%Disk%:\Android\sdk;set path6=%Disk%:\Java\jdk1.8.0_172\bin;%Disk%:\Java\jre1.8.0_172\bin;%Disk%:\Android\AndroidStudio\bin;%Disk%:\Android\sdk\tools;%Disk%:\Android\sdk\platform-tools;REM for Pythonocc under MSYS2 according to https://groups.google.com/forum/?utm_medium=email&amp;utm_source=footer#!msg/pythonocc/z-NI9A-Vyic/8QjD81q-AwAJset CSF_GraphicShr=%Disk%:\oce-0.18.1\bin\TKOpenGl.dllpath=%path%;%path1%;%path2%;%path3%;%path4%;%path5%;%path6%;start /MIN %Disk%:\scite\bin\Sc1.exestart /MIN %Disk%:\scite\bin\Sc1.exestart /MIN cmd.exestart /MIN cmd.exestart /MIN cmd.exe /k "y:\cp2018.bat"start /MIN cmd.exe /k "y:\cp2018_http_server.batstart /MIN cmd.exe /k "y:\cadp2018.bat"REM 啟動 Leo 編輯器REM %Disk%:\python36\python.exe %Disk%:\launchLeo.pyREM 啟動 stunnelREM start /MIN fossil.exe server -P 127.0.0.1:8080 %Disk%:\tmp\fossil_repoREM start /MIN stunnel.exestart qtcreatorExit</pre><p>stop.bat</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo offset Disk=yREM 關閉 SciTEtaskkill /IM Sc1.exe /FREM 關閉 pythontaskkill /IM python.exe /Ftaskkill /IM pythonw.exe /FREM 關閉 stunneltaskkill /IM stunnel.exe /FREM 關閉 fossiltaskkill /IM fossil.exe /Ftaskkill /IM sharex.exe /FREM 清除 log 資料path=%PATH%;REM del /Q /F  V:\tmp\*.*REM 終止虛擬硬碟與目錄的對應subst %Disk%: /DREM 關閉 cmd 指令視窗taskkill /IM cmd.exe /FREM taskkill /IM mingw32 /FEXIT</pre><p>在 start.bat 啟動中的:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">start /MIN cmd.exe /k "y:\cp2018.bat"start /MIN cmd.exe /k "y:\cp2018_http_server.bat"start /MIN cmd.exe /k "y:\cadp2018.bat"</pre><p>需要 cp2018.bat, cp2018_http_server.bat 與 cadp2018.bat, 目的在隨身系統啟動時, 可以直接開啟近端網際內容管理系統.</p><p>cp2018.bat</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">cd /d c:\2018\cp2018python wsgi.py</pre><p>cp2018_http_server.bat</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">cd /d c:\2018\cp2018python http-server.py</pre><p>cadp2018.bat</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">cd /d c:\2018\cadp2018python wsgi.py</pre><p>上述使用 cmd.exe /k 執行 batch 檔案的目的, 在執行完指令後, 會回應到 dos command 指令, 以便執行其下的指令.</p><p>同時, 在近端或區域網路維護 CMSimfly 時, 需要利用 Python 執行 Flask 框架程式, 且同時利用 cp2018_http_server.py 程式啟動 www 伺服器, 除了可以查驗靜態 CMSimfly 網頁的內容外, 也能一併檢查 reveal.js 與 Pelican Blog 的網頁內容.</p><p>當 reveal.js 或 Pelican Blog 希望引用 CMSimfly 內容時, 則引用其最終轉換後的靜態資料相關連結.</p><p>隨身系統資料管理:</p><p style="padding-left: 30px;">SciTE: 文字檔案編輯器與 Python, ANSI C, 及 Lua 程式解譯器.</p><p style="padding-left: 30px;">Leo Editor: 大綱管理器與整合程式開發環境, Python 程式解譯器.</p><p style="padding-left: 30px;">Qt Creator: Qt C++ 程式整合開發環境.</p><p style="padding-left: 30px;">Eric IDE: PyQt 程式整合開發環境.</p><p style="padding-left: 30px;">CMSimfly: 網際內容管理系統, 屬於電子書章節明確的三層次網際資料管理.</p><p style="padding-left: 30px;">Pelican: 靜態網誌產生系統, 可分類, 以關鍵字架構及時間序建立的網際流程紀錄.</p><p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用&nbsp; CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p><p>Python 非官方 Windows 模組:&nbsp;<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a>&nbsp;</p><h2>Git</h2>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a>&nbsp;</p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>&nbsp;</p>
 <p><a href="https://github.com/">https://github.com/</a>&nbsp;</p>
@@ -1659,7 +1554,7 @@ python wsgi.py</pre>
 <p>在近端提交改版內容</p>
 <p>git push</p>
 <p>將近端改版內容推送到遠端</p>
-<p>git pull</p>
+<p>git pull (<a href="https://www.git-tower.com/learn/git/faq/difference-between-git-fetch-git-pull">比較</a>與 git fetch 的差異與兩者用法)</p>
 <p>拉下遠端新版本內容, 在 fossil scm 使用 fossil update</p>
 <p>git log</p>
 <p>查驗 git 提交推送紀錄</p>
@@ -1678,8 +1573,7 @@ python wsgi.py</pre>
 <p>To remove a remote branch</p>
 <p>git push origin :the_remote_branch</p>
 <p>or</p>
-<p>git push origin --delete the_remote_branch</p>
-<h2>Fossil SCM</h2>
+<p>git push origin --delete the_remote_branch</p><h2>Fossil SCM</h2>
 <p><a href="https://www.fossil-scm.org">https://www.fossil-scm.org</a>&nbsp;</p>
 <p>Fossil SCM 是一套簡潔可靠的分散式組態管理工具, 內建網際介面, 臭蟲追蹤, 快記與技術筆記功能的單一可執行檔.</p>
 <p>Fossil SCM 為自由開放源軟體, 使用者可以自行在 Windows 或 Linux 環境中編譯. 例如: 在 Windows 環境, 以 <a href="https://www.msys2.org/">MSYS2</a> 編譯:&nbsp;<a href="http://lab.kmol.info/blog/msys2_compile_fossil_scm.html">http://lab.kmol.info/blog/msys2_compile_fossil_scm.html</a>&nbsp;</p>
@@ -6554,7 +6448,20 @@ if __name__ == '__main__':
 <h2>V-rep</h2>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-event-driven-programming-design.html</a>&nbsp;</p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/JPtW66z0-VQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
-<h2>車輛工程</h2><p>DIY 自動駕駛:</p><p><a href="https://github.com/commaai/openpilot">https://github.com/commaai/openpilot</a>&nbsp;</p><p><a href="https://comma.ai/">https://comma.ai/</a>&nbsp;</p><p>舊款自印硬體:&nbsp;<a href="https://github.com/commaai/neo">https://github.com/commaai/neo</a>&nbsp;</p><p><iframe width="560" height="315" src="https://www.youtube.com/embed/KTrgRYa2wbI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p><p>自駕車:&nbsp;</p><p><a href="https://github.com/ndrplz/self-driving-car">https://github.com/ndrplz/self-driving-car</a>&nbsp;</p><p><a href="https://github.com/RyanZotti/Self-Driving-Car">https://github.com/RyanZotti/Self-Driving-Car</a>&nbsp;</p><p><a href="https://github.com/philbort/awesome-self-driving-cars">https://github.com/philbort/awesome-self-driving-cars</a>&nbsp;</p><p><a href="https://github.com/ApolloAuto/apollo">https://github.com/ApolloAuto/apollo</a>&nbsp;</p><h2>人臉辨識</h2>
+<h3>Lua 學習</h3>
+<p><a href="http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts">http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts</a>&nbsp;</p>
+<p><a href="https://github.com/CoppeliaRobotics/lua">https://github.com/CoppeliaRobotics/lua</a>&nbsp;</p>
+<p><a href="http://www.coppeliarobotics.com/helpFiles/en/scripts.htm">http://www.coppeliarobotics.com/helpFiles/en/scripts.htm</a>&nbsp;</p><h2>車輛工程</h2>
+<p>DIY 自動駕駛:</p>
+<p><a href="https://github.com/commaai/openpilot">https://github.com/commaai/openpilot</a>&nbsp;</p>
+<p><a href="https://comma.ai/">https://comma.ai/</a>&nbsp;</p>
+<p>舊款自印硬體:&nbsp;<a href="https://github.com/commaai/neo">https://github.com/commaai/neo</a>&nbsp;</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/KTrgRYa2wbI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
+<p>自駕車:&nbsp;</p>
+<p><a href="https://github.com/ndrplz/self-driving-car">https://github.com/ndrplz/self-driving-car</a>&nbsp;</p>
+<p><a href="https://github.com/RyanZotti/Self-Driving-Car">https://github.com/RyanZotti/Self-Driving-Car</a>&nbsp;</p>
+<p><a href="https://github.com/philbort/awesome-self-driving-cars">https://github.com/philbort/awesome-self-driving-cars</a>&nbsp;</p>
+<p><a href="https://github.com/ApolloAuto/apollo">https://github.com/ApolloAuto/apollo</a>&nbsp;</p><h2>人臉辨識</h2>
 <p><a href="https://github.com/meownoid/face-identification-tpe">https://github.com/meownoid/face-identification-tpe</a>&nbsp;</p><h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a>&nbsp;</p>
@@ -7115,7 +7022,7 @@ mingw32-make</pre>
 <p><a href="http://solvespace.com">http://solvespace.com</a>&nbsp;</p>
 <h2>V-rep 解析</h2>
 <p><a href="http://www.coppeliarobotics.com/">http://www.coppeliarobotics.com/</a>&nbsp;</p>
-<h2>FreeCAD 解析</h2>
+<p><a href="https://github.com/CoppeliaRobotics/v_rep">https://github.com/CoppeliaRobotics/v_rep</a>&nbsp;</p><h2>FreeCAD 解析</h2>
 <p><a href="https://www.freecadweb.org/">https://www.freecadweb.org/</a>&nbsp;</p>
 <h2>RigitBody library</h2>
 <p>Rigit Body Dynamic Library</p>

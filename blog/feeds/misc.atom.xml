@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>機械設計工程系 2018 計算機程式 - Misc</title><link href="https://mdecourse.github.io/cp2018/blog/" rel="alternate"></link><link href="https://mdecourse.github.io/cp2018/blog/feeds/misc.atom.xml" rel="self"></link><id>https://mdecourse.github.io/cp2018/blog/</id><updated>2018-07-18T11:00:00+08:00</updated><entry><title>2018 Fall CP 課程</title><link href="https://mdecourse.github.io/cp2018/blog/2018-Fall-Computer-Programming.html" rel="alternate"></link><published>2018-07-18T11:00:00+08:00</published><updated>2018-07-18T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:mdecourse.github.io,2018-07-18:/cp2018/blog/2018-Fall-Computer-Programming.html</id><summary type="html">&lt;p&gt;2018 Fall 開始將網際內容管理、投影片與網誌進行整合.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>機械設計工程系 2018 計算機程式 - Misc</title><link href="./" rel="alternate"></link><link href="./feeds/misc.atom.xml" rel="self"></link><id>./</id><updated>2018-07-18T11:00:00+08:00</updated><entry><title>2018 Fall CP 課程</title><link href="./2018-Fall-Computer-Programming.html" rel="alternate"></link><published>2018-07-18T11:00:00+08:00</published><updated>2018-07-18T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:None,2018-07-18:./2018-Fall-Computer-Programming.html</id><summary type="html">&lt;p&gt;2018 Fall 開始將網際內容管理、投影片與網誌進行整合.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;2018 Fall 開始將網際內容管理、投影片與網誌進行整合.&lt;/p&gt;
 
 
@@ -10,7 +10,4 @@
 &lt;p&gt;第三, 改版後的 CMSimfly, 加上 Pelican 靜態網誌與 Reveal.js 投影片系統, 均為靜態網站資料, 可以直接整合一起, 透過一個網址當作上課參考資料.&lt;/p&gt;
 &lt;h2&gt;該學習哪種程式語言?&lt;/h2&gt;
 &lt;p&gt;C/C++、Python、Lua 或 Javascript?&lt;/p&gt;
-&lt;p&gt;都可以.&lt;/p&gt;
-&lt;p&gt;從 &lt;a target="_blank" href="/get_page/Pyslvs%20解析"&gt;Pyslvs 解析&lt;/a&gt; 中可以得知 Solvespace 採用 C++11, 假如使用者希望一窺此一參數式機械繪圖軟體的架構與內涵, 需要專精 C++.&lt;/p&gt;
-&lt;p&gt;網誌內容寫成 /get_page/ 但是, 轉換成遠端網誌過程, 必須將&lt;/p&gt;
-&lt;p&gt;/get_page/ 要換成 ./../content/, 且最後要補上 .html&lt;/p&gt;</content><category term="2018FallCP"></category></entry></feed>
+&lt;p&gt;都可以.&lt;/p&gt;</content><category term="2018FallCP"></category></entry></feed>

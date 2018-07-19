@@ -1353,10 +1353,18 @@ def render_menu2(head, level, page, sitemap=0):
     directory += "</li></ul>"
     return directory
 # reveal 方法主要將位於 reveal 目錄下的檔案送回瀏覽器
+'''
+目前在 CMSimfly 管理模式下已經無需透過 Flask送回 reveal 與 Pelican blog 資料
+因為設計成使用者啟動隨身系統時, 除了 Flask 外還加上 http server 來檢視 reveal 與 Pelican blog 的資料
+'''
 @app.route('/reveal/<path:path>')
 def reveal(path):
   return send_from_directory(_curdir+"/reveal/", path)
 # blog 方法主要將位於 blog目錄下的檔案送回瀏覽器
+'''
+目前在 CMSimfly 管理模式下已經無需透過 Flask 送回 reveal 與 Pelican blog 資料
+因為設計成使用者啟動隨身系統時, 除了 Flask 外還加上 http server 來檢視 reveal 與 Pelican blog 的資料
+'''
 @app.route('/blog/<path:path>')
 def blog(path):
   return send_from_directory(_curdir+"/blog/", path)
@@ -1519,8 +1527,6 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">File Upload</a></li>
 <li><a href="/download_list">File List</a></li>
 <li><a href="/logout">Logout</a></li>
-<li><a href="/reveal/index.html">reveal</a></li>
-<li><a href="/blog/index.html">blog</a></li>
 <li><a href="/generate_pages">generate_pages</a></li>
 '''
     outstring += '''
@@ -1571,8 +1577,6 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 <li><a href="/fileuploadform">file upload</a></li>
 <li><a href="/download_list">file list</a></li>
 <li><a href="/logout">logout</a></li>
-<li><a href="/reveal/index.html">reveal</a></li>
-<li><a href="/blog/index.html">blog</a></li>
 <li><a href="/generate_pages">generate_pages</a></li>
 '''
     else:

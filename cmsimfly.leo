@@ -884,8 +884,6 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;File Upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;File List&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
 '''
     outstring += '''
@@ -1094,8 +1092,6 @@ window.location= 'https://' + location.host + location.pathname + location.searc
 &lt;li&gt;&lt;a href="/fileuploadform"&gt;file upload&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/download_list"&gt;file list&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/logout"&gt;logout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/reveal/index.html"&gt;reveal&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/blog/index.html"&gt;blog&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/generate_pages"&gt;generate_pages&lt;/a&gt;&lt;/li&gt;
 '''
     else:
@@ -2513,6 +2509,10 @@ bpm.kill(kind="http")
 <t tx="leo.20180702145534.1"></t>
 <t tx="leo.20180702145555.1"></t>
 <t tx="leo.20180711105804.1"># reveal 方法主要將位於 reveal 目錄下的檔案送回瀏覽器
+'''
+目前在 CMSimfly 管理模式下已經無需透過 Flask送回 reveal 與 Pelican blog 資料
+因為設計成使用者啟動隨身系統時, 除了 Flask 外還加上 http server 來檢視 reveal 與 Pelican blog 的資料
+'''
 @app.route('/reveal/&lt;path:path&gt;')
 def reveal(path):
   return send_from_directory(_curdir+"/reveal/", path)
@@ -2721,6 +2721,10 @@ Created by [KMOLab](http://lab.kmol.info/)
 </t>
 <t tx="leo.20180711113949.1"></t>
 <t tx="leo.20180711121340.1"># blog 方法主要將位於 blog目錄下的檔案送回瀏覽器
+'''
+目前在 CMSimfly 管理模式下已經無需透過 Flask 送回 reveal 與 Pelican blog 資料
+因為設計成使用者啟動隨身系統時, 除了 Flask 外還加上 http server 來檢視 reveal 與 Pelican blog 的資料
+'''
 @app.route('/blog/&lt;path:path&gt;')
 def blog(path):
   return send_from_directory(_curdir+"/blog/", path)
