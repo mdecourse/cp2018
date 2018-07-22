@@ -1542,7 +1542,7 @@ initialize(FILES,
            )</pre>
 <p>Reference</p>
 <p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p>
-<h1>工具</h1>
+<h2>Red Lang</h2><p><a href="https://www.red-lang.org/">https://www.red-lang.org/</a>&nbsp;</p><p><a href="http://www.mycode4fun.co.uk/About-Red-Programming">http://www.mycode4fun.co.uk/About-Red-Programming</a>&nbsp;</p><h1>工具</h1>
 <p>USB 可攜程式開發系統</p>
 <p>可解譯 ANSI C</p>
 <p>可解譯 Python</p>
@@ -2064,7 +2064,207 @@ print(result)</pre>
 * 按 o 鍵可以切換單張或全域檢視 (overview)
 * 按 b 或 . 鍵可以切換螢幕黑屏 (black)
 * 按 Esc 可以退出全螢幕或全域檢視 (Escape)</pre>
-<p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p><h2>數值分析</h2><p>操作目的:</p><p style="padding-left: 30px;">讓學員了解如何利用電腦程式解數學問題.</p><p>所欲解決問題:</p><p style="padding-left: 30px;">如何結合計算機程式與微積分及工程數學, 解決工程設計所可能面臨的問題.</p><p>Numerical Analysis</p><p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p><p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p><p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p><p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p><p>解微分方程式:</p><p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p><p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p><p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */ #include &lt;stdio.h&gt;#include &lt;math.h&gt; #define N 2 /* number of first order equations */#define dist 0.1 /* stepsize in t*/#define MAX 30.0 /* max for t */ FILE *output; /* internal filename */FILE *output1; /* internal filename */// 利用 pipe 呼叫 gnuplot 繪圖FILE *pipe; void runge4(double x, double y[], double step); /* Runge-Kutta function */double f(double x, double y[], int i); /* function for derivatives */ void main(){   double t, y[N];  int j;   output=fopen("osc.dat", "w"); /* external filename */  output1=fopen("osc1.dat", "w"); /* external filename */   y[0]=1.0; /* initial position */  y[1]=0.0; /* initial velocity */   //fprintf(output, "0\t%f\n", y[0]);   for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{     t=j*dist;    runge4(t, y, dist);    fprintf(output, "%f\t%f\n", t, y[0]);    fprintf(output1, "%f\t%f\n", t, y[1]);  }   fclose(output);  fclose(output1);   pipe = popen("gnuplot -persist","w");  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");  //fprintf(pipe,"set yrange [68:70]\n");  fprintf(pipe,"set output \"test.png\"\n");  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");  fprintf(pipe,"quit\n");  fprintf(pipe,"quit\n");  pclose(pipe);} void runge4(double x, double y[], double step){   double h=step/2.0, /* the midpoint */  t1[N], t2[N], t3[N], /* temporary storage arrays */  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */  int i;   for (i=0;i&lt;N;i++){     t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));  }   for (i=0;i&lt;N;i++){     t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));  }   for (i=0;i&lt;N;i++){     t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));  }   for (i=0;i&lt;N;i++){     k4[i]= step*f(x+step, t3, i);  }   for (i=0;i&lt;N;i++){     y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;  }} double f(double x, double y[], int i){   if (i==0)    x=y[1]; /* derivative of first equation */  if (i==1)    x=-y[0]-0.5*y[1];  return x;}</pre><p>Python:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt def rk4(f, x0, y0, x1, n):    vx = [0] * (n + 1)    vy = [0] * (n + 1)    print(vx, vy)    h = (x1 - x0) / float(n)    vx[0] = x = x0    vy[0] = y = y0    for i in range(1, n + 1):        k1 = h * f(x, y)        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)        k4 = h * f(x + h, y + k3)        vx[i] = x = x0 + i * h        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6    return vx, vy def f(x, y):    return x * sqrt(y) vx, vy = rk4(f, 0, 1, 10, 100)for x, y in list(zip(vx, vy))[::10]:    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre><p>也是 Python:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):    """Returns final (position, velocity) tuple after    time dt has passed.    x: initial position (number-like object)    v: initial velocity (number-like object)    a: acceleration function a(x,v,dt) (must be callable)    dt: timestep (number)"""    x1 = x    v1 = v    a1 = a(x1, v1, 0)    x2 = x + 0.5*v1*dt    v2 = v + 0.5*a1*dt    a2 = a(x2, v2, dt/2.0)    x3 = x + 0.5*v2*dt    v3 = v + 0.5*a2*dt    a3 = a(x3, v3, dt/2.0)    x4 = x + v3*dt    v4 = v + a3*dt    a4 = a(x4, v4, dt)    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)    return xf, vf    def accel(x, v, dt):    """Determines acceleration from current position,    velocity, and timestep. This particular acceleration    function models a spring."""    stiffness = 1    damping = -0.005    return -stiffness*x - damping*vt = 0dt = 1.0/4000 # Timestep of 1/40 secondstate = 50, 5 # Position, velocityeuler = 50, 5 # For comparison with Euler integrationprint("Initial    -position: %6.2f, velocity: %6.2f"%state)# Run for 100 secondswhile t &lt; 100:    t += dt    state = rk4(state[0], state[1], accel, dt)    #print(t, state)    # Integrate using Euler's method    euler = (        euler[0] + euler[1]*dt,        euler[1] + accel(euler[0],euler[1],dt)*dt    )print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre><p>練習步驟:</p><ol><li>請說明何謂微分方程式?</li><li>微分方程式用在機械設計的哪個領域?</li><li>何謂微分方程式的解析解與數值分析解?</li><li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li><li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li><li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li></ol><h2>Qt C++ 計算器程式</h2>
+<p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p><h2>數值分析</h2>
+<p>操作目的:</p>
+<p style="padding-left: 30px;">讓學員了解如何利用電腦程式解數學問題.</p>
+<p>所欲解決問題:</p>
+<p style="padding-left: 30px;">如何結合計算機程式與微積分及工程數學, 解決工程設計所可能面臨的問題.</p>
+<p>Numerical Analysis</p>
+<p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p>
+<p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p>
+<p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p>
+<p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p>
+<p>解微分方程式:</p>
+<p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p>
+<p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p>
+<p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+ 
+#define N 2 /* number of first order equations */
+#define dist 0.1 /* stepsize in t*/
+#define MAX 30.0 /* max for t */
+ 
+FILE *output; /* internal filename */
+FILE *output1; /* internal filename */
+// 利用 pipe 呼叫 gnuplot 繪圖
+FILE *pipe;
+ 
+void runge4(double x, double y[], double step); /* Runge-Kutta function */
+double f(double x, double y[], int i); /* function for derivatives */
+ 
+void main(){
+ 
+  double t, y[N];
+  int j;
+ 
+  output=fopen("osc.dat", "w"); /* external filename */
+  output1=fopen("osc1.dat", "w"); /* external filename */
+ 
+  y[0]=1.0; /* initial position */
+  y[1]=0.0; /* initial velocity */
+ 
+  //fprintf(output, "0\t%f\n", y[0]);
+ 
+  for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{
+ 
+    t=j*dist;
+    runge4(t, y, dist);
+    fprintf(output, "%f\t%f\n", t, y[0]);
+    fprintf(output1, "%f\t%f\n", t, y[1]);
+  }
+ 
+  fclose(output);
+  fclose(output1);
+ 
+  pipe = popen("gnuplot -persist","w");
+  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");
+  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");
+  //fprintf(pipe,"set yrange [68:70]\n");
+  fprintf(pipe,"set output \"test.png\"\n");
+  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");
+  fprintf(pipe,"quit\n");
+
+  fprintf(pipe,"quit\n");
+  pclose(pipe);
+}
+ 
+void runge4(double x, double y[], double step){
+ 
+  double h=step/2.0, /* the midpoint */
+  t1[N], t2[N], t3[N], /* temporary storage arrays */
+  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */
+  int i;
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    k4[i]= step*f(x+step, t3, i);
+  }
+ 
+  for (i=0;i&lt;N;i++){
+ 
+    y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;
+  }
+}
+ 
+double f(double x, double y[], int i){
+ 
+  if (i==0)
+    x=y[1]; /* derivative of first equation */
+  if (i==1)
+    x=-y[0]-0.5*y[1];
+  return x;
+}</pre>
+<p>Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt
+ 
+def rk4(f, x0, y0, x1, n):
+    vx = [0] * (n + 1)
+    vy = [0] * (n + 1)
+    print(vx, vy)
+    h = (x1 - x0) / float(n)
+    vx[0] = x = x0
+    vy[0] = y = y0
+    for i in range(1, n + 1):
+        k1 = h * f(x, y)
+        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)
+        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)
+        k4 = h * f(x + h, y + k3)
+        vx[i] = x = x0 + i * h
+        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6
+    return vx, vy
+ 
+def f(x, y):
+    return x * sqrt(y)
+ 
+vx, vy = rk4(f, 0, 1, 10, 100)
+for x, y in list(zip(vx, vy))[::10]:
+    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre>
+<p>也是 Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):
+    """Returns final (position, velocity) tuple after
+    time dt has passed.
+
+    x: initial position (number-like object)
+    v: initial velocity (number-like object)
+    a: acceleration function a(x,v,dt) (must be callable)
+    dt: timestep (number)"""
+    x1 = x
+    v1 = v
+    a1 = a(x1, v1, 0)
+
+    x2 = x + 0.5*v1*dt
+    v2 = v + 0.5*a1*dt
+    a2 = a(x2, v2, dt/2.0)
+
+    x3 = x + 0.5*v2*dt
+    v3 = v + 0.5*a2*dt
+    a3 = a(x3, v3, dt/2.0)
+
+    x4 = x + v3*dt
+    v4 = v + a3*dt
+    a4 = a(x4, v4, dt)
+
+    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)
+    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)
+
+    return xf, vf
+    
+def accel(x, v, dt):
+    """Determines acceleration from current position,
+    velocity, and timestep. This particular acceleration
+    function models a spring."""
+    stiffness = 1
+    damping = -0.005
+    return -stiffness*x - damping*v
+
+t = 0
+dt = 1.0/4000 # Timestep of 1/40 second
+state = 50, 5 # Position, velocity
+euler = 50, 5 # For comparison with Euler integration
+
+print("Initial    -position: %6.2f, velocity: %6.2f"%state)
+
+# Run for 100 seconds
+while t &lt; 100:
+    t += dt
+    state = rk4(state[0], state[1], accel, dt)
+    #print(t, state)
+
+    # Integrate using Euler's method
+    euler = (
+        euler[0] + euler[1]*dt,
+        euler[1] + accel(euler[0],euler[1],dt)*dt
+    )
+
+print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)
+print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre>
+<p>練習步驟:</p>
+<ol>
+<li>請說明何謂微分方程式?</li>
+<li>微分方程式用在機械設計的哪個領域?</li>
+<li>何謂微分方程式的解析解與數值分析解?</li>
+<li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li>
+<li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li>
+<li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li>
+</ol><h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
 <p>calculator.pro</p>
