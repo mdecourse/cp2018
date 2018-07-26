@@ -1225,8 +1225,9 @@ def parse_config():
     password = config_data[1].split(":")[1]
     return site_title, password
 def parse_content():
-    from pybean import Store, SQLiteWriter
+    #from pybean import Store, SQLiteWriter
     # if no content.db, create database file with cms table
+    '''
     if not os.path.isfile(config_dir+"content.db"):
         library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
         cms = library.new("cms")
@@ -1236,6 +1237,7 @@ def parse_content():
         cms.memo = "first memo"
         library.save(cms)
         library.commit()
+    '''
     # if no content.htm, generate a head 1 and content 1 file
     if not os.path.isfile(config_dir+"content.htm"):
         # create content.htm if there is no content.htm
@@ -1268,6 +1270,8 @@ def parse_content():
         #page_data = re.sub('</h[1-'+str(head_level)+']>', content_sep, data[index])
         page_data = re.sub('</h', content_sep, data[index])
         head = page_data.split(content_sep)[0]
+        # remove all tags from head - bug 180726
+        head = re.sub("<.*?>", "", head)
         order += 1
         head_list.append(head)
         # put level data into level variable

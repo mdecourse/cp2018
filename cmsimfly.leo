@@ -29,7 +29,7 @@
 <v t="amd.20160715000709.1" a="E"><vh>註解</vh>
 <v t="amd.20160715211540.1"><vh>處理 url 與 edit</vh></v>
 <v t="amd.20160715213810.1"><vh>必須處理 downloads 與 images 目錄</vh></v>
-<v t="leo.20180625155103.1"><vh>改為 pybean based</vh>
+<v t="leo.20180625155103.1" a="E"><vh>改為 pybean based</vh>
 <v t="leo.20180625155310.1"><vh>資料庫設計</vh></v>
 </v>
 <v t="leo.20180630135634.1" a="E"><vh>新增 generate_pages 功能</vh>
@@ -41,6 +41,7 @@
 <v t="leo.20180702104314.1"><vh>整合設定檔案</vh></v>
 <v t="leo.20180701205822.1"><vh>editorhead 修改</vh></v>
 <v t="leo.20180701212101.1"><vh>有關 Cango library</vh></v>
+<v t="leo.20180726212905.1"><vh>存檔時移除所有 tag of title</vh></v>
 </v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
 <v t="amd.20160717220157.1"><vh>Flask 開講</vh></v>
@@ -469,8 +470,9 @@ def get_page(heading, edit):
                 return outstring
 </t>
 <t tx="amd.20160714231319.1">def parse_content():
-    from pybean import Store, SQLiteWriter
+    #from pybean import Store, SQLiteWriter
     # if no content.db, create database file with cms table
+    '''
     if not os.path.isfile(config_dir+"content.db"):
         library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
         cms = library.new("cms")
@@ -480,6 +482,7 @@ def get_page(heading, edit):
         cms.memo = "first memo"
         library.save(cms)
         library.commit()
+    '''
     # if no content.htm, generate a head 1 and content 1 file
     if not os.path.isfile(config_dir+"content.htm"):
         # create content.htm if there is no content.htm
@@ -512,6 +515,8 @@ def get_page(heading, edit):
         #page_data = re.sub('&lt;/h[1-'+str(head_level)+']&gt;', content_sep, data[index])
         page_data = re.sub('&lt;/h', content_sep, data[index])
         head = page_data.split(content_sep)[0]
+        # remove all tags from head - bug 180726
+        head = re.sub("&lt;.*?&gt;", "", head)
         order += 1
         head_list.append(head)
         # put level data into level variable
@@ -2066,6 +2071,8 @@ def downloads(path):
 
 使用 SQLite 資料庫儲存檔案, 而且可以轉為純 html 文件
 
+2018.07.25 暫時關掉 pybean
+
 </t>
 <t tx="leo.20180625155310.1">CMSimfly 所需欄位
 
@@ -2731,5 +2738,10 @@ def blog(path):
 
 </t>
 <t tx="leo.20180712144340.1">因為每次 generate_pages 必須將 content 目錄中的所有檔案刪除後, 再從 content.htm 轉為靜態網頁, 因此從負擔較重的每次存檔都自動轉檔, 改回必要時再以手動呼叫 generate_pages 進行轉檔.</t>
+<t tx="leo.20180726212905.1">存檔時移除所有 tag of title
+
+這是一個 bug, 目前若 title 有 tag, 則無法透過 get_page 辨識, 因此必須在存檔前移除所有 tags
+
+bug 180726</t>
 </tnodes>
 </leo_file>
