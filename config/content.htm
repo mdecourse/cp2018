@@ -4175,51 +4175,7 @@ for item in top:
 
 檔案.write(all_text)
 print("done")</pre>
-<h2>docx 轉 pdf</h2>
-<p>用來學習 Onshape 的教學檔案格式為 docx, 以下使用 Windows 環境下的 Python3 程式, 自動進入各教學檔案目錄, 將 docx 轉為 pdf</p>
-<p>首先必須以 pip install comtypes 安裝 comtypes 模組, 然後以 SciTE, 在教學檔案目錄中, 利用以下程式碼建立 docx2pdf.py 後執行, 即可將所有 56 個 docx 轉出 pdf 檔案.</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
-import os
-import comtypes.client
- 
-wdFormatPDF = 17
- 
-#in_file = input("input docx")
-#out_file = input("output filename")
- 
-def docx2pdf(in_file, out_file):
-    word = comtypes.client.CreateObject('Word.Application')
-    doc = word.Documents.Open(in_file)
-    doc.SaveAs(out_file, FileFormat=wdFormatPDF)
-    doc.Close()
-    word.Quit()
- 
-count = 0
-# traverse root directory, and list directories as dirs and files as files
-for root, dirs, files in os.walk(os.getcwd()):
-    #print(root)
-    path = root.split('/')
-    #print(path)
-    #print((len(path) - 1) * '---', os.path.basename(root))
-    #print(files)
-    for file in files:
-        #print(len(path) * '---', file)
-        file_ext = file.split(".")[1]
-        file_name = file.split(".")[0]
-        #print(file_ext)
-        if file_ext == "docx":
-            count = count + 1
-            in_file = path[0] + "/" + file
-            #print(count,":", in_file)
-            out_file = path[0] + "/" + file_name + ".pdf"
-            #print(out_file)
-            docx2pdf(in_file, out_file)
- 
-#print(count)
-#docx2pdf(in_file, out_file)
-print("done")</pre>
-<p></p>
-<h2>網際繪圖</h2>
+<h2>docx 轉 pdf</h2><p>用來學習 Onshape 的教學檔案格式為 docx, 以下使用 Windows 環境下的 Python3 程式, 自動進入各教學檔案目錄, 將 docx 轉為 pdf</p><p>首先必須以 pip install comtypes 安裝 comtypes 模組, 然後以 SciTE, 在教學檔案目錄中, 利用以下程式碼建立 docx2pdf.py 後執行, 即可將所有 56 個 docx 轉出 pdf 檔案. 之後, 可以再設法利用&nbsp;<a href="https://github.com/coolwanglu/pdf2htmlEX">https://github.com/coolwanglu/pdf2htmlEX</a>&nbsp;以程式方法, 直接將 pdf 轉為 html.&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysimport osimport comtypes.client wdFormatPDF = 17 #in_file = input("input docx")#out_file = input("output filename") def docx2pdf(in_file, out_file):    word = comtypes.client.CreateObject('Word.Application')    doc = word.Documents.Open(in_file)    doc.SaveAs(out_file, FileFormat=wdFormatPDF)    doc.Close()    word.Quit() count = 0# traverse root directory, and list directories as dirs and files as filesfor root, dirs, files in os.walk(os.getcwd()):    #print(root)    path = root.split('/')    #print(path)    #print((len(path) - 1) * '---', os.path.basename(root))    #print(files)    for file in files:        #print(len(path) * '---', file)        file_ext = file.split(".")[1]        file_name = file.split(".")[0]        #print(file_ext)        if file_ext == "docx":            count = count + 1            in_file = path[0] + "/" + file            #print(count,":", in_file)            out_file = path[0] + "/" + file_name + ".pdf"            #print(out_file)            docx2pdf(in_file, out_file) #print(count)#docx2pdf(in_file, out_file)print("done")</pre><p></p><h2>網際繪圖</h2>
 <p>網頁中有三種基本元素 HTML5, CSS 與 Javascript, 透過 <a href="https://brython.info/">Brython</a> 或 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以使用 Python 及 Lua 替代 Javascript.</p>
 <p>參考資料:&nbsp;</p>
 <p><a href="https://link.springer.com/book/10.1007/978-1-4842-2463-2">Pro HTML5 with CSS, JavaScript, and Multimedia.pdf</a></p>
@@ -7589,7 +7545,10 @@ print(data)
 <p>CMSimple的後台管理, 僅允許單一用戶使用. 透過後台管理, 可設定各種與頁面展示相關的參數. 與許多內容管理系統相同, CMSimple提供延伸程式開發架構的設計, 可以讓程式開發者自行建構原始CMSimple以外的功能.</p>
 <p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
 <p>CMSimfly 網際內容管理系統, 以 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p>
-<h2>Pygrouf 解析</h2>
+<h3>CMSimfly 開發</h3>
+<p>以下為可行的開發項目:</p>
+<p>採用 SQLite 資料庫儲存內容資料, 允許重複標題.</p>
+<p>在靜態內容管理系統中, 納入 <a href="http://www.tipue.com/search/">Tipue Search</a> 功能.</p><h2>Pygrouf 解析</h2>
 <p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>&nbsp; 為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
 <p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架,&nbsp;<a href="https://github.com/coleifer/peewee">peewee</a>&nbsp;ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a>&nbsp;(可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p>
 <h2>Pyslvs 解析</h2>
@@ -8551,4 +8510,103 @@ timer.set_interval(draw,20)
 <p><span>p37 下載使用的 drive 則以 disk1 At goodkym 登錄</span></p>
 <p><span>Qt 下載則又以 mdecourse 登錄</span></p>
 <p><span>以上相關帳號與附屬資源, 必須統一整合</span></p>
-<h2>代理主機</h2><p>在 Windows 64 位元操作系統, 在 Virtualbox , 使用 Ubuntu 18.04 Server 版建立 Squid 代理主機,&nbsp; 然後透過&nbsp;<a href="http://vboxvmservice.sourceforge.net/">http://vboxvmservice.sourceforge.net/</a>&nbsp;讓虛擬代理主機隨 Windows 開機啟動.</p><p>執行步驟 :</p><ol><li>下載 Ubuntu 18.04 Server 版 iso</li><li>在 Windows 64 位元操作系統中安裝 Virtubox</li><li>利用 Virtualbox 安裝 Ubuntu 18.04 Server</li><li>在 Ubuntu Server 中安裝 Squid</li><li>設定 Squid 令其雙支援 IPv4 與 IPv6 協定</li><li>設定 Squid 在 Ubuntu 開機時啟動</li><li>設定 Virtualbox 中的 Ubuntu 在 Windows 開機時啟動</li></ol><p>squid.conf 設定檔案:</p><pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">acl cad_lab src 140.130.17.0/24acl cad_lab src 2001:288:6004:17::/64 acl SSL_ports port 443acl Safe_ports port 80 # httpacl Safe_ports port 88 #acl Safe_ports port 21 # ftpacl SSL_ports port 8443acl Safe_ports port 8443 acl SSL_ports port 9443acl Safe_ports port 9443 acl SSL_ports port 22acl Safe_ports port 22 acl Safe_ports port 443 # httpsacl Safe_ports port 1025-65535 # unregistered portsacl Safe_ports port 280 # http-mgmtacl Safe_ports port 488 # gss-httpacl Safe_ports port 591 # filemakeracl Safe_ports port 777 # multiling httpacl CONNECT method CONNECT # Deny requests to certain unsafe portshttp_access deny !Safe_ports # Deny CONNECT to other than secure SSL portshttp_access deny CONNECT !SSL_ports http_access allow cad_labhttp_access deny all# Only allow cachemgr access from localhosthttp_access allow localhost managerhttp_access deny manager #http_access allow localnethttp_access allow localhost # And finally deny all other access to this proxyhttp_access deny all # Squid normally listens to port 3128http_port 3128 #cache_dir ufs /var/spool/squid 100 16 256icp_port 3130icp_access allow all cache_dir ufs /var/spool/squid 2000 16 256cache_peer 140.130.17.17 sibling 3128 3130cache_peer 140.130.17.4 sibling 3128 3130cache_peer 140.130.17.9 sibling 3128 3130cache_peer 140.130.17.53 sibling 3128 3130cache_peer 140.130.17.42 sibling 3128 3130 ## Add any of your own refresh_pattern entries above these.#refresh_pattern ^ftp: 1440 20% 10080refresh_pattern ^gopher: 1440 0% 1440refresh_pattern -i (/cgi-bin/|\?) 0 0% 0refresh_pattern (Release|Packages(.gz)*)$ 0 20% 2880refresh_pattern . 0 20% 4320</pre><p></p>
+<h2>代理主機</h2>
+<p>在 Windows 64 位元操作系統, 以 Virtualbox , 使用 Ubuntu 18.04 Server 版建立 Squid 代理主機,&nbsp; 然後透過&nbsp;<a href="http://vboxvmservice.sourceforge.net/">http://vboxvmservice.sourceforge.net/</a>&nbsp;讓虛擬代理主機隨 Windows 開機啟動.</p>
+<p>執行步驟 :</p>
+<ol>
+<li>下載 Ubuntu 18.04 Server 版 iso</li>
+<li>在 Windows 64 位元操作系統中安裝 Virtubox</li>
+<li>利用 Virtualbox 安裝 Ubuntu 18.04 Server</li>
+<li>在 Ubuntu Server 中安裝 Squid</li>
+<li>設定 Squid 令其雙支援 IPv4 與 IPv6 協定</li>
+<li>設定 Squid 在 Ubuntu 開機時啟動</li>
+<li>設定 Virtualbox 中的 Ubuntu 在 Windows 開機時啟動</li>
+<li>若要轉移已經設定完成的 Virtualbox 主機, 以 File-&gt;Export Appliance 進行</li>
+<li>若要轉進已經設定完成的 Virtualbox 主機, 以 File-&gt;Import Applicance 進行</li>
+<li>轉進虛擬主機後, 必須針對實際環境加以修改相關設定</li>
+</ol>
+<p>squid.conf 設定檔案:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">acl cad_lab src 140.130.17.0/24
+acl cad_lab src 2001:288:6004:17::/64
+ 
+acl SSL_ports port 443
+acl Safe_ports port 80 # http
+acl Safe_ports port 88
+ 
+#acl Safe_ports port 21 # ftp
+acl SSL_ports port 8443
+acl Safe_ports port 8443
+ 
+acl SSL_ports port 9443
+acl Safe_ports port 9443
+ 
+acl SSL_ports port 22
+acl Safe_ports port 22
+ 
+acl Safe_ports port 443 # https
+acl Safe_ports port 1025-65535 # unregistered ports
+acl Safe_ports port 280 # http-mgmt
+acl Safe_ports port 488 # gss-http
+acl Safe_ports port 591 # filemaker
+acl Safe_ports port 777 # multiling http
+acl CONNECT method CONNECT
+ 
+# Deny requests to certain unsafe ports
+http_access deny !Safe_ports
+ 
+# Deny CONNECT to other than secure SSL ports
+http_access deny CONNECT !SSL_ports
+ 
+http_access allow cad_lab
+http_access deny all
+# Only allow cachemgr access from localhost
+http_access allow localhost manager
+http_access deny manager
+ 
+#http_access allow localnet
+http_access allow localhost
+ 
+# And finally deny all other access to this proxy
+http_access deny all
+ 
+# Squid normally listens to port 3128
+http_port 3128
+ 
+#cache_dir ufs /var/spool/squid 100 16 256
+icp_port 3130
+icp_access allow all
+ 
+cache_dir ufs /var/spool/squid 2000 16 256
+cache_peer 140.130.17.17 sibling 3128 3130
+cache_peer 140.130.17.4 sibling 3128 3130
+cache_peer 140.130.17.9 sibling 3128 3130
+cache_peer 140.130.17.53 sibling 3128 3130
+cache_peer 140.130.17.42 sibling 3128 3130
+ 
+#
+# Add any of your own refresh_pattern entries above these.
+#
+refresh_pattern ^ftp: 1440 20% 10080
+refresh_pattern ^gopher: 1440 0% 1440
+refresh_pattern -i (/cgi-bin/|\?) 0 0% 0
+refresh_pattern (Release|Packages(.gz)*)$ 0 20% 2880
+refresh_pattern . 0 20% 4320</pre>
+<p><span>安裝 squid</span></p>
+<p><span>sudo apt install squid</span></p>
+<p>sudo gedit /etc/squid/squid.conf</p>
+<p>sudo service squid restart</p>
+<p><span></span>netplan YAML 設定範例:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">network:
+    ethernets:
+        enp0s3:
+            addresses: 
+                - 2001:288:6004:17:0811::cccc/64
+            gateway6: 2001:288:6004:17::254
+            nameservers:
+                addresses:
+                    - 2001:b000:168::1
+ 
+    version: 2</pre>
+<p>Ubuntu 操作指令:</p>
+<p>刪除 history:&nbsp;</p>
+<pre class="lang-bsh prettyprint prettyprinted"><code><span class="pln">cat </span><span class="pun">/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">null </span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">~/.</span><span class="pln">bash_history </span><span class="pun">&amp;&amp;</span><span class="pln"> history </span><span class="pun">-</span><span class="pln">c </span><span class="pun">&amp;&amp;</span><span class="pln"> exit</span></code></pre>
