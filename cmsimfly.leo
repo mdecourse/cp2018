@@ -42,6 +42,7 @@
 <v t="leo.20180701205822.1"><vh>editorhead 修改</vh></v>
 <v t="leo.20180701212101.1"><vh>有關 Cango library</vh></v>
 <v t="leo.20180726212905.1"><vh>存檔時移除所有 tag of title</vh></v>
+<v t="leo.20180728154823.1"><vh>利用 flake8 查驗格式</vh></v>
 </v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
 <v t="amd.20160717220157.1"><vh>Flask 開講</vh></v>
@@ -66,7 +67,6 @@
 <v t="amd.20160714230833.1" a="E"><vh>編輯 flaskapp.py</vh>
 <v t="amd.20160714230833.2" a="E"><vh>@clean flaskapp.py</vh>
 <v t="amd.20160714230833.3"><vh>&lt;&lt;declarations&gt;&gt;</vh></v>
-<v t="amd.20160714230833.4"><vh>&lt;&lt;registers&gt;&gt;</vh></v>
 <v t="amd.20160714233131.1"><vh>checkLogin</vh></v>
 <v t="amd.20160717235504.1"><vh>delete_file</vh></v>
 <v t="amd.20160715161158.1"><vh>doDelete</vh></v>
@@ -268,8 +268,6 @@ vertical: body pane on the botton</t>
 @others
 </t>
 <t tx="amd.20160714230122.1">#!/usr/bin/python
-# 導入 os 模組, 主要用來判斷是否以 uwsgi 或一般近端模式執行
-import os
 # 導入同目錄下的 flaskapp.py
 import flaskapp
 import ssl
@@ -285,8 +283,10 @@ if uwsgi:
     application = flaskapp.app
 else:
     # 表示在近端執行, 以 python3 wsgi.py 執行
-    flaskapp.app.run(host='127.0.0.1', port=8443, debug=True, ssl_context=context)
-
+    flaskapp.app.run(
+        host='127.0.0.1', port=8443, debug=True,
+        ssl_context=context
+    )
 </t>
 <t tx="amd.20160714230833.1"></t>
 <t tx="amd.20160714230833.16">@app.route('/download/', methods=['GET'])
@@ -299,7 +299,6 @@ def download():
     else:
     # for image files
         return send_from_directory(image_dir, filename=filename)
-    
 
 
 </t>
@@ -318,16 +317,9 @@ def send_static():
 <t tx="amd.20160714230833.2">@language python
 @tabwidth -4
 &lt;&lt;declarations&gt;&gt;
-&lt;&lt;registers&gt;&gt;
 @others
 if __name__ == "__main__":
     app.run()
-
-
-
-
-
-
 </t>
 <t tx="amd.20160714230833.20"># setup static directory
 @app.route('/static/&lt;path:path&gt;')
@@ -337,40 +329,29 @@ def send_file(path):
 </t>
 <t tx="amd.20160714230833.3"># coding: utf-8
 from flask import Flask, send_from_directory, request, redirect, \
-    render_template, session, make_response, url_for, flash
-import random
+    session, url_for, flash
 import math
-import os
 # init.py 為自行建立的起始物件
 import init
 # 利用 nocache.py 建立 @nocache decorator, 讓頁面不會留下 cache
-from nocache import nocache
+# from nocache import nocache
 # the followings are for cmsimfly
 import re
 import os
-import math
 import hashlib
 # use quote_plus() to generate URL
 import urllib.parse
 # use cgi.escape() to resemble php htmlspecialchars()
-# use cgi.escape() or html.escape to generate data for textarea tag, otherwise Editor can not deal with some Javascript code.
+'''use cgi.escape() or html.escape to generate data for textarea tag,
+otherwise Editor can not deal with some Javascript codes.
+'''
 import cgi
-# get the current directory of the file
-_curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
 import sys
-sys.path.append(_curdir)
 
-# 由 init.py 中的 uwsgi = False 或 True 決定在 uwsgi 模式或近端模式執行
-
-#ends for cmsimfly
-
-# 假如隨後要利用 blueprint 架構時, 可以將程式放在子目錄中
-# 然後利用 register 方式導入
-# 導入 g1 目錄下的 user1.py
-#import users.g1.user1
-
+# get the current directory of the file
 # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
 _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+sys.path.append(_curdir)
 # 表示程式在近端執行, 最後必須決定是由 init.py 或此地決定目錄設定
 config_dir = _curdir + "/config/"
 static_dir = _curdir + "/static"
@@ -382,7 +363,8 @@ initobj = init.Init()
 # 取 init.py 中 Init 類別中的 class uwsgi 變數 (static variable) 設定
 uwsgi = init.Init.uwsgi
 
-# 必須先將 download_dir 設為 static_folder, 然後才可以用於 download 方法中的 app.static_folder 的呼叫
+'''必須先將 download_dir 設為 static_folder,
+然後才可以用於 download 方法中的 app.static_folder 的呼叫'''
 app = Flask(__name__)
 
 # 設置隨後要在 blueprint 應用程式中引用的 global 變數
@@ -395,16 +377,6 @@ app.config['download_dir'] = download_dir
 # set the secret key.  keep this really secret:
 app.secret_key = 'A0Zr9@8j/3yX R~XHH!jmN]LWX/,?R@T'
 
-
-
-
-
-
-
-
-</t>
-<t tx="amd.20160714230833.4"># 子目錄中註冊藍圖位置
-#app.register_blueprint(users.g1.user1.g1app)
 
 </t>
 <t tx="amd.20160714231055.1"># seperate page need heading and edit variables, if edit=1, system will enter edit mode
@@ -800,6 +772,7 @@ def file_lister(directory, type=None, page=1, item_per_page=10):
     # files are all the data to list, from starti to endi
     # add file size
     outstring = ""
+
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileExtension = fileExtension.lower()
@@ -1138,7 +1111,8 @@ def checkLogin():
         session['admin'] = 1
         return redirect('/edit_page')
     return redirect('/')
-    
+
+
 </t>
 <t tx="amd.20160714233320.1"># edit all page content
 @app.route('/edit_page', defaults={'edit': 1})
@@ -1462,64 +1436,81 @@ def download_list():
             notlast = True
         if int(page) &gt; 1:
             outstring += "&lt;a href='"
-            outstring += "download_list?&amp;amp;page=1&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=1&amp;amp;item_per_page=" + str(item_per_page) + \
+                                "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;&lt;&lt;&lt;/a&gt; "
             page_num = int(page) - 1
             outstring += "&lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(page_num)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(page_num) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;Previous&lt;/a&gt; "
+
         span = 10
+
         for index in range(int(page)-span, int(page)+span):
             if index&gt;= 0 and index&lt; totalpage:
                 page_now = index + 1 
                 if page_now == int(page):
-                    outstring += "&lt;font size='+1' color='red'&gt;"+str(page)+" &lt;/font&gt;"
+                    outstring += "&lt;font size='+1' color='red'&gt;" + str(page) + " &lt;/font&gt;"
                 else:
                     outstring += "&lt;a href='"
-                    outstring += "download_list?&amp;amp;page="+str(page_now)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
-                    outstring += "'&gt;"+str(page_now)+"&lt;/a&gt; "
+                    outstring += "download_list?&amp;amp;page=" + str(page_now) + "&amp;amp;item_per_page=" + \
+                                        str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
+                    outstring += "'&gt;"+str(page_now) + "&lt;/a&gt; "
 
         if notlast == True:
             nextpage = int(page) + 1
             outstring += " &lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(nextpage)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(nextpage) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;Next&lt;/a&gt;"
             outstring += " &lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(totalpage)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(totalpage) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;&gt;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;"
+
         if (int(page) * int(item_per_page)) &lt; total_rows:
             notlast = True
-            outstring += downloadlist_access_list(files, starti, endi)+"&lt;br /&gt;"
+            outstring += downloadlist_access_list(files, starti, endi) + "&lt;br /&gt;"
         else:
             outstring += "&lt;br /&gt;&lt;br /&gt;"
-            outstring += downloadlist_access_list(files, starti, total_rows)+"&lt;br /&gt;"
-        
+            outstring += downloadlist_access_list(files, starti, total_rows) + "&lt;br /&gt;"
+
         if int(page) &gt; 1:
             outstring += "&lt;a href='"
-            outstring += "download_list?&amp;amp;page=1&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=1&amp;amp;item_per_page=" + str(item_per_page) + \
+                                "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;&lt;&lt;&lt;/a&gt; "
             page_num = int(page) - 1
             outstring += "&lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(page_num)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(page_num) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;Previous&lt;/a&gt; "
+
         span = 10
+
         for index in range(int(page)-span, int(page)+span):
         #for ($j=$page-$range;$j&lt;$page+$range;$j++)
             if index &gt;=0 and index &lt; totalpage:
                 page_now = index + 1
                 if page_now == int(page):
-                    outstring += "&lt;font size='+1' color='red'&gt;"+str(page)+" &lt;/font&gt;"
+                    outstring += "&lt;font size='+1' color='red'&gt;" + str(page)+" &lt;/font&gt;"
                 else:
                     outstring += "&lt;a href='"
-                    outstring += "download_list?&amp;amp;page="+str(page_now)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
-                    outstring += "'&gt;"+str(page_now)+"&lt;/a&gt; "
+                    outstring += "download_list?&amp;amp;page=" + str(page_now) + \
+                                        "&amp;amp;item_per_page=" + str(item_per_page) + \
+                                        "&amp;amp;keyword=" + str(session.get('download_keyword'))
+                    outstring += "'&gt;" + str(page_now)+"&lt;/a&gt; "
+
         if notlast == True:
             nextpage = int(page) + 1
             outstring += " &lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(nextpage)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(nextpage) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;Next&lt;/a&gt;"
             outstring += " &lt;a href='"
-            outstring += "download_list?&amp;amp;page="+str(totalpage)+"&amp;amp;item_per_page="+str(item_per_page)+"&amp;amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;amp;page=" + str(totalpage) + "&amp;amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'&gt;&gt;&gt;&lt;/a&gt;"
     else:
         outstring += "no data!"
@@ -1528,8 +1519,9 @@ def download_list():
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
 
-    return set_css()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
-        directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;"+outstring+"&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+    return set_css() + "&lt;div class='container'&gt;&lt;nav&gt;" + \
+               directory + "&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;" + outstring + "&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+
 
 </t>
 <t tx="amd.20160715160642.1">@app.route('/image_list', defaults={'edit':1})
@@ -1762,24 +1754,25 @@ def doDelete():
     # only select one file
     if isinstance(filename, str):
         try:
-            os.remove(download_dir+"/"+filename)
-            outstring += filename+" deleted!"
+            os.remove(download_dir + "/" + filename)
+            outstring += filename + " deleted!"
         except:
-            outstring += filename+"Error, can not delete files!&lt;br /&gt;"
+            outstring += filename + "Error, can not delete files!&lt;br /&gt;"
     else:
         # multiple files selected
         for index in range(len(filename)):
             try:
-                os.remove(download_dir+"/"+filename[index])
-                outstring += filename[index]+" deleted!&lt;br /&gt;"
+                os.remove(download_dir + "/" + filename[index])
+                outstring += filename[index] + " deleted!&lt;br /&gt;"
             except:
-                outstring += filename[index]+"Error, can not delete files!&lt;br /&gt;"
+                outstring += filename[index] + "Error, can not delete files!&lt;br /&gt;"
 
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
 
-    return set_css()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
-        directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;"+outstring+"&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+    return set_css() + "&lt;div class='container'&gt;&lt;nav&gt;" + \
+               directory + "&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;" + \
+               outstring + "&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
 
 </t>
 <t tx="amd.20160715161251.1">@app.route('/image_doDelete', methods=['POST'])
@@ -1839,12 +1832,14 @@ def doSearch():
         for index in range(len(head)):
             if (keyword != "" or None) and (keyword.lower() in page[index].lower() or \
             keyword.lower() in head[index].lower()): \
-                match += "&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;&lt;br /&gt;"
-        return set_css()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
-        directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Search Result&lt;/h1&gt;keyword: "+ \
-        keyword.lower()+"&lt;br /&gt;&lt;br /&gt;in the following pages:&lt;br /&gt;&lt;br /&gt;"+ \
-        match+" \
-     &lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+                match += "&lt;a href='/get_page/" + head[index] + "'&gt;" + \
+                                head[index] + "&lt;/a&gt;&lt;br /&gt;"
+        return set_css() + "&lt;div class='container'&gt;&lt;nav&gt;"+ \
+                   directory + "&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Search Result&lt;/h1&gt;keyword: " + \
+                   keyword.lower()+"&lt;br /&gt;&lt;br /&gt;in the following pages:&lt;br /&gt;&lt;br /&gt;" + \
+                   match + "&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+
+
 </t>
 <t tx="amd.20160715161642.1">@app.route('/edit_config', defaults={'edit': 1})
 @app.route('/edit_config/&lt;path:edit&gt;')
@@ -2037,23 +2032,29 @@ def delete_file():
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
     filename = request.form['filename']
-    if filename == None:
+    if filename is None:
         outstring = "no file selected!"
-        return set_css()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
-        directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Delete Error&lt;/h1&gt;"+outstring+"&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+        return set_css() + "&lt;div class='container'&gt;&lt;nav&gt;" + \
+                   directory + "&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Delete Error&lt;/h1&gt;" + \
+                   outstring + "&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
     outstring = "delete all these files?&lt;br /&gt;&lt;br /&gt;"
     outstring += "&lt;form method='post' action='doDelete'&gt;"
     # only one file is selected
     if isinstance(filename, str):
-        outstring += filename+"&lt;input type='hidden' name='filename' value='"+filename+"'&gt;&lt;br /&gt;"
+        outstring += filename + "&lt;input type='hidden' name='filename' value='" + \
+                            filename + "'&gt;&lt;br /&gt;"
     else:
         # multiple files selected
         for index in range(len(filename)):
-            outstring += filename[index]+"&lt;input type='hidden' name='filename' value='"+filename[index]+"'&gt;&lt;br /&gt;"
+            outstring += filename[index] + "&lt;input type='hidden' name='filename' value='" + \
+                                filename[index]+"'&gt;&lt;br /&gt;"
     outstring += "&lt;br /&gt;&lt;input type='submit' value='delete'&gt;&lt;/form&gt;"
 
-    return set_css()+"&lt;div class='container'&gt;&lt;nav&gt;"+ \
-        directory+"&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;"+outstring+"&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+    return set_css() + "&lt;div class='container'&gt;&lt;nav&gt;" + \
+               directory + "&lt;/nav&gt;&lt;section&gt;&lt;h1&gt;Download List&lt;/h1&gt;" + \
+               outstring + "&lt;br/&gt;&lt;br /&gt;&lt;/body&gt;&lt;/html&gt;"
+
+
 </t>
 <t tx="amd.20160718002238.1">有關內容解碼
 
@@ -2743,5 +2744,6 @@ def blog(path):
 這是一個 bug, 目前若 title 有 tag, 則無法透過 get_page 辨識, 因此必須在存檔前移除所有 tags
 
 bug 180726</t>
+<t tx="leo.20180728154823.1">將程式碼逐一修改為 flake8 查驗無誤</t>
 </tnodes>
 </leo_file>

@@ -1,39 +1,28 @@
 # coding: utf-8
 from flask import Flask, send_from_directory, request, redirect, \
-    render_template, session, make_response, url_for, flash
-import random
+    session, url_for, flash
 import math
-import os
 # init.py 為自行建立的起始物件
 import init
 # 利用 nocache.py 建立 @nocache decorator, 讓頁面不會留下 cache
-from nocache import nocache
+# from nocache import nocache
 # the followings are for cmsimfly
 import re
 import os
-import math
 import hashlib
 # use quote_plus() to generate URL
 import urllib.parse
 # use cgi.escape() to resemble php htmlspecialchars()
-# use cgi.escape() or html.escape to generate data for textarea tag, otherwise Editor can not deal with some Javascript code.
+'''use cgi.escape() or html.escape to generate data for textarea tag,
+otherwise Editor can not deal with some Javascript codes.
+'''
 import cgi
-# get the current directory of the file
-_curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
 import sys
-sys.path.append(_curdir)
 
-# 由 init.py 中的 uwsgi = False 或 True 決定在 uwsgi 模式或近端模式執行
-
-#ends for cmsimfly
-
-# 假如隨後要利用 blueprint 架構時, 可以將程式放在子目錄中
-# 然後利用 register 方式導入
-# 導入 g1 目錄下的 user1.py
-#import users.g1.user1
-
+# get the current directory of the file
 # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
 _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+sys.path.append(_curdir)
 # 表示程式在近端執行, 最後必須決定是由 init.py 或此地決定目錄設定
 config_dir = _curdir + "/config/"
 static_dir = _curdir + "/static"
@@ -45,7 +34,8 @@ initobj = init.Init()
 # 取 init.py 中 Init 類別中的 class uwsgi 變數 (static variable) 設定
 uwsgi = init.Init.uwsgi
 
-# 必須先將 download_dir 設為 static_folder, 然後才可以用於 download 方法中的 app.static_folder 的呼叫
+'''必須先將 download_dir 設為 static_folder,
+然後才可以用於 download 方法中的 app.static_folder 的呼叫'''
 app = Flask(__name__)
 
 # 設置隨後要在 blueprint 應用程式中引用的 global 變數
@@ -59,15 +49,6 @@ app.config['download_dir'] = download_dir
 app.secret_key = 'A0Zr9@8j/3yX R~XHH!jmN]LWX/,?R@T'
 
 
-
-
-
-
-
-
-# 子目錄中註冊藍圖位置
-#app.register_blueprint(users.g1.user1.g1app)
-
 @app.route('/checkLogin', methods=['POST'])
 def checkLogin():
     """Check user login process."""
@@ -78,7 +59,8 @@ def checkLogin():
         session['admin'] = 1
         return redirect('/edit_page')
     return redirect('/')
-    
+
+
 @app.route('/delete_file', methods=['POST'])
 def delete_file():
     """Delete user uploaded files."""
@@ -87,23 +69,29 @@ def delete_file():
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
     filename = request.form['filename']
-    if filename == None:
+    if filename is None:
         outstring = "no file selected!"
-        return set_css()+"<div class='container'><nav>"+ \
-        directory+"</nav><section><h1>Delete Error</h1>"+outstring+"<br/><br /></body></html>"
+        return set_css() + "<div class='container'><nav>" + \
+                   directory + "</nav><section><h1>Delete Error</h1>" + \
+                   outstring + "<br/><br /></body></html>"
     outstring = "delete all these files?<br /><br />"
     outstring += "<form method='post' action='doDelete'>"
     # only one file is selected
     if isinstance(filename, str):
-        outstring += filename+"<input type='hidden' name='filename' value='"+filename+"'><br />"
+        outstring += filename + "<input type='hidden' name='filename' value='" + \
+                            filename + "'><br />"
     else:
         # multiple files selected
         for index in range(len(filename)):
-            outstring += filename[index]+"<input type='hidden' name='filename' value='"+filename[index]+"'><br />"
+            outstring += filename[index] + "<input type='hidden' name='filename' value='" + \
+                                filename[index]+"'><br />"
     outstring += "<br /><input type='submit' value='delete'></form>"
 
-    return set_css()+"<div class='container'><nav>"+ \
-        directory+"</nav><section><h1>Download List</h1>"+outstring+"<br/><br /></body></html>"
+    return set_css() + "<div class='container'><nav>" + \
+               directory + "</nav><section><h1>Download List</h1>" + \
+               outstring + "<br/><br /></body></html>"
+
+
 @app.route('/doDelete', methods=['POST'])
 def doDelete():
     """Action to delete user uploaded files."""
@@ -115,24 +103,25 @@ def doDelete():
     # only select one file
     if isinstance(filename, str):
         try:
-            os.remove(download_dir+"/"+filename)
-            outstring += filename+" deleted!"
+            os.remove(download_dir + "/" + filename)
+            outstring += filename + " deleted!"
         except:
-            outstring += filename+"Error, can not delete files!<br />"
+            outstring += filename + "Error, can not delete files!<br />"
     else:
         # multiple files selected
         for index in range(len(filename)):
             try:
-                os.remove(download_dir+"/"+filename[index])
-                outstring += filename[index]+" deleted!<br />"
+                os.remove(download_dir + "/" + filename[index])
+                outstring += filename[index] + " deleted!<br />"
             except:
-                outstring += filename[index]+"Error, can not delete files!<br />"
+                outstring += filename[index] + "Error, can not delete files!<br />"
 
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
 
-    return set_css()+"<div class='container'><nav>"+ \
-        directory+"</nav><section><h1>Download List</h1>"+outstring+"<br/><br /></body></html>"
+    return set_css() + "<div class='container'><nav>" + \
+               directory + "</nav><section><h1>Download List</h1>" + \
+               outstring + "<br/><br /></body></html>"
 
 @app.route('/doSearch', methods=['POST'])
 def doSearch():
@@ -147,12 +136,14 @@ def doSearch():
         for index in range(len(head)):
             if (keyword != "" or None) and (keyword.lower() in page[index].lower() or \
             keyword.lower() in head[index].lower()): \
-                match += "<a href='/get_page/"+head[index]+"'>"+head[index]+"</a><br />"
-        return set_css()+"<div class='container'><nav>"+ \
-        directory+"</nav><section><h1>Search Result</h1>keyword: "+ \
-        keyword.lower()+"<br /><br />in the following pages:<br /><br />"+ \
-        match+" \
-     </section></div></body></html>"
+                match += "<a href='/get_page/" + head[index] + "'>" + \
+                                head[index] + "</a><br />"
+        return set_css() + "<div class='container'><nav>"+ \
+                   directory + "</nav><section><h1>Search Result</h1>keyword: " + \
+                   keyword.lower()+"<br /><br />in the following pages:<br /><br />" + \
+                   match + "</section></div></body></html>"
+
+
 @app.route('/download/', methods=['GET'])
 def download():
     """Download file using URL."""
@@ -163,7 +154,6 @@ def download():
     else:
     # for image files
         return send_from_directory(image_dir, filename=filename)
-    
 
 
 #@app.route('/download_list', defaults={'edit':1})
@@ -205,64 +195,81 @@ def download_list():
             notlast = True
         if int(page) > 1:
             outstring += "<a href='"
-            outstring += "download_list?&amp;page=1&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=1&amp;item_per_page=" + str(item_per_page) + \
+                                "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'><<</a> "
             page_num = int(page) - 1
             outstring += "<a href='"
-            outstring += "download_list?&amp;page="+str(page_num)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(page_num) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>Previous</a> "
+
         span = 10
+
         for index in range(int(page)-span, int(page)+span):
             if index>= 0 and index< totalpage:
                 page_now = index + 1 
                 if page_now == int(page):
-                    outstring += "<font size='+1' color='red'>"+str(page)+" </font>"
+                    outstring += "<font size='+1' color='red'>" + str(page) + " </font>"
                 else:
                     outstring += "<a href='"
-                    outstring += "download_list?&amp;page="+str(page_now)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
-                    outstring += "'>"+str(page_now)+"</a> "
+                    outstring += "download_list?&amp;page=" + str(page_now) + "&amp;item_per_page=" + \
+                                        str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
+                    outstring += "'>"+str(page_now) + "</a> "
 
         if notlast == True:
             nextpage = int(page) + 1
             outstring += " <a href='"
-            outstring += "download_list?&amp;page="+str(nextpage)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(nextpage) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>Next</a>"
             outstring += " <a href='"
-            outstring += "download_list?&amp;page="+str(totalpage)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(totalpage) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>>></a><br /><br />"
+
         if (int(page) * int(item_per_page)) < total_rows:
             notlast = True
-            outstring += downloadlist_access_list(files, starti, endi)+"<br />"
+            outstring += downloadlist_access_list(files, starti, endi) + "<br />"
         else:
             outstring += "<br /><br />"
-            outstring += downloadlist_access_list(files, starti, total_rows)+"<br />"
-        
+            outstring += downloadlist_access_list(files, starti, total_rows) + "<br />"
+
         if int(page) > 1:
             outstring += "<a href='"
-            outstring += "download_list?&amp;page=1&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=1&amp;item_per_page=" + str(item_per_page) + \
+                                "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'><<</a> "
             page_num = int(page) - 1
             outstring += "<a href='"
-            outstring += "download_list?&amp;page="+str(page_num)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(page_num) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>Previous</a> "
+
         span = 10
+
         for index in range(int(page)-span, int(page)+span):
         #for ($j=$page-$range;$j<$page+$range;$j++)
             if index >=0 and index < totalpage:
                 page_now = index + 1
                 if page_now == int(page):
-                    outstring += "<font size='+1' color='red'>"+str(page)+" </font>"
+                    outstring += "<font size='+1' color='red'>" + str(page)+" </font>"
                 else:
                     outstring += "<a href='"
-                    outstring += "download_list?&amp;page="+str(page_now)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
-                    outstring += "'>"+str(page_now)+"</a> "
+                    outstring += "download_list?&amp;page=" + str(page_now) + \
+                                        "&amp;item_per_page=" + str(item_per_page) + \
+                                        "&amp;keyword=" + str(session.get('download_keyword'))
+                    outstring += "'>" + str(page_now)+"</a> "
+
         if notlast == True:
             nextpage = int(page) + 1
             outstring += " <a href='"
-            outstring += "download_list?&amp;page="+str(nextpage)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(nextpage) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>Next</a>"
             outstring += " <a href='"
-            outstring += "download_list?&amp;page="+str(totalpage)+"&amp;item_per_page="+str(item_per_page)+"&amp;keyword="+str(session.get('download_keyword'))
+            outstring += "download_list?&amp;page=" + str(totalpage) + "&amp;item_per_page=" + \
+                                str(item_per_page) + "&amp;keyword=" + str(session.get('download_keyword'))
             outstring += "'>>></a>"
     else:
         outstring += "no data!"
@@ -271,8 +278,9 @@ def download_list():
     head, level, page = parse_content()
     directory = render_menu(head, level, page)
 
-    return set_css()+"<div class='container'><nav>"+ \
-        directory+"</nav><section><h1>Download List</h1>"+outstring+"<br/><br /></body></html>"
+    return set_css() + "<div class='container'><nav>" + \
+               directory + "</nav><section><h1>Download List</h1>" + outstring + "<br/><br /></body></html>"
+
 
 def downloadlist_access_list(files, starti, endi):
     """List files function for download_list."""
@@ -281,6 +289,7 @@ def downloadlist_access_list(files, starti, endi):
     # files are all the data to list, from starti to endi
     # add file size
     outstring = ""
+
     for index in range(int(starti)-1, int(endi)):
         fileName, fileExtension = os.path.splitext(files[index])
         fileExtension = fileExtension.lower()
@@ -1833,9 +1842,3 @@ def unique(items):
     return keep
 if __name__ == "__main__":
     app.run()
-
-
-
-
-
-
