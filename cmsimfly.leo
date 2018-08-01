@@ -106,7 +106,7 @@
 <v t="amd.20160714232921.1"><vh>login</vh></v>
 <v t="amd.20160715154321.1"><vh>logout</vh></v>
 <v t="amd.20160714231619.1"><vh>parse_config</vh></v>
-<v t="amd.20160714231319.1"><vh>parse_content</vh></v>
+<v t="leo.20180801114917.1"><vh>parse_content</vh></v>
 <v t="amd.20160714231359.1"><vh>render_menu</vh></v>
 <v t="leo.20180630203542.1"><vh>render_menu2</vh></v>
 <v t="leo.20180711105804.1"><vh>reveal</vh></v>
@@ -338,6 +338,8 @@ import init
 # the followings are for cmsimfly
 import re
 import os
+# for new parse_content function
+from bs4 import BeautifulSoup
 import hashlib
 # use quote_plus() to generate URL
 import urllib.parse
@@ -440,66 +442,6 @@ def get_page(heading, edit):
             #pagedata = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+search_content(head, page, heading)
             #outstring = last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata), page_order)
                 return outstring
-</t>
-<t tx="amd.20160714231319.1">def parse_content():
-    #from pybean import Store, SQLiteWriter
-    # if no content.db, create database file with cms table
-    '''
-    if not os.path.isfile(config_dir+"content.db"):
-        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
-        cms = library.new("cms")
-        cms.follow = 0
-        cms.title = "head 1"
-        cms.content = "content 1"
-        cms.memo = "first memo"
-        library.save(cms)
-        library.commit()
-    '''
-    # if no content.htm, generate a head 1 and content 1 file
-    if not os.path.isfile(config_dir+"content.htm"):
-        # create content.htm if there is no content.htm
-        File = open(config_dir+"content.htm", "w", encoding="utf-8")
-        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
-        File.close()
-    subject = file_get_contents(config_dir+"content.htm")
-    # deal with content without content
-    if subject == "":
-        # create content.htm if there is no content.htm
-        File = open(config_dir+"content.htm", "w", encoding="utf-8")
-        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
-        File.close()
-    # deal with content has content but no heading
-    # replace subject content with special seperate string to avoid error 
-    subject = re.sub('#@CMSIMPLY_SPLIT@#', '井@CMSIMPLY_SPLIT@井', subject)
-    content_sep = '#@CMSIMPLY_SPLIT@#'
-    head_level = 3
-    # remove all attribute inside h1, h2 and h3 tags
-    subject = re.sub('&lt;(h1|h2|h3)[^&gt;]*&gt;', r'&lt;\1&gt;', subject, flags=re.I)
-    content = re.split('&lt;/body&gt;', subject)
-    result = re.sub('&lt;h[1-'+str(head_level)+']&gt;', content_sep, content[0])
-    # remove the first element contains html and body tags
-    data = result.split(content_sep)[1:]
-    head_list = []
-    level_list = []
-    page_list = []
-    order = 1
-    for index in range(len(data)):
-        #page_data = re.sub('&lt;/h[1-'+str(head_level)+']&gt;', content_sep, data[index])
-        page_data = re.sub('&lt;/h', content_sep, data[index])
-        head = page_data.split(content_sep)[0]
-        # remove all tags from head - bug 180726
-        head = re.sub("&lt;.*?&gt;", "", head)
-        order += 1
-        head_list.append(head)
-        # put level data into level variable
-        level = page_data.split(content_sep)[1][0]
-        level_list.append(level)
-        # remove  1&gt;,  2&gt; or 3&gt;
-        page = page_data.split(content_sep)[1][2:]
-        page_list.append(page)
-    # send head to unique function to avoid duplicate heading
-    #head_list = unique(head_list)
-    return head_list, level_list, page_list
 </t>
 <t tx="amd.20160714231359.1">def render_menu(head, level, page, sitemap=0):
     directory = ""
@@ -2745,5 +2687,80 @@ def blog(path):
 
 bug 180726</t>
 <t tx="leo.20180728154823.1">將程式碼逐一修改為 flake8 查驗無誤</t>
+<t tx="leo.20180801114917.1">def parse_content():
+    """use bs4 and re module functions to parse content.htm"""
+    #from pybean import Store, SQLiteWriter
+    # if no content.db, create database file with cms table
+    '''
+    if not os.path.isfile(config_dir+"content.db"):
+        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
+        cms = library.new("cms")
+        cms.follow = 0
+        cms.title = "head 1"
+        cms.content = "content 1"
+        cms.memo = "first memo"
+        library.save(cms)
+        library.commit()
+    '''
+    # if no content.htm, generate a head 1 and content 1 file
+    if not os.path.isfile(config_dir+"content.htm"):
+        # create content.htm if there is no content.htm
+        File = open(config_dir+"content.htm", "w", encoding="utf-8")
+        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
+        File.close()
+    subject = file_get_contents(config_dir+"content.htm")
+    # deal with content without content
+    if subject == "":
+        # create content.htm if there is no content.htm
+        File = open(config_dir+"content.htm", "w", encoding="utf-8")
+        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
+        File.close()
+        subject = "&lt;h1&gt;head 1&lt;/h1&gt;content 1"
+    # initialize the return lists
+    head_list = []
+    level_list = []
+    page_list = []
+    # make the soup out of the html content
+    soup = BeautifulSoup(subject, 'html.parser')
+    # get all h1, h2, h3 tags into list
+    htag= soup.find_all(['h1', 'h2', 'h3'])
+    n = len(htag)
+    # get all h tags
+    # g.es(soup.find_all(re.compile(r"^h\d$")))
+    # get the page content to split subject using each h tag
+    # i = 0
+    temp_data = subject.split(str(htag[0]))
+    # cut the first htag out
+    subject = temp_data[1]
+
+    if n &gt;1:
+            # i from 1 to i-1
+            for i in range(1, len(htag)):
+                # add the first page title
+                head_list.append(htag[i-1].text.strip())
+                # use name attribute of h* tag to get h1, h2 or h3
+                # the number of h1, h2 or h3 is the level of page menu
+                level_list.append(htag[i-1].name[1])
+                temp_data = subject.split(str(htag[i]))
+                subject = temp_data[1]
+                # cut the other page content out of htag from 1 to i-1
+                cut = temp_data[0]
+                # add the page content
+                page_list.append(cut)
+    # last i
+    # add the last page title
+    head_list.append(htag[n-1].text.strip())
+    # add the last level
+    level_list.append(htag[n-1].name[1])
+    temp_data = subject.split(str(htag[n-1]))
+    # the last subject
+    subject = temp_data[0]
+    # cut the last page content out
+    cut = temp_data[0]
+    # the last page content
+    page_list.append(cut)
+    return head_list, level_list, page_list
+
+</t>
 </tnodes>
 </leo_file>
