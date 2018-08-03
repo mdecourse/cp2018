@@ -1405,13 +1405,7 @@ int compare_long(const void *m, const void *n)
 <p><a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p>
 <p>在機械設計相關技術開發方面, Python 結合 <a href="https://www.riverbankcomputing.com/software/pyqt/download5">PyQt5</a> 與演化分析, 可用來建立機構模擬與合成套件: <a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a></p>
 <p>Python 也可以套用 Flask 框架, 建立簡單的網際內容管理系統: <a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a> 或結合 oauth2 與 ORM 資料庫模組, 建立網際協同群組軟體: <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a></p>
-<p>Python 也被用於自動化特定流程: <a href="https://automatetheboringstuff.com/">https://automatetheboringstuff.com/</a></p><h3>what is new</h3>
-<p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p>
-<p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
-<p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p>
-<p><a href="https://docs.python.org/3/whatsnew/3.6.html">https://docs.python.org/3/whatsnew/3.6.html</a>&nbsp;</p>
-<p><a href="https://docs.python.org/3/whatsnew/3.7.html">https://docs.python.org/3/whatsnew/3.7.html</a>&nbsp;</p>
-<h3>style guide</h3>
+<p>Python 也被用於自動化特定流程: <a href="https://automatetheboringstuff.com/">https://automatetheboringstuff.com/</a></p><h3>what is new</h3><p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p><p><a href="https://docs.python.org/3/whatsnew/3.6.html">https://docs.python.org/3/whatsnew/3.6.html</a>&nbsp;</p><p><a href="https://docs.python.org/3/whatsnew/3.7.html">https://docs.python.org/3/whatsnew/3.7.html</a>&nbsp;</p><p>Python 3.7 關鍵字:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Python 3.7&gt; keyword.kwlist['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']</pre><h4>模組化程式設計:</h4><p><a href="https://www.python-course.eu/python3_modules_and_modular_programming.php">https://www.python-course.eu/python3_modules_and_modular_programming.php</a>&nbsp;</p><h3>style guide</h3>
 <p>Python docstring conventions:</p>
 <p><a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a>&nbsp;</p>
 <p>One line docstring:</p>
@@ -1548,7 +1542,38 @@ initialize(FILES,
 <p><a href="http://flake8.pycqa.org/en/latest/">http://flake8.pycqa.org/en/latest/</a>&nbsp;</p>
 <p><a href="https://github.com/PyCQA/pyflakes">https://github.com/PyCQA/pyflakes</a>&nbsp;</p>
 <p>Python 程式編寫, 必須通過 Flake8 格式查驗.</p>
-<h3>lark</h3>
+<h3>unittest</h3>
+<p><a href="https://docs.python.org/3/library/unittest.html">https://docs.python.org/3/library/unittest.html</a>&nbsp;</p>
+<p><a href="http://pythontesting.net/framework/unittest/unittest-introduction/">http://pythontesting.net/framework/unittest/unittest-introduction/</a>&nbsp;</p>
+<h4>doctest:</h4>
+<p><a href="https://docs.python.org/3.7/library/doctest.html">https://docs.python.org/3.7/library/doctest.html</a>&nbsp;</p>
+<p>doctest 可用來執行程式文件中所提供的範例, 確認能得到預期結果. doctest 可以用在比較簡單的程式測試, 較複雜的測試流程, 則建議使用 unittest.</p>
+<p>unittest 標準工作流程:</p>
+<ol>
+<li>繼承 unittest.TestCase , 定義希望進行 unit test 的新類別.</li>
+<li>在新類別中定義所需的測試方法, 各方法必須以 test_ 開頭命名.</li>
+<li>執行 unittest.main() 以啟動所定義類別中的各測試方法.<br><br></li>
+</ol>
+<p>簡單 unit test 範例:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import unittest
+
+def multiply(a, b):
+    return a * b
+ 
+class TestUM(unittest.TestCase):
+ 
+    def setUp(self):
+        pass
+ 
+    def test_numbers_3_4(self):
+        self.assertEqual( multiply(3,4), 12)
+ 
+    def test_strings_a_3(self):
+        self.assertEqual( multiply('a',3), 'aaa')
+ 
+if __name__ == '__main__':
+    unittest.main()</pre>
+<p></p><h3>lark</h3>
 <p><a href="https://github.com/lark-parser/lark">https://github.com/lark-parser/lark</a>&nbsp;</p>
 <p><a href="http://blog.erezsh.com/how-to-write-a-dsl-in-python-with-lark/">http://blog.erezsh.com/how-to-write-a-dsl-in-python-with-lark/</a>&nbsp;</p>
 <p>如何利用 python lark 模組寫 DSL (Domain Specific Language)</p>
@@ -9106,7 +9131,15 @@ context.scale(1,-1)
 #以間隔 20 micro seconds 重複呼叫 draw()
 timer.set_interval(draw,20)
 &lt;/script&gt;</pre>
-<h1>可攜系統</h1><p>初階 <a href="https://drive.google.com/file/d/1DWtyoUhl8CycKJ8uulB3viRXE39KqpE1/view?usp=sharing">p37.7z</a> 約 240MB, 解開後容量約 1GB, 可以執行基本 Python3, ANSI C, 與 Lua 程式, 並且內含 git, Fossil SCM 與 gnuplot.</p><p><span>完整&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 約 8GB, 送到 disk1 AT gk 約需 30 分鐘, 製解壓縮需要 2.5 小時, 解開後容量約 21 GB.</span></p><p>或從 <a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> 下載.</p><p>自行安裝模組:</p><p>python -m pip install sympy</p><h2>帳號整合</h2>
+<h1>可攜系統</h1>
+<p>初階 <a href="https://drive.google.com/file/d/1DWtyoUhl8CycKJ8uulB3viRXE39KqpE1/view?usp=sharing">p37.7z</a> 約 240MB, 解開後容量約 1GB, 可以執行基本 Python3, ANSI C, 與 Lua 程式, 並且內含 git, Fossil SCM 與 gnuplot.</p>
+<p><span>完整&nbsp;</span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> 約 8GB, 送到 disk1 AT gk 約需 30 分鐘, 製解壓縮需要 2.5 小時, 解開後容量約 21 GB.</span></p>
+<p>或從 <a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> 下載.</p>
+<p>自行安裝模組:</p>
+<p>python -m pip install sympy</p>
+<hr>
+<p>p37 額外安裝模組:</p>
+<pre><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">flake8</span></pre><h2>帳號整合</h2>
 <p>目前用於 oauth2 開發用的 https://localhost:6443&nbsp;以<span>&nbsp;2016springwcm 郵件帳號登記憑證</span></p>
 <p><span>coggle 心智圖則以 scrum1 AT mde 登記</span></p>
 <p><span>上課 github 則以 mdecourse 登記</span></p>
