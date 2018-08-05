@@ -3068,211 +3068,7 @@ double evaluate(int D, double tmp[], long *nfeval)
 * 按 b 或 . 鍵可以切換螢幕黑屏 (black)
 * 按 Esc 可以退出全螢幕或全域檢視 (Escape)</pre>
 <p>其中, 單層 section 標註為向右展開的網際投影片, 而雙層 section 標註的投影片, 則向下展開.</p>
-<h2>數值分析</h2>
-<p>操作目的:</p>
-<p style="padding-left: 30px;">讓學員了解如何利用電腦程式解數學問題.</p>
-<p>所欲解決問題:</p>
-<p style="padding-left: 30px;">如何結合計算機程式與微積分及工程數學, 解決工程設計所可能面臨的問題.</p>
-<p>Numerical Analysis</p>
-<p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p>
-<p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p>
-<p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p>
-<p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p>
-<p>解微分方程式:</p>
-<p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p>
-<p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p>
-<p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */
- 
-#include &lt;stdio.h&gt;
-#include &lt;math.h&gt;
- 
-#define N 2 /* number of first order equations */
-#define dist 0.1 /* stepsize in t*/
-#define MAX 30.0 /* max for t */
- 
-FILE *output; /* internal filename */
-FILE *output1; /* internal filename */
-// 利用 pipe 呼叫 gnuplot 繪圖
-FILE *pipe;
- 
-void runge4(double x, double y[], double step); /* Runge-Kutta function */
-double f(double x, double y[], int i); /* function for derivatives */
- 
-void main(){
- 
-  double t, y[N];
-  int j;
- 
-  output=fopen("osc.dat", "w"); /* external filename */
-  output1=fopen("osc1.dat", "w"); /* external filename */
- 
-  y[0]=1.0; /* initial position */
-  y[1]=0.0; /* initial velocity */
- 
-  //fprintf(output, "0\t%f\n", y[0]);
- 
-  for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{
- 
-    t=j*dist;
-    runge4(t, y, dist);
-    fprintf(output, "%f\t%f\n", t, y[0]);
-    fprintf(output1, "%f\t%f\n", t, y[1]);
-  }
- 
-  fclose(output);
-  fclose(output1);
- 
-  pipe = popen("gnuplot -persist","w");
-  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");
-  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");
-  //fprintf(pipe,"set yrange [68:70]\n");
-  fprintf(pipe,"set output \"test.png\"\n");
-  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");
-  fprintf(pipe,"quit\n");
-
-  fprintf(pipe,"quit\n");
-  pclose(pipe);
-}
- 
-void runge4(double x, double y[], double step){
- 
-  double h=step/2.0, /* the midpoint */
-  t1[N], t2[N], t3[N], /* temporary storage arrays */
-  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */
-  int i;
- 
-  for (i=0;i&lt;N;i++){
- 
-    t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));
-  }
- 
-  for (i=0;i&lt;N;i++){
- 
-    t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));
-  }
- 
-  for (i=0;i&lt;N;i++){
- 
-    t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));
-  }
- 
-  for (i=0;i&lt;N;i++){
- 
-    k4[i]= step*f(x+step, t3, i);
-  }
- 
-  for (i=0;i&lt;N;i++){
- 
-    y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;
-  }
-}
- 
-double f(double x, double y[], int i){
- 
-  if (i==0)
-    x=y[1]; /* derivative of first equation */
-  if (i==1)
-    x=-y[0]-0.5*y[1];
-  return x;
-}</pre>
-<p>Python:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt
- 
-def rk4(f, x0, y0, x1, n):
-    vx = [0] * (n + 1)
-    vy = [0] * (n + 1)
-    print(vx, vy)
-    h = (x1 - x0) / float(n)
-    vx[0] = x = x0
-    vy[0] = y = y0
-    for i in range(1, n + 1):
-        k1 = h * f(x, y)
-        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)
-        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)
-        k4 = h * f(x + h, y + k3)
-        vx[i] = x = x0 + i * h
-        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6
-    return vx, vy
- 
-def f(x, y):
-    return x * sqrt(y)
- 
-vx, vy = rk4(f, 0, 1, 10, 100)
-for x, y in list(zip(vx, vy))[::10]:
-    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre>
-<p>也是 Python:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):
-    """Returns final (position, velocity) tuple after
-    time dt has passed.
-
-    x: initial position (number-like object)
-    v: initial velocity (number-like object)
-    a: acceleration function a(x,v,dt) (must be callable)
-    dt: timestep (number)"""
-    x1 = x
-    v1 = v
-    a1 = a(x1, v1, 0)
-
-    x2 = x + 0.5*v1*dt
-    v2 = v + 0.5*a1*dt
-    a2 = a(x2, v2, dt/2.0)
-
-    x3 = x + 0.5*v2*dt
-    v3 = v + 0.5*a2*dt
-    a3 = a(x3, v3, dt/2.0)
-
-    x4 = x + v3*dt
-    v4 = v + a3*dt
-    a4 = a(x4, v4, dt)
-
-    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)
-    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)
-
-    return xf, vf
-    
-def accel(x, v, dt):
-    """Determines acceleration from current position,
-    velocity, and timestep. This particular acceleration
-    function models a spring."""
-    stiffness = 1
-    damping = -0.005
-    return -stiffness*x - damping*v
-
-t = 0
-dt = 1.0/4000 # Timestep of 1/40 second
-state = 50, 5 # Position, velocity
-euler = 50, 5 # For comparison with Euler integration
-
-print("Initial    -position: %6.2f, velocity: %6.2f"%state)
-
-# Run for 100 seconds
-while t &lt; 100:
-    t += dt
-    state = rk4(state[0], state[1], accel, dt)
-    #print(t, state)
-
-    # Integrate using Euler's method
-    euler = (
-        euler[0] + euler[1]*dt,
-        euler[1] + accel(euler[0],euler[1],dt)*dt
-    )
-
-print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)
-print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre>
-<p>練習步驟:</p>
-<ol>
-<li>請說明何謂微分方程式?</li>
-<li>微分方程式用在機械設計的哪個領域?</li>
-<li>何謂微分方程式的解析解與數值分析解?</li>
-<li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li>
-<li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li>
-<li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li>
-</ol>
-<p><a href="http://darren1231.pixnet.net/blog/post/328238049-swig%E6%95%99%E5%AD%B8--c%2B%2B%E8%BD%89%E6%88%90python">SWIG C++ 與 Python 實際操作練習</a></p>
-<p><a href="https://www.cs.ubc.ca/~gberseth/blog/using-swig-to-wrap-c-for-python.html">SWIG C++ 與 Python 實際操作練習二</a></p>
-<p><a href="https://realmike.org/blog/2010/07/18/python-extensions-in-cpp-using-swig/">SWIG 練習三</a></p>
-<p>SWIG 練習四 - <a href="https://github.com/KmolYuan/python-solvespace">Python Solvespace</a></p><h2>Qt C++ 計算器程式</h2>
+<h2>數值分析</h2><p>操作目的:</p><p style="padding-left: 30px;">讓學員了解如何利用電腦程式解數學問題.</p><p>所欲解決問題:</p><p style="padding-left: 30px;">如何結合計算機程式與微積分及工程數學, 解決工程設計所可能面臨的問題.</p><p>Numerical Analysis</p><p>何謂微分方程 (取自 Wikipedia: <a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>)? 如何<a href="https://nile.northampton.ac.uk/bbcswebdav/courses/CFAP02R/Guest%20access%20files/HELM_new/pages/workbooks_1_50_jan2008/Workbook19/19_4_applications_diffrntl_eqns.pdf">應用</a>?</p><p>微分方程 (Differential equation) 是一種數學方程, 用來描述某一類函數與其導數之間的關係. 微分方程的解是一個符合方程的函數.&nbsp;</p><p>微分方程的應用十分廣泛, 可以解決許多與導數有關的問題. 物理中許多涉及變力的運動學、動力學問題, 如空氣的阻力為速度函數的落體運動等問題, 很多可以用微分方程求解.&nbsp;</p><p>只有少數簡單的微分方程可以求得解析解. 不過即使沒有找到其解析解. 仍然可以確認其解的部份性質. 在無法求得解析解時, 可以利用數值分析的方式, 利用電腦來找到其數值解. 動力系統理論強調對於微分方程系統的量化分析. 而許多數值方法可以計算微分方程的數值解, 且有一定的準確度.</p><p>解微分方程式:</p><p>Euler's Method:&nbsp;<a href="http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx">http://tutorial.math.lamar.edu/Classes/DE/EulersMethod.aspx</a>&nbsp;</p><p>Runge-Kutta Method:&nbsp;<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a>&nbsp;</p><p>ANSI C 與 <a href="http://www.gnuplot.info/">gnuplot</a>:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* Runge Kutta for a set of first order differential equations */ #include &lt;stdio.h&gt;#include &lt;math.h&gt; #define N 2 /* number of first order equations */#define dist 0.1 /* stepsize in t*/#define MAX 30.0 /* max for t */ FILE *output; /* internal filename */FILE *output1; /* internal filename */// 利用 pipe 呼叫 gnuplot 繪圖FILE *pipe; void runge4(double x, double y[], double step); /* Runge-Kutta function */double f(double x, double y[], int i); /* function for derivatives */ void main(){   double t, y[N];  int j;   output=fopen("osc.dat", "w"); /* external filename */  output1=fopen("osc1.dat", "w"); /* external filename */   y[0]=1.0; /* initial position */  y[1]=0.0; /* initial velocity */   //fprintf(output, "0\t%f\n", y[0]);   for (j=1; j*dist&lt;=MAX ;j++) /* time loop */{     t=j*dist;    runge4(t, y, dist);    fprintf(output, "%f\t%f\n", t, y[0]);    fprintf(output1, "%f\t%f\n", t, y[1]);  }   fclose(output);  fclose(output1);   pipe = popen("gnuplot -persist","w");  //fprintf(pipe,"set term png enhanced font \"v:/fireflysung.ttf\" 18 \n");  fprintf(pipe,"set term png enhanced font \"y:/wqy-microhei.ttc\" 18 \n");  //fprintf(pipe,"set yrange [68:70]\n");  fprintf(pipe,"set output \"test.png\"\n");  fprintf(pipe, "plot \"osc.dat\" title \"位移\" with lines, \"osc1.dat\" title \"速度\" with lines\n");  fprintf(pipe,"quit\n");  fprintf(pipe,"quit\n");  pclose(pipe);} void runge4(double x, double y[], double step){   double h=step/2.0, /* the midpoint */  t1[N], t2[N], t3[N], /* temporary storage arrays */  k1[N], k2[N], k3[N],k4[N]; /* for Runge-Kutta */  int i;   for (i=0;i&lt;N;i++){     t1[i]=y[i]+0.5*(k1[i]=step*f(x,y,i));  }   for (i=0;i&lt;N;i++){     t2[i]=y[i]+0.5*(k2[i]=step*f(x+h, t1, i));  }   for (i=0;i&lt;N;i++){     t3[i]=y[i]+ (k3[i]=step*f(x+h, t2, i));  }   for (i=0;i&lt;N;i++){     k4[i]= step*f(x+step, t3, i);  }   for (i=0;i&lt;N;i++){     y[i]+=(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6.0;  }} double f(double x, double y[], int i){   if (i==0)    x=y[1]; /* derivative of first equation */  if (i==1)    x=-y[0]-0.5*y[1];  return x;}</pre><p>Python:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from math import sqrt def rk4(f, x0, y0, x1, n):    vx = [0] * (n + 1)    vy = [0] * (n + 1)    print(vx, vy)    h = (x1 - x0) / float(n)    vx[0] = x = x0    vy[0] = y = y0    for i in range(1, n + 1):        k1 = h * f(x, y)        k2 = h * f(x + 0.5 * h, y + 0.5 * k1)        k3 = h * f(x + 0.5 * h, y + 0.5 * k2)        k4 = h * f(x + h, y + k3)        vx[i] = x = x0 + i * h        vy[i] = y = y + (k1 + k2 + k2 + k3 + k3 + k4) / 6    return vx, vy def f(x, y):    return x * sqrt(y) vx, vy = rk4(f, 0, 1, 10, 100)for x, y in list(zip(vx, vy))[::10]:    print("%4.1f %10.5f %+12.4e" % (x, y, y - (4 + x * x)**2 / 16))</pre><p>也是 Python:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def rk4(x, v, a, dt):    """Returns final (position, velocity) tuple after    time dt has passed.    x: initial position (number-like object)    v: initial velocity (number-like object)    a: acceleration function a(x,v,dt) (must be callable)    dt: timestep (number)"""    x1 = x    v1 = v    a1 = a(x1, v1, 0)    x2 = x + 0.5*v1*dt    v2 = v + 0.5*a1*dt    a2 = a(x2, v2, dt/2.0)    x3 = x + 0.5*v2*dt    v3 = v + 0.5*a2*dt    a3 = a(x3, v3, dt/2.0)    x4 = x + v3*dt    v4 = v + a3*dt    a4 = a(x4, v4, dt)    xf = x + (dt/6.0)*(v1 + 2*v2 + 2*v3 + v4)    vf = v + (dt/6.0)*(a1 + 2*a2 + 2*a3 + a4)    return xf, vf    def accel(x, v, dt):    """Determines acceleration from current position,    velocity, and timestep. This particular acceleration    function models a spring."""    stiffness = 1    damping = -0.005    return -stiffness*x - damping*vt = 0dt = 1.0/4000 # Timestep of 1/40 secondstate = 50, 5 # Position, velocityeuler = 50, 5 # For comparison with Euler integrationprint("Initial    -position: %6.2f, velocity: %6.2f"%state)# Run for 100 secondswhile t &lt; 100:    t += dt    state = rk4(state[0], state[1], accel, dt)    #print(t, state)    # Integrate using Euler's method    euler = (        euler[0] + euler[1]*dt,        euler[1] + accel(euler[0],euler[1],dt)*dt    )print("Final RK4  -position: %6.2f, velocity: %6.2f"%state)print("Final Euler-position: %6.2f, velocity: %6.2f"%euler)</pre><p>練習步驟:</p><ol><li>請說明何謂微分方程式?</li><li>微分方程式用在機械設計的哪個領域?</li><li>何謂微分方程式的解析解與數值分析解?</li><li>請說明何謂 Euler's Method? 如何用來解微分方程式?</li><li>請說明何謂 Runge-Kutta Method? 如何用 C 與 Python 編寫 Runge-Kutta 數值分析程式?</li><li>請將上述 ANSI C 的程式, 改為 Python, 用 <a href="http://www.gnuplot.info/">gnuplot</a> 繪出位移與速度圖.</li></ol><p><a href="http://darren1231.pixnet.net/blog/post/328238049-swig%E6%95%99%E5%AD%B8--c%2B%2B%E8%BD%89%E6%88%90python">SWIG C++ 與 Python 實際操作練習</a></p><p><a href="https://www.cs.ubc.ca/~gberseth/blog/using-swig-to-wrap-c-for-python.html">SWIG C++ 與 Python 實際操作練習二</a></p><p><a href="https://realmike.org/blog/2010/07/18/python-extensions-in-cpp-using-swig/">SWIG 練習三</a></p><p>SWIG 練習四 - <a href="https://github.com/KmolYuan/python-solvespace">Python Solvespace</a></p><p>利用 <a href="https://en.wikipedia.org/wiki/Differential_evolution">Differential Evolution</a> algorithm 解題:</p><p>ANSI C 版本:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">// 必須在演算過程中, 設法限制各變數的上下限!#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;math.h&gt;#include &lt;memory.h&gt;#include &lt;time.h&gt; // 最大族群數, NP#define MAXPOP  5000// 最大向量維度, D#define MAXDIM  35// MAXIMAPROBLEM =1 最大化 0 最小化#define MAXIMAPROBLEM 1// 最大化時 PENALITY 必須為負值, 否則為正值#define PENALITY -1000/*#define MAXIMAPROBLEM 0#define PENALITY 1000*/ /*------Constants for rnd_uni()--------------------------------------------*/ #define IM1 2147483563#define IM2 2147483399#define AM (1.0/IM1)#define IMM1 (IM1-1)#define IA1 40014#define IA2 40692#define IQ1 53668#define IQ2 52774#define IR1 12211#define IR2 3791#define NTAB 32#define NDIV (1+IMM1/NTAB)#define EPS 1.2e-7#define RNMX (1.0-EPS) /*------------------------Globals---------------------------------------*/ long  rnd_uni_init;                 /* serves as a seed for rnd_uni()   */double c[MAXPOP][MAXDIM], d[MAXPOP][MAXDIM];double (*pold)[MAXPOP][MAXDIM], (*pnew)[MAXPOP][MAXDIM], (*pswap)[MAXPOP][MAXDIM]; /*---------Function declarations----------------------------------------*/ void  assignd(int D, double a[], double b[]);double rnd_uni(long *idum);    /* uniform pseudo random number generator */double extern evaluate(int D, double tmp[], long *nfeval); /* obj. funct. */ /*---------Function definitions-----------------------------------------*/// 指定向量 b 為 avoid  assignd(int D, double a[], double b[]){   int j;   for (j=0; j&lt;D; j++)   {      a[j] = b[j];   }} // 產生 0 ~ 1 間的亂數double rnd_uni(long *idum){  long j;  long k;  static long idum2=123456789;  static long iy=0;  static long iv[NTAB];  double temp;   if (*idum &lt;= 0)  {    if (-(*idum) &lt; 1) *idum=1;    else *idum = -(*idum);    idum2=(*idum);    for (j=NTAB+7;j&gt;=0;j--)    {      k=(*idum)/IQ1;      *idum=IA1*(*idum-k*IQ1)-k*IR1;      if (*idum &lt; 0) *idum += IM1;      if (j &lt; NTAB) iv[j] = *idum;    }    iy=iv[0];  }  k=(*idum)/IQ1;  *idum=IA1*(*idum-k*IQ1)-k*IR1;  if (*idum &lt; 0) *idum += IM1;  k=idum2/IQ2;  idum2=IA2*(idum2-k*IQ2)-k*IR2;  if (idum2 &lt; 0) idum2 += IM2;  j=iy/NDIV;  iy=iv[j]-idum2;  iv[j] = *idum;  if (iy &lt; 1) iy += IMM1;  if ((temp=AM*iy) &gt; RNMX) return RNMX;  else return temp; }/*------End of rnd_uni()--------------------------*/ // 將上下限轉為全域變數double inibound_h;      /* upper parameter bound              */double inibound_l;      /* lower parameter bound              */// 與機構合成相關的全域變數// 宣告一個座標結構struct Coord {    double x;    double y;  // 這裡保留 double z;}; main(int argc, char *argv[]){   char  chr;             /* y/n choice variable                */   char  *strat[] =       /* strategy-indicator                 */   {            "",            "DE/best/1/exp",            "DE/rand/1/exp",            "DE/rand-to-best/1/exp",            "DE/best/2/exp",            "DE/rand/2/exp",            "DE/best/1/bin",            "DE/rand/1/bin",            "DE/rand-to-best/1/bin",            "DE/best/2/bin",            "DE/rand/2/bin"   };    int   i, j, L, n;      /* counting variables                 */   int   r1, r2, r3, r4;  /* placeholders for random indexes    */   int   r5;              /* placeholders for random indexes    */   int   D;               /* Dimension of parameter vector      */   int   NP;              /* number of population members       */   int   imin;            /* index to member with lowest energy */   int   refresh;         /* refresh rate of screen output      */   int   strategy;        /* choice parameter for screen output */   int   gen, genmax, seed;       long  nfeval;          /* number of function evaluations     */    double trial_cost;      /* buffer variable                    */   // 將上下限轉為全域變數, 可能要根據各變數加以設定   //double inibound_h;      /* upper parameter bound              */   //double inibound_l;      /* lower parameter bound              */   double tmp[MAXDIM], best[MAXDIM], bestit[MAXDIM]; /* members  */   double cost[MAXPOP];    /* obj. funct. values                 */   double cvar;            /* computes the cost variance         */   double cmean;           /* mean cost                          */   double F,CR;            /* control variables of DE            */   double cmin;            /* help variables                     */    FILE  *fpin_ptr;   FILE  *fpout_ptr; // 計算執行過程所需時間起點, 需要導入 time.h  clock_t start = clock(); /*------Initializations----------------------------*/ // 將結果寫入 out.dat fpout_ptr = fopen("out.dat","w");          /* open output file for reading,    */// 目前已經採用 strategy 3 可以得到最佳結果  strategy = 3;  genmax = 2000;  refresh = 100;  // 配合機構尺寸合成, 每一個體有 9 個機構尺寸值與 5 個通過點角度值  D = 2;  NP = 200;  inibound_h = 50.;  inibound_l = 0.;/*得到最佳解  F = 0.85;CR 必須介於 0 to 1. 之間  CR = 1.;*/  F = 0.85;  CR = 1.;  seed = 3;  //fclose(fpin_ptr); /*-----Checking input variables for proper range----------------------------*/   if (D &gt; MAXDIM)  {     printf("\nError! D=%d &gt; MAXDIM=%d\n",D,MAXDIM);     exit(1);  }  if (D &lt;= 0)  {     printf("\nError! D=%d, should be &gt; 0\n",D);     exit(1);  }  if (NP &gt; MAXPOP)  {     printf("\nError! NP=%d &gt; MAXPOP=%d\n",NP,MAXPOP);     exit(1);  }  if (NP &lt;= 0)  {     printf("\nError! NP=%d, should be &gt; 0\n",NP);     exit(1);  }  if ((CR &lt; 0) || (CR &gt; 1.0))  {     printf("\nError! CR=%f, should be ex [0,1]\n",CR);     exit(1);  }  if (seed &lt;= 0)  {     printf("\nError! seed=%d, should be &gt; 0\n",seed);     exit(1);  }  if (refresh &lt;= 0)  {     printf("\nError! refresh=%d, should be &gt; 0\n",refresh);     exit(1);  }  if (genmax &lt;= 0)  {     printf("\nError! genmax=%d, should be &gt; 0\n",genmax);     exit(1);  }  if ((strategy &lt; 0) || (strategy &gt; 10))  {     printf("\nError! strategy=%d, should be ex {1,2,3,4,5,6,7,8,9,10}\n",strategy);     exit(1);  }  if (inibound_h &lt; inibound_l)  {     printf("\nError! inibound_h=%f &lt; inibound_l=%f\n",inibound_h, inibound_l);     exit(1);  } /*-----Initialize random number generator-----------------------------*/  rnd_uni_init = -(long)seed;  /* initialization of rnd_uni() */ nfeval       =  0;  /* reset number of function evaluations */ /*------Initialization------------------------------------------------*//*------Right now this part is kept fairly simple and just generates--*//*------random numbers in the range [-initfac, +initfac]. You might---*//*------want to extend the init part such that you can initialize-----*//*------each parameter separately.------------------------------------*/    for (i=0; i&lt;NP; i++)   {      for (j=0; j&lt;D; j++) /* spread initial population members */      {        c[i][j] = inibound_l + rnd_uni(&amp;rnd_uni_init)*(inibound_h - inibound_l);      }      cost[i] = evaluate(D,c[i],&amp;nfeval); /* obj. funct. value */   }   cmin = cost[0];   imin = 0;   for (i=1; i&lt;NP; i++)   {     if(MAXIMAPROBLEM == 1)     {       // 改為最大化        if (cost[i]&gt;cmin)        {          cmin = cost[i];          imin = i;        }      }      else      {        // 最小化問題        if (cost[i]&lt;cmin)        {          cmin = cost[i];          imin = i;        }      }   }    assignd(D,best,c[imin]);            /* save best member ever          */   assignd(D,bestit,c[imin]);          /* save best member of generation */    pold = &amp;c; /* old population (generation G)   */   pnew = &amp;d; /* new population (generation G+1) */ /*=======================================================================*//*=========Iteration loop================================================*//*=======================================================================*/    gen = 0;                          /* generation counter reset */   while ((gen &lt; genmax) /*&amp;&amp; (kbhit() == 0)*/) /* remove comments if conio.h */   {                                            /* is accepted by compiler    */      gen++;      imin = 0;       for (i=0; i&lt;NP; i++)         /* Start of loop through ensemble  */      {     do                        /* Pick a random population member */     {                         /* Endless loop for NP &lt; 2 !!!     */       r1 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);     }while(r1==i);                  do                        /* Pick a random population member */     {                         /* Endless loop for NP &lt; 3 !!!     */       r2 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);     }while((r2==i) || (r2==r1));      do                        /* Pick a random population member */     {                         /* Endless loop for NP &lt; 4 !!!     */       r3 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);     }while((r3==i) || (r3==r1) || (r3==r2));      do                        /* Pick a random population member */     {                         /* Endless loop for NP &lt; 5 !!!     */       r4 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);     }while((r4==i) || (r4==r1) || (r4==r2) || (r4==r3));      do                        /* Pick a random population member */     {                         /* Endless loop for NP &lt; 6 !!!     */       r5 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);     }while((r5==i) || (r5==r1) || (r5==r2) || (r5==r3) || (r5==r4)); /*=======EXPONENTIAL CROSSOVER============================================================*/ /*-------DE/best/1/exp--------------------------------------------------------------------*//*-------Our oldest strategy but still not bad. However, we have found several------------*//*-------optimization problems where misconvergence occurs.-------------------------------*/     if (strategy == 1) /* strategy DE0 (not in our paper) */     {       assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);       L = 0;       do       {                                tmp[n] = bestit[n] + F*((*pold)[r2][n]-(*pold)[r3][n]);         n = (n+1)%D;         L++;       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));     }/*-------DE/rand/1/exp-------------------------------------------------------------------*//*-------This is one of my favourite strategies. It works especially well when the-------*//*-------"bestit[]"-schemes experience misconvergence. Try e.g. F=0.7 and CR=0.5---------*//*-------as a first guess.---------------------------------------------------------------*/     else if (strategy == 2) /* strategy DE1 in the techreport */     {       assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);       L = 0;       do       {                                tmp[n] = (*pold)[r1][n] + F*((*pold)[r2][n]-(*pold)[r3][n]);         n = (n+1)%D;         L++;       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));     }/*-------DE/rand-to-best/1/exp-----------------------------------------------------------*//*-------This strategy seems to be one of the best strategies. Try F=0.85 and CR=1.------*//*-------If you get misconvergence try to increase NP. If this doesn't help you----------*//*-------should play around with all three control variables.----------------------------*/     else if (strategy == 3) /* similiar to DE2 but generally better */     {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);        L = 0;       do       {                                tmp[n] = tmp[n] + F*(bestit[n] - tmp[n]) + F*((*pold)[r1][n]-(*pold)[r2][n]);         n = (n+1)%D;         L++;       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));     }/*-------DE/best/2/exp is another powerful strategy worth trying--------------------------*/     else if (strategy == 4)     {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);        L = 0;       do       {                                    tmp[n] = bestit[n] +               ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;         n = (n+1)%D;         L++;       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));     }/*-------DE/rand/2/exp seems to be a robust optimizer for many functions-------------------*/     else if (strategy == 5)     {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);        L = 0;       do       {                                    tmp[n] = (*pold)[r5][n] +               ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;         n = (n+1)%D;         L++;       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));     } /*=======Essentially same strategies but BINOMIAL CROSSOVER===============================*/ /*-------DE/best/1/bin--------------------------------------------------------------------*/     else if (strategy == 6)      {       assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);            for (L=0; L&lt;D; L++) /* perform D binomial trials */           {         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */         {                                  tmp[n] = bestit[n] + F*((*pold)[r2][n]-(*pold)[r3][n]);         }         n = (n+1)%D;           }     }/*-------DE/rand/1/bin-------------------------------------------------------------------*/     else if (strategy == 7)      {       assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);            for (L=0; L&lt;D; L++) /* perform D binomial trials */           {         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */         {                                  tmp[n] = (*pold)[r1][n] + F*((*pold)[r2][n]-(*pold)[r3][n]);         }         n = (n+1)%D;           }     }/*-------DE/rand-to-best/1/bin-----------------------------------------------------------*/     else if (strategy == 8)      {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);            for (L=0; L&lt;D; L++) /* perform D binomial trials */           {         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */         {                                  tmp[n] = tmp[n] + F*(bestit[n] - tmp[n]) + F*((*pold)[r1][n]-(*pold)[r2][n]);         }         n = (n+1)%D;           }     }/*-------DE/best/2/bin--------------------------------------------------------------------*/     else if (strategy == 9)     {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);            for (L=0; L&lt;D; L++) /* perform D binomial trials */           {         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */         {                                  tmp[n] = bestit[n] +               ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;         }         n = (n+1)%D;           }     }/*-------DE/rand/2/bin--------------------------------------------------------------------*/     else     {        assignd(D,tmp,(*pold)[i]);       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);            for (L=0; L&lt;D; L++) /* perform D binomial trials */           {         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */         {                                  tmp[n] = (*pold)[r5][n] +               ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;         }         n = (n+1)%D;           }     }  /*=======Trial mutation now in tmp[]. Test how good this choice really was.==================*/      trial_cost = evaluate(D,tmp,&amp;nfeval);  /* Evaluate new vector in tmp[] */   if(MAXIMAPROBLEM == 1)   {    // 改為最大化       if (trial_cost &gt;= cost[i])   /* improved objective function value ? */       {                                            cost[i]=trial_cost;                   assignd(D,(*pnew)[i],tmp);          if (trial_cost&gt;cmin)          /* Was this a new minimum? */          {                               /* if so...*/             cmin=trial_cost;           /* reset cmin to new low...*/             imin=i;             assignd(D,best,tmp);                     }                                  }                                   else       {          assignd(D,(*pnew)[i],(*pold)[i]); /* replace target with old value */       }    }    else    {          // 最小化問題       if (trial_cost &lt;= cost[i])   /* improved objective function value ? */       {                                            cost[i]=trial_cost;                   assignd(D,(*pnew)[i],tmp);          if (trial_cost&lt;cmin)          /* Was this a new minimum? */          {                               /* if so...*/             cmin=trial_cost;           /* reset cmin to new low...*/             imin=i;             assignd(D,best,tmp);                     }                                  }                                   else       {          assignd(D,(*pnew)[i],(*pold)[i]); /* replace target with old value */       }    }       }   /* End mutation loop through pop. */       assignd(D,bestit,best);  /* Save best population member of current iteration */       /* swap population arrays. New generation becomes old one */       pswap = pold;      pold  = pnew;      pnew  = pswap; /*----Compute the energy variance (just for monitoring purposes)-----------*/       cmean = 0.;          /* compute the mean value first */      for (j=0; j&lt;NP; j++)      {         cmean += cost[j];      }      cmean = cmean/NP;       cvar = 0.;           /* now the variance              */      for (j=0; j&lt;NP; j++)      {         cvar += (cost[j] - cmean)*(cost[j] - cmean);      }      cvar = cvar/(NP-1);  /*----Output part----------------------------------------------------------*/       if (gen%refresh==1)   /* display after every refresh generations */      { /* ABORT works only if conio.h is accepted by your compiler */    printf("\n\n                         PRESS ANY KEY TO ABORT");     printf("\n\n\n Best-so-far cost funct. value=%-15.10g\n",cmin);     for (j=0;j&lt;D;j++)    {      printf("\n best[%d]=%-15.10g",j,best[j]);    }    printf("\n\n Generation=%d  NFEs=%ld   Strategy: %s    ",gen,nfeval,strat[strategy]);    printf("\n NP=%d    F=%-4.2g    CR=%-4.2g   cost-variance=%-10.5g\n",               NP,F,CR,cvar);      }       fprintf(fpout_ptr,"%ld   %-15.10g\n",nfeval,cmin);   }/*=======================================================================*//*=========End of iteration loop=========================================*//*=======================================================================*/ /*-------Final output in file-------------------------------------------*/     fprintf(fpout_ptr,"\n\n\n Best-so-far obj. funct. value = %-15.10g\n",cmin);    for (j=0;j&lt;D;j++)   {     fprintf(fpout_ptr,"\n best[%d]=%-15.10g",j,best[j]);   }   fprintf(fpout_ptr,"\n\n Generation=%d  NFEs=%ld   Strategy: %s    ",gen,nfeval,strat[strategy]);   fprintf(fpout_ptr,"\n NP=%d    F=%-4.2g    CR=%-4.2g    cost-variance=%-10.5g\n",           NP,F,CR,cvar);    fclose(fpout_ptr);   /* Code you want timed here */  printf("Time elapsed: %f\n", ((double)clock() - start) / CLOCKS_PER_SEC);   return(0);} /*-----------End of main()------------------------------------------*/ // 適應函式 fittness function (cost function)double evaluate(int D, double tmp[], long *nfeval){   double result=0, surface = 80.0, z, volume, penality;   (*nfeval)++;   z = (surface-tmp[0]*tmp[1])/(2.0*(tmp[0]+tmp[1]));   volume = tmp[0]*tmp[1]*z;   if(volume &lt;= 0){    return PENALITY;  }// 只限制長度與寬度必須大於 0  if(tmp[0] &lt;= inibound_l){    return PENALITY;  }   if(tmp[1] &lt;= inibound_l){    return PENALITY;  }/*  if((tmp[0] &lt;= inibound_l)|| (tmp[0] &gt;inibound_h)){    return PENALITY;  }   if((tmp[1] &lt;= inibound_l) || (tmp[1] &gt;inibound_h)){    return PENALITY;  }  */  // volume must &gt;0 and max volume  // 目前為最小化問題   //return 1+1/(volume*volume);  return volume;} </pre><p>Python 版本:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import randomclass Chromosome(object):    """    just copy the idea of genetic algorithm, pretty similar..    """    def __init__(self, n):        """        int n, dimension of question        """        # dimension        self.n = n        # the gene        self.v = [0] * n        # the fitness value        self.f = 0    def assign(self, obj):        """        Chromosome obj        copy all attribute from obj to itself        """        self.n = obj.n        self.v = obj.v[:]        self.f = obj.fclass DiffertialEvolution(object):    def __init__(self,Func, pType, strategy, D, NP, F, CR, lower, upper, maxGen, report):        # if pType = 1 it is maximization  otherwise is minimization problem        self.pType = pType        # strategy 1~10, choice what strategy to generate new member in temporary        self.strategy = strategy        # dimesion of quesiton        self.D = D        # population size        # To start off NP = 10*D is a reasonable choice. Increase NP if misconvergence        self.NP = NP        # weight factor        # F is usually between 0.5 and 1 (in rare cases &gt; 1)        self.F = F        # crossover possible        # CR in [0,1]        self.CR = CR        # lower bound array        self.lb = lower[:]        # upper bound array        self.ub = upper[:]        # maximum generation        self.maxGen = maxGen        # how many generation report once        self.rpt = report        # object function, or enviorment        self.f = Func        # check parameter is set properly        self.checkParameter()        # generation pool, depend on population size        self.pop = [Chromosome(D) for i in range(NP)]        # last generation best member        self.lastgenbest = Chromosome(D)        # current best member        self.currentbest = Chromosome(D)        # the generation count        self.gen = 0        # the vector        self.r1 = 0        self.r2 = 0        self.r3 = 0        self.r4 = 0        self.r5 = 0    def checkParameter(self):        """        check parameter is set properly        """        if (type(self.D) is not int) and self.D &lt;= 0:            raise Exception('D shoud be integer and larger than 0')        if (type(self.NP) is not int) and self.NP &lt;= 0:            raise Exception('NP shoud be integer and larger than 0')        if self.CR &lt; 0 or self.CR &gt; 1:            raise Exception('CR should be [0,1]')        if self.maxGen &lt;= 0:            raise Exception('generation should larger than 0')        if self.rpt &lt;= 0 or self.rpt &gt; self.maxGen:            raise Exception('report should be larger than 0 and less than max genration')        if self.strategy &lt; 1 or self.strategy &gt; 10:            raise Exception('strategy should be [1,10]')        for lower, upper in zip(self.lb, self.ub):            if lower &gt; upper:                raise Exception('upper bound should be larger than lower bound')    def init(self):        """        init population        """        for i in range(self.NP):            for j in range(self.D):                self.pop[i].v[j] = self.lb[j] + random.random()*(self.ub[j] - self.lb[j])            self.pop[i].f = self.evalute(self.pop[i])    def evalute(self, p):        """        evalute the member in enviorment        """        return self.f(p.v)    def findBest(self):        """        find member that have minimum fitness value from pool        """        if self.pType == 1:            return max(self.pop, key=lambda chrom:chrom.f)        else:            return min(self.pop, key=lambda chrom:chrom.f)    def generateRandomVector(self, i):        """        generate new vector        """        while True:            self.r1 = int(random.random() * self.NP)            if not (self.r1 == i):                break        while True:            self.r2 = int(random.random() * self.NP)            if not ((self.r2 == i) or (self.r2 == self.r1)):                break        while True:            self.r3 = int(random.random() * self.NP)            if not ((self.r3 == i) or (self.r3 == self.r1) or (self.r3 == self.r2)):                break        while True:            self.r4 = int(random.random() * self.NP)            if not ((self.r4 == i) or (self.r4 == self.r1) or (self.r4 == self.r2) or (self.r4 == self.r3)):                break        while True:            self.r5 = int(random.random() * self.NP)            if not ((self.r5 == i) or (self.r5 == self.r1) or (self.r5 == self.r2) or (self.r5 == self.r3) or (self.r5 == self.r4)):                break    def recombination(self, i):        """        use new vector, recombination the new one member to tmp        """        tmp = Chromosome(self.D)        if self.strategy == 1:            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            L = 0            while True:                tmp.v[n] = self.lastgenbest.v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D                L += 1                if not ((random.random() &lt; self.CR) and (L &lt; self.D)):                    break        elif self.strategy == 2:            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            L = 0            while True:                tmp.v[n] = self.pop[self.r1].v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D                L += 1                if not ((random.random() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 3):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            L = 0            while True:                tmp.v[n] = tmp.v[n] + self.F*(self.lastgenbest.v[n] - tmp.v[n]) + self.F*(self.pop[self.r1].v[n] - self.pop[self.r2].v[n])                n = (n + 1) % self.D                L += 1                if not ((random.random() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 4):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            L = 0            while True:                tmp.v[n] = self.lastgenbest.v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D                L += 1                if not ((random.random() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 5):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            L = 0            while True:                tmp.v[n] = self.pop[self.r5].v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D                L += 1                if not ((random.random() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 6):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            for L in range(self.D):                if ((random.random() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.lastgenbest.v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D        elif (self.strategy == 7):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            for L in range(self.D):                if ((random.random() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.pop[self.r1].v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D        elif (self.strategy == 8):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            for L in range(self.D):                if ((random.random() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = tmp.v[n] + self.F*(self.lastgenbest.v[n] - tmp.v[n]) + self.F*(self.pop[self.r1].v[n] - self.pop[self.r2].v[n])                n = (n + 1) % self.D        elif (self.strategy == 9):            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            for L in range(self.D):                if ((random.random() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.lastgenbest.v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D        else:            tmp.assign(self.pop[i])            n = int(random.random() * self.D)            for L in range(self.D):                if ((random.random() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.pop[self.r5].v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D        return tmp    def report(self):        """        report current generation status        """        if self.gen == 0:            print("DiffertialEvolution results - init pop")        elif self.gen == self.maxGen:            print("Final DiffertialEvolution results at", self.gen, "generations")        else:            print("DiffertialEvolution results after", self.gen, "generations")        print("Function : %.6f" % (self.currentbest.f))        for i, v in enumerate(self.currentbest.v, start=1):            print("Var", i, ":", v)    def overbound(self, member):        """        check the member's chromosome that is out of bound?        """        for i in range(self.D):            if member.v[i] &gt; self.ub[i] or member.v[i] &lt; self.lb[i]:                return True        return False    def run(self):        """        run the algorithm...        """        # initial step        # generation 0        self.gen = 0        # init the member's chromsome        self.init()        # find the best one(smallest fitness value)        tmp = self.findBest()        # copy to lastgenbest        self.lastgenbest.assign(tmp)        # copy to currentbest        self.currentbest.assign(tmp)        # report status        self.report()        # end initial step        # the evolution journey is beggin...        for self.gen in range(1, self.maxGen + 1):            for i in range(self.NP):                # generate new vector                self.generateRandomVector(i)                # use the vector recombine the member to temporary                tmp = self.recombination(i)                # check the one is out of bound?                if self.overbound(tmp):                    # if it is, then ignore                    continue                # is not out of bound, that mean it's quilify of enviorment                # then evalute the one                tmp.f = self.evalute(tmp)                # if temporary one is better than origin(fitness value is larger or smaller)                # pType is 1, the problem is maximization type                if self.pType == 1:                    if tmp.f &gt;= self.pop[i].f:                        # copy the temporary one to origin member                        self.pop[i].assign(tmp)                        # check the temporary one is better than the currentbest                        if tmp.f &gt; self.currentbest.f:                            # copy the temporary one to currentbest                            self.currentbest.assign(tmp)                else:                    if tmp.f &lt;= self.pop[i].f:                        # copy the temporary one to origin member                        self.pop[i].assign(tmp)                        # check the temporary one is better than the currentbest                        if tmp.f &lt; self.currentbest.f:                            # copy the temporary one to currentbest                            self.currentbest.assign(tmp)            # copy the currentbest to lastgenbest            self.lastgenbest.assign(self.currentbest)            # if report generation is set, report            if self.rpt != 0:                if self.gen % self.rpt == 0:                    self.report()        # the evolution journey is done, report the final status        self.report()#fittness function (cost function)def evaluate(designVariablel):    surface = 80.0    # if pType is 1, the penality is negative (maximization problem)    # if pType is 0, the penality is positive (minimization problem)    penality = -1000    z = (surface-designVariablel[0]*designVariablel[1])/(2.0*(designVariablel[0]\         +designVariablel[1]))    volume = designVariablel[0]*designVariablel[1]*z      if(volume &lt;= 0):        return penality    # box length and width need to be larger than 0    if(designVariablel[0] &lt;= 0):        return penality    if(designVariablel[1] &lt;= 0):        return penality    return volume#volume = DiffertialEvolution((self,Func, max, strategy, D, NP, F, CR, lower, upper, maxGen, report)volume = DiffertialEvolution(evaluate, 1, 3, 2, 100, 0.6, 0.85, [0, 0], [50, 50], 100, 10)volume.run()</pre><p>將上述 Python 轉為 Cython 格式:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#import randomfrom cpython cimport bool#from array import arrayimport numpy as npcimport numpy as npfrom libc.stdlib cimport rand, RAND_MAX, srandfrom libc.time cimport time# make true it is random everytimesrand(time(NULL))cdef double randV():    return rand()*1.0 / RAND_MAXcdef class Chromosome(object):    """    just copy the idea of genetic algorithm, pretty similar..    """    cdef public int n    cdef public double f    cdef public np.ndarray v    def __cinit__(self, int n):        """        int n, dimension of question        """        # dimension        self.n = n        # the gene        self.v = np.zeros(n)        # the fitness value        self.f = 0    def assign(self, Chromosome obj):        """        Chromosome obj        copy all attribute from obj to itself        """        self.n = obj.n        self.v[:] = obj.v        self.f = obj.fcdef class DiffertialEvolution(object):    cdef:        int strategy, D, NP, maxGen, rpt, gen, r1, r2, r3, r4, r5        double F, CR        np.ndarray lb, ub, pop        object f        Chromosome lastgenbest, currentbest    def __cinit__(self, object Func, int strategy, int D, int NP, double F, double CR, object lower, object upper, int maxGen, int report):        # strategy 1~10, choice what strategy to generate new member in temporary        self.strategy = strategy        # dimesion of quesiton        self.D = D        # population size        # To start off NP = 10*D is a reasonable choice. Increase NP if misconvergence        self.NP = NP        # weight factor        # F is usually between 0.5 and 1 (in rare cases &gt; 1)        self.F = F        # crossover possible        # CR in [0,1]        self.CR = CR        # low bound        self.lb = np.array(lower[:])        # up bound        self.ub = np.array(upper[:])        # maximum generation        self.maxGen = maxGen        # how many generation report once        self.rpt = report        # object function, or enviorment        self.f = Func        # check parameter is set properly        self.checkParameter()        # generation pool, depend on population size        #self.pop = [Chromosome(self.D) for i in range(self.NP)]        self.pop = np.ndarray((NP,),dtype=np.object)        for i in range(NP):            self.pop[i] = Chromosome(self.D)        # last generation best member        self.lastgenbest = Chromosome(D)        # current best member        self.currentbest = Chromosome(D)        # the generation count        self.gen = 0        # the vector        self.r1 = 0        self.r2 = 0        self.r3 = 0        self.r4 = 0        self.r5 = 0    cdef void checkParameter(self):        """        check parameter is set properly        """        if (type(self.D) is not int) and self.D &lt;= 0:            raise Exception('D shoud be integer and larger than 0')        if (type(self.NP) is not int) and self.NP &lt;= 0:            raise Exception('NP shoud be integer and larger than 0')        if self.CR &lt; 0 or self.CR &gt; 1:            raise Exception('CR should be [0,1]')        if self.maxGen &lt;= 0:            raise Exception('generation should larger than 0')        if self.rpt &lt;= 0 or self.rpt &gt; self.maxGen:            raise Exception('report should be larger than 0 and less than max genration')        if self.strategy &lt; 1 or self.strategy &gt; 10:            raise Exception('strategy should be [1,10]')        for lower, upper in zip(self.lb, self.ub):            if lower &gt; upper:                raise Exception('upper bound should be larger than lower bound')    cdef void init(self):        """        init population        """        cdef int i, j        for i in range(self.NP):            for j in range(self.D):                self.pop[i].v[j] = self.lb[j] + randV()*(self.ub[j] - self.lb[j])            self.pop[i].f = self.evalute(self.pop[i])    cdef double evalute(self, Chromosome member):        """        evalute the member in enviorment        """        return self.f(member.v)    cdef Chromosome findBest(self):        """        find member that have minimum fitness value from pool        """        return min(self.pop, key=lambda chrom:chrom.f)    cdef void generateRandomVector(self, i):        """        generate new vector        """        while True:            self.r1 = int(randV() * self.NP)            if not (self.r1 == i):                break        while True:            self.r2 = int(randV() * self.NP)            if not ((self.r2 == i) or (self.r2 == self.r1)):                break        while True:            self.r3 = int(randV() * self.NP)            if not ((self.r3 == i) or (self.r3 == self.r1) or (self.r3 == self.r2)):                break        while True:            self.r4 = int(randV() * self.NP)            if not ((self.r4 == i) or (self.r4 == self.r1) or (self.r4 == self.r2) or (self.r4 == self.r3)):                break        while True:            self.r5 = int(randV() * self.NP)            if not ((self.r5 == i) or (self.r5 == self.r1) or (self.r5 == self.r2) or (self.r5 == self.r3) or (self.r5 == self.r4)):                break    cdef Chromosome recombination(self, int i):        """        use new vector, recombination the new one member to tmp        """        cdef Chromosome tmp        cdef int n, L        tmp = Chromosome(self.D)        if self.strategy == 1:            tmp.assign(self.pop[i])            n = int(randV() * self.D)            L = 0            while True:                tmp.v[n] = self.lastgenbest.v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D                L += 1                if not ((randV() &lt; self.CR) and (L &lt; self.D)):                    break        elif self.strategy == 2:            tmp.assign(self.pop[i])            n = int(randV() * self.D)            L = 0            while True:                tmp.v[n] = self.pop[self.r1].v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D                L += 1                if not ((randV() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 3):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            L = 0            while True:                tmp.v[n] = tmp.v[n] + self.F*(self.lastgenbest.v[n] - tmp.v[n]) + self.F*(self.pop[self.r1].v[n] - self.pop[self.r2].v[n])                n = (n + 1) % self.D                L += 1                if not ((randV() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 4):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            L = 0            while True:                tmp.v[n] = self.lastgenbest.v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D                L += 1                if not ((randV() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 5):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            L = 0            while True:                tmp.v[n] = self.pop[self.r5].v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D                L += 1                if not ((randV() &lt; self.CR) and (L &lt; self.D)):                    break        elif (self.strategy == 6):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            for L in range(self.D):                if ((randV() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.lastgenbest.v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D        elif (self.strategy == 7):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            for L in range(self.D):                if ((randV() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.pop[self.r1].v[n] + self.F*(self.pop[self.r2].v[n] - self.pop[self.r3].v[n])                n = (n + 1) % self.D        elif (self.strategy == 8):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            for L in range(self.D):                if ((randV() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = tmp.v[n] + self.F*(self.lastgenbest.v[n] - tmp.v[n]) + self.F*(self.pop[self.r1].v[n] - self.pop[self.r2].v[n])                n = (n + 1) % self.D        elif (self.strategy == 9):            tmp.assign(self.pop[i])            n = int(randV() * self.D)            for L in range(self.D):                if ((randV() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.lastgenbest.v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D        else:            tmp.assign(self.pop[i])            n = int(randV() * self.D)            for L in range(self.D):                if ((randV() &lt; self.CR) or L == (self.D - 1)):                    tmp.v[n] = self.pop[self.r5].v[n] + (self.pop[self.r1].v[n] + self.pop[self.r2].v[n] - self.pop[self.r3].v[n] - self.pop[self.r4].v[n]) * self.F                n = (n + 1) % self.D        return tmp    cdef void report(self):        """        report current generation status        """        cdef int i        cdef double v        if self.gen == 0:            print("DiffertialEvolution results - init pop")        elif self.gen == self.maxGen:            print("Final DiffertialEvolution results at %d generations"%(self.gen,))        else:            print("DiffertialEvolution results after %d generations"%(self.gen,))        print("Function : %.6f" % (self.currentbest.f))        for i, v in enumerate(self.currentbest.v.flat, start=1):            print("Var %d : %.4f"%(i, v))    cdef bool overbound(self, Chromosome member):        """        check the member's chromosome that is out of bound?        """        cdef int i        for i in range(self.D):            if member.v[i] &gt; self.ub[i] or member.v[i] &lt; self.lb[i]:                return True        return False    cdef void run(self):        """        run the algorithm...        """        cdef Chromosome tmp        cdef int i        # initial step        # generation 0        self.gen = 0        # init the member's chromsome        self.init()        # find the best one(smallest fitness value)        tmp = self.findBest()        # copy to lastgenbest        self.lastgenbest.assign(tmp)        # copy to currentbest        self.currentbest.assign(tmp)        # report status        self.report()        # end initial step        # the evolution journey is beggin...        for self.gen in range(1, self.maxGen + 1):            for i in range(self.NP):                # generate new vector                self.generateRandomVector(i)                # use the vector recombine the member to temporary                tmp = self.recombination(i)                # check the one is out of bound?                if self.overbound(tmp):                    # if it is, then abandon it                    continue                # is not out of bound, that mean it's quilify of enviorment                # then evalute the one                tmp.f = self.evalute(tmp)                # if temporary one is better than origin(fitness value is smaller)                if tmp.f &lt;= self.pop[i].f:                    # copy the temporary one to origin member                    self.pop[i].assign(tmp)                    # check the temporary one is better than the currentbest                    if tmp.f &lt; self.currentbest.f:                        # copy the temporary one to currentbest                        self.currentbest.assign(tmp)            # copy the currentbest to lastgenbest            self.lastgenbest.assign(self.currentbest)            # if report generation is set, report            if self.rpt != 0:                if self.gen % self.rpt == 0:                    self.report()        # the evolution journey is done, report the final status        self.report()</pre><p><span>使用 Real-coded Genetic algorithm 解題:</span></p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import timeimport mathclass Chromosome(object):    def __init__(self, n=None):        self.np = n if n &gt; 0 else 2        self.f = 0.0        self.v = [0.0] * n    def cp(self, obj):        """        copy all atribute from another chromsome object        """        self.np = obj.np        self.f = obj.f        self.v = obj.v[:]    def get_v(self, i):        return self.v[i]    def is_self(self, obj):        """        check the object is self?        """        return obj is self    def assign(self, obj):        if not self.is_self(obj):            self.cp(obj)class Genetic(object):    def __init__(self, func, pType, nParm, nPop, pCross, pMute, pWin, bDelta, upper, lower):        """        init(function func)        """        self.func=func        self.pType = pType        self.nParm=nParm        self.nPop=nPop        self.pCross=pCross        self.pMute=pMute        self.pWin=pWin        self.bDelta=bDelta        self.chrom = [Chromosome(nParm) for i in range(nPop)]        self.newChrom = [Chromosome(nParm) for i in range(nPop)]        self.babyChrom = [Chromosome(nParm) for i in range(3)]        self.chromElite = [Chromosome(nParm)]        self.chromBest = [Chromosome(nParm)]        self.maxLimit = upper[:]        self.minLimit = lower[:]        self.maxGen = None        self.gen = None        self.seed = 0.0        self.iseed = 470211272.0        self.mask = 2147483647    def check(self, i, v):        """        If a variable is out of bound,        replace it with a random value        """        if (v &gt; self.maxLimit[i]) or (v &lt; self.minLimit[i]):            return self.randVal(self.minLimit[i], self.maxLimit[i])        return v    def crossOver(self):        for i in range(0, self.nPop-1, 2):            # crossover            if(self.rnd() &lt; self.pCross):                for s in range(self.nParm):                    # first baby, half father half mother                    self.babyChrom[0].v[s] = 0.5 * self.chrom[i].v[s] + 0.5*self.chrom[i+1].v[s];                    # second baby, three quaters of fater and quater of mother                    self.babyChrom[1].v[s] = self.check(s, 1.5 * self.chrom[i].v[s] - 0.5*self.chrom[i+1].v[s])                    # third baby, quater of fater and three quaters of mother                    self.babyChrom[2].v[s] = self.check(s,-0.5 * self.chrom[i].v[s] + 1.5*self.chrom[i+1].v[s]);                for j in range(3):                    self.babyChrom[j].f = self.func(self.babyChrom[j].v)                # maximization                if self.pType == 1:                                        if self.babyChrom[1].f &gt; self.babyChrom[0].f:                        self.babyChrom[0], self.babyChrom[1] = self.babyChrom[1], self.babyChrom[0]                    if self.babyChrom[2].f &gt; self.babyChrom[0].f:                        self.babyChrom[2], self.babyChrom[0] = self.babyChrom[0], self.babyChrom[2]                    if self.babyChrom[2].f &gt; self.babyChrom[1].f:                        self.babyChrom[2], self.babyChrom[1] = self.babyChrom[1], self.babyChrom[2]                else:                                        if self.babyChrom[1].f &lt; self.babyChrom[0].f:                        self.babyChrom[0], self.babyChrom[1] = self.babyChrom[1], self.babyChrom[0]                    if self.babyChrom[2].f &lt; self.babyChrom[0].f:                        self.babyChrom[2], self.babyChrom[0] = self.babyChrom[0], self.babyChrom[2]                    if self.babyChrom[2].f &lt; self.babyChrom[1].f:                        self.babyChrom[2], self.babyChrom[1] = self.babyChrom[1], self.babyChrom[2]                # replace first two baby to parent, another one will be                self.chrom[i].assign(self.babyChrom[0])                self.chrom[i+1].assign(self.babyChrom[1])    def delta(self, y):        r = float(self.gen) / self.maxGen;        return y*self.rnd()*math.pow(1.0-r, self.bDelta)    def fitness(self):        for j in range(self.nPop):            self.chrom[j].f = self.func(self.chrom[j].v)        self.chromBest[0].assign(self.chrom[0])        for j in range(self.nPop):            if self.pType == 1:                if(self.chrom[j].f &gt; self.chromBest[0].f):                    self.chromBest[0].assign(self.chrom[j])            else:                if(self.chrom[j].f &lt; self.chromBest[0].f):                    self.chromBest[0].assign(self.chrom[j])        if self.pType == 1:            if(self.chromBest[0].f &gt; self.chromElite[0].f):                self.chromElite[0].assign(self.chromBest[0])        else:            if(self.chromBest[0].f &lt; self.chromElite[0].f):                self.chromElite[0].assign(self.chromBest[0])    def initialPop(self):        for j in range(self.nPop):            for i in range(self.nParm):                self.chrom[j].v[i] = self.randVal(self.minLimit[i], self.maxLimit[i])    def mutate(self):        for i in range(self.nPop):            if self.rnd() &lt; self.pMute:                s = self.random(self.nParm)                if (self.random(2) == 0):                    self.chrom[i].v[s] += self.delta(self.maxLimit[s]-self.chrom[i].v[s])                else:                    self.chrom[i].v[s] -= self.delta(self.chrom[i].v[s]-self.minLimit[s])    def report(self):        if self.gen == 0:            print("Genetik results - Initial population")        elif self.gen == self.maxGen:            print("Final Genetik results at", self.gen, "generations")        else:            print("Genetik results after", self.gen, "generations")        print("Function : %.6f" % (self.chromElite[0].f))        for i, p in enumerate(self.chromElite[0].v):            print("Var", i+1, ":", p)    def select(self):        """        roulette wheel selection        """        for i in range(self.nPop):            j = self.random(self.nPop)            k = self.random(self.nPop)            self.newChrom[i].assign(self.chrom[j])            if self.pType == 1:                if(self.chrom[k].f &gt; self.chrom[j].f) and (self.rnd() &gt; self.pWin):                    self.newChrom[i].assign(self.chrom[k])            else:                if(self.chrom[k].f &lt; self.chrom[j].f) and (self.rnd() &lt; self.pWin):                    self.newChrom[i].assign(self.chrom[k])        # in this stage, newChrom is select finish        # now replace origin chrom        for i in range(self.nPop):            self.chrom[i].assign(self.newChrom[i])        # select random one chrom to be best chrom, make best chrom still exist        j = self.random(self.nPop);        self.chrom[j].assign(self.chromElite[0])    def run(self, mxg, rp):        """        // **** Init and run GA for maxGen times        // **** mxg : maximum generation        // **** rp  : report cycle, 0 for final report or        // ****       report each mxg modulo rp        """        self.maxGen = mxg        self.rpt = rp        self.randomize()        self.initialPop()        self.chrom[0].f = self.func(self.chrom[0].v)        self.chromElite[0].assign(self.chrom[0])        self.gen = 0        self.fitness()        self.report()        for self.gen in range(1, self.maxGen + 1):            self.select()            self.crossOver()            self.mutate()            self.fitness()            if rp != 0:                if self.gen % self.rpt == 0:                    self.report()        self.report()    def newSeed(self):        if(self.seed == 0.0):            self.seed=self.iseed        else:            self.seed *= 16807.0            self.seed = math.fmod(self.seed, self.mask)    def rnd(self):        self.newSeed()        return self.seed/self.mask    def randomize(self):        self.seed = time.time()    def random(self, k):        return int(self.rnd()*k)    def randVal(self, low, high):        number_types = (int, float)        if isinstance(low, number_types) and isinstance(high, number_types):            return self.rnd()*(high-low)+low        raise ValueError        #fittness function (cost function)def evaluate(designVariablel):    surface = 80.0    # if pType is 1, the penality is negative (maximization problem)    # if pType is 0, the penality is positive (minimization problem)    penality = -1000    z = (surface-designVariablel[0]*designVariablel[1])/(2.0*(designVariablel[0]\         +designVariablel[1]))    volume = designVariablel[0]*designVariablel[1]*z      if(volume &lt;= 0):        return penality    # box length and width need to be larger than 0    if(designVariablel[0] &lt;= 0):        return penality    if(designVariablel[1] &lt;= 0):        return penality    #return 1+1/(volume*volume)    return volume#volume = Genetic(self, func, pType, nParm, nPop, pCross, pMute, pWin, bDelta, upper, lower):volume = Genetic(evaluate, 1, 2, 1000, 0.95, 0.05, 0.95, 5, [0, 0], [50, 50])volume.run(1000, 50)</pre><p></p><h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img src="/images/Qt5_creator_calculator_proj.png" width="600" height="455" alt=""></p>
 <p>calculator.pro</p>
@@ -3719,8 +3515,9 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 }</pre>
 <h3>Qt5 Tutorial</h3>
 <p><a href="http://www.bogotobogo.com/Qt/Qt5_Creating_QtQuick2_QML_Application_Animation_A.php">http://www.bogotobogo.com/Qt/Qt5_Creating_QtQuick2_QML_Application_Animation_A.php</a>&nbsp;</p>
-<p>Qt5 編程指南: <a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a> </p>
-<p>Qt5 PDF viewer: <a href="https://github.com/yshurik/qpdfjs">https://github.com/yshurik/qpdfjs</a></p><h2>PyQt 計算器程式</h2>
+<p>Qt5 編程指南: <a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a></p>
+<p>Qt5 PDF viewer: <a href="https://github.com/yshurik/qpdfjs">https://github.com/yshurik/qpdfjs</a></p>
+<p>Qt5 瀏覽器:&nbsp;<a href="https://otter-browser.org/">https://otter-browser.org/</a>&nbsp;</p><h2>PyQt 計算器程式</h2>
 <p>PyQt Version History</p>
 <p>1994, Qt</p>
 <p>November 1998 SIP, and released PyQt 0.1 supporting Qt 1.41</p>
@@ -3752,7 +3549,202 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <p>參考資料:</p>
 <p><a href="https://www.e-education.psu.edu/geog489/l2.html">https://www.e-education.psu.edu/geog489/l2.html</a>&nbsp;</p>
-<h3>PyQt5 實際操作</h3><p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3import sysfrom PyQt5.QtCore import QDateTime, Qt# stage 1#from PyQt5.QtWidgets import QApplication, QWidget# stage 2#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication# stage 3from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenufrom PyQt5.QtGui import QIconnow = QDateTime.currentDateTime()print("Today:", now.toString(Qt.ISODate))print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))class Example(QMainWindow):        def __init__(self):        super().__init__()        self.initUI()                    def initUI(self):                       '''        # stage 1        self.statusBar().showMessage('Ready')                self.setGeometry(300, 300, 250, 150)        self.setWindowTitle('Statusbar')            self.show()        '''                '''        # stage 2        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)                exitAct.setShortcut('Ctrl+Q')        exitAct.setStatusTip('Exit application')        exitAct.triggered.connect(qApp.quit)        self.statusBar()        menubar = self.menuBar()        fileMenu = menubar.addMenu('&amp;File')        fileMenu.addAction(exitAct)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Simple menu')            self.show()        '''                menubar = self.menuBar()        fileMenu = menubar.addMenu('File')                impMenu = QMenu('Import', self)        impAct = QAction('Import mail', self)         impMenu.addAction(impAct)                # 加入 QAction        newAct = QAction('New', self)                fileMenu.addAction(newAct)                newAct1 = QAction('New1', self)                fileMenu.addAction(newAct1)                # 加入 QMenu        fileMenu.addMenu(impMenu)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Submenu')            self.show()if __name__ == '__main__':    '''    app = QApplication(sys.argv)    w = QWidget()    w.resize(250, 150)    w.move(300, 300)    w.setWindowTitle('Simple')    w.show()    '''    app = QApplication(sys.argv)    ex = Example()        sys.exit(app.exec())</pre><p></p><h2>Flask 網際程式</h2>
+<h3>PyQt5 實際操作</h3>
+<p><a href="https://pythonprogramming.net/basic-gui-pyqt-tutorial/">https://pythonprogramming.net/basic-gui-pyqt-tutorial/</a>&nbsp; (for PyQt4)</p>
+<p><a href="https://github.com/kenwaldek/pythonprogramming">https://github.com/kenwaldek/pythonprogramming</a>&nbsp; (PyQt5 examples)</p>
+<p>以 QWidget 建立視窗:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+
+# 利用 QApplication 類別建立案例
+app = QApplication(sys.argv)
+
+# 無 parent 的部件為視窗
+window = QWidget()
+# 設定視窗屬性
+window.setGeometry(50, 50, 500, 300)
+window.setWindowTitle('第一個 PyQt5 程式')
+
+# 顯示視窗
+window.show()
+# 執行應用程式, 若按右上方 close 按鈕可以 exit
+sys.exit(app.exec())</pre>
+<p>改寫為自建視窗類別物件:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+
+class window(QWidget):
+
+    def __init__(self):
+        # 啟始時先執行父物件 (即 QWidget) 的建構子
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        # 案例建立時直接顯示, 也可以建立案例後再顯示
+        self.show()
+
+app = QApplication(sys.argv)
+Gui = window()
+sys.exit(app.exec())</pre>
+<p>以 QMainWindow&nbsp; 類別建立視窗:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+
+
+class window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        self.addExitButton()
+
+    def addExitButton(self):
+        btn = QPushButton('退出', self)
+        btn.clicked.connect(QCoreApplication.instance().quit)
+        btn.resize(100, 100)
+        btn.move(100, 100)
+        # 顯示 window
+        self.show()
+
+def run():
+    app = QApplication(sys.argv)
+    Gui = window()
+    sys.exit(app.exec())
+
+run()</pre>
+<p>視窗關閉時列印訊息:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+
+
+class window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        self.addQuitButton()
+
+    def addQuitButton(self):
+        btn = QPushButton('退出', self)
+        btn.clicked.connect(self.close_application)
+
+        btn.resize(btn.sizeHint())  #set to acceptable size automatic
+        btn.move(0, 0)
+        self.show()
+
+    def close_application(self):
+        print('關閉應用程式')
+        sys.exit()
+
+def run():
+    app = QApplication(sys.argv)
+    Gui = window()
+    sys.exit(app.exec())
+
+run()</pre>
+<p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3
+
+import sys
+from PyQt5.QtCore import QDateTime, Qt
+# stage 1
+#from PyQt5.QtWidgets import QApplication, QWidget
+# stage 2
+#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
+# stage 3
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenu
+from PyQt5.QtGui import QIcon
+
+now = QDateTime.currentDateTime()
+
+print("Today:", now.toString(Qt.ISODate))
+print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))
+print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))
+
+print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))
+print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))
+print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))
+
+class Example(QMainWindow):
+    
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        
+        
+    def initUI(self):               
+        '''
+        # stage 1
+        self.statusBar().showMessage('Ready')
+        
+        self.setGeometry(300, 300, 250, 150)
+        self.setWindowTitle('Statusbar')    
+        self.show()
+        '''
+        
+        '''
+        # stage 2
+        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)        
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip('Exit application')
+        exitAct.triggered.connect(qApp.quit)
+
+        self.statusBar()
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&amp;File')
+        fileMenu.addAction(exitAct)
+        
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Simple menu')    
+        self.show()
+        '''
+        
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('File')
+        
+        impMenu = QMenu('Import', self)
+        impAct = QAction('Import mail', self) 
+        impMenu.addAction(impAct)
+        
+        # 加入 QAction
+        newAct = QAction('New', self)        
+        fileMenu.addAction(newAct)
+        
+        newAct1 = QAction('New1', self)        
+        fileMenu.addAction(newAct1)
+        
+        # 加入 QMenu
+        fileMenu.addMenu(impMenu)
+        
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Submenu')    
+        self.show()
+
+
+if __name__ == '__main__':
+    '''
+    app = QApplication(sys.argv)
+
+    w = QWidget()
+    w.resize(250, 150)
+    w.move(300, 300)
+    w.setWindowTitle('Simple')
+    w.show()
+    '''
+    app = QApplication(sys.argv)
+    ex = Example()
+    
+    sys.exit(app.exec())<br><br><br>
+</pre>
+<p>有關&nbsp; if __name__ == '__main__':</p>
+<p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p>
+<p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p>
+<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
 <p>oauth2 模組:</p>
 <p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
 <p>or</p>
