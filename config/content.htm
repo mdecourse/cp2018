@@ -1,4 +1,32 @@
-<h1>簡介</h1><p><span style="background-color: #ffffcc;">請注意: 在 2018.09 正式開課前, 本網站資料內容均尚未定案, 僅為參考草案.</span></p><h4>以 Python 與 PyQt5 為主</h4><p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 PyQt5 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉些許電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p><h4>結合 C/C++ 提升運算速度</h4><p>計算機程式課程以 Python 程式語言導入的目的, 在於能讓初學者快速建立用於電腦輔助機械設計流程相關的程式, 而當 Python 程式需要與 C/C++ 程式庫結合時, 則建議利用 <a href="http://www.swig.org/">SWIG</a>&nbsp;(<a href="/downloads/swig_cpp_python.pdf">ref.pdf</a>) 將現成 C/C++ 程式編寫為能讓 Python 直接呼叫執行的動態連結庫.</p><h4>學習用於 V-rep 的 Lua</h4><p>本課程提及 Lua 程式語言的原因, 在於隨後課程所使用的 <a href="http://www.coppeliarobotics.com/">V-rep</a> 嵌入程式採用 <a href="http://www.coppeliarobotics.com/helpFiles/en/scripts.htm">Lua</a> 程式與 C++ 結合, 因使用 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以直接在<a href="http://mde.tw/vecp2018/lua/SchoolProject/">網際 Lua 平台</a>練習基本程式語法.</p><p>至於以 Python 語言編寫的某些數值分析程式, 為了提高執行效率, 也提及可以使用 <a href="http://cython.org/">Cython</a> 將這些 Python 程式庫轉為 C 之後, 再編譯為能與主 Python 程式結合的動態連結庫.</p><h4>機電資協同整合設計目標</h4><p>機械設計工程系的電腦輔助機械設計相關課程, 除了本<a href="https://mdecourse.github.io/cp2018/">計算機程式</a>外, 還包含網際內容管理, <a href="https://mdecourse.github.io/cadp2018/">電腦輔助設計實習</a>與協同產品設計實習, 希望能夠在課程結束後, 各學員能以團隊整合的模式開發電腦程式, 有效解決電腦輔助機械設計相關問題.</p><p>課程倉儲: <a href="https://github.com/mdecourse/cp2018">https://github.com/mdecourse/cp2018</a></p><p>課程目標:</p><p>本計算機程式課程在導引如何利用電腦輔助方法進行機械設計, 開發有實用價值的程式.</p><p>需要自學技術:</p><ol><li><a href="http://indiatyping.com/index.php/typing-tutor/english-typing-tutor">電腦英文輸入</a></li><li>電腦中文輸入: 注音輸入, <a href="https://www.pinyinjoe.com/windows-10/windows-10-pinyin-setup.htm">漢語拼音</a></li><li>Windows 10 基本操作: <a href="/downloads/win10_manual.pdf">win10_manual.pdf</a></li><li><a href="/downloads/MSDOS.pdf">命令列基本指令操作</a></li><li><a href="/downloads/computer_hardware.pdf">個人電腦硬體基本認識</a>&nbsp;: <a href="/downloads/com_tutorial.pdf">computer fundamental tutorial.pdf</a></li></ol><p>程式語言:</p><ol><li>C/C++: 含 Qt5 圖形介面程式開發</li><li>Python: 含 PyQt5 圖形介面程式開發</li><li>Lua: 以能與 C/C++ 結合, 並在 <a href="http://www.coppeliarobotics.com/">V-rep</a> 環境中使用為目標.</li><li>Javascript: 含 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 網際環境導入.</li></ol><h2>課程規劃</h2>
+<h1>簡介</h1>
+<p><span style="background-color: #ffffcc;">請注意: 在 2018.09 正式開課前, 本網站資料內容均尚未定案, 僅為參考草案.</span></p>
+<h4>以 Python 與 PyQt5 為主</h4>
+<p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 PyQt5 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉些許電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p>
+<h4>結合 C/C++ 提升運算速度</h4>
+<p>計算機程式課程以 Python 程式語言導入的目的, 在於能讓初學者快速建立用於電腦輔助機械設計流程相關的程式, 而當 Python 程式需要與 C/C++ 程式庫結合時, 則建議利用 <a href="http://www.swig.org/">SWIG</a>&nbsp;(<a href="/downloads/swig_cpp_python.pdf">ref.pdf</a>) 將現成 C/C++ 程式編寫為能讓 Python 直接呼叫執行的動態連結庫.</p>
+<h4>學習用於 V-rep 的 Lua</h4>
+<p>本課程提及 Lua 程式語言的原因, 在於隨後課程所使用的 <a href="http://www.coppeliarobotics.com/">V-rep</a> 嵌入程式採用 <a href="http://www.coppeliarobotics.com/helpFiles/en/scripts.htm">Lua</a> 程式與 C++ 結合, 因使用 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以直接在<a href="http://mde.tw/vecp2018/lua/SchoolProject/">網際 Lua 平台</a>練習基本程式語法.</p>
+<p>至於以 Python 語言編寫的某些數值分析程式, 為了提高執行效率, 也提及可以使用 <a href="http://cython.org/">Cython</a> 將這些 Python 程式庫轉為 C 之後, 再編譯為能與主 Python 程式結合的動態連結庫.</p>
+<h4>機電資協同整合設計目標</h4>
+<p>機械設計工程系的電腦輔助機械設計相關課程, 除了本<a href="https://mdecourse.github.io/cp2018/">計算機程式</a>外, 還包含網際內容管理, <a href="https://mdecourse.github.io/cadp2018/">電腦輔助設計實習</a>與協同產品設計實習, 希望能夠在課程結束後, 各學員能以團隊整合的模式開發電腦程式, 有效解決電腦輔助機械設計相關問題.</p>
+<p>課程倉儲: <a href="https://github.com/mdecourse/cp2018">https://github.com/mdecourse/cp2018</a></p>
+<p>課程目標:</p>
+<p>本計算機程式課程在導引如何利用電腦輔助方法進行機械設計, 開發有實用價值的程式.</p>
+<p>需要自學技術:</p>
+<ol>
+<li><a href="http://indiatyping.com/index.php/typing-tutor/english-typing-tutor">電腦英文輸入</a></li>
+<li>電腦中文輸入: 注音輸入, <a href="https://www.pinyinjoe.com/windows-10/windows-10-pinyin-setup.htm">漢語拼音</a></li>
+<li>Windows 10 基本操作: <a href="/downloads/win10_manual.pdf">win10_manual.pdf</a></li>
+<li><a href="/downloads/MSDOS.pdf">命令列基本指令操作</a></li>
+<li><a href="/downloads/computer_hardware.pdf">個人電腦硬體基本認識</a>&nbsp;: <a href="/downloads/com_tutorial.pdf">computer fundamental tutorial.pdf</a></li>
+</ol>
+<p>程式語言:</p>
+<ol>
+<li>C/C++: 含 Qt5 圖形介面程式開發</li>
+<li>Python: 含 PyQt5 圖形介面程式開發</li>
+<li>Lua: 以能與 C/C++ 結合, 並在 <a href="http://www.coppeliarobotics.com/">V-rep</a> 環境中使用為目標.</li>
+<li>Javascript: 含 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 網際環境導入.</li>
+</ol><h2>課程規劃</h2>
 <p>課程目標:</p>
 <p>為了讓機械設計工程師了解, 該如何利用電腦與網路進行機械設計. 總共安排了四門課程:</p>
 <p>計算機程式 - 內容分為 C, Python, Lua, Html5, CSS, Javascript 等,&nbsp; 利用可攜系統, Git, Fossil SCM, Windows 10 電腦, Ubuntu 電腦與網路的技術, 進行各種問題的解決.</p>
@@ -2360,7 +2388,629 @@ print(result)</pre>
 <p>新增 index.html 後, 以 fossil add, commit 改版後, 再以 fossil ui hello.fossil 啟動網際介面後, 以 localhost:8080/doc/trunk/index.html 擷取 index.html 內容.</p>
 <p>Fossil SCM 基本設定</p>
 <p>Fossil SCM Wiki Timeline 與 upload 檔案</p>
-<h2>CMSimfly 操作</h2>
+<p>以 C 解最大化問題:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">// 必須在演算過程中, 設法限制各變數的上下限!
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;memory.h&gt;
+#include &lt;time.h&gt;
+ 
+// 最大族群數, NP
+#define MAXPOP  5000
+// 最大向量維度, D
+#define MAXDIM  35
+// MAXIMAPROBLEM =1 最大化 0 最小化
+#define MAXIMAPROBLEM 1
+// 最大化時 PENALITY 必須為負值, 否則為正值
+#define PENALITY -1000
+/*
+#define MAXIMAPROBLEM 0
+#define PENALITY 1000
+*/
+ 
+/*------Constants for rnd_uni()--------------------------------------------*/
+ 
+#define IM1 2147483563
+#define IM2 2147483399
+#define AM (1.0/IM1)
+#define IMM1 (IM1-1)
+#define IA1 40014
+#define IA2 40692
+#define IQ1 53668
+#define IQ2 52774
+#define IR1 12211
+#define IR2 3791
+#define NTAB 32
+#define NDIV (1+IMM1/NTAB)
+#define EPS 1.2e-7
+#define RNMX (1.0-EPS)
+ 
+/*------------------------Globals---------------------------------------*/
+ 
+long  rnd_uni_init;                 /* serves as a seed for rnd_uni()   */
+double c[MAXPOP][MAXDIM], d[MAXPOP][MAXDIM];
+double (*pold)[MAXPOP][MAXDIM], (*pnew)[MAXPOP][MAXDIM], (*pswap)[MAXPOP][MAXDIM];
+ 
+/*---------Function declarations----------------------------------------*/
+ 
+void  assignd(int D, double a[], double b[]);
+double rnd_uni(long *idum);    /* uniform pseudo random number generator */
+double extern evaluate(int D, double tmp[], long *nfeval); /* obj. funct. */
+ 
+/*---------Function definitions-----------------------------------------*/
+// 指定向量 b 為 a
+void  assignd(int D, double a[], double b[])
+{
+   int j;
+   for (j=0; j&lt;D; j++)
+   {
+      a[j] = b[j];
+   }
+}
+ 
+// 產生 0 ~ 1 間的亂數
+double rnd_uni(long *idum)
+{
+  long j;
+  long k;
+  static long idum2=123456789;
+  static long iy=0;
+  static long iv[NTAB];
+  double temp;
+ 
+  if (*idum &lt;= 0)
+  {
+    if (-(*idum) &lt; 1) *idum=1;
+    else *idum = -(*idum);
+    idum2=(*idum);
+    for (j=NTAB+7;j&gt;=0;j--)
+    {
+      k=(*idum)/IQ1;
+      *idum=IA1*(*idum-k*IQ1)-k*IR1;
+      if (*idum &lt; 0) *idum += IM1;
+      if (j &lt; NTAB) iv[j] = *idum;
+    }
+    iy=iv[0];
+  }
+  k=(*idum)/IQ1;
+  *idum=IA1*(*idum-k*IQ1)-k*IR1;
+  if (*idum &lt; 0) *idum += IM1;
+  k=idum2/IQ2;
+  idum2=IA2*(idum2-k*IQ2)-k*IR2;
+  if (idum2 &lt; 0) idum2 += IM2;
+  j=iy/NDIV;
+  iy=iv[j]-idum2;
+  iv[j] = *idum;
+  if (iy &lt; 1) iy += IMM1;
+  if ((temp=AM*iy) &gt; RNMX) return RNMX;
+  else return temp;
+ 
+}/*------End of rnd_uni()--------------------------*/
+ 
+// 將上下限轉為全域變數
+double inibound_h;      /* upper parameter bound              */
+double inibound_l;      /* lower parameter bound              */
+// 與機構合成相關的全域變數
+// 宣告一個座標結構
+struct Coord {
+    double x;
+    double y;
+  // 這裡保留 double z;
+};
+ 
+main(int argc, char *argv[])
+{
+   char  chr;             /* y/n choice variable                */
+   char  *strat[] =       /* strategy-indicator                 */
+   {
+            "",
+            "DE/best/1/exp",
+            "DE/rand/1/exp",
+            "DE/rand-to-best/1/exp",
+            "DE/best/2/exp",
+            "DE/rand/2/exp",
+            "DE/best/1/bin",
+            "DE/rand/1/bin",
+            "DE/rand-to-best/1/bin",
+            "DE/best/2/bin",
+            "DE/rand/2/bin"
+   };
+ 
+   int   i, j, L, n;      /* counting variables                 */
+   int   r1, r2, r3, r4;  /* placeholders for random indexes    */
+   int   r5;              /* placeholders for random indexes    */
+   int   D;               /* Dimension of parameter vector      */
+   int   NP;              /* number of population members       */
+   int   imin;            /* index to member with lowest energy */
+   int   refresh;         /* refresh rate of screen output      */
+   int   strategy;        /* choice parameter for screen output */
+   int   gen, genmax, seed;   
+ 
+   long  nfeval;          /* number of function evaluations     */
+ 
+   double trial_cost;      /* buffer variable                    */
+   // 將上下限轉為全域變數, 可能要根據各變數加以設定
+   //double inibound_h;      /* upper parameter bound              */
+   //double inibound_l;      /* lower parameter bound              */
+   double tmp[MAXDIM], best[MAXDIM], bestit[MAXDIM]; /* members  */
+   double cost[MAXPOP];    /* obj. funct. values                 */
+   double cvar;            /* computes the cost variance         */
+   double cmean;           /* mean cost                          */
+   double F,CR;            /* control variables of DE            */
+   double cmin;            /* help variables                     */
+ 
+   FILE  *fpin_ptr;
+   FILE  *fpout_ptr;
+ 
+// 計算執行過程所需時間起點, 需要導入 time.h
+  clock_t start = clock();
+ 
+/*------Initializations----------------------------*/
+ 
+// 將結果寫入 out.dat
+ fpout_ptr = fopen("out.dat","w");          /* open output file for reading,    */
+// 目前已經採用 strategy 3 可以得到最佳結果
+  strategy = 3;
+  genmax = 2000;
+  refresh = 100;
+  // 配合機構尺寸合成, 每一個體有 9 個機構尺寸值與 5 個通過點角度值
+  D = 2;
+  NP = 200;
+  inibound_h = 50.;
+  inibound_l = 0.;
+/*得到最佳解
+  F = 0.85;
+CR 必須介於 0 to 1. 之間
+  CR = 1.;
+*/
+  F = 0.85;
+  CR = 1.;
+  seed = 3;
+ 
+ //fclose(fpin_ptr);
+ 
+/*-----Checking input variables for proper range----------------------------*/
+ 
+  if (D &gt; MAXDIM)
+  {
+     printf("\nError! D=%d &gt; MAXDIM=%d\n",D,MAXDIM);
+     exit(1);
+  }
+  if (D &lt;= 0)
+  {
+     printf("\nError! D=%d, should be &gt; 0\n",D);
+     exit(1);
+  }
+  if (NP &gt; MAXPOP)
+  {
+     printf("\nError! NP=%d &gt; MAXPOP=%d\n",NP,MAXPOP);
+     exit(1);
+  }
+  if (NP &lt;= 0)
+  {
+     printf("\nError! NP=%d, should be &gt; 0\n",NP);
+     exit(1);
+  }
+  if ((CR &lt; 0) || (CR &gt; 1.0))
+  {
+     printf("\nError! CR=%f, should be ex [0,1]\n",CR);
+     exit(1);
+  }
+  if (seed &lt;= 0)
+  {
+     printf("\nError! seed=%d, should be &gt; 0\n",seed);
+     exit(1);
+  }
+  if (refresh &lt;= 0)
+  {
+     printf("\nError! refresh=%d, should be &gt; 0\n",refresh);
+     exit(1);
+  }
+  if (genmax &lt;= 0)
+  {
+     printf("\nError! genmax=%d, should be &gt; 0\n",genmax);
+     exit(1);
+  }
+  if ((strategy &lt; 0) || (strategy &gt; 10))
+  {
+     printf("\nError! strategy=%d, should be ex {1,2,3,4,5,6,7,8,9,10}\n",strategy);
+     exit(1);
+  }
+  if (inibound_h &lt; inibound_l)
+  {
+     printf("\nError! inibound_h=%f &lt; inibound_l=%f\n",inibound_h, inibound_l);
+     exit(1);
+  }
+ 
+/*-----Initialize random number generator-----------------------------*/
+ 
+ rnd_uni_init = -(long)seed;  /* initialization of rnd_uni() */
+ nfeval       =  0;  /* reset number of function evaluations */
+ 
+/*------Initialization------------------------------------------------*/
+/*------Right now this part is kept fairly simple and just generates--*/
+/*------random numbers in the range [-initfac, +initfac]. You might---*/
+/*------want to extend the init part such that you can initialize-----*/
+/*------each parameter separately.------------------------------------*/
+ 
+   for (i=0; i&lt;NP; i++)
+   {
+      for (j=0; j&lt;D; j++) /* spread initial population members */
+      {
+        c[i][j] = inibound_l + rnd_uni(&amp;rnd_uni_init)*(inibound_h - inibound_l);
+      }
+      cost[i] = evaluate(D,c[i],&amp;nfeval); /* obj. funct. value */
+   }
+   cmin = cost[0];
+   imin = 0;
+   for (i=1; i&lt;NP; i++)
+   {
+     if(MAXIMAPROBLEM == 1)
+     {
+       // 改為最大化
+        if (cost[i]&gt;cmin)
+        {
+          cmin = cost[i];
+          imin = i;
+        }
+      }
+      else
+      {
+        // 最小化問題
+        if (cost[i]&lt;cmin)
+        {
+          cmin = cost[i];
+          imin = i;
+        }
+      }
+   }
+ 
+   assignd(D,best,c[imin]);            /* save best member ever          */
+   assignd(D,bestit,c[imin]);          /* save best member of generation */
+ 
+   pold = &amp;c; /* old population (generation G)   */
+   pnew = &amp;d; /* new population (generation G+1) */
+ 
+/*=======================================================================*/
+/*=========Iteration loop================================================*/
+/*=======================================================================*/
+ 
+   gen = 0;                          /* generation counter reset */
+   while ((gen &lt; genmax) /*&amp;&amp; (kbhit() == 0)*/) /* remove comments if conio.h */
+   {                                            /* is accepted by compiler    */
+      gen++;
+      imin = 0;
+ 
+      for (i=0; i&lt;NP; i++)         /* Start of loop through ensemble  */
+      {
+     do                        /* Pick a random population member */
+     {                         /* Endless loop for NP &lt; 2 !!!     */
+       r1 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);
+     }while(r1==i);            
+ 
+     do                        /* Pick a random population member */
+     {                         /* Endless loop for NP &lt; 3 !!!     */
+       r2 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);
+     }while((r2==i) || (r2==r1));
+ 
+     do                        /* Pick a random population member */
+     {                         /* Endless loop for NP &lt; 4 !!!     */
+       r3 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);
+     }while((r3==i) || (r3==r1) || (r3==r2));
+ 
+     do                        /* Pick a random population member */
+     {                         /* Endless loop for NP &lt; 5 !!!     */
+       r4 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);
+     }while((r4==i) || (r4==r1) || (r4==r2) || (r4==r3));
+ 
+     do                        /* Pick a random population member */
+     {                         /* Endless loop for NP &lt; 6 !!!     */
+       r5 = (int)(rnd_uni(&amp;rnd_uni_init)*NP);
+     }while((r5==i) || (r5==r1) || (r5==r2) || (r5==r3) || (r5==r4));
+ 
+/*=======EXPONENTIAL CROSSOVER============================================================*/
+ 
+/*-------DE/best/1/exp--------------------------------------------------------------------*/
+/*-------Our oldest strategy but still not bad. However, we have found several------------*/
+/*-------optimization problems where misconvergence occurs.-------------------------------*/
+     if (strategy == 1) /* strategy DE0 (not in our paper) */
+     {
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);
+       L = 0;
+       do
+       {                       
+         tmp[n] = bestit[n] + F*((*pold)[r2][n]-(*pold)[r3][n]);
+         n = (n+1)%D;
+         L++;
+       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));
+     }
+/*-------DE/rand/1/exp-------------------------------------------------------------------*/
+/*-------This is one of my favourite strategies. It works especially well when the-------*/
+/*-------"bestit[]"-schemes experience misconvergence. Try e.g. F=0.7 and CR=0.5---------*/
+/*-------as a first guess.---------------------------------------------------------------*/
+     else if (strategy == 2) /* strategy DE1 in the techreport */
+     {
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D);
+       L = 0;
+       do
+       {                       
+         tmp[n] = (*pold)[r1][n] + F*((*pold)[r2][n]-(*pold)[r3][n]);
+         n = (n+1)%D;
+         L++;
+       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));
+     }
+/*-------DE/rand-to-best/1/exp-----------------------------------------------------------*/
+/*-------This strategy seems to be one of the best strategies. Try F=0.85 and CR=1.------*/
+/*-------If you get misconvergence try to increase NP. If this doesn't help you----------*/
+/*-------should play around with all three control variables.----------------------------*/
+     else if (strategy == 3) /* similiar to DE2 but generally better */
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+       L = 0;
+       do
+       {                       
+         tmp[n] = tmp[n] + F*(bestit[n] - tmp[n]) + F*((*pold)[r1][n]-(*pold)[r2][n]);
+         n = (n+1)%D;
+         L++;
+       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));
+     }
+/*-------DE/best/2/exp is another powerful strategy worth trying--------------------------*/
+     else if (strategy == 4)
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+       L = 0;
+       do
+       {                           
+         tmp[n] = bestit[n] + 
+              ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;
+         n = (n+1)%D;
+         L++;
+       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));
+     }
+/*-------DE/rand/2/exp seems to be a robust optimizer for many functions-------------------*/
+     else if (strategy == 5)
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+       L = 0;
+       do
+       {                           
+         tmp[n] = (*pold)[r5][n] + 
+              ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;
+         n = (n+1)%D;
+         L++;
+       }while((rnd_uni(&amp;rnd_uni_init) &lt; CR) &amp;&amp; (L &lt; D));
+     }
+ 
+/*=======Essentially same strategies but BINOMIAL CROSSOVER===============================*/
+ 
+/*-------DE/best/1/bin--------------------------------------------------------------------*/
+     else if (strategy == 6) 
+     {
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+           for (L=0; L&lt;D; L++) /* perform D binomial trials */
+           {
+         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */
+         {                       
+           tmp[n] = bestit[n] + F*((*pold)[r2][n]-(*pold)[r3][n]);
+         }
+         n = (n+1)%D;
+           }
+     }
+/*-------DE/rand/1/bin-------------------------------------------------------------------*/
+     else if (strategy == 7) 
+     {
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+           for (L=0; L&lt;D; L++) /* perform D binomial trials */
+           {
+         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */
+         {                       
+           tmp[n] = (*pold)[r1][n] + F*((*pold)[r2][n]-(*pold)[r3][n]);
+         }
+         n = (n+1)%D;
+           }
+     }
+/*-------DE/rand-to-best/1/bin-----------------------------------------------------------*/
+     else if (strategy == 8) 
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+           for (L=0; L&lt;D; L++) /* perform D binomial trials */
+           {
+         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */
+         {                       
+           tmp[n] = tmp[n] + F*(bestit[n] - tmp[n]) + F*((*pold)[r1][n]-(*pold)[r2][n]);
+         }
+         n = (n+1)%D;
+           }
+     }
+/*-------DE/best/2/bin--------------------------------------------------------------------*/
+     else if (strategy == 9)
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+           for (L=0; L&lt;D; L++) /* perform D binomial trials */
+           {
+         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */
+         {                       
+           tmp[n] = bestit[n] + 
+              ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;
+         }
+         n = (n+1)%D;
+           }
+     }
+/*-------DE/rand/2/bin--------------------------------------------------------------------*/
+     else
+     { 
+       assignd(D,tmp,(*pold)[i]);
+       n = (int)(rnd_uni(&amp;rnd_uni_init)*D); 
+           for (L=0; L&lt;D; L++) /* perform D binomial trials */
+           {
+         if ((rnd_uni(&amp;rnd_uni_init) &lt; CR) || L == (D-1)) /* change at least one parameter */
+         {                       
+           tmp[n] = (*pold)[r5][n] + 
+              ((*pold)[r1][n]+(*pold)[r2][n]-(*pold)[r3][n]-(*pold)[r4][n])*F;
+         }
+         n = (n+1)%D;
+           }
+     }
+ 
+ 
+/*=======Trial mutation now in tmp[]. Test how good this choice really was.==================*/
+ 
+     trial_cost = evaluate(D,tmp,&amp;nfeval);  /* Evaluate new vector in tmp[] */
+   if(MAXIMAPROBLEM == 1)
+   {
+    // 改為最大化
+       if (trial_cost &gt;= cost[i])   /* improved objective function value ? */
+       {                                  
+          cost[i]=trial_cost;         
+          assignd(D,(*pnew)[i],tmp);
+          if (trial_cost&gt;cmin)          /* Was this a new minimum? */
+          {                               /* if so...*/
+             cmin=trial_cost;           /* reset cmin to new low...*/
+             imin=i;
+             assignd(D,best,tmp);           
+          }                           
+       }                            
+       else
+       {
+          assignd(D,(*pnew)[i],(*pold)[i]); /* replace target with old value */
+       }
+    }
+    else
+    {
+          // 最小化問題
+       if (trial_cost &lt;= cost[i])   /* improved objective function value ? */
+       {                                  
+          cost[i]=trial_cost;         
+          assignd(D,(*pnew)[i],tmp);
+          if (trial_cost&lt;cmin)          /* Was this a new minimum? */
+          {                               /* if so...*/
+             cmin=trial_cost;           /* reset cmin to new low...*/
+             imin=i;
+             assignd(D,best,tmp);           
+          }                           
+       }                            
+       else
+       {
+          assignd(D,(*pnew)[i],(*pold)[i]); /* replace target with old value */
+       }
+    }
+ 
+      }   /* End mutation loop through pop. */
+ 
+      assignd(D,bestit,best);  /* Save best population member of current iteration */
+ 
+      /* swap population arrays. New generation becomes old one */
+ 
+      pswap = pold;
+      pold  = pnew;
+      pnew  = pswap;
+ 
+/*----Compute the energy variance (just for monitoring purposes)-----------*/
+ 
+      cmean = 0.;          /* compute the mean value first */
+      for (j=0; j&lt;NP; j++)
+      {
+         cmean += cost[j];
+      }
+      cmean = cmean/NP;
+ 
+      cvar = 0.;           /* now the variance              */
+      for (j=0; j&lt;NP; j++)
+      {
+         cvar += (cost[j] - cmean)*(cost[j] - cmean);
+      }
+      cvar = cvar/(NP-1);
+ 
+ 
+/*----Output part----------------------------------------------------------*/
+ 
+      if (gen%refresh==1)   /* display after every refresh generations */
+      { /* ABORT works only if conio.h is accepted by your compiler */
+    printf("\n\n                         PRESS ANY KEY TO ABORT"); 
+    printf("\n\n\n Best-so-far cost funct. value=%-15.10g\n",cmin);
+ 
+    for (j=0;j&lt;D;j++)
+    {
+      printf("\n best[%d]=%-15.10g",j,best[j]);
+    }
+    printf("\n\n Generation=%d  NFEs=%ld   Strategy: %s    ",gen,nfeval,strat[strategy]);
+    printf("\n NP=%d    F=%-4.2g    CR=%-4.2g   cost-variance=%-10.5g\n",
+               NP,F,CR,cvar);
+      }
+ 
+      fprintf(fpout_ptr,"%ld   %-15.10g\n",nfeval,cmin);
+   }
+/*=======================================================================*/
+/*=========End of iteration loop=========================================*/
+/*=======================================================================*/
+ 
+/*-------Final output in file-------------------------------------------*/
+ 
+ 
+   fprintf(fpout_ptr,"\n\n\n Best-so-far obj. funct. value = %-15.10g\n",cmin);
+ 
+   for (j=0;j&lt;D;j++)
+   {
+     fprintf(fpout_ptr,"\n best[%d]=%-15.10g",j,best[j]);
+   }
+   fprintf(fpout_ptr,"\n\n Generation=%d  NFEs=%ld   Strategy: %s    ",gen,nfeval,strat[strategy]);
+   fprintf(fpout_ptr,"\n NP=%d    F=%-4.2g    CR=%-4.2g    cost-variance=%-10.5g\n",
+           NP,F,CR,cvar); 
+ 
+  fclose(fpout_ptr);
+ 
+  /* Code you want timed here */
+  printf("Time elapsed: %f\n", ((double)clock() - start) / CLOCKS_PER_SEC);
+   return(0);
+}
+ 
+/*-----------End of main()------------------------------------------*/
+ 
+// 適應函式 fittness function (cost function)
+double evaluate(int D, double tmp[], long *nfeval)
+{
+   double result=0, surface = 80.0, z, volume, penality;
+   (*nfeval)++;
+   z = (surface-tmp[0]*tmp[1])/(2.0*(tmp[0]+tmp[1]));
+   volume = tmp[0]*tmp[1]*z;
+ 
+  if(volume &lt;= 0){
+    return PENALITY;
+  }
+// 只限制長度與寬度必須大於 0
+  if(tmp[0] &lt;= inibound_l){
+    return PENALITY;
+  }
+ 
+  if(tmp[1] &lt;= inibound_l){
+    return PENALITY;
+  }
+/*
+  if((tmp[0] &lt;= inibound_l)|| (tmp[0] &gt;inibound_h)){
+    return PENALITY;
+  }
+ 
+  if((tmp[1] &lt;= inibound_l) || (tmp[1] &gt;inibound_h)){
+    return PENALITY;
+  }
+  */
+  // volume must &gt;0 and max volume
+  // 目前為最小化問題
+   //return 1+1/(volume*volume);
+  return volume;
+}
+ </pre>
+<p></p><h2>CMSimfly 操作</h2>
 <p>操作目的:</p>
 <p style="padding-left: 30px;">讓學員透過&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;的程式編寫架構與使用, 了解如何利用 Python 與&nbsp; Flask 網際框架, 自行建構網際內容管理系統.</p>
 <p>所欲解決問題:</p>
@@ -3101,7 +3751,8 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><yt-formatted-string class="style-scope ytd-video-primary-info-renderer">一乙第十二週第二部分</yt-formatted-string></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <p>參考資料:</p>
-<p><a href="https://www.e-education.psu.edu/geog489/l2.html">https://www.e-education.psu.edu/geog489/l2.html</a>&nbsp;</p><h2>Flask 網際程式</h2>
+<p><a href="https://www.e-education.psu.edu/geog489/l2.html">https://www.e-education.psu.edu/geog489/l2.html</a>&nbsp;</p>
+<h3>PyQt5 實際操作</h3><p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3import sysfrom PyQt5.QtCore import QDateTime, Qt# stage 1#from PyQt5.QtWidgets import QApplication, QWidget# stage 2#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication# stage 3from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenufrom PyQt5.QtGui import QIconnow = QDateTime.currentDateTime()print("Today:", now.toString(Qt.ISODate))print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))class Example(QMainWindow):        def __init__(self):        super().__init__()        self.initUI()                    def initUI(self):                       '''        # stage 1        self.statusBar().showMessage('Ready')                self.setGeometry(300, 300, 250, 150)        self.setWindowTitle('Statusbar')            self.show()        '''                '''        # stage 2        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)                exitAct.setShortcut('Ctrl+Q')        exitAct.setStatusTip('Exit application')        exitAct.triggered.connect(qApp.quit)        self.statusBar()        menubar = self.menuBar()        fileMenu = menubar.addMenu('&amp;File')        fileMenu.addAction(exitAct)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Simple menu')            self.show()        '''                menubar = self.menuBar()        fileMenu = menubar.addMenu('File')                impMenu = QMenu('Import', self)        impAct = QAction('Import mail', self)         impMenu.addAction(impAct)                # 加入 QAction        newAct = QAction('New', self)                fileMenu.addAction(newAct)                newAct1 = QAction('New1', self)                fileMenu.addAction(newAct1)                # 加入 QMenu        fileMenu.addMenu(impMenu)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Submenu')            self.show()if __name__ == '__main__':    '''    app = QApplication(sys.argv)    w = QWidget()    w.resize(250, 150)    w.move(300, 300)    w.setWindowTitle('Simple')    w.show()    '''    app = QApplication(sys.argv)    ex = Example()        sys.exit(app.exec())</pre><p></p><h2>Flask 網際程式</h2>
 <p>oauth2 模組:</p>
 <p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
 <p>or</p>
