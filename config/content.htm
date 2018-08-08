@@ -5363,7 +5363,206 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <p>參考資料:</p>
 <p><a href="https://www.e-education.psu.edu/geog489/l2.html">https://www.e-education.psu.edu/geog489/l2.html</a>&nbsp;</p>
-<h3>PyQt5 實際操作</h3><p><a href="/downloads/Algorithmic%20Problem Solving with Python.pdf">Algorithmic Problem Solving with Python.pdf</a></p><p><a href="https://pythonprogramming.net/basic-gui-pyqt-tutorial/">https://pythonprogramming.net/basic-gui-pyqt-tutorial/</a>&nbsp; (for PyQt4)</p><p><a href="https://github.com/kenwaldek/pythonprogramming">https://github.com/kenwaldek/pythonprogramming</a>&nbsp; (PyQt5 examples)</p><p><a href="https://blog.csdn.net/c3060911030/article/category/6247011/1">https://blog.csdn.net/c3060911030/article/category/6247011/1</a>&nbsp;(PyQt5 教程)</p><p><a href="/downloads/pyqt5tutorial_201603.pdf">pyqt5tutorial_201603.pdf</a></p><p><a href="http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html">PyQt5 class reference</a></p><p>以 QWidget 建立視窗:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QApplication, QWidget# 利用 QApplication 類別建立案例app = QApplication(sys.argv)# 無 parent 的部件為視窗window = QWidget()# 設定視窗屬性window.setGeometry(50, 50, 500, 300)window.setWindowTitle('第一個 PyQt5 程式')# 顯示視窗window.show()# 執行應用程式, 若按右上方 close 按鈕可以 exitsys.exit(app.exec())</pre><p>改寫為自建視窗類別物件:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QApplication, QWidgetclass window(QWidget):    def __init__(self):        # 啟始時先執行父物件 (即 QWidget) 的建構子        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        # 案例建立時直接顯示, 也可以建立案例後再顯示        self.show()app = QApplication(sys.argv)Gui = window()sys.exit(app.exec())</pre><p>以 QMainWindow&nbsp; 類別建立視窗:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtCore import QCoreApplicationfrom PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButtonclass window(QMainWindow):    def __init__(self):        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        self.addExitButton()    def addExitButton(self):        btn = QPushButton('退出', self)        btn.clicked.connect(QCoreApplication.instance().quit)        btn.resize(100, 100)        btn.move(100, 100)        # 顯示 window        self.show()def run():    app = QApplication(sys.argv)    Gui = window()    sys.exit(app.exec())run()</pre><p>視窗關閉時列印訊息:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtCore import QCoreApplicationfrom PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButtonclass window(QMainWindow):    def __init__(self):        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        self.addQuitButton()    def addQuitButton(self):        btn = QPushButton('退出', self)        btn.clicked.connect(self.close_application)        btn.resize(btn.sizeHint())  #set to acceptable size automatic        btn.move(0, 0)        self.show()    def close_application(self):        print('關閉應用程式')        sys.exit()def run():    app = QApplication(sys.argv)    Gui = window()    sys.exit(app.exec())run()</pre><p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3import sysfrom PyQt5.QtCore import QDateTime, Qt# stage 1#from PyQt5.QtWidgets import QApplication, QWidget# stage 2#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication# stage 3from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenufrom PyQt5.QtGui import QIconnow = QDateTime.currentDateTime()print("Today:", now.toString(Qt.ISODate))print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))class Example(QMainWindow):        def __init__(self):        super().__init__()        self.initUI()                    def initUI(self):                       '''        # stage 1        self.statusBar().showMessage('Ready')                self.setGeometry(300, 300, 250, 150)        self.setWindowTitle('Statusbar')            self.show()        '''                '''        # stage 2        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)                exitAct.setShortcut('Ctrl+Q')        exitAct.setStatusTip('Exit application')        exitAct.triggered.connect(qApp.quit)        self.statusBar()        menubar = self.menuBar()        fileMenu = menubar.addMenu('&amp;File')        fileMenu.addAction(exitAct)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Simple menu')            self.show()        '''                menubar = self.menuBar()        fileMenu = menubar.addMenu('File')                impMenu = QMenu('Import', self)        impAct = QAction('Import mail', self)         impMenu.addAction(impAct)                # 加入 QAction        newAct = QAction('New', self)                fileMenu.addAction(newAct)                newAct1 = QAction('New1', self)                fileMenu.addAction(newAct1)                # 加入 QMenu        fileMenu.addMenu(impMenu)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Submenu')            self.show()if __name__ == '__main__':    '''    app = QApplication(sys.argv)    w = QWidget()    w.resize(250, 150)    w.move(300, 300)    w.setWindowTitle('Simple')    w.show()    '''    app = QApplication(sys.argv)    ex = Example()        sys.exit(app.exec())<br><br><br></pre><p>有關&nbsp; if __name__ == '__main__':</p><p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p><p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p><p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
+<h3>PyQt5 實際操作</h3>
+<p><a href="/downloads/Algorithmic%20Problem Solving with Python.pdf">Algorithmic Problem Solving with Python.pdf</a></p>
+<p><a href="https://pythonprogramming.net/basic-gui-pyqt-tutorial/">https://pythonprogramming.net/basic-gui-pyqt-tutorial/</a>&nbsp; (for PyQt4)</p>
+<p><a href="https://github.com/kenwaldek/pythonprogramming">https://github.com/kenwaldek/pythonprogramming</a>&nbsp; (PyQt5 examples)</p>
+<p><a href="https://blog.csdn.net/c3060911030/article/category/6247011/1">https://blog.csdn.net/c3060911030/article/category/6247011/1</a>&nbsp;(PyQt5 教程)</p>
+<p><a href="/downloads/pyqt5tutorial_201603.pdf">pyqt5tutorial_201603.pdf</a></p>
+<p><a href="http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html">PyQt5 class reference</a></p>
+<p>以 QWidget 建立視窗:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+
+# 利用 QApplication 類別建立案例
+app = QApplication(sys.argv)
+
+# 無 parent 的部件為視窗
+window = QWidget()
+# 設定視窗屬性
+window.setGeometry(50, 50, 500, 300)
+window.setWindowTitle('第一個 PyQt5 程式')
+
+# 顯示視窗
+window.show()
+# 執行應用程式, 若按右上方 close 按鈕可以 exit
+sys.exit(app.exec())</pre>
+<p>改寫為自建視窗類別物件:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+
+class window(QWidget):
+
+    def __init__(self):
+        # 啟始時先執行父物件 (即 QWidget) 的建構子
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        # 案例建立時直接顯示, 也可以建立案例後再顯示
+        self.show()
+
+app = QApplication(sys.argv)
+Gui = window()
+sys.exit(app.exec())</pre>
+<p>以 QMainWindow&nbsp; 類別建立視窗:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+
+
+class window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        self.addExitButton()
+
+    def addExitButton(self):
+        btn = QPushButton('退出', self)
+        btn.clicked.connect(QCoreApplication.instance().quit)
+        btn.resize(100, 100)
+        btn.move(100, 100)
+        # 顯示 window
+        self.show()
+
+def run():
+    app = QApplication(sys.argv)
+    Gui = window()
+    sys.exit(app.exec())
+
+run()</pre>
+<p>視窗關閉時列印訊息:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+
+
+class window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(50, 50, 500, 300)
+        self.setWindowTitle('第一個 PyQt5 程式')
+        self.addQuitButton()
+
+    def addQuitButton(self):
+        btn = QPushButton('退出', self)
+        btn.clicked.connect(self.close_application)
+
+        btn.resize(btn.sizeHint())  #set to acceptable size automatic
+        btn.move(0, 0)
+        self.show()
+
+    def close_application(self):
+        print('關閉應用程式')
+        sys.exit()
+
+def run():
+    app = QApplication(sys.argv)
+    Gui = window()
+    sys.exit(app.exec())
+
+run()</pre>
+<p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3
+
+import sys
+from PyQt5.QtCore import QDateTime, Qt
+# stage 1
+#from PyQt5.QtWidgets import QApplication, QWidget
+# stage 2
+#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
+# stage 3
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenu
+from PyQt5.QtGui import QIcon
+
+now = QDateTime.currentDateTime()
+
+print("Today:", now.toString(Qt.ISODate))
+print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))
+print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))
+
+print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))
+print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))
+print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))
+
+class Example(QMainWindow):
+    
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        
+        
+    def initUI(self):               
+        '''
+        # stage 1
+        self.statusBar().showMessage('Ready')
+        
+        self.setGeometry(300, 300, 250, 150)
+        self.setWindowTitle('Statusbar')    
+        self.show()
+        '''
+        
+        '''
+        # stage 2
+        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)        
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip('Exit application')
+        exitAct.triggered.connect(qApp.quit)
+
+        self.statusBar()
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&amp;File')
+        fileMenu.addAction(exitAct)
+        
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Simple menu')    
+        self.show()
+        '''
+        
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('File')
+        
+        impMenu = QMenu('Import', self)
+        impAct = QAction('Import mail', self) 
+        impMenu.addAction(impAct)
+        
+        # 加入 QAction
+        newAct = QAction('New', self)        
+        fileMenu.addAction(newAct)
+        
+        newAct1 = QAction('New1', self)        
+        fileMenu.addAction(newAct1)
+        
+        # 加入 QMenu
+        fileMenu.addMenu(impMenu)
+        
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Submenu')    
+        self.show()
+
+
+if __name__ == '__main__':
+    '''
+    app = QApplication(sys.argv)
+
+    w = QWidget()
+    w.resize(250, 150)
+    w.move(300, 300)
+    w.setWindowTitle('Simple')
+    w.show()
+    '''
+    app = QApplication(sys.argv)
+    ex = Example()
+    
+    sys.exit(app.exec())<br><br><br>
+</pre>
+<p>有關&nbsp; if __name__ == '__main__':</p>
+<p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p>
+<p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p>
+<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
 <p>oauth2 模組:</p>
 <p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
 <p>or</p>
@@ -10736,92 +10935,7 @@ print(data)
 
 
 </pre>
-<h2>CMSimfly 解析</h2>
-<h4>CMSimfly 源起</h4>
-<p>CMSimfly 的設計概念源自&nbsp;<a href="https://www.cmsimple.org/en/">https://www.cmsimple.org/en/</a>, CMSimple&nbsp;不需要使用資料庫,所有的頁面資料都以一個超文件檔案格式, 名稱為content.htm, 存於全球資訊網伺服器上.純文字檔的資料設計使得安裝與備份工作相對較為簡單.</p>
-<p>CMSimple主要的程式功能分為頁面展示與後台管理. 其頁面展示功能是利用超文件中的 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;, 與 &lt;h3&gt;&lt;/h3&gt; 標註（可後續延伸至 &lt;h4&gt;&lt;/h4&gt;等）, 進行分頁. CMSimple程式會將 content.htm 中的 &lt;h1&gt;&lt;/h1&gt; 當作第一層頁面的標題, 緊跟其後之 &lt;h2&gt;&lt;/h2&gt; 則將被視為第二層頁面的標題, 而 &lt;h3&gt;&lt;/h3&gt; 所涵蓋的內容則為第三層頁面的標題. 各層標題則依照其位於content.htm文件中的順序而定. 由於CMSimple利用 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;，與&lt;h3&gt;&lt;/h3&gt; 標註進行分頁，因此其文件內容無法出現標題標註（header）所對應的粗體文字. 使用者必須透過其他方式產生類似粗體文字的效果.</p>
-<p>CMSimple的後台管理, 僅允許單一用戶使用. 透過後台管理, 可設定各種與頁面展示相關的參數. 與許多內容管理系統相同, CMSimple提供延伸程式開發架構的設計, 可以讓程式開發者自行建構原始CMSimple以外的功能.</p>
-<p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p>
-<h4>CMSimfly 架構</h4>
-<p>CMSimfly 網際內容管理系統, 以位於 config 目錄中的 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p>
-<p>config/content.htm 的解讀, 以&nbsp; Python 的 Beautiful Soup 模組達成, 主要先取得 content.htm 檔案中的各 &lt;h1&gt; &lt;h2&gt; 與 &lt;h3&gt; 標註的內容後, 轉為數列, 然後利用各頁面標題作為切割各頁內容的依據, 以便取得各頁面的標題、階次與內容, 標題階次主要用來建立多層次表單以及 site map.</p>
-<p>由於切割頁面的依據為 &lt;h1&gt; 至 &lt;h3&gt; 的標題, 且頁面連結與編輯均依賴頁面標題, 因此各頁面標題不可重複, 否則連結與編輯時, 將會在畫面出現多個資料與編輯區. 要改進此一缺點, 可以將 content.htm 的資料存入資料庫, 並以獨立序號來辨識各頁面標題、階次與內容.</p>
-<p>CMSimfly 中採 bs4 與 re 所建立的 parse_content 方法:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def parse_content():
-    """use bs4 and re module functions to parse content.htm"""
-    #from pybean import Store, SQLiteWriter
-    # if no content.db, create database file with cms table
-    '''
-    if not os.path.isfile(config_dir+"content.db"):
-        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
-        cms = library.new("cms")
-        cms.follow = 0
-        cms.title = "head 1"
-        cms.content = "content 1"
-        cms.memo = "first memo"
-        library.save(cms)
-        library.commit()
-    '''
-    # if no content.htm, generate a head 1 and content 1 file
-    if not os.path.isfile(config_dir+"content.htm"):
-        # create content.htm if there is no content.htm
-        File = open(config_dir + "content.htm", "w", encoding="utf-8")
-        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
-        File.close()
-    subject = file_get_contents(config_dir+"content.htm")
-    # deal with content without content
-    if subject == "":
-        # create content.htm if there is no content.htm
-        File = open(config_dir + "content.htm", "w", encoding="utf-8")
-        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
-        File.close()
-        subject = "&lt;h1&gt;head 1&lt;/h1&gt;content 1"
-    # initialize the return lists
-    head_list = []
-    level_list = []
-    page_list = []
-    # make the soup out of the html content
-    soup = BeautifulSoup(subject, 'html.parser')
-    # get all h1, h2, h3 tags into list
-    htag= soup.find_all(['h1', 'h2', 'h3'])
-    n = len(htag)
-    # get all h tags
-    # g.es(soup.find_all(re.compile(r"^h\d$")))
-    # get the page content to split subject using each h tag
-    # i = 0
-    temp_data = subject.split(str(htag[0]))
-    # cut the first htag out
-    subject = temp_data[1]
-
-    if n &gt;1:
-            # i from 1 to i-1
-            for i in range(1, len(htag)):
-                # add the first page title
-                head_list.append(htag[i-1].text.strip())
-                # use name attribute of h* tag to get h1, h2 or h3
-                # the number of h1, h2 or h3 is the level of page menu
-                level_list.append(htag[i-1].name[1])
-                temp_data = subject.split(str(htag[i]))
-                subject = temp_data[1]
-                # cut the other page content out of htag from 1 to i-1
-                cut = temp_data[0]
-                # add the page content
-                page_list.append(cut)
-    # last i
-    # add the last page title
-    head_list.append(htag[n-1].text.strip())
-    # add the last level
-    level_list.append(htag[n-1].name[1])
-    temp_data = subject.split(str(htag[n-1]))
-    # the last subject
-    subject = temp_data[0]
-    # cut the last page content out
-    cut = temp_data[0]
-    # the last page content
-    page_list.append(cut)
-    return head_list, level_list, page_list
-</pre>
-<p></p><h3>CMSimfly 開發</h3>
+<h2>CMSimfly 解析</h2><h4>CMSimfly 源起</h4><p>CMSimfly 的設計概念源自&nbsp;<a href="https://www.cmsimple.org/en/">https://www.cmsimple.org/en/</a>, CMSimple&nbsp;不需要使用資料庫,所有的頁面資料都以一個超文件檔案格式, 名稱為content.htm, 存於全球資訊網伺服器上.純文字檔的資料設計使得安裝與備份工作相對較為簡單.</p><p>CMSimple主要的程式功能分為頁面展示與後台管理. 其頁面展示功能是利用超文件中的 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;, 與 &lt;h3&gt;&lt;/h3&gt; 標註（可後續延伸至 &lt;h4&gt;&lt;/h4&gt;等）, 進行分頁. CMSimple程式會將 content.htm 中的 &lt;h1&gt;&lt;/h1&gt; 當作第一層頁面的標題, 緊跟其後之 &lt;h2&gt;&lt;/h2&gt; 則將被視為第二層頁面的標題, 而 &lt;h3&gt;&lt;/h3&gt; 所涵蓋的內容則為第三層頁面的標題. 各層標題則依照其位於content.htm文件中的順序而定. 由於CMSimple利用 &lt;h1&gt;&lt;/h1&gt;, &lt;h2&gt;&lt;/h2&gt;，與&lt;h3&gt;&lt;/h3&gt; 標註進行分頁，因此其文件內容無法出現標題標註（header）所對應的粗體文字. 使用者必須透過其他方式產生類似粗體文字的效果.</p><p>CMSimple的後台管理, 僅允許單一用戶使用. 透過後台管理, 可設定各種與頁面展示相關的參數. 與許多內容管理系統相同, CMSimple提供延伸程式開發架構的設計, 可以讓程式開發者自行建構原始CMSimple以外的功能.</p><p><a href="http://lab.kmol.info">KMOL</a> 將 CMSimple 轉為 Python 程式時, 採用 <a href="https://cherrypy.org/">Cherrypy</a> 網際框架. 稱為&nbsp;<a href="https://github.com/chiamingyen/cmsimply">https://github.com/chiamingyen/cmsimply</a>&nbsp;, 之後的版本改用 Flask 網際框架, 名稱改為&nbsp;<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a>&nbsp;</p><h4>CMSimfly 架構</h4><p>CMSimfly 網際內容管理系統, 以位於 config 目錄中的 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p><p>config/content.htm 的解讀, 以&nbsp; Python 的 Beautiful Soup 模組達成, 主要先取得 content.htm 檔案中的各 &lt;h1&gt; &lt;h2&gt; 與 &lt;h3&gt; 標註的內容後, 轉為數列, 然後利用各頁面標題作為切割各頁內容的依據, 以便取得各頁面的標題、階次與內容, 標題階次主要用來建立多層次表單以及 site map.</p><p>由於切割頁面的依據為 &lt;h1&gt; 至 &lt;h3&gt; 的標題, 且頁面連結與編輯均依賴頁面標題, 因此各頁面標題不可重複, 否則連結與編輯時, 將會在畫面出現多個資料與編輯區. 要改進此一缺點, 可以將 content.htm 的資料存入資料庫, 並以獨立序號來辨識各頁面標題、階次與內容.</p><p>CMSimfly 中採 bs4 與 re 所建立的 parse_content 方法, 提供重複標題頁面處理:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def parse_content():    """use bs4 and re module functions to parse content.htm"""    #from pybean import Store, SQLiteWriter    # if no content.db, create database file with cms table    '''    if not os.path.isfile(config_dir+"content.db"):        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))        cms = library.new("cms")        cms.follow = 0        cms.title = "head 1"        cms.content = "content 1"        cms.memo = "first memo"        library.save(cms)        library.commit()    '''    # if no content.htm, generate a head 1 and content 1 file    if not os.path.isfile(config_dir+"content.htm"):        # create content.htm if there is no content.htm        File = open(config_dir + "content.htm", "w", encoding="utf-8")        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")        File.close()    subject = file_get_contents(config_dir+"content.htm")    # deal with content without content    if subject == "":        # create content.htm if there is no content.htm        File = open(config_dir + "content.htm", "w", encoding="utf-8")        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")        File.close()        subject = "&lt;h1&gt;head 1&lt;/h1&gt;content 1"    # initialize the return lists    head_list = []    level_list = []    page_list = []    # make the soup out of the html content    soup = BeautifulSoup(subject, 'html.parser')    # get all h1, h2, h3 tags into list    htag= soup.find_all(['h1', 'h2', 'h3'])    n = len(htag)    # get all h tags    # g.es(soup.find_all(re.compile(r"^h\d$")))    # get the page content to split subject using each h tag    # i = 0    temp_data = subject.split(str(htag[0]))    if len(temp_data) &gt; 2:        subject = str(htag[0]).join(temp_data[1:])    else:        subject = temp_data[1]    if n &gt;1:            # i from 1 to i-1            for i in range(1, len(htag)):                # add the first page title                head_list.append(htag[i-1].text.strip())                # use name attribute of h* tag to get h1, h2 or h3                # the number of h1, h2 or h3 is the level of page menu                level_list.append(htag[i-1].name[1])                temp_data = subject.split(str(htag[i]))                if len(temp_data) &gt; 2:                    subject = str(htag[i]).join(temp_data[1:])                else:                    subject = temp_data[1]                # cut the other page content out of htag from 1 to i-1                cut = temp_data[0]                # add the page content                page_list.append(cut)    # last i    # add the last page title    head_list.append(htag[n-1].text.strip())    # add the last level    level_list.append(htag[n-1].name[1])    temp_data = subject.split(str(htag[n-1]))    # the last subject    subject = temp_data[0]    # cut the last page content out    cut = temp_data[0]    # the last page content    page_list.append(cut)    return head_list, level_list, page_list</pre><p>get_page2 則提供從動態網頁內容, 轉為靜態網頁檔案.</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># seperate page need heading and edit variables, if edit=1, system will enter edit mode# single page edit will use ssavePage to save content, it means seperate save page'''@app.route('/get_page2')@app.route('/get_page2/&lt;heading&gt;', defaults={'edit': 0})@app.route('/get_page2/&lt;heading&gt;/&lt;int:edit&gt;')'''def get_page2(heading, head, edit):    not_used_head, level, page = parse_content()    # 直接在此將 /images/ 換為 ./../images/, /downloads/ 換為 ./../downloads/, 以 content 為基準的相對目錄設定    page = [w.replace('/images/', './../images/') for w in page]    page = [w.replace('/downloads/', './../downloads/') for w in page]    directory = render_menu2(head, level, page)    if heading is None:        heading = head[0]    # 因為同一 heading 可能有多頁, 因此不可使用 head.index(heading) 搜尋 page_order    page_order_list, page_content_list = search_content(head, page, heading)    return_content = ""    pagedata = ""    outstring = ""    outstring_duplicate = ""    pagedata_duplicate = ""    outstring_list = []    for i in range(len(page_order_list)):        #page_order = head.index(heading)        page_order = page_order_list[i]        if page_order == 0:            last_page = ""        else:            #last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/get_page/"+head[page_order-1]+"'&gt;Previous&lt;/a&gt;"            last_page = head[page_order-1] + " &lt;&lt; &lt;a href='"+head[page_order-1] + ".html'&gt;Previous&lt;/a&gt;"        if page_order == len(head) - 1:            # no next page            next_page = ""        else:            #next_page = "&lt;a href='/get_page/"+head[page_order+1]+"'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]            next_page = "&lt;a href='" + head[page_order+1] + ".html'&gt;Next&lt;/a&gt; &gt;&gt; " + head[page_order+1]        if len(page_order_list) &gt; 1:            return_content += last_page + " " + next_page + "&lt;br /&gt;&lt;h1&gt;" + \                                      heading + "&lt;/h1&gt;" + page_content_list[i] + \                                      "&lt;br /&gt;" + last_page + " "+ next_page + "&lt;br /&gt;&lt;hr&gt;"            pagedata_duplicate = "&lt;h"+level[page_order] + "&gt;" + heading + "&lt;/h" + level[page_order]+"&gt;"+page_content_list[i]            outstring_list.append(last_page + " " + next_page + "&lt;br /&gt;" + tinymce_editor(directory, cgi.escape(pagedata_duplicate), page_order))        else:            return_content += last_page + " " + next_page + "&lt;br /&gt;&lt;h1&gt;" + \                                      heading + "&lt;/h1&gt;" + page_content_list[i] + \                                      "&lt;br /&gt;" + last_page + " " + next_page                    pagedata += "&lt;h" + level[page_order] + "&gt;" + heading + \                          "&lt;/h" + level[page_order] + "&gt;" + page_content_list[i]        # 利用 cgi.escape() 將 specialchar 轉成只能顯示的格式        outstring += last_page + " " + next_page + "&lt;br /&gt;" + tinymce_editor(directory, cgi.escape(pagedata), page_order)        # edit=0 for viewpage    if edit == 0:        return set_css2() + "&lt;div class='container'&gt;&lt;nav&gt;"+ \        directory + "&lt;/nav&gt;&lt;section&gt;" + return_content + "&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"    # enter edit mode    else:        # check if administrator        if not isAdmin():            redirect(url_for('login'))        else:            if len(page_order_list) &gt; 1:                # 若碰到重複頁面頁印, 且要求編輯, 則導向 edit_page                #return redirect("/edit_page")                for i in range(len(page_order_list)):                    outstring_duplicate += outstring_list[i] + "&lt;br /&gt;&lt;hr&gt;"                return outstring_duplicate            else:            #pagedata = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+search_content(head, page, heading)            #outstring = last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata), page_order)                return outstring</pre><p>generate_pages 方法提供將帶有重複標題頁面轉為不同標題名的靜態網頁檔案</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@app.route('/generate_pages')def generate_pages():    # 必須決定如何處理重複標題頁面的轉檔    import os    # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線    _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))    # 根據 content.htm 內容, 逐一產生各頁面檔案    # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結    head, level, page = parse_content()    # 處理重複標題 head 數列， 再重複標題按照次序加上 1, 2, 3...    newhead = []    for i, v in enumerate(head):        # 各重複標題總數        totalcount = head.count(v)        # 目前重複標題出現總數        count = head[:i].count(v)        # 針對重複標題者, 附加目前重複標題出現數 +1, 未重複採原標題        newhead.append(v + str(count + 1) if totalcount &gt; 1 else v)    # 刪除 content 目錄中所有 html 檔案    filelist = [ f for f in os.listdir(_curdir + "\\content\\") if f.endswith(".html") ]    for f in filelist:        os.remove(os.path.join(_curdir + "\\content\\", f))    # 這裡需要建立專門寫出 html 的 write_page    # index.html    file = open(_curdir + "\\content\\index.html", "w", encoding="utf-8")    file.write(get_page2(None, newhead, 0))    file.close()    # sitemap    file = open(_curdir + "\\content\\sitemap.html", "w", encoding="utf-8")    # sitemap2 需要 newhead    file.write(sitemap2(newhead))    file.close()    # 以下轉檔, 改用 newhead 數列    for i in range(len(newhead)):        # 在此必須要將頁面中的 /images/ 字串換為 images/, /downloads/ 換為 downloads/        # 因為 Flask 中靠 /images/ 取檔案, 但是一般 html 則採相對目錄取檔案        # 此一字串置換在 get_page2 中進行        file = open(_curdir + "\\content\\" + newhead[i] + ".html", "w", encoding="utf-8")        # 增加以 newhead 作為輸入        file.write(get_page2(newhead[i], newhead, 0))        file.close()    # generate each page html under content directory    return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"</pre><p></p><h3>CMSimfly 開發</h3>
 <p>以下為可行的開發項目:</p>
 <ol>
 <li>採用 SQLite 資料庫儲存內容資料, 以允許重複頁面標題.</li>

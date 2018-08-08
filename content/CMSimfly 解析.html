@@ -77,7 +77,7 @@ $(function(){
 <p>CMSimfly 網際內容管理系統, 以位於 config 目錄中的 content.htm 檔案的解析為主, 一旦取得各頁面的標題、階次與內容時, 就可以列出各頁對應的內容.</p>
 <p>config/content.htm 的解讀, 以&nbsp; Python 的 Beautiful Soup 模組達成, 主要先取得 content.htm 檔案中的各 &lt;h1&gt; &lt;h2&gt; 與 &lt;h3&gt; 標註的內容後, 轉為數列, 然後利用各頁面標題作為切割各頁內容的依據, 以便取得各頁面的標題、階次與內容, 標題階次主要用來建立多層次表單以及 site map.</p>
 <p>由於切割頁面的依據為 &lt;h1&gt; 至 &lt;h3&gt; 的標題, 且頁面連結與編輯均依賴頁面標題, 因此各頁面標題不可重複, 否則連結與編輯時, 將會在畫面出現多個資料與編輯區. 要改進此一缺點, 可以將 content.htm 的資料存入資料庫, 並以獨立序號來辨識各頁面標題、階次與內容.</p>
-<p>CMSimfly 中採 bs4 與 re 所建立的 parse_content 方法:</p>
+<p>CMSimfly 中採 bs4 與 re 所建立的 parse_content 方法, 提供重複標題頁面處理:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def parse_content():
     """use bs4 and re module functions to parse content.htm"""
     #from pybean import Store, SQLiteWriter
@@ -121,9 +121,10 @@ $(function(){
     # get the page content to split subject using each h tag
     # i = 0
     temp_data = subject.split(str(htag[0]))
-    # cut the first htag out
-    subject = temp_data[1]
-
+    if len(temp_data) &gt; 2:
+        subject = str(htag[0]).join(temp_data[1:])
+    else:
+        subject = temp_data[1]
     if n &gt;1:
             # i from 1 to i-1
             for i in range(1, len(htag)):
@@ -133,7 +134,10 @@ $(function(){
                 # the number of h1, h2 or h3 is the level of page menu
                 level_list.append(htag[i-1].name[1])
                 temp_data = subject.split(str(htag[i]))
-                subject = temp_data[1]
+                if len(temp_data) &gt; 2:
+                    subject = str(htag[i]).join(temp_data[1:])
+                else:
+                    subject = temp_data[1]
                 # cut the other page content out of htag from 1 to i-1
                 cut = temp_data[0]
                 # add the page content
@@ -151,5 +155,125 @@ $(function(){
     # the last page content
     page_list.append(cut)
     return head_list, level_list, page_list
+</pre>
+<p>get_page2 則提供從動態網頁內容, 轉為靜態網頁檔案.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># seperate page need heading and edit variables, if edit=1, system will enter edit mode
+# single page edit will use ssavePage to save content, it means seperate save page
+'''
+@app.route('/get_page2')
+@app.route('/get_page2/&lt;heading&gt;', defaults={'edit': 0})
+@app.route('/get_page2/&lt;heading&gt;/&lt;int:edit&gt;')
+'''
+def get_page2(heading, head, edit):
+    not_used_head, level, page = parse_content()
+    # 直接在此將 ./../images/ 換為 ./.../../images/, ./../downloads/ 換為 ./.../../downloads/, 以 content 為基準的相對目錄設定
+    page = [w.replace('./../images/', './.../../images/') for w in page]
+    page = [w.replace('./../downloads/', './.../../downloads/') for w in page]
+    directory = render_menu2(head, level, page)
+    if heading is None:
+        heading = head[0]
+    # 因為同一 heading 可能有多頁, 因此不可使用 head.index(heading) 搜尋 page_order
+    page_order_list, page_content_list = search_content(head, page, heading)
+    return_content = ""
+    pagedata = ""
+    outstring = ""
+    outstring_duplicate = ""
+    pagedata_duplicate = ""
+    outstring_list = []
+    for i in range(len(page_order_list)):
+        #page_order = head.index(heading)
+        page_order = page_order_list[i]
+        if page_order == 0:
+            last_page = ""
+        else:
+            #last_page = head[page_order-1]+" &lt;&lt; &lt;a href='/get_page/"+head[page_order-1]+"'&gt;Previous&lt;/a&gt;"
+            last_page = head[page_order-1] + " &lt;&lt; &lt;a href='"+head[page_order-1] + ".html'&gt;Previous&lt;/a&gt;"
+        if page_order == len(head) - 1:
+            # no next page
+            next_page = ""
+        else:
+            #next_page = "&lt;a href='/get_page/"+head[page_order+1]+"'&gt;Next&lt;/a&gt; &gt;&gt; "+ head[page_order+1]
+            next_page = "&lt;a href='" + head[page_order+1] + ".html'&gt;Next&lt;/a&gt; &gt;&gt; " + head[page_order+1]
+        if len(page_order_list) &gt; 1:
+            return_content += last_page + " " + next_page + "&lt;br /&gt;&lt;h1&gt;" + \
+                                      heading + "&lt;/h1&gt;" + page_content_list[i] + \
+                                      "&lt;br /&gt;" + last_page + " "+ next_page + "&lt;br /&gt;&lt;hr&gt;"
+            pagedata_duplicate = "&lt;h"+level[page_order] + "&gt;" + heading + "&lt;/h" + level[page_order]+"&gt;"+page_content_list[i]
+            outstring_list.append(last_page + " " + next_page + "&lt;br /&gt;" + tinymce_editor(directory, cgi.escape(pagedata_duplicate), page_order))
+        else:
+            return_content += last_page + " " + next_page + "&lt;br /&gt;&lt;h1&gt;" + \
+                                      heading + "&lt;/h1&gt;" + page_content_list[i] + \
+                                      "&lt;br /&gt;" + last_page + " " + next_page
+            
+        pagedata += "&lt;h" + level[page_order] + "&gt;" + heading + \
+                          "&lt;/h" + level[page_order] + "&gt;" + page_content_list[i]
+        # 利用 cgi.escape() 將 specialchar 轉成只能顯示的格式
+        outstring += last_page + " " + next_page + "&lt;br /&gt;" + tinymce_editor(directory, cgi.escape(pagedata), page_order)
+    
+    # edit=0 for viewpage
+    if edit == 0:
+        return set_css2() + "&lt;div class='container'&gt;&lt;nav&gt;"+ \
+        directory + "&lt;/nav&gt;&lt;section&gt;" + return_content + "&lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+    # enter edit mode
+    else:
+        # check if administrator
+        if not isAdmin():
+            redirect(url_for('login'))
+        else:
+            if len(page_order_list) &gt; 1:
+                # 若碰到重複頁面頁印, 且要求編輯, 則導向 edit_page
+                #return redirect("/edit_page")
+                for i in range(len(page_order_list)):
+                    outstring_duplicate += outstring_list[i] + "&lt;br /&gt;&lt;hr&gt;"
+                return outstring_duplicate
+            else:
+            #pagedata = "&lt;h"+level[page_order]+"&gt;"+heading+"&lt;/h"+level[page_order]+"&gt;"+search_content(head, page, heading)
+            #outstring = last_page+" "+next_page+"&lt;br /&gt;"+ tinymce_editor(directory, cgi.escape(pagedata), page_order)
+                return outstring
+</pre>
+<p>generate_pages 方法提供將帶有重複標題頁面轉為不同標題名的靜態網頁檔案</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@app.route('/generate_pages')
+def generate_pages():
+    # 必須決定如何處理重複標題頁面的轉檔
+    import os
+    # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
+    _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+    # 根據 content.htm 內容, 逐一產生各頁面檔案
+    # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結
+    head, level, page = parse_content()
+    # 處理重複標題 head 數列， 再重複標題按照次序加上 1, 2, 3...
+    newhead = []
+    for i, v in enumerate(head):
+        # 各重複標題總數
+        totalcount = head.count(v)
+        # 目前重複標題出現總數
+        count = head[:i].count(v)
+        # 針對重複標題者, 附加目前重複標題出現數 +1, 未重複採原標題
+        newhead.append(v + str(count + 1) if totalcount &gt; 1 else v)
+    # 刪除 content 目錄中所有 html 檔案
+    filelist = [ f for f in os.listdir(_curdir + "\\content\\") if f.endswith(".html") ]
+    for f in filelist:
+        os.remove(os.path.join(_curdir + "\\content\\", f))
+    # 這裡需要建立專門寫出 html 的 write_page
+    # index.html
+    file = open(_curdir + "\\content\\index.html", "w", encoding="utf-8")
+    file.write(get_page2(None, newhead, 0))
+    file.close()
+    # sitemap
+    file = open(_curdir + "\\content\\sitemap.html", "w", encoding="utf-8")
+    # sitemap2 需要 newhead
+    file.write(sitemap2(newhead))
+    file.close()
+    # 以下轉檔, 改用 newhead 數列
+    for i in range(len(newhead)):
+        # 在此必須要將頁面中的 ./../images/ 字串換為 images/, ./../downloads/ 換為 downloads/
+        # 因為 Flask 中靠 ./../images/ 取檔案, 但是一般 html 則採相對目錄取檔案
+        # 此一字串置換在 get_page2 中進行
+        file = open(_curdir + "\\content\\" + newhead[i] + ".html", "w", encoding="utf-8")
+        # 增加以 newhead 作為輸入
+        file.write(get_page2(newhead[i], newhead, 0))
+        file.close()
+    # generate each page html under content directory
+    return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"
 </pre>
 <p></p><br />符號式推導 << <a href='符號式推導.html'>Previous</a> <a href='CMSimfly 開發.html'>Next</a> >> CMSimfly 開發</section></div></body></html>
