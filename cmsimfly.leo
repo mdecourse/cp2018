@@ -475,38 +475,55 @@ def get_page(heading, edit):
 </t>
 <t tx="amd.20160714231359.1">def render_menu(head, level, page, sitemap=0):
     directory = ""
+    # 從 level 數列第一個元素作為開端
     current_level = level[0]
+    # 若是 sitemap 則僅列出樹狀架構而沒有套用 css3menu 架構
     if sitemap:
         directory += "&lt;ul&gt;"
     else:
         directory += "&lt;ul id='css3menu1' class='topmenu'&gt;"
+    # 逐一配合 level 數列中的各標題階次, 一一建立對應的表單或 sitemap
     for index in range(len(head)):
-        if level[index] &gt; current_level:
+        # 用 this_level 取出迴圈中逐一處理的頁面對應層級, 注意取出值為 str
+        this_level = level[index]
+        # 若處理中的層級比上一層級高超過一層, 則將處理層級升級 (處理 h1 後直接接 h3 情況)
+        if (int(this_level) - int(current_level)) &gt; 1:
+            #this_level = str(int(this_level) - 1)
+            # 考慮若納入 h4 也作為標題標註, 相鄰層級可能大於一層, 因此直接用上一層級 + 1
+            this_level = str(int(current_level) + 1)
+        # 若處理的階次比目前已經處理的階次大, 表示位階較低
+        # 其實當 level[0] 完全不會報告此一區塊
+        # 從正在處理的標題階次與前一個元素比對, 若階次低, 則要加入另一區段的 unordered list 標頭
+        # 兩者皆為 str 會轉為整數後比較
+        if this_level &gt; current_level:
             directory += "&lt;ul&gt;"
             directory += "&lt;li&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
-        elif level[index] == current_level:
-            if level[index] == 1:
+        # 假如正在處理的標題與前一個元素同位階, 則必須再判定是否為另一個 h1 的樹狀頭
+        elif this_level == current_level:
+            # 若正在處理的標題確實為樹狀頭, 則標上樹狀頭開始標註
+            if this_level == 1:
+                # 這裡還是需要判定是在建立 sitemap 模式或者選單模式
                 if sitemap:
                     directory += "&lt;li&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index]+"&lt;/a&gt;"
                 else:
                     directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
+            #  假如不是樹狀頭, 則只列出對應的 list
             else:
                 directory += "&lt;li&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
+        # 假如正處理的元素比上一個元素位階更高, 必須要先關掉前面的低位階區段
         else:
             directory += "&lt;/li&gt;"*(int(current_level) - int(level[index]))
             directory += "&lt;/ul&gt;"*(int(current_level) - int(level[index]))
-            if level[index] == 1:
+            if this_level == 1:
                 if sitemap:
                     directory += "&lt;li&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
                 else:
                     directory += "&lt;li class='topmenu'&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
             else:
                 directory += "&lt;li&gt;&lt;a href='/get_page/" + head[index] + "'&gt;" + head[index] + "&lt;/a&gt;"
-        current_level = level[index]
+        current_level = this_level
     directory += "&lt;/li&gt;&lt;/ul&gt;"
     return directory
-
-
 </t>
 <t tx="amd.20160714231440.1"># use head title to search page content
 '''
@@ -2221,37 +2238,47 @@ memo - 額外註解欄位
 </t>
 <t tx="leo.20180630142017.1">@app.route('/generate_pages')
 def generate_pages():
+    # 必須決定如何處理重複標題頁面的轉檔
     import os
     # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
     _curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+    # 根據 content.htm 內容, 逐一產生各頁面檔案
+    # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結
+    head, level, page = parse_content()
+    # 處理重複標題 head 數列， 再重複標題按照次序加上 1, 2, 3...
+    newhead = []
+    for i, v in enumerate(head):
+        # 各重複標題總數
+        totalcount = head.count(v)
+        # 目前重複標題出現總數
+        count = head[:i].count(v)
+        # 針對重複標題者, 附加目前重複標題出現數 +1, 未重複採原標題
+        newhead.append(v + str(count + 1) if totalcount &gt; 1 else v)
     # 刪除 content 目錄中所有 html 檔案
     filelist = [ f for f in os.listdir(_curdir + "\\content\\") if f.endswith(".html") ]
     for f in filelist:
         os.remove(os.path.join(_curdir + "\\content\\", f))
-
     # 這裡需要建立專門寫出 html 的 write_page
     # index.html
     file = open(_curdir + "\\content\\index.html", "w", encoding="utf-8")
-    file.write(get_page2(None, 0))
+    file.write(get_page2(None, newhead, 0))
     file.close()
     # sitemap
     file = open(_curdir + "\\content\\sitemap.html", "w", encoding="utf-8")
-    file.write(sitemap2())
+    # sitemap2 需要 newhead
+    file.write(sitemap2(newhead))
     file.close()
-    # 根據 content.htm 內容, 逐一產生各頁面檔案
-    # 在此也要同時配合 render_menu2, 產生對應的 anchor 連結
-    head, level, page = parse_content()
-    for i in range(len(head)):
+    # 以下轉檔, 改用 newhead 數列
+    for i in range(len(newhead)):
         # 在此必須要將頁面中的 /images/ 字串換為 images/, /downloads/ 換為 downloads/
         # 因為 Flask 中靠 /images/ 取檔案, 但是一般 html 則採相對目錄取檔案
         # 此一字串置換在 get_page2 中進行
-        file = open(_curdir + "\\content\\" + head[i] + ".html", "w", encoding="utf-8")
-        file.write(get_page2(head[i], 0))
+        file = open(_curdir + "\\content\\" + newhead[i] + ".html", "w", encoding="utf-8")
+        # 增加以 newhead 作為輸入
+        file.write(get_page2(newhead[i], newhead, 0))
         file.close()
     # generate each page html under content directory
     return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"
-
-
 </t>
 <t tx="leo.20180630144325.1"># seperate page need heading and edit variables, if edit=1, system will enter edit mode
 # single page edit will use ssavePage to save content, it means seperate save page
@@ -2260,13 +2287,11 @@ def generate_pages():
 @app.route('/get_page2/&lt;heading&gt;', defaults={'edit': 0})
 @app.route('/get_page2/&lt;heading&gt;/&lt;int:edit&gt;')
 '''
-def get_page2(heading, edit):
-    head, level, page = parse_content()
-    
+def get_page2(heading, head, edit):
+    not_used_head, level, page = parse_content()
     # 直接在此將 /images/ 換為 ./../images/, /downloads/ 換為 ./../downloads/, 以 content 為基準的相對目錄設定
     page = [w.replace('/images/', './../images/') for w in page]
     page = [w.replace('/downloads/', './../downloads/') for w in page]
-    
     directory = render_menu2(head, level, page)
     if heading is None:
         heading = head[0]
@@ -2331,10 +2356,10 @@ def get_page2(heading, edit):
 
 
 </t>
-<t tx="leo.20180630203449.1">def sitemap2():
+<t tx="leo.20180630203449.1">def sitemap2(head):
     """sitemap for static content generation"""
     edit = 0
-    head, level, page = parse_content()
+    not_used_head, level, page = parse_content()
     directory = render_menu2(head, level, page)
     sitemap = render_menu2(head, level, page, sitemap=1)
     return set_css2() + "&lt;div class='container'&gt;&lt;nav&gt;" + directory + \
@@ -2352,13 +2377,18 @@ def get_page2(heading, edit):
     else:
         directory += "&lt;ul id='css3menu1' class='topmenu'&gt;"
     for index in range(len(head)):
-        if level[index] &gt; current_level:
+        this_level = level[index]
+        # 若處理中的層級比上一層級高超過一層, 則將處理層級升級 (處理 h1 後直接接 h3 情況)
+        if (int(this_level) - int(current_level)) &gt; 1:
+            #this_level = str(int(this_level) - 1)
+            this_level = str(int(current_level) + 1)
+        if this_level &gt; current_level:
             directory += "&lt;ul&gt;"
             #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
             # 改為連結到 content/標題.html
             directory += "&lt;li&gt;&lt;a href='" + head[index] + ".html'&gt;" + head[index] + "&lt;/a&gt;"
-        elif level[index] == current_level:
-            if level[index] == 1:
+        elif this_level == current_level:
+            if this_level == 1:
                 if sitemap:
                     # 改為連結到 content/標題.html
                     #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
@@ -2372,7 +2402,7 @@ def get_page2(heading, edit):
         else:
             directory += "&lt;/li&gt;"*(int(current_level) - int(level[index]))
             directory += "&lt;/ul&gt;"*(int(current_level) - int(level[index]))
-            if level[index] == 1:
+            if this_level == 1:
                 if sitemap:
                     #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
                     directory += "&lt;li&gt;&lt;a href='" + head[index] + ".html'&gt;" + head[index] + "&lt;/a&gt;"
@@ -2382,11 +2412,9 @@ def get_page2(heading, edit):
             else:
                 #directory += "&lt;li&gt;&lt;a href='/get_page/"+head[index]+"'&gt;"+head[index]+"&lt;/a&gt;"
                 directory += "&lt;li&gt;&lt;a href='" + head[index] + ".html'&gt;" + head[index] + "&lt;/a&gt;"
-        current_level = level[index]
+        current_level = this_level
     directory += "&lt;/li&gt;&lt;/ul&gt;"
     return directory
-
-
 </t>
 <t tx="leo.20180630203825.1">def set_css2():
     """set css for static site"""
@@ -2941,8 +2969,6 @@ bug 180726</t>
     # get the page content to split subject using each h tag
     # i = 0
     temp_data = subject.split(str(htag[0]))
-    # cut the first htag out
-    # has duplicate head title
     if len(temp_data) &gt; 2:
         subject = str(htag[0]).join(temp_data[1:])
     else:
@@ -2956,7 +2982,6 @@ bug 180726</t>
                 # the number of h1, h2 or h3 is the level of page menu
                 level_list.append(htag[i-1].name[1])
                 temp_data = subject.split(str(htag[i]))
-                # has duplicate head title
                 if len(temp_data) &gt; 2:
                     subject = str(htag[i]).join(temp_data[1:])
                 else:
@@ -2978,6 +3003,8 @@ bug 180726</t>
     # the last page content
     page_list.append(cut)
     return head_list, level_list, page_list
+
+
 </t>
 </tnodes>
 </leo_file>
