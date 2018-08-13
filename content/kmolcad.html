@@ -192,10 +192,10 @@ def fill_xor(win):
     xm = int(find_max_y(win.edges))
     for ed in win.edges:
         p.begin(win.image)
-        # если горизонтальное ребро - дальше
+        # if the horizontal edge is farther
         if ed[1] == ed[3]:
             continue
-        # иначе определяем границы сканирования
+        # otherwise we define scanning boundaries
         if ed[1] &gt; ed[3]:
             ed[1], ed[3] = ed[3], ed[1]
 
@@ -208,7 +208,7 @@ def fill_xor(win):
         start_x = ed[0]
 
         while y &lt; end_y:
-            # определяем пересечение
+            # determine the intersection
 
             x = start_x
             while x &lt; xm:
@@ -262,7 +262,7 @@ if __name__ == "__main__":
    &lt;/rect&gt;
   &lt;/property&gt;
   &lt;property name="windowTitle"&gt;
-   &lt;string&gt;Filling areas&lt;/string&gt;
+   &lt;string&gt;Filling areasstring&lt;/string&gt;
   &lt;/property&gt;
   &lt;widget class="QWidget" name="centralwidget"&gt;
    &lt;widget class="QGraphicsView" name="view"&gt;
@@ -281,7 +281,7 @@ if __name__ == "__main__":
       &lt;x&gt;590&lt;/x&gt;
       &lt;y&gt;10&lt;/y&gt;
       &lt;width&gt;211&lt;/width&gt;
-      &lt;height&gt;391&lt;/height&gt;
+      &lt;height&gt;241&lt;/height&gt;
      &lt;/rect&gt;
     &lt;/property&gt;
     &lt;column&gt;
@@ -423,10 +423,127 @@ if __name__ == "__main__":
      &lt;string&gt;Y&lt;/string&gt;
     &lt;/property&gt;
    &lt;/widget&gt;
+   &lt;widget class="QSpinBox" name="p_y"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;700&lt;/x&gt;
+      &lt;y&gt;370&lt;/y&gt;
+      &lt;width&gt;48&lt;/width&gt;
+      &lt;height&gt;24&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="minimum"&gt;
+     &lt;number&gt;1&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="maximum"&gt;
+     &lt;number&gt;581&lt;/number&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QLabel" name="label_3"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;600&lt;/x&gt;
+      &lt;y&gt;370&lt;/y&gt;
+      &lt;width&gt;16&lt;/width&gt;
+      &lt;height&gt;16&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;X&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="pixel"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;580&lt;/x&gt;
+      &lt;y&gt;330&lt;/y&gt;
+      &lt;width&gt;211&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Enter the seed pixel&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QSpinBox" name="p_x"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;620&lt;/x&gt;
+      &lt;y&gt;370&lt;/y&gt;
+      &lt;width&gt;48&lt;/width&gt;
+      &lt;height&gt;24&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="minimum"&gt;
+     &lt;number&gt;1&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="maximum"&gt;
+     &lt;number&gt;561&lt;/number&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QLabel" name="label_4"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;680&lt;/x&gt;
+      &lt;y&gt;370&lt;/y&gt;
+      &lt;width&gt;16&lt;/width&gt;
+      &lt;height&gt;16&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Y&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QLabel" name="label_5"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;640&lt;/x&gt;
+      &lt;y&gt;300&lt;/y&gt;
+      &lt;width&gt;71&lt;/width&gt;
+      &lt;height&gt;20&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Radius&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QPushButton" name="addcircle"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;580&lt;/x&gt;
+      &lt;y&gt;270&lt;/y&gt;
+      &lt;width&gt;211&lt;/width&gt;
+      &lt;height&gt;32&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="text"&gt;
+     &lt;string&gt;Add circle&lt;/string&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
+   &lt;widget class="QSpinBox" name="rad"&gt;
+    &lt;property name="geometry"&gt;
+     &lt;rect&gt;
+      &lt;x&gt;700&lt;/x&gt;
+      &lt;y&gt;300&lt;/y&gt;
+      &lt;width&gt;48&lt;/width&gt;
+      &lt;height&gt;24&lt;/height&gt;
+     &lt;/rect&gt;
+    &lt;/property&gt;
+    &lt;property name="minimum"&gt;
+     &lt;number&gt;1&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="maximum"&gt;
+     &lt;number&gt;561&lt;/number&gt;
+    &lt;/property&gt;
+    &lt;property name="value"&gt;
+     &lt;number&gt;160&lt;/number&gt;
+    &lt;/property&gt;
+   &lt;/widget&gt;
   &lt;/widget&gt;
  &lt;/widget&gt;
  &lt;resources/&gt;
  &lt;connections/&gt;
 &lt;/ui&gt;</pre>
-<p></p>
-<br />jsketcher << <a href='jsketcher.html'>Previous</a> <a href='分組專題.html'>Next</a> >> 分組專題</section></div></body></html>
+<p>參考資料</p>
+<p><a href="https://github.com/Panda-Lewandowski/Computer-graphics">https://github.com/Panda-Lewandowski/Computer-graphics</a>&nbsp;</p>
+<p><a href="https://github.com/chiamingyen/PythonCAD_py3">https://github.com/chiamingyen/PythonCAD_py3</a>&nbsp;</p><br />jsketcher << <a href='jsketcher.html'>Previous</a> <a href='分組專題.html'>Next</a> >> 分組專題</section></div></body></html>

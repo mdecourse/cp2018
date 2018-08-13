@@ -2328,7 +2328,16 @@ result = lib.multiply(ctypes.c_float(3.0), ctypes.c_float(2.0))
 print(result)</pre>
 <p>有關 Tiny C Compiler 資料位於&nbsp;<a href="https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc">https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc</a>&nbsp;</p>
 <p></p>
-<h2>Qt</h2><p><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a> 是一個跨平台的 C++ 程式開發框架.&nbsp;</p><p><a href="http://doc.qt.io/qt-5/androidgs.html">Qt for Android</a></p><p>目前只能使用 Jdk 8:&nbsp;<a href="https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed">https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed</a>&nbsp;</p><p>參考資料:</p><p><a href="http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/">http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/</a>&nbsp;</p><p><a href="https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php">https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php</a>&nbsp;</p><p><a href="https://wiki.qt.io/MSYS2">https://wiki.qt.io/MSYS2</a>&nbsp;</p><p>&nbsp;編程指南:&nbsp;<a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a>&nbsp;</p><p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp;</p><h2>Eirc IDE</h2>
+<h2>Qt</h2>
+<p><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a> 是一個跨平台的 C++ 程式開發框架.&nbsp;</p>
+<p><a href="http://doc.qt.io/qt-5/androidgs.html">Qt for Android</a></p>
+<p>目前只能使用 Jdk 8:&nbsp;<a href="https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed">https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed</a>&nbsp;</p>
+<p>參考資料:</p>
+<p><a href="http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/">http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/</a>&nbsp;</p>
+<p><a href="https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php">https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php</a>&nbsp;</p>
+<p><a href="https://wiki.qt.io/MSYS2">https://wiki.qt.io/MSYS2</a>&nbsp;</p>
+<p>&nbsp;編程指南:&nbsp;<a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a>&nbsp;</p>
+<p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp;</p><h2>Eirc IDE</h2>
 <p>目前 Eric6 18.07 只能配合使用 Python 3.6.5, 一方面 Python 3.7.0 尚無法以 pip install pyqt5-tools 安裝, 且 Python3.7.0 在 Eric6 18.07 尚存 bugs.</p>
 <p>這與 Qt 目前還無法使用 Jdk 9 與 10 的情況相同, 許多工具仍然尚未配合最新版本的 Python 與 Java 解譯或編譯工具進行更改.</p>
 <h2>CMSimfly</h2>
@@ -9302,6 +9311,51 @@ def emit_pdf(finished):
 loader.loadFinished.connect(emit_pdf)
 
 app.exec()</pre>
+<p>mouse event and line drawing:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, QtGui, QtCore
+
+
+class Window(QtWidgets.QWidget):
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        self.view = View(self)
+        self.button = QtWidgets.QPushButton('Clear View', self)
+        self.button.clicked.connect(self.handleClearView)
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addWidget(self.view)
+        layout.addWidget(self.button)
+
+    def handleClearView(self):
+        self.view.scene().clear()
+
+class View(QtWidgets.QGraphicsView):
+    def __init__(self, parent):
+        QtWidgets.QGraphicsView.__init__(self, parent)
+        self.setScene(QtWidgets.QGraphicsScene(self))
+        self.setSceneRect(QtCore.QRectF(self.viewport().rect()))
+
+    def mousePressEvent(self, event):
+        self._start = event.pos()
+
+    def mouseReleaseEvent(self, event):
+        start = QtCore.QPointF(self.mapToScene(self._start))
+        end = QtCore.QPointF(self.mapToScene(event.pos()))
+        self.scene().addItem(
+            QtWidgets.QGraphicsLineItem(QtCore.QLineF(start, end)))
+        for point in (start, end):
+            text = self.scene().addSimpleText(
+                '(%d, %d)' % (point.x(), point.y()))
+            text.setBrush(QtCore.Qt.red)
+            text.setPos(point)
+
+if __name__ == '__main__':
+
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    window = Window()
+    window.resize(640, 480)
+    window.show()
+    sys.exit(app.exec())</pre>
 <p>使用 Eric6 開發 PyQt5 GUI 程式:</p>
 <p>參考流程:&nbsp;<a href="http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO">http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO</a>&nbsp;</p>
 <p><a href="/downloads/qt_designer_tutorial.pdf">Qt Designer 教學.pdf</a></p><h3>STetris</h3>
@@ -10550,369 +10604,7 @@ woocommerce</pre>
 <p>https://github.com/stoic1979/robovision</p>
 <h3>jsketcher</h3>
 <p>https://github.com/xibyte/jsketcher</p>
-<h3>kmolcad</h3>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, uic
-from PyQt5.QtWidgets import QTableWidgetItem
-from PyQt5.QtGui import QPen, QColor, QImage, QPixmap, QPainter
-from PyQt5.QtCore import Qt, QTime, QCoreApplication, QEventLoop, QPoint
-import time
-
-col_one = Qt.black
-col_zero = Qt.white
-
-
-class Window(QtWidgets.QMainWindow):
-    def __init__(self):
-        QtWidgets.QWidget.__init__(self)
-        uic.loadUi("window.ui", self)
-        self.scene = myScene(0, 0, 561, 581)
-        self.scene.win = self
-        self.view.setScene(self.scene)
-        self.image = QImage(561, 581, QImage.Format_ARGB32_Premultiplied)
-        self.image.fill(col_zero)
-        self.lock.clicked.connect(lambda: lock(self))
-        self.erase.clicked.connect(lambda: clean_all(self))
-        self.paint.clicked.connect(lambda: fill_xor(self))
-        self.addpoint.clicked.connect(lambda: add_point_by_btn(self))
-        self.edges = []
-        self.point_now = None
-        self.point_lock = None
-        self.pen = QPen(col_one)
-        self.delay.setChecked(False)
-
-
-class myScene(QtWidgets.QGraphicsScene):
-    def mousePressEvent(self, event):
-        add_point(event.scenePos())
-
-
-def add_row(win):
-    win.table.insertRow(win.table.rowCount())
-
-
-def add_point(point):
-    global w
-    if w.point_now is None:
-        w.point_now = point
-        w.point_lock = point
-        add_row(w)
-        i = w.table.rowCount() - 1
-        item_x = QTableWidgetItem("{0}".format(point.x()))
-        item_y = QTableWidgetItem("{0}".format(point.y()))
-        w.table.setItem(i, 0, item_x)
-        w.table.setItem(i, 1, item_y)
-    else:
-        w.edges.append([w.point_now.x(), w.point_now.y(),
-                        point.x(), point.y()])
-        w.point_now = point
-        add_row(w)
-        i = w.table.rowCount() - 1
-        item_x = QTableWidgetItem("{0}".format(point.x()))
-        item_y = QTableWidgetItem("{0}".format(point.y()))
-        w.table.setItem(i, 0, item_x)
-        w.table.setItem(i, 1, item_y)
-        item_x = w.table.item(i-1, 0)
-        item_y = w.table.item(i-1, 1)
-        w.scene.addLine(point.x(), point.y(), float(item_x.text()), float(item_y.text()), w.pen)
-    #print(w.edges)
-
-
-def lock(win):
-    win.edges.append([win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y()])
-    win.scene.addLine(win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y(), w.pen)
-    win.point_now = None
-    #print(win.edges)
-
-
-def clean_all(win):
-    win.scene.clear()
-    win.table.clear()
-    win.edges = []
-    win.point_now = None
-    win.point_lock = None
-    win.image.fill(col_zero)
-    r = win.table.rowCount()
-    for i in range(r, -1, -1):
-        win.table.removeRow(i)
-
-
-def draw_edges(image, edges):
-    p = QPainter()
-    p.begin(image)
-    p.setPen(QPen(col_one))
-    for ed in edges:
-        p.drawLine(ed[0], ed[1], ed[2], ed[3])
-    p.end()
-
-
-def delay():
-    #QCoreApplication.processEvents(QEventLoop.AllEvents, 1)
-    QtWidgets.QApplication.processEvents(QEventLoop.AllEvents, 1)
-    #time.sleep(.005)
-
-    """t = QTime.currentTime().addMSecs(1)
-    while QTime.currentTime() &lt; t:
-        QCoreApplication.processEvents(QEventLoop.AllEvents, 1)"""
-
-
-def find_max_y(ed):
-    x_max = None
-    for i in range(len(ed)):
-        if x_max is None or ed[i][0] &gt; x_max:
-            x_max = ed[i][0]
-
-        if x_max is None or ed[i][2] &gt; x_max:
-            x_max = ed[i][2]
-
-    return x_max
-
-
-def fill_xor(win):
-    pix = QPixmap()
-    p = QPainter()
-
-
-    xm = int(find_max_y(win.edges))
-    for ed in win.edges:
-        p.begin(win.image)
-        # если горизонтальное ребро - дальше
-        if ed[1] == ed[3]:
-            continue
-        # иначе определяем границы сканирования
-        if ed[1] &gt; ed[3]:
-            ed[1], ed[3] = ed[3], ed[1]
-
-            ed[0], ed[2] = ed[2], ed[0]
-            
-
-        y = ed[1]
-        end_y = ed[3]
-        dx = (ed[2] - ed[0]) / (ed[3] - ed[1])
-        start_x = ed[0]
-
-        while y &lt; end_y:
-            # определяем пересечение
-
-            x = start_x
-            while x &lt; xm:
-                col = QColor(win.image.pixel(x, y))
-                if col == col_zero:
-                    p.setPen(QPen(col_one))
-                else:
-                    p.setPen(QPen(col_zero))
-                p.drawPoint(x, y)
-                x += 1
-
-            start_x += dx
-            y += 1
-
-            if win.delay.isChecked():
-                delay()
-                pix.convertFromImage(win.image)
-                win.scene.addPixmap(pix)
-
-        if not win.delay.isChecked():
-            pix.convertFromImage(win.image)
-            win.scene.addPixmap(pix)
-        p.end()
-    draw_edges(win.image, win.edges)
-
-def add_point_by_btn(win):
-    x = win.x.value()
-    y = win.y.value()
-    p = QPoint()
-    p.setX(x)
-    p.setY(y)
-    add_point(p)
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    w = Window()
-    w.show()
-    sys.exit(app.exec_())</pre>
-<p>window.ui</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;ui version="4.0"&gt;
- &lt;class&gt;MainWindow&lt;/class&gt;
- &lt;widget class="QMainWindow" name="MainWindow"&gt;
-  &lt;property name="geometry"&gt;
-   &lt;rect&gt;
-    &lt;x&gt;0&lt;/x&gt;
-    &lt;y&gt;0&lt;/y&gt;
-    &lt;width&gt;809&lt;/width&gt;
-    &lt;height&gt;605&lt;/height&gt;
-   &lt;/rect&gt;
-  &lt;/property&gt;
-  &lt;property name="windowTitle"&gt;
-   &lt;string&gt;Filling areas&lt;/string&gt;
-  &lt;/property&gt;
-  &lt;widget class="QWidget" name="centralwidget"&gt;
-   &lt;widget class="QGraphicsView" name="view"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;10&lt;/x&gt;
-      &lt;y&gt;10&lt;/y&gt;
-      &lt;width&gt;561&lt;/width&gt;
-      &lt;height&gt;581&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QTableWidget" name="table"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;590&lt;/x&gt;
-      &lt;y&gt;10&lt;/y&gt;
-      &lt;width&gt;211&lt;/width&gt;
-      &lt;height&gt;391&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;column&gt;
-     &lt;property name="text"&gt;
-      &lt;string&gt;X&lt;/string&gt;
-     &lt;/property&gt;
-    &lt;/column&gt;
-    &lt;column&gt;
-     &lt;property name="text"&gt;
-      &lt;string&gt;Y&lt;/string&gt;
-     &lt;/property&gt;
-    &lt;/column&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QPushButton" name="paint"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;620&lt;/x&gt;
-      &lt;y&gt;560&lt;/y&gt;
-      &lt;width&gt;113&lt;/width&gt;
-      &lt;height&gt;32&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;Colorize&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QPushButton" name="lock"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;620&lt;/x&gt;
-      &lt;y&gt;500&lt;/y&gt;
-      &lt;width&gt;113&lt;/width&gt;
-      &lt;height&gt;32&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;Close&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QPushButton" name="erase"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;620&lt;/x&gt;
-      &lt;y&gt;530&lt;/y&gt;
-      &lt;width&gt;113&lt;/width&gt;
-      &lt;height&gt;32&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;Clear&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QCheckBox" name="delay"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;620&lt;/x&gt;
-      &lt;y&gt;480&lt;/y&gt;
-      &lt;width&gt;141&lt;/width&gt;
-      &lt;height&gt;20&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="font"&gt;
-     &lt;font&gt;
-      &lt;pointsize&gt;13&lt;/pointsize&gt;
-     &lt;/font&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;With a delay&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QPushButton" name="addpoint"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;600&lt;/x&gt;
-      &lt;y&gt;410&lt;/y&gt;
-      &lt;width&gt;141&lt;/width&gt;
-      &lt;height&gt;32&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;Add Point&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QSpinBox" name="x"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;620&lt;/x&gt;
-      &lt;y&gt;440&lt;/y&gt;
-      &lt;width&gt;48&lt;/width&gt;
-      &lt;height&gt;24&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="minimum"&gt;
-     &lt;number&gt;1&lt;/number&gt;
-    &lt;/property&gt;
-    &lt;property name="maximum"&gt;
-     &lt;number&gt;561&lt;/number&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QSpinBox" name="y"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;700&lt;/x&gt;
-      &lt;y&gt;440&lt;/y&gt;
-      &lt;width&gt;48&lt;/width&gt;
-      &lt;height&gt;24&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="minimum"&gt;
-     &lt;number&gt;1&lt;/number&gt;
-    &lt;/property&gt;
-    &lt;property name="maximum"&gt;
-     &lt;number&gt;581&lt;/number&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QLabel" name="label"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;600&lt;/x&gt;
-      &lt;y&gt;440&lt;/y&gt;
-      &lt;width&gt;16&lt;/width&gt;
-      &lt;height&gt;16&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;X&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-   &lt;widget class="QLabel" name="label_2"&gt;
-    &lt;property name="geometry"&gt;
-     &lt;rect&gt;
-      &lt;x&gt;680&lt;/x&gt;
-      &lt;y&gt;440&lt;/y&gt;
-      &lt;width&gt;16&lt;/width&gt;
-      &lt;height&gt;16&lt;/height&gt;
-     &lt;/rect&gt;
-    &lt;/property&gt;
-    &lt;property name="text"&gt;
-     &lt;string&gt;Y&lt;/string&gt;
-    &lt;/property&gt;
-   &lt;/widget&gt;
-  &lt;/widget&gt;
- &lt;/widget&gt;
- &lt;resources/&gt;
- &lt;connections/&gt;
-&lt;/ui&gt;</pre>
-<p></p>
-<h1>分組專題</h1>
+<h3>kmolcad</h3><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, uicfrom PyQt5.QtWidgets import QTableWidgetItemfrom PyQt5.QtGui import QPen, QColor, QImage, QPixmap, QPainterfrom PyQt5.QtCore import Qt, QTime, QCoreApplication, QEventLoop, QPointimport timecol_one = Qt.blackcol_zero = Qt.whiteclass Window(QtWidgets.QMainWindow):    def __init__(self):        QtWidgets.QWidget.__init__(self)        uic.loadUi("window.ui", self)        self.scene = myScene(0, 0, 561, 581)        self.scene.win = self        self.view.setScene(self.scene)        self.image = QImage(561, 581, QImage.Format_ARGB32_Premultiplied)        self.image.fill(col_zero)        self.lock.clicked.connect(lambda: lock(self))        self.erase.clicked.connect(lambda: clean_all(self))        self.paint.clicked.connect(lambda: fill_xor(self))        self.addpoint.clicked.connect(lambda: add_point_by_btn(self))        self.edges = []        self.point_now = None        self.point_lock = None        self.pen = QPen(col_one)        self.delay.setChecked(False)class myScene(QtWidgets.QGraphicsScene):    def mousePressEvent(self, event):        add_point(event.scenePos())def add_row(win):    win.table.insertRow(win.table.rowCount())def add_point(point):    global w    if w.point_now is None:        w.point_now = point        w.point_lock = point        add_row(w)        i = w.table.rowCount() - 1        item_x = QTableWidgetItem("{0}".format(point.x()))        item_y = QTableWidgetItem("{0}".format(point.y()))        w.table.setItem(i, 0, item_x)        w.table.setItem(i, 1, item_y)    else:        w.edges.append([w.point_now.x(), w.point_now.y(),                        point.x(), point.y()])        w.point_now = point        add_row(w)        i = w.table.rowCount() - 1        item_x = QTableWidgetItem("{0}".format(point.x()))        item_y = QTableWidgetItem("{0}".format(point.y()))        w.table.setItem(i, 0, item_x)        w.table.setItem(i, 1, item_y)        item_x = w.table.item(i-1, 0)        item_y = w.table.item(i-1, 1)        w.scene.addLine(point.x(), point.y(), float(item_x.text()), float(item_y.text()), w.pen)    #print(w.edges)def lock(win):    win.edges.append([win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y()])    win.scene.addLine(win.point_now.x(), win.point_now.y(), win.point_lock.x(), win.point_lock.y(), w.pen)    win.point_now = None    #print(win.edges)def clean_all(win):    win.scene.clear()    win.table.clear()    win.edges = []    win.point_now = None    win.point_lock = None    win.image.fill(col_zero)    r = win.table.rowCount()    for i in range(r, -1, -1):        win.table.removeRow(i)def draw_edges(image, edges):    p = QPainter()    p.begin(image)    p.setPen(QPen(col_one))    for ed in edges:        p.drawLine(ed[0], ed[1], ed[2], ed[3])    p.end()def delay():    #QCoreApplication.processEvents(QEventLoop.AllEvents, 1)    QtWidgets.QApplication.processEvents(QEventLoop.AllEvents, 1)    #time.sleep(.005)    """t = QTime.currentTime().addMSecs(1)    while QTime.currentTime() &lt; t:        QCoreApplication.processEvents(QEventLoop.AllEvents, 1)"""def find_max_y(ed):    x_max = None    for i in range(len(ed)):        if x_max is None or ed[i][0] &gt; x_max:            x_max = ed[i][0]        if x_max is None or ed[i][2] &gt; x_max:            x_max = ed[i][2]    return x_maxdef fill_xor(win):    pix = QPixmap()    p = QPainter()    xm = int(find_max_y(win.edges))    for ed in win.edges:        p.begin(win.image)        # if the horizontal edge is farther        if ed[1] == ed[3]:            continue        # otherwise we define scanning boundaries        if ed[1] &gt; ed[3]:            ed[1], ed[3] = ed[3], ed[1]            ed[0], ed[2] = ed[2], ed[0]                    y = ed[1]        end_y = ed[3]        dx = (ed[2] - ed[0]) / (ed[3] - ed[1])        start_x = ed[0]        while y &lt; end_y:            # determine the intersection            x = start_x            while x &lt; xm:                col = QColor(win.image.pixel(x, y))                if col == col_zero:                    p.setPen(QPen(col_one))                else:                    p.setPen(QPen(col_zero))                p.drawPoint(x, y)                x += 1            start_x += dx            y += 1            if win.delay.isChecked():                delay()                pix.convertFromImage(win.image)                win.scene.addPixmap(pix)        if not win.delay.isChecked():            pix.convertFromImage(win.image)            win.scene.addPixmap(pix)        p.end()    draw_edges(win.image, win.edges)def add_point_by_btn(win):    x = win.x.value()    y = win.y.value()    p = QPoint()    p.setX(x)    p.setY(y)    add_point(p)if __name__ == "__main__":    import sys    app = QtWidgets.QApplication(sys.argv)    w = Window()    w.show()    sys.exit(app.exec_())</pre><p>window.ui</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ui version="4.0"&gt; &lt;class&gt;MainWindow&lt;/class&gt; &lt;widget class="QMainWindow" name="MainWindow"&gt;  &lt;property name="geometry"&gt;   &lt;rect&gt;    &lt;x&gt;0&lt;/x&gt;    &lt;y&gt;0&lt;/y&gt;    &lt;width&gt;809&lt;/width&gt;    &lt;height&gt;605&lt;/height&gt;   &lt;/rect&gt;  &lt;/property&gt;  &lt;property name="windowTitle"&gt;   &lt;string&gt;Filling areasstring&lt;/string&gt;  &lt;/property&gt;  &lt;widget class="QWidget" name="centralwidget"&gt;   &lt;widget class="QGraphicsView" name="view"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;10&lt;/x&gt;      &lt;y&gt;10&lt;/y&gt;      &lt;width&gt;561&lt;/width&gt;      &lt;height&gt;581&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QTableWidget" name="table"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;590&lt;/x&gt;      &lt;y&gt;10&lt;/y&gt;      &lt;width&gt;211&lt;/width&gt;      &lt;height&gt;241&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;column&gt;     &lt;property name="text"&gt;      &lt;string&gt;X&lt;/string&gt;     &lt;/property&gt;    &lt;/column&gt;    &lt;column&gt;     &lt;property name="text"&gt;      &lt;string&gt;Y&lt;/string&gt;     &lt;/property&gt;    &lt;/column&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="paint"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;560&lt;/y&gt;      &lt;width&gt;113&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Colorize&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="lock"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;500&lt;/y&gt;      &lt;width&gt;113&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Close&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="erase"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;530&lt;/y&gt;      &lt;width&gt;113&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Clear&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QCheckBox" name="delay"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;480&lt;/y&gt;      &lt;width&gt;141&lt;/width&gt;      &lt;height&gt;20&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="font"&gt;     &lt;font&gt;      &lt;pointsize&gt;13&lt;/pointsize&gt;     &lt;/font&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;With a delay&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="addpoint"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;600&lt;/x&gt;      &lt;y&gt;410&lt;/y&gt;      &lt;width&gt;141&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Add Point&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QSpinBox" name="x"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;440&lt;/y&gt;      &lt;width&gt;48&lt;/width&gt;      &lt;height&gt;24&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="minimum"&gt;     &lt;number&gt;1&lt;/number&gt;    &lt;/property&gt;    &lt;property name="maximum"&gt;     &lt;number&gt;561&lt;/number&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QSpinBox" name="y"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;700&lt;/x&gt;      &lt;y&gt;440&lt;/y&gt;      &lt;width&gt;48&lt;/width&gt;      &lt;height&gt;24&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="minimum"&gt;     &lt;number&gt;1&lt;/number&gt;    &lt;/property&gt;    &lt;property name="maximum"&gt;     &lt;number&gt;581&lt;/number&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QLabel" name="label"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;600&lt;/x&gt;      &lt;y&gt;440&lt;/y&gt;      &lt;width&gt;16&lt;/width&gt;      &lt;height&gt;16&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;X&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QLabel" name="label_2"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;680&lt;/x&gt;      &lt;y&gt;440&lt;/y&gt;      &lt;width&gt;16&lt;/width&gt;      &lt;height&gt;16&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Y&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QSpinBox" name="p_y"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;700&lt;/x&gt;      &lt;y&gt;370&lt;/y&gt;      &lt;width&gt;48&lt;/width&gt;      &lt;height&gt;24&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="minimum"&gt;     &lt;number&gt;1&lt;/number&gt;    &lt;/property&gt;    &lt;property name="maximum"&gt;     &lt;number&gt;581&lt;/number&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QLabel" name="label_3"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;600&lt;/x&gt;      &lt;y&gt;370&lt;/y&gt;      &lt;width&gt;16&lt;/width&gt;      &lt;height&gt;16&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;X&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="pixel"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;580&lt;/x&gt;      &lt;y&gt;330&lt;/y&gt;      &lt;width&gt;211&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Enter the seed pixel&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QSpinBox" name="p_x"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;620&lt;/x&gt;      &lt;y&gt;370&lt;/y&gt;      &lt;width&gt;48&lt;/width&gt;      &lt;height&gt;24&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="minimum"&gt;     &lt;number&gt;1&lt;/number&gt;    &lt;/property&gt;    &lt;property name="maximum"&gt;     &lt;number&gt;561&lt;/number&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QLabel" name="label_4"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;680&lt;/x&gt;      &lt;y&gt;370&lt;/y&gt;      &lt;width&gt;16&lt;/width&gt;      &lt;height&gt;16&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Y&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QLabel" name="label_5"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;640&lt;/x&gt;      &lt;y&gt;300&lt;/y&gt;      &lt;width&gt;71&lt;/width&gt;      &lt;height&gt;20&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Radius&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QPushButton" name="addcircle"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;580&lt;/x&gt;      &lt;y&gt;270&lt;/y&gt;      &lt;width&gt;211&lt;/width&gt;      &lt;height&gt;32&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="text"&gt;     &lt;string&gt;Add circle&lt;/string&gt;    &lt;/property&gt;   &lt;/widget&gt;   &lt;widget class="QSpinBox" name="rad"&gt;    &lt;property name="geometry"&gt;     &lt;rect&gt;      &lt;x&gt;700&lt;/x&gt;      &lt;y&gt;300&lt;/y&gt;      &lt;width&gt;48&lt;/width&gt;      &lt;height&gt;24&lt;/height&gt;     &lt;/rect&gt;    &lt;/property&gt;    &lt;property name="minimum"&gt;     &lt;number&gt;1&lt;/number&gt;    &lt;/property&gt;    &lt;property name="maximum"&gt;     &lt;number&gt;561&lt;/number&gt;    &lt;/property&gt;    &lt;property name="value"&gt;     &lt;number&gt;160&lt;/number&gt;    &lt;/property&gt;   &lt;/widget&gt;  &lt;/widget&gt; &lt;/widget&gt; &lt;resources/&gt; &lt;connections/&gt;&lt;/ui&gt;</pre><p>參考資料</p><p><a href="https://github.com/Panda-Lewandowski/Computer-graphics">https://github.com/Panda-Lewandowski/Computer-graphics</a>&nbsp;</p><p><a href="https://github.com/chiamingyen/PythonCAD_py3">https://github.com/chiamingyen/PythonCAD_py3</a>&nbsp;</p><h1>分組專題</h1>
 <p>分組專題報告</p>
 <p>章節</p>
 <ul>

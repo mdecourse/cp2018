@@ -1214,6 +1214,51 @@ def emit_pdf(finished):
 loader.loadFinished.connect(emit_pdf)
 
 app.exec()</pre>
+<p>mouse event and line drawing:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5 import QtWidgets, QtGui, QtCore
+
+
+class Window(QtWidgets.QWidget):
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        self.view = View(self)
+        self.button = QtWidgets.QPushButton('Clear View', self)
+        self.button.clicked.connect(self.handleClearView)
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addWidget(self.view)
+        layout.addWidget(self.button)
+
+    def handleClearView(self):
+        self.view.scene().clear()
+
+class View(QtWidgets.QGraphicsView):
+    def __init__(self, parent):
+        QtWidgets.QGraphicsView.__init__(self, parent)
+        self.setScene(QtWidgets.QGraphicsScene(self))
+        self.setSceneRect(QtCore.QRectF(self.viewport().rect()))
+
+    def mousePressEvent(self, event):
+        self._start = event.pos()
+
+    def mouseReleaseEvent(self, event):
+        start = QtCore.QPointF(self.mapToScene(self._start))
+        end = QtCore.QPointF(self.mapToScene(event.pos()))
+        self.scene().addItem(
+            QtWidgets.QGraphicsLineItem(QtCore.QLineF(start, end)))
+        for point in (start, end):
+            text = self.scene().addSimpleText(
+                '(%d, %d)' % (point.x(), point.y()))
+            text.setBrush(QtCore.Qt.red)
+            text.setPos(point)
+
+if __name__ == '__main__':
+
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    window = Window()
+    window.resize(640, 480)
+    window.show()
+    sys.exit(app.exec())</pre>
 <p>使用 Eric6 開發 PyQt5 GUI 程式:</p>
 <p>參考流程:&nbsp;<a href="http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO">http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO</a>&nbsp;</p>
 <p><a href="./../downloads/qt_designer_tutorial.pdf">Qt Designer 教學.pdf</a></p><br />Moveblocks << <a href='Moveblocks.html'>Previous</a> <a href='STetris.html'>Next</a> >> STetris</section></div></body></html>
