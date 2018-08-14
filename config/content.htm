@@ -7439,24 +7439,512 @@ if __name__ == "__main__":
     main.show()
 
     sys.exit(app.exec())</pre>
-<h3>QPainter</h3><p>PyQt5 共有三種不同的繪圖 API, 即 QWidget 繪圖, QGraphicsScene 堆棧繪圖以及 QtQuick 繪圖.</p><p>QWidget 用來繪製典型的 GUI 方形元件, 例如: 按鈕, 查核表單, 下拉式表單等. 因為 QWidget 部件從 QObject 衍生物件 因此可以直接使用 signals/slots 進行配置.</p><p>QGraphicsScene 則為繪圖場景, 提供場景的上下左右捲動, 縮放與旋轉功能. 而視圖為獨立物件, 因為 QGraphicsItem 並非從 QObject 所衍生, 因此無法直接透過 signals/slots 進行配置, 而必須透過 QGraphicsObject 間接配置. QGraphicsItem&nbsp; 則必須利用 QPainter 繪圖.<br>QGraphicsScene 繪圖除了使用內建的 lines, rectangles 等外, 也可透過 QPainter 執行客製化繪圖.</p><p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p><p>The QPainter class performs low-level painting on widgets and other paint devices.</p><p>QPainter provides highly optimized functions to do most of the drawing GUI programs require. It can draw everything from simple lines to complex shapes like pies and chords. It can also draw aligned text and pixmaps. Normally, it draws in a "natural" coordinate system, but it can also do view and world transformation. QPainter can operate on any object that inherits the QPaintDevice class.</p><p>The common use of QPainter is inside a widget's paint event: Construct and customize (e.g. set the pen or the brush) the painter. Then draw. Remember to destroy the QPainter object after drawing.</p><p>Every widget in QT5 has a method called paintEvent(&hellip;) that is called when the widget needs to be drawn (for instance, when its drawn for the first time or when the size of the widget has changed). The only parameter passed to this method is an event object that can be used to get the current dimensions of the content area that we can draw on by calling its rect() method. That means when we want to use a widget for drawing something on it, we derive a new class from the respective widget class and overwrite the paintEvent(&hellip;) method with our own implementation that takes care of the drawing. To do the actual drawing, we need to create an object of the class QPainter and then use the drawing methods it provides. Here is a simple example; the details will be explained below:</p><p>Let&rsquo;s look at the coarse structure first: We are defining a new class derived from QWidget and only overwrite the<span>&nbsp;</span><em>paintEvent(&hellip;)</em><span>&nbsp;</span>method, meaning in all other aspects this widget will behave like an instance of QWidget. In the main code, we simply create an instance of our new widget class and make it show up on the screen. Now, let&rsquo;s look at the body of method<span>&nbsp;</span><em>paintEvent(&hellip;)</em>: The first thing to note here is that all drawing needs to be preceded by the creation of the QPainter object (line 8) and the call of its<span>&nbsp;</span><em>begin(&hellip;)</em>method using &ldquo;self&rdquo; as the parameter standing for the widget object itself because that is what we want to draw on (line 9). To conclude the drawing, we need to call the<span>&nbsp;</span><em>end()</em><span>&nbsp;</span>method of the QPainter object (line 19).</p><p>Next, let us look at the methods of the QPainter object we are invoking that all start with &ldquo;draw&hellip;&rdquo;. These are the methods provided by QPainter to draw different kinds of entities like text, circles or ellipses, rectangles, images, etc. We here use the method<span>&nbsp;</span><em>drawText(&hellip;)</em><span>&nbsp;</span>twice to produce the two different lines of text (lines 12&nbsp;and 13). The difference between the two calls is that in the first one we use absolute coordinates, so the text will be drawn at pixel coordinates 20, 20 counting from the top left corner of the widget&rsquo;s content area. The second call takes a rectangle (class QRectF) as the first parameter and then draws the text within this rectangle based on the additional text options given as the second parameter which here ask&nbsp;for the text to be centered within the rectangle. This is an example where a class provides several methods with the same name but different parameters, something that is called<span>&nbsp;</span><em>overloading</em>. If you check out the<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qpainter.html" class="ext" target="_blank" rel="noopener noreferrer">documentation of QPainter<span class="ext" aria-label="(link is external)"></span></a>, you will see that most methods come in different versions. Now go ahead and resize the window a bit and see how the text produced by the first call always remains at the same absolute position, while that from the second call always stays centered within the available area.</p><p>In line 15, we use the method<span>&nbsp;</span><em>drawEllipse(&hellip;)</em><span>&nbsp;</span>to produce the circle. There is no special circle drawing method, so we use this one and then provide the same number for the two radii. To draw the rectangle, we use the method<span>&nbsp;</span><em>drawRect(&hellip;)</em><span>&nbsp;</span>in the version that takes the coordinates of the corner plus width and height values as parameters.</p><p>The remaining calls of methods of the QPainter object are there to affect the way the objects are drawn, e.g. their color. Colors inPyQt5 are represented by instances of the class QColor. In line 11, we create a new QColor object by providing values between 0 and 255 for the color&rsquo;s red, green, and blue values. Since the red value is 200 and both green and blue are zero, the overall color will be the kind of red that the text appears in. QT5 also has a number of predefined colors that we are using in lines 14&nbsp;(Qt.darkGreen) and 16&nbsp;(Qt.blue).</p><p>QPainter uses objects of class<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qpen.html" class="ext" target="_blank" rel="noopener noreferrer">QPen<span class="ext" aria-label="(link is external)"></span></a><span>&nbsp;</span>and<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qbrush.html" class="ext" target="_blank" rel="noopener noreferrer">QBrush<span class="ext" aria-label="(link is external)"></span></a><span>&nbsp;</span>to draw the boundary and inside of a shape. In line 11, it is stated that a pen with red color should be used for the following drawing operations. As a result, both text lines appear in red. In line 14, we create a new QPen object to be used by the QPainter and specify that the color should be dark green, and the line width should be 4. This is used for drawing the circle. In line 16, we do the same with color blue and line width 2, and, in addition, we say that sharp corners should be used for the connection between to adjacent line segments of the shape&rsquo;s border. This is used for drawing the rectangle. We won&rsquo;t go further into the details of the different pen and brush properties here but the documentation of the QPen and QBrush classes provide some more examples and explanation. In addition, you will see more use cases in the walkthrough in the next section.</p><p>直接繪圖:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import (QGraphicsView,    QGraphicsScene,QApplication)from PyQt5.QtCore import (QLineF)    if __name__ == '__main__':    import sys    # 建立應用程式    app = QApplication(sys.argv)    # 建立場景    scene = QGraphicsScene()    # 在場景中加入字串    scene.addText("場景中的字串!")    scene.addLine(QLineF(0, 0, 100, 100))    scene.addLine(QLineF(100, 0, 0, 100))    # 將場景放入視圖案例中    view = QGraphicsView(scene)    #顯示視圖    view.show()    # 執行應用程式    sys.exit(app.exec())</pre><p>在 QWidget 中繪圖</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys from PyQt5 import QtGui, QtWidgets from PyQt5.QtCore import Qt, QPoint  class MyWidget(QtWidgets.QWidget):      def paintEvent(self, event):         qp = QtGui.QPainter()         qp.begin(self)          qp.setPen(QtGui.QColor(200,0,0))         qp.drawText(20,20, "在固定座標繪字串")         qp.drawText(event.rect(), Qt.AlignCenter, "在繪圖區正中央繪字串")         qp.setPen(QtGui.QPen(Qt.darkGreen, 4))         qp.drawEllipse(QPoint(50,60),30,30)         qp.setPen(QtGui.QPen(Qt.blue, 2, join = Qt.MiterJoin))         qp.drawRect(20,60,50,80)          qp.end()  app = QtWidgets.QApplication(sys.argv)  window = MyWidget() window.show()  sys.exit(app.exec())</pre><p>以 QPainter 繪圖</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainter, QColor, QFontfrom PyQt5.QtCore import Qtclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):                      self.text = "Author"        self.setGeometry(300, 300, 280, 170)        self.setWindowTitle('Drawing text')        self.show()            def paintEvent(self, event):        qp = QPainter()        qp.begin(self)        self.drawText(event, qp)        qp.end()                    def drawText(self, event, qp):              qp.setPen(QColor(168, 34, 3))        qp.setFont(QFont('Decorative', 10))        qp.drawText(event.rect(), Qt.AlignCenter, self.text)                                if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>Draw points:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainterfrom PyQt5.QtCore import Qtimport sys, randomclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):              self.setGeometry(300, 300, 300, 190)        self.setWindowTitle('Points')        self.show()            def paintEvent(self, e):        qp = QPainter()        qp.begin(self)        self.drawPoints(qp)        qp.end()                    def drawPoints(self, qp):              qp.setPen(Qt.red)        size = self.size()                for i in range(1000):            x = random.randint(1, size.width()-1)            y = random.randint(1, size.height()-1)            qp.drawPoint(x, y)                             if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>Colors:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainter, QColor, QBrushimport sysclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):              self.setGeometry(300, 300, 350, 100)        self.setWindowTitle('Colours')        self.show()    def paintEvent(self, e):        qp = QPainter()        qp.begin(self)        self.drawRectangles(qp)        qp.end()            def drawRectangles(self, qp):              col = QColor(0, 0, 0)        col.setNamedColor('#d4d4d4')        qp.setPen(col)        qp.setBrush(QColor(200, 0, 0))        qp.drawRect(10, 15, 90, 60)        qp.setBrush(QColor(255, 80, 0, 160))        qp.drawRect(130, 15, 90, 60)        qp.setBrush(QColor(25, 0, 90, 200))        qp.drawRect(250, 15, 90, 60)                      if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>QPen:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainter, QPenfrom PyQt5.QtCore import Qtimport sysclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):              self.setGeometry(300, 300, 280, 270)        self.setWindowTitle('Pen styles')        self.show()            def paintEvent(self, e):        qp = QPainter()        qp.begin(self)        self.drawLines(qp)        qp.end()                    def drawLines(self, qp):              pen = QPen(Qt.black, 2, Qt.SolidLine)        qp.setPen(pen)        qp.drawLine(20, 40, 250, 40)        pen.setStyle(Qt.DashLine)        qp.setPen(pen)        qp.drawLine(20, 80, 250, 80)        pen.setStyle(Qt.DashDotLine)        qp.setPen(pen)        qp.drawLine(20, 120, 250, 120)        pen.setStyle(Qt.DotLine)        qp.setPen(pen)        qp.drawLine(20, 160, 250, 160)        pen.setStyle(Qt.DashDotDotLine)        qp.setPen(pen)        qp.drawLine(20, 200, 250, 200)        pen.setStyle(Qt.CustomDashLine)        pen.setDashPattern([1, 4, 5, 4])        qp.setPen(pen)        qp.drawLine(20, 240, 250, 240)                      if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>Brush:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainter, QBrushfrom PyQt5.QtCore import Qtimport sysclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):              self.setGeometry(300, 300, 355, 280)        self.setWindowTitle('Brushes')        self.show()            def paintEvent(self, e):        qp = QPainter()        qp.begin(self)        self.drawBrushes(qp)        qp.end()                    def drawBrushes(self, qp):              brush = QBrush(Qt.SolidPattern)        qp.setBrush(brush)        qp.drawRect(10, 15, 90, 60)        brush.setStyle(Qt.Dense1Pattern)        qp.setBrush(brush)        qp.drawRect(130, 15, 90, 60)        brush.setStyle(Qt.Dense2Pattern)        qp.setBrush(brush)        qp.drawRect(250, 15, 90, 60)        brush.setStyle(Qt.DiagCrossPattern)        qp.setBrush(brush)        qp.drawRect(10, 105, 90, 60)        brush.setStyle(Qt.Dense5Pattern)        qp.setBrush(brush)        qp.drawRect(130, 105, 90, 60)        brush.setStyle(Qt.Dense6Pattern)        qp.setBrush(brush)        qp.drawRect(250, 105, 90, 60)        brush.setStyle(Qt.HorPattern)        qp.setBrush(brush)        qp.drawRect(10, 195, 90, 60)        brush.setStyle(Qt.VerPattern)        qp.setBrush(brush)        qp.drawRect(130, 195, 90, 60)        brush.setStyle(Qt.BDiagPattern)        qp.setBrush(brush)        qp.drawRect(250, 195, 90, 60)                      if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>Bezier curve:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplicationfrom PyQt5.QtGui import QPainter, QPainterPathfrom PyQt5.QtCore import Qtimport sysclass Example(QWidget):        def __init__(self):        super().__init__()                self.initUI()                    def initUI(self):              self.setGeometry(300, 300, 380, 250)        self.setWindowTitle('B&eacute;zier curve')        self.show()            def paintEvent(self, e):        qp = QPainter()        qp.begin(self)        qp.setRenderHint(QPainter.Antialiasing)        self.drawBezierCurve(qp)        qp.end()                    def drawBezierCurve(self, qp):              path = QPainterPath()        path.moveTo(30, 30)        path.cubicTo(30, 30, 200, 350, 350, 30)                qp.drawPath(path)                      if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p>QPainter:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabelfrom PyQt5.QtGui import QPainter, QColor, QPenfrom PyQt5.QtGui import QIconfrom PyQt5.QtCore import Qtimport random class App(QMainWindow):     def __init__(self):        super().__init__()        self.title = 'PyQt paint example'        self.left = 10        self.top = 10        self.width = 440        self.height = 280        self.initUI()     def initUI(self):        self.setWindowTitle(self.title)        self.setGeometry(self.left, self.top, self.width, self.height)         # Set window background color        self.setAutoFillBackground(True)        p = self.palette()        p.setColor(self.backgroundRole(), Qt.white)        self.setPalette(p)         # Add paint widget and paint        self.m = PaintWidget(self)        self.m.move(0,0)        self.m.resize(self.width,self.height)         self.show()  class PaintWidget(QWidget):   def paintEvent(self, event):      qp = QPainter(self)       qp.setPen(Qt.black)      size = self.size()       for i in range(1024):          x = random.randint(1, size.width()-1)          y = random.randint(1, size.height()-1)          qp.drawPoint(x, y)  if __name__ == '__main__':    app = QApplication(sys.argv)    ex = App()    sys.exit(app.exec())</pre><p>Screen Shot:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""Screenshot and that kind of stuff."""import iofrom PyQt5.QtCore import QUrl, QIODevice, QBuffer, QByteArrayfrom PyQt5.QtWidgets import QApplicationfrom PyQt5.QtGui import QImage, QPainterfrom PyQt5.QtWebEngineWidgets import QWebEngineViewclass Screenshot(QWebEngineView):    def __init__(self):        self.app = QApplication([])        QWebEngineView.__init__(self)        self._loaded = False        self.loadFinished.connect(self._load_finished)        print('--finish init')    def capture(self, url):        print('--load')        self.load(QUrl(url))        self.wait_load()        self.show()        size = self.page().contentsSize()        self.page().view().resize(*[int(s) for s in [size.width(), size.height()]])        print('--take image')        image = QImage(800, 800, QImage.Format_ARGB32)        painter = QPainter(image)        print('--render')        self.page().view().render(painter)        painter.end()        print('Saving QImage')        img_bytes = QByteArray()        bio = QBuffer(img_bytes)        bio.open(QIODevice.WriteOnly)        image.save(bio, 'PNG')        return img_bytes    def wait_load(self):        while not self._loaded:            self.app.processEvents()        self._loaded = False    def _load_finished(self, result):        self._loaded = True</pre><p>Reference:</p><p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p><p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>靜態繪圖</h3>
-<p>QtWidgets.QGraphicsScene</p>
-<p>QtWidgets.QGraphicsView</p>
-<p>繪圖片段:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">super(Dialog, self).__init__(parent)
-self.setupUi(self)
-scene = QtWidgets.QGraphicsScene()
-self.graphicsView.setScene(scene)
-pen = QtGui.QPen(QtCore.Qt.blue)
+<h3>QPainter</h3>
+<p>PyQt5 共有三種不同的繪圖 API, 即透過 QPaintDevice 子類別 QWidget 繪圖, QGraphicsScene Canvas 繪圖以及 QtQuick 繪圖.</p>
+<p>QWidget 用來繪製典型的 GUI 方形元件, 例如: 按鈕, 查核表單, 下拉式表單等. 因為 QWidget 部件為 QObject 衍生物件, 因此可以直接使用 signals/slots 進行配置.</p>
+<p>QGraphicsScene 則為繪圖場景, 提供場景的上下左右捲動, 縮放與旋轉功能. 而視圖為獨立物件, 因為 QGraphicsItem 並非從 QObject 所衍生, 因此無法直接透過 signals/slots 進行配置, 而必須透過 QGraphicsObject 間接配置.</p>
+<p>QGraphicsScene 繪圖除了使用內建的 lines, rectangles 等外, 若需要執行客製化繪圖, 可利用 QGraphicsItem 物件中的 paint 方法, 以 QPainter 繪圖.</p>
+<p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p>
+<h4><a href="http://doc.qt.io/qt-5/qwidget.html#details">QWidget</a></h4>
+<p>Since QWidget is a subclass of QPaintDevice, subclasses can be used to display custom content that is composed using a series of painting operations with an instance of the QPainter class. This approach contrasts with the canvas-style approach used by the Graphics View Framework where items are added to a scene by the application and are rendered by the framework itself.</p>
+<p>Each widget performs all painting operations from within its paintEvent() function. This is called whenever the widget needs to be redrawn, either as a result of some external change or when requested by the application.</p>
+<p>The QPainter class performs low-level painting on widgets and other paint devices.</p>
+<p>QPainter provides highly optimized functions to do most of the drawing GUI programs require. It can draw everything from simple lines to complex shapes like pies and chords. It can also draw aligned text and pixmaps. Normally, it draws in a "natural" coordinate system, but it can also do view and world transformation. QPainter can operate on any object that inherits the QPaintDevice class.</p>
+<p>The common use of QPainter is inside a widget's paint event: Construct and customize (e.g. set the pen or the brush) the painter. Then draw. Remember to destroy the QPainter object after drawing.</p>
+<p>Every widget in QT5 has a method called paintEvent(&hellip;) that is called when the widget needs to be drawn (for instance, when its drawn for the first time or when the size of the widget has changed). The only parameter passed to this method is an event object that can be used to get the current dimensions of the content area that we can draw on by calling its rect() method. That means when we want to use a widget for drawing something on it, we derive a new class from the respective widget class and overwrite the paintEvent(&hellip;) method with our own implementation that takes care of the drawing. To do the actual drawing, we need to create an object of the class QPainter and then use the drawing methods it provides. Here is a simple example; the details will be explained below:</p>
+<p>Let&rsquo;s look at the coarse structure first: We are defining a new class derived from QWidget and only overwrite the<span>&nbsp;</span><em>paintEvent(&hellip;)</em><span>&nbsp;</span>method, meaning in all other aspects this widget will behave like an instance of QWidget. In the main code, we simply create an instance of our new widget class and make it show up on the screen. Now, let&rsquo;s look at the body of method<span>&nbsp;</span><em>paintEvent(&hellip;)</em>: The first thing to note here is that all drawing needs to be preceded by the creation of the QPainter object (line 31) and the call of its<span>&nbsp;</span><em>begin(&hellip;)</em>method using &ldquo;self&rdquo; as the parameter standing for the widget object itself because that is what we want to draw on (line 32). To conclude the drawing, we need to call the<span>&nbsp;</span><em>end()</em><span>&nbsp;</span>method of the QPainter object (line 40).</p>
+<p>Next, let us look at the methods of the QPainter object we are invoking that all start with &ldquo;draw&hellip;&rdquo;. These are the methods provided by QPainter to draw different kinds of entities like text, circles or ellipses, rectangles, images, etc. We here use the method<span>&nbsp;</span><em>drawText(&hellip;)</em><span>&nbsp;</span>twice to produce the two different lines of text (lines 34 and 35). The difference between the two calls is that in the first one we use absolute coordinates, so the text will be drawn at pixel coordinates 20, 20 counting from the top left corner of the widget&rsquo;s content area. The second call takes a rectangle (class QRectF) as the first parameter and then draws the text within this rectangle based on the additional text options given as the second parameter which here ask&nbsp;for the text to be centered within the rectangle. This is an example where a class provides several methods with the same name but different parameters, something that is called<span>&nbsp;</span><em>overloading</em>. If you check out the<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qpainter.html" class="ext" target="_blank" rel="noopener noreferrer">documentation of QPainter<span class="ext" aria-label="(link is external)"></span></a>, you will see that most methods come in different versions. Now go ahead and resize the window a bit and see how the text produced by the first call always remains at the same absolute position, while that from the second call always stays centered within the available area.</p>
+<p>In line 37, we use the method<span>&nbsp;</span><em>drawEllipse(&hellip;)</em><span>&nbsp;</span>to produce the circle. There is no special circle drawing method, so we use this one and then provide the same number for the two radii. To draw the rectangle, we use the method<span>&nbsp;</span><em>drawRect(&hellip;)</em><span>&nbsp;</span>in the version that takes the coordinates of the corner plus width and height values as parameters.</p>
+<p>The remaining calls of methods of the QPainter object are there to affect the way the objects are drawn, e.g. their color. Colors inPyQt5 are represented by instances of the class QColor. In line 33, we create a new QColor object by providing values between 0 and 255 for the color&rsquo;s red, green, and blue values. Since the red value is 200 and both green and blue are zero, the overall color will be the kind of red that the text appears in. QT5 also has a number of predefined colors that we are using in lines 36 (Qt.darkGreen) and 38 (Qt.blue).</p>
+<p>QPainter uses objects of class<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qpen.html" class="ext" target="_blank" rel="noopener noreferrer">QPen<span class="ext" aria-label="(link is external)"></span></a><span>&nbsp;</span>and<span>&nbsp;</span><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qbrush.html" class="ext" target="_blank" rel="noopener noreferrer">QBrush<span class="ext" aria-label="(link is external)"></span></a><span>&nbsp;</span>to draw the boundary and inside of a shape. In line 33, it is stated that a pen with red color should be used for the following drawing operations. As a result, both text lines appear in red. In line 36, we create a new QPen object to be used by the QPainter and specify that the color should be dark green, and the line width should be 4. This is used for drawing the circle. In line 38, we do the same with color blue and line width 2, and, in addition, we say that sharp corners should be used for the connection between to adjacent line segments of the shape&rsquo;s border. This is used for drawing the rectangle. We won&rsquo;t go further into the details of the different pen and brush properties here but the documentation of the QPen and QBrush classes provide some more examples and explanation. In addition, you will see more use cases in the walkthrough in the next section.</p>
+<p>直接繪圖:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import (QGraphicsView,
+    QGraphicsScene,QApplication)
+from PyQt5.QtCore import (QLineF)
+    
+if __name__ == '__main__':
+    import sys
+    # 建立應用程式
+    app = QApplication(sys.argv)
+    # 建立場景
+    scene = QGraphicsScene()
+    # 在場景中加入字串
+    scene.addText("場景中的字串!")
+    scene.addLine(QLineF(0, 0, 100, 100))
+    scene.addLine(QLineF(100, 0, 0, 100))
+    # 將場景放入視圖案例中
+    view = QGraphicsView(scene)
+    #顯示視圖
+    view.show()
+    # 執行應用程式
+    sys.exit(app.exec())</pre>
+<p>在 QWidget 中以 QPainter 繪圖 (必須採 paintEvent 方法)</p>
+<p>比較採用 Canvas based 的 QGraphicsScene 放入 QGraphicsView 繪圖差異.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import (QGraphicsView,
+    QGraphicsScene,QApplication, QWidget)
+from PyQt5.QtCore import (Qt, QLineF, QPoint)
+from PyQt5.QtGui import (QPainter, QPen, QColor)
+     
+if __name__ == '__main__':
+    import sys
+    # 建立應用程式
+    app = QApplication(sys.argv)
+    # 以 canvas 繪圖模式建立場景
+    scene = QGraphicsScene()
+    # 在場景中加入字串
+    scene.addText("場景中的字串!")
+    scene.addLine(QLineF(0, 0, 100, 100))
+    scene.addLine(QLineF(100, 0, 0, 100))
+    # 將場景放入視圖案例中-方法一
+    # view = QGraphicsView(scene)
+    # 將場景放入視圖案例中-方法二, 先建 view 後, 
+    # 以 setScene() 將 scene 置入
+    view = QGraphicsView()
+    view.setScene(scene)
+    
+    # 因 QWidget 為 QPaintDevice subclass, 
+    # 可以直接在 QWidget 上以 QPainter 繪圖
+    # 建立 QWidget 物件, 以 paintEvent 繪圖
+    class window(QWidget):
+        def __init__(self):
+            super().__init__()
 
-side = 20
+        def paintEvent(self, event): 
+            qp = QPainter() 
+            qp.begin(self) 
+            qp.setPen(QColor(200,0,0)) 
+            qp.drawText(20,20, "在固定座標繪字串") 
+            qp.drawText(event.rect(), Qt.AlignCenter, "在繪圖區正中央繪字串") 
+            qp.setPen(QPen(Qt.darkGreen, 4)) 
+            qp.drawEllipse(QPoint(50,60),30,30) 
+            qp.setPen(QPen(Qt.blue, 2, join = Qt.MiterJoin)) 
+            qp.drawRect(20,60,50,80) 
+            qp.end() 
+    # 以 window 類別案例建立 win 物件
+    win = window()
+    # 顯示 win 物件內容
+    win.show()
+    # 以 QGraphicsView 作為視窗, 將視圖內容於視窗中央顯示
+    #view.show()
+    # 執行應用程式
+    sys.exit(app.exec())</pre>
+<p>以 QPainter 繪圖</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QColor, QFont
+from PyQt5.QtCore import Qt
 
-for i in range(16):
-    for j in range(16):
-        r = QtCore.QRectF(QtCore.QPointF(i*side, j*side), QtCore.QSizeF(side, side))
-        scene.addRect(r, pen)</pre>
-<p></p>
-<h3>Moveblocks</h3>
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+        
+        self.text = "Author"
+
+        self.setGeometry(300, 300, 280, 170)
+        self.setWindowTitle('Drawing text')
+        self.show()
+        
+
+    def paintEvent(self, event):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawText(event, qp)
+        qp.end()
+        
+        
+    def drawText(self, event, qp):
+      
+        qp.setPen(QColor(168, 34, 3))
+        qp.setFont(QFont('Decorative', 10))
+        qp.drawText(event.rect(), Qt.AlignCenter, self.text)        
+                
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>Draw points:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter
+from PyQt5.QtCore import Qt
+import sys, random
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 300, 190)
+        self.setWindowTitle('Points')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawPoints(qp)
+        qp.end()
+        
+        
+    def drawPoints(self, qp):
+      
+        qp.setPen(Qt.red)
+        size = self.size()
+        
+        for i in range(1000):
+            x = random.randint(1, size.width()-1)
+            y = random.randint(1, size.height()-1)
+            qp.drawPoint(x, y)     
+                
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>Colors:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QColor, QBrush
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 350, 100)
+        self.setWindowTitle('Colours')
+        self.show()
+
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawRectangles(qp)
+        qp.end()
+
+        
+    def drawRectangles(self, qp):
+      
+        col = QColor(0, 0, 0)
+        col.setNamedColor('#d4d4d4')
+        qp.setPen(col)
+
+        qp.setBrush(QColor(200, 0, 0))
+        qp.drawRect(10, 15, 90, 60)
+
+        qp.setBrush(QColor(255, 80, 0, 160))
+        qp.drawRect(130, 15, 90, 60)
+
+        qp.setBrush(QColor(25, 0, 90, 200))
+        qp.drawRect(250, 15, 90, 60)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>QPen:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 280, 270)
+        self.setWindowTitle('Pen styles')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawLines(qp)
+        qp.end()
+        
+        
+    def drawLines(self, qp):
+      
+        pen = QPen(Qt.black, 2, Qt.SolidLine)
+
+        qp.setPen(pen)
+        qp.drawLine(20, 40, 250, 40)
+
+        pen.setStyle(Qt.DashLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 80, 250, 80)
+
+        pen.setStyle(Qt.DashDotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 120, 250, 120)
+
+        pen.setStyle(Qt.DotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 160, 250, 160)
+
+        pen.setStyle(Qt.DashDotDotLine)
+        qp.setPen(pen)
+        qp.drawLine(20, 200, 250, 200)
+
+        pen.setStyle(Qt.CustomDashLine)
+        pen.setDashPattern([1, 4, 5, 4])
+        qp.setPen(pen)
+        qp.drawLine(20, 240, 250, 240)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>Brush:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QBrush
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 355, 280)
+        self.setWindowTitle('Brushes')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        self.drawBrushes(qp)
+        qp.end()
+        
+        
+    def drawBrushes(self, qp):
+      
+        brush = QBrush(Qt.SolidPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 15, 90, 60)
+
+        brush.setStyle(Qt.Dense1Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 15, 90, 60)
+
+        brush.setStyle(Qt.Dense2Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 15, 90, 60)
+
+        brush.setStyle(Qt.DiagCrossPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 105, 90, 60)
+
+        brush.setStyle(Qt.Dense5Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 105, 90, 60)
+
+        brush.setStyle(Qt.Dense6Pattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 105, 90, 60)
+
+        brush.setStyle(Qt.HorPattern)
+        qp.setBrush(brush)
+        qp.drawRect(10, 195, 90, 60)
+
+        brush.setStyle(Qt.VerPattern)
+        qp.setBrush(brush)
+        qp.drawRect(130, 195, 90, 60)
+
+        brush.setStyle(Qt.BDiagPattern)
+        qp.setBrush(brush)
+        qp.drawRect(250, 195, 90, 60)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>Bezier curve:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QPainter, QPainterPath
+from PyQt5.QtCore import Qt
+import sys
+
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        
+        
+    def initUI(self):      
+
+        self.setGeometry(300, 300, 380, 250)
+        self.setWindowTitle('B&eacute;zier curve')
+        self.show()
+        
+
+    def paintEvent(self, e):
+
+        qp = QPainter()
+        qp.begin(self)
+        qp.setRenderHint(QPainter.Antialiasing)
+        self.drawBezierCurve(qp)
+        qp.end()
+        
+        
+    def drawBezierCurve(self, qp):
+      
+        path = QPainterPath()
+        path.moveTo(30, 30)
+        path.cubicTo(30, 30, 200, 350, 350, 30)
+        
+        qp.drawPath(path)
+              
+        
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p>QPainter:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
+from PyQt5.QtGui import QPainter, QColor, QPen
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
+import random
+ 
+class App(QMainWindow):
+ 
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt paint example'
+        self.left = 10
+        self.top = 10
+        self.width = 440
+        self.height = 280
+        self.initUI()
+ 
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+ 
+        # Set window background color
+        self.setAutoFillBackground(True)
+        p = self.palette()
+        p.setColor(self.backgroundRole(), Qt.white)
+        self.setPalette(p)
+ 
+        # Add paint widget and paint
+        self.m = PaintWidget(self)
+        self.m.move(0,0)
+        self.m.resize(self.width,self.height)
+ 
+        self.show()
+ 
+ 
+class PaintWidget(QWidget):
+   def paintEvent(self, event):
+      qp = QPainter(self)
+ 
+      qp.setPen(Qt.black)
+      size = self.size()
+ 
+      for i in range(1024):
+          x = random.randint(1, size.width()-1)
+          y = random.randint(1, size.height()-1)
+          qp.drawPoint(x, y)
+ 
+ 
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = App()
+    sys.exit(app.exec())</pre>
+<p>Screen Shot:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"""Screenshot and that kind of stuff."""
+import io
+from PyQt5.QtCore import QUrl, QIODevice, QBuffer, QByteArray
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QImage, QPainter
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+
+class Screenshot(QWebEngineView):
+    def __init__(self):
+        self.app = QApplication([])
+        QWebEngineView.__init__(self)
+        self._loaded = False
+        self.loadFinished.connect(self._load_finished)
+        print('--finish init')
+
+    def capture(self, url):
+        print('--load')
+        self.load(QUrl(url))
+        self.wait_load()
+        self.show()
+        size = self.page().contentsSize()
+        self.page().view().resize(*[int(s) for s in [size.width(), size.height()]])
+        print('--take image')
+        image = QImage(800, 800, QImage.Format_ARGB32)
+        painter = QPainter(image)
+        print('--render')
+        self.page().view().render(painter)
+        painter.end()
+        print('Saving QImage')
+        img_bytes = QByteArray()
+        bio = QBuffer(img_bytes)
+        bio.open(QIODevice.WriteOnly)
+        image.save(bio, 'PNG')
+        return img_bytes
+
+    def wait_load(self):
+        while not self._loaded:
+            self.app.processEvents()
+        self._loaded = False
+
+    def _load_finished(self, result):
+        self._loaded = True</pre>
+<p>Reference:</p>
+<p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>靜態繪圖</h3><h4>Canvas based 繪圖</h4><p>參考:&nbsp;<a href="http://doc.qt.io/qt-5/graphicsview.html">http://doc.qt.io/qt-5/graphicsview.html</a>&nbsp;</p><p>QtWidgets.QGraphicsScene (場景)</p><p>QtWidgets.QGraphicsView (顯示區)</p><p>QtWidgets.QGraphicsItem (場景中的元件) - <a href="http://doc.qt.io/qt-5/qgraphicsitem.html#details">客製化</a>需要建立 boundingRect() 與 paint()</p><p>Qt 內建採&nbsp;<span><a href="https://en.wikipedia.org/wiki/Binary_space_partitioning">Binary Space Partitioning Tree</a>&nbsp; 方式管理場景中的元件, 可以即時顯示非常多的場景元件.</span></p><p><span>同一場景可以透過多個不同的 View 加以顯示, 而座標系統則分為: 以 Item 中心為原點的 Item 座標系統、Scene 座標系統, 以及 View 座標系統等三種.&nbsp; View 座標系統可以透過 mapToScene() 方法轉為 Scene 座標系統.</span></p><p>繪圖片段:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">super(Dialog, self).__init__(parent)self.setupUi(self)scene = QtWidgets.QGraphicsScene()self.graphicsView.setScene(scene)pen = QtGui.QPen(QtCore.Qt.blue)side = 20for i in range(16):    for j in range(16):        r = QtCore.QRectF(QtCore.QPointF(i*side, j*side), QtCore.QSizeF(side, side))        scene.addRect(r, pen)</pre><h4>動態繪圖</h4><p><a href="http://doc.qt.io/qt-5/animation-overview.html">http://doc.qt.io/qt-5/animation-overview.html</a>&nbsp;</p><p>ball.png</p><p><img src="/images/ball.png" width="20" height="20" alt=""></p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3# -*- coding: utf-8 -*-'''ZetCode Advanced PyQt5 tutorialThis programs animates a ball object along a curve.Author: Jan BodnarWebsite: zetcode.comLast edited: August 2017'''from PyQt5.QtWidgets import QApplication, QWidget, QLabelfrom PyQt5.QtGui import QPainter, QPixmap, QPainterPathfrom PyQt5.QtCore import QObject, QPointF, QPropertyAnimation, pyqtPropertyimport sys                              class Ball(QLabel):        def __init__(self, parent):        super().__init__(parent)                pix = QPixmap("ball.png")        self.h = pix.height()        self.w = pix.width()                self.setPixmap(pix)            def _set_pos(self, pos):                self.move(pos.x() - self.w/2, pos.y() - self.h/2)    pos = pyqtProperty(QPointF, fset=_set_pos)              class Example(QWidget):        def __init__(self):        super().__init__()        self.initView()        self.initAnimation()                    def initView(self):                    self.path = QPainterPath()        self.path.moveTo(30, 30)        self.path.cubicTo(30, 30, 200, 350, 350, 30)                        self.ball = Ball(self)        self.ball.pos = QPointF(30, 30)                self.setWindowTitle("Animation along curve")        self.setGeometry(300, 300, 400, 300)        self.show()                    def paintEvent(self, e):                    qp = QPainter()        qp.begin(self)        qp.setRenderHint(QPainter.Antialiasing)           qp.drawPath(self.path)        qp.end()                         def initAnimation(self):                self.anim = QPropertyAnimation(self.ball, b'pos')        self.anim.setDuration(7000)                self.anim.setStartValue(QPointF(30, 30))                vals = [p/100 for p in range(0, 101)]        for i in vals:            self.anim.setKeyValueAt(i, self.path.pointAtPercent(i))                          self.anim.setEndValue(QPointF(350, 30))                self.anim.start()                          if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p></p><h3>Moveblocks</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtCore import (QAbstractTransition, QEasingCurve, QEvent,
         QParallelAnimationGroup, QPropertyAnimation, qrand, QRect,
         QSequentialAnimationGroup, qsrand, QState, QStateMachine, Qt, QTime,
@@ -10547,7 +11035,13 @@ woocommerce</pre>
 <p>Real-time Object Detection:</p>
 <p><a href="https://pjreddie.com/darknet/yolo/">https://pjreddie.com/darknet/yolo/</a></p>
 <p>Neural Network Library by Sony:</p>
-<p><a href="https://github.com/sony/nnabla">https://github.com/sony/nnabla</a></p><h2>輔助設計套件</h2>
+<p><a href="https://github.com/sony/nnabla">https://github.com/sony/nnabla</a></p>
+<h4>Structure Sensor</h4>
+<p><a href="https://structure.io/">https://structure.io/</a></p>
+<p><a href="https://github.com/occipital/openni2">https://github.com/occipital/openni2</a>&nbsp;</p>
+<p><a href="https://skanect.occipital.com/">https://skanect.occipital.com/</a>&nbsp;</p>
+<p><a href="https://en.wikipedia.org/wiki/OpenNI">https://en.wikipedia.org/wiki/OpenNI</a>&nbsp;</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/nFyT2q8f_i4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p><h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a>&nbsp;</p>
 <p>一般常見的機械電腦輔助設計套件包括法國<span>&nbsp;</span><a href="https://www.3ds.com/">Dassault</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.3ds.com/products-services/solidworks/">SolidWorks</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.3ds.com/products-services/catia/">Catia</a>, 美國<span>&nbsp;</span><a href="https://www.autodesk.com.tw/">AutoDesk</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.autodesk.com.tw/products/autocad/">AutoCAD</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.autodesk.com/products/inventor/overview">Inventor</a>, 德國<span>&nbsp;</span><a href="https://www.siemens.com/tw/zh/home.html">Siemens</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/en/products/solid-edge/">Solid Edge</a><span>&nbsp;</span>與<span>&nbsp;</span><a href="https://www.plm.automation.siemens.com/zh/products/nx/index.shtml">NX</a>, 美國<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/">PTC</a><span>&nbsp;</span>公司的<span>&nbsp;</span><a href="http://www.ptc-taiwan.com/cad">Creo</a>, 以及 2015 年推出的<span>&nbsp;</span><a href="https://www.onshape.com/">Onshape</a></p>
