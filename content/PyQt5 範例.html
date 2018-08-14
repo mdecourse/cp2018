@@ -71,11 +71,26 @@ $(function(){
 <p>參考:&nbsp;<a href="https://www.e-education.psu.edu/geog489/node/2292">https://www.e-education.psu.edu/geog489/node/2292</a>&nbsp;</p>
 <p>利用 PyQt5 建立程式, 都需要透過 QApplication 類別建立應用程式物件, 並且以 exec() 進入主事件迴圈, 完成所需的初始化與後台事物管理.&nbsp;</p>
 <p>此一透過 QApplication 建立的 PyQt5 應用程式物件, 對應至一變數名稱 app 後,&nbsp; 接著設置所需的 GUI 元件, 並在程式最後, 調用此應用程式物件的 exec() 方法執行, 以及處理用戶輸入.</p>
+<p>QApplication&nbsp; 與 QWidget 類別隸屬於 PyQt5.QtWidgets 模組.</p>
 <p>app.exec() 執行後的傳回值 0, 用於從 Python 標準程式庫調用 sys.exit() 函式正常退出 Python 程式.</p>
 <p><a href="http://doc.qt.io/qt-5/qapplication.html#exec">QApplication::exec() 說明文件</a></p>
 <p><a href="https://docs.python.org/3/library/sys.html">sys.exit() 說明文件</a></p>
 <p>Label, push button, line edit, layout, signal and slot:</p>
 <p><a href="https://docs.python.org/3/tutorial/classes.html">https://docs.python.org/3/tutorial/classes.html</a>&nbsp;</p>
+<p>PyQt5 程式流程:</p>
+<ol>
+<li>建立 QApplication 物件</li>
+<li>&nbsp;建立主應用程式視窗</li>
+<li>設定主視窗參數, 建立或新增子部件</li>
+<li>顯示主視窗</li>
+<li>啟動 QApplication 物件</li>
+</ol>
+<p>PyQt5 主要模組:</p>
+<ol>
+<li>QtCore &ndash; 核心非 GUI 工具</li>
+<li>QtGui &ndash; 視窗系統整合, 事件處理, 2D 繪圖, 影像處理與字型</li>
+<li>QtWidgets &ndash;&nbsp;基本 UI 元件, 包含標籤, 按鈕, 文字輸入, 數列, 表格, 表單與工具箱</li>
+</ol>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
@@ -1258,6 +1273,430 @@ if __name__ == '__main__':
     window = Window()
     window.resize(640, 480)
     window.show()
+    sys.exit(app.exec())</pre>
+<p>在場景中加入元件 (<a href="https://github.com/mmisono/pyqt5-example/blob/master/tic_tac_toe.py">來源</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
+
+from PyQt5.QtCore import (QLineF, QPointF, QRectF, Qt)
+from PyQt5.QtGui import (QBrush, QColor, QPainter)
+from PyQt5.QtWidgets import (QApplication, QGraphicsView, QGraphicsScene, QGraphicsItem,
+                             QGridLayout, QVBoxLayout, QHBoxLayout,
+                             QLabel, QLineEdit, QPushButton)
+
+# 繼承 QGraphicsItem 類別, 建立 TicTacToe 類別
+class TicTacToe(QGraphicsItem):
+    # 定義建構子
+    def __init__(self):
+        # 先執行父物件的建構子方法
+        super().__init__()
+        # 定義 board instance 屬性
+        self.board = [[-1, -1, -1],[-1, -1, -1], [-1, -1, -1]]
+        # 定義 O 與 X 與 turn 物件案例屬性
+        self.O = 0
+        self.X = 1
+        self.turn = self.O
+
+    # 定義重置方法
+    def reset(self):
+        # 以 y=0, 1, 2 重複執行迴圈
+        for y in range(3):
+            # 以 x=0, 1, 2 重複執行迴圈
+            for x in range(3):
+                # board 案例數列全設為 -1
+                self.board[y][x] = -1
+        # turn 設為 O
+        self.turn = self.O
+        # 執行 update 案例方法
+        self.update()
+
+    # 定義 select
+    def select(self, x, y):
+        # 不在範圍中的 x 與 y 直接 return
+        if x &lt; 0 or y &lt; 0 or x &gt;= 3 or y &gt;= 3:
+            return
+        # 當板中特定位置為 -1, 表示該位置尚未 paint, 則一開始 turn 為 O, 也就是 0
+        # 接著 turn 成為 1-0  轉為 1
+        if self.board[y][x] == -1:
+            self.board[y][x] = self.turn
+            self.turn = 1 - self.turn
+
+    def paint(self, painter, option, widget):
+        painter.setPen(Qt.black)
+        painter.drawLine(0,100,300,100)
+        painter.drawLine(0,200,300,200)
+        painter.drawLine(100,0,100,300)
+        painter.drawLine(200,0,200,300)
+
+        for y in range(3):
+            for x in range(3):
+                if self.board[y][x] == self.O:
+                    painter.setPen(Qt.red)
+                    painter.drawEllipse(QPointF(50+x*100, 50+y*100), 30, 30)
+                elif self.board[y][x] == self.X:
+                    painter.setPen(Qt.blue)
+                    painter.drawLine(20+x*100, 20+y*100, 80+x*100, 80+y*100)
+                    painter.drawLine(20+x*100, 80+y*100, 80+x*100, 20+y*100)
+
+    def boundingRect(self):
+        return QRectF(0,0,300,300)
+
+    # 滑鼠點按事件
+    def mousePressEvent(self, event):
+        pos = event.pos()
+        self.select(int(pos.x()/100), int(pos.y()/100))
+        self.update()
+        super(TicTacToe, self).mousePressEvent(event)
+
+# 以 QGraphicsView 作為視窗
+class MainWindow(QGraphicsView):
+    def __init__(self):
+        super().__init__()
+        # 場景
+        scene = QGraphicsScene(self)
+        self.tic_tac_toe = TicTacToe()
+        # 在場景中加入 TicTacToe() 的案例物件
+        scene.addItem(self.tic_tac_toe)
+        scene.setSceneRect(0, 0, 300, 300)
+        # 在視窗中 setScene
+        self.setScene(scene)
+        # 設定 CacheMode
+        self.setCacheMode(QGraphicsView.CacheBackground)
+        self.setWindowTitle("Tic Tac Toe")
+
+    def keyPressEvent(self, event):
+        key = event.key()
+        # 若按下 R 鍵, 則執行 reset 方法
+        if key == Qt.Key_R:
+            self.tic_tac_toe.reset()
+        # 執行 MainWindow 中的 keyPressEvent
+        super(MainWindow, self).keyPressEvent(event)
+
+if __name__ == '__main__':
+    import sys
+    app = QApplication(sys.argv)
+    mainWindow = MainWindow()
+
+    mainWindow.show()
+    sys.exit(app.exec())</pre>
+<p>納入 matplotlib 動畫 (<a href="https://github.com/mmisono/pyqt5-example/blob/master/plot.py">來源</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
+
+import random
+import numpy as np
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+
+from PyQt5.QtCore import (QLineF, QPointF, QRectF, Qt, QTimer)
+from PyQt5.QtGui import (QBrush, QColor, QPainter)
+from PyQt5.QtWidgets import (QApplication, QGraphicsView, QGraphicsScene, QGraphicsItem,
+                             QGridLayout, QVBoxLayout, QHBoxLayout, QSizePolicy,
+                             QLabel, QLineEdit, QPushButton)
+
+# FigureCanvas inherits QWidget
+class MainWindow(FigureCanvas):
+    def __init__(self, parent=None, width=4, height=3, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        self.axes.hold(False)
+
+        super(MainWindow, self).__init__(fig)
+        self.setParent(parent)
+
+        FigureCanvas.setSizePolicy(self,
+                                   QSizePolicy.Expanding,
+                                   QSizePolicy.Expanding)
+        FigureCanvas.updateGeometry(self)
+
+        timer = QTimer(self)
+        timer.timeout.connect(self.update_figure)
+        timer.start(50)
+
+        self.x  = np.arange(0, 4*np.pi, 0.1)
+        self.y  = np.sin(self.x)
+
+        self.setWindowTitle("Sin Curve")
+
+    def update_figure(self):
+        self.axes.plot(self.x, self.y)
+        self.y = np.roll(self.y,-1)
+        self.draw()
+
+if __name__ == '__main__':
+    import sys
+    app = QApplication(sys.argv)
+    mainWindow = MainWindow()
+
+    mainWindow.show()
+    sys.exit(app.exec())</pre>
+<p>表單 Factorial (<a href="https://github.com/mmisono/pyqt5-example/blob/master/factorial.py">來源</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
+
+from PyQt5.QtWidgets import (QApplication, QWidget,
+                             QGridLayout, QVBoxLayout, QHBoxLayout,
+                             QLabel, QLineEdit, QPushButton)
+
+def factorial(n):
+    if n &lt; 0:
+        return -1
+    elif n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+class MainWindow(QWidget):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+
+        self.inputLine = QLineEdit()
+        self.outputLine = QLineEdit()
+        self.outputLine.setReadOnly(True)
+
+        self.calcButton = QPushButton("&amp;Calc")
+        self.calcButton.clicked.connect(self.calc)
+
+        lineLayout = QGridLayout()
+        lineLayout.addWidget(QLabel("num"), 0, 0)
+        lineLayout.addWidget(self.inputLine, 0, 1)
+        lineLayout.addWidget(QLabel("result"), 1, 0)
+        lineLayout.addWidget(self.outputLine, 1, 1)
+
+        buttonLayout = QVBoxLayout()
+        buttonLayout.addWidget(self.calcButton)
+
+        mainLayout = QHBoxLayout()
+        mainLayout.addLayout(lineLayout)
+        mainLayout.addLayout(buttonLayout)
+
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Factorial")
+
+    def calc(self):
+        n = int(self.inputLine.text())
+        r = factorial(n)
+        self.outputLine.setText(str(r))
+
+if __name__ == '__main__':
+    import sys
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+
+    main_window.show()
+    sys.exit(app.exec())</pre>
+<p>使用 QGraphicsView 與 QWidget (<a href="https://github.com/mmisono/pyqt5-example/blob/master/cellular_automaton.py">來源</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
+
+import random
+
+from PyQt5.QtCore import (QLineF, QPointF, QRectF, Qt, QTimer)
+from PyQt5.QtGui import (QBrush, QColor, QPainter, QIntValidator)
+from PyQt5.QtWidgets import (QApplication, QWidget, QGraphicsView, QGraphicsScene, QGraphicsItem,
+                             QGridLayout, QVBoxLayout, QHBoxLayout,
+                             QLabel, QLineEdit, QPushButton)
+
+class CelllarAutomaton(QGraphicsItem):
+    def __init__(self, width=500, height=500, size=5):
+        super(CelllarAutomaton, self).__init__()
+        self.width = width
+        self.height = height
+        self.size = size
+        self.NH = self.height//size
+        self.NW = self.width//size
+        self.board = []
+        for y in range(self.NH):
+            self.board.append([0] * self.NW)
+        self.board[0][self.NW//2] = 1
+        self.pos = 0
+
+    def reset(self):
+        for y in range(self.NH):
+            for x in range(self.NW):
+                self.board[y][x] = 0
+        self.board[0][self.NW//2] = 1
+        self.pos = 0
+        self.update()
+
+    def randomInit(self):
+        for y in range(self.NH):
+            for x in range(self.NW):
+                self.board[y][x] = 0
+        for x in range(self.NW):
+            self.board[0][x] = int(random.random() &lt; 0.2)
+        self.pos = 0
+        self.update()
+
+    def paint(self, painter, option, widget):
+        painter.setPen(QColor(220,220,220))
+        for y in range(self.NH):
+            painter.drawLine(0, y*self.size, self.width, y*self.size)
+        for x in range(self.NW):
+            painter.drawLine(x*self.size, 0, x*self.size, self.height)
+
+        painter.setBrush(Qt.black)
+        for y in range(self.NH):
+            for x in range(self.NW):
+                if self.board[y][x] == 1:
+                    painter.drawRect(self.size*x, self.size*y, self.size, self.size)
+
+    def do_prev(self):
+        if self.pos == 0:
+            return
+        for x in range(self.NW):
+            self.board[self.pos][x] = 0
+        self.pos -= 1
+        self.update()
+
+    def do_next(self, n):
+        if self.pos+1 &gt;= self.NH:
+            return False
+        p = []
+        for i in range(8):
+            p.append(n &amp; 0b1) 
+            n &gt;&gt;= 1
+
+        self.board[self.pos+1][0] = p[(self.board[self.pos][0]&lt;&lt;1) + self.board[self.pos][1]]
+        self.board[self.pos+1][self.NW-1] = p[(self.board[self.pos][self.NW-2]&lt;&lt;1) + self.board[self.pos][self.NW-1]]
+        for x in range(1,self.NW-1):
+            self.board[self.pos+1][x] = p[(self.board[self.pos][x-1]&lt;&lt;2)
+                                            + (self.board[self.pos][x]&lt;&lt;1)
+                                            + (self.board[self.pos][x+1])]
+        self.pos += 1
+        self.update()
+        return True
+
+    def boundingRect(self):
+        return QRectF(0,0,self.width,self.height)
+
+class MainWindow(QWidget):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+
+        self.graphicsView = QGraphicsView()
+        scene = QGraphicsScene(self.graphicsView)
+        scene.setSceneRect(0, 0, 400, 400)
+        self.graphicsView.setScene(scene)
+        self.celluarAutomaton = CelllarAutomaton(400,400)
+        scene.addItem(self.celluarAutomaton)
+
+        validator = QIntValidator(0,1)
+        ruleLayout = QGridLayout()
+        ruleLayout.setAlignment(Qt.AlignTop)
+        self.ruleEdits = []
+        for i in range(7,-1,-1):
+            ruleEdit = QLineEdit()
+            ruleEdit.setValidator(validator)
+            ruleEdit.setText("0")
+            ruleEdit.setFixedWidth(30)
+            ruleEdit.textEdited.connect(self.update_rule)
+            ruleLayout.addWidget(QLabel("{0:03b}".format(i)), 0, 7-i)
+            ruleLayout.addWidget(ruleEdit, 1,7-i)
+            self.ruleEdits.append(ruleEdit)
+
+        validator2 = QIntValidator(0,255)
+        self.rule10Edit = QLineEdit()
+        self.rule10Edit.setValidator(validator2)
+        self.rule10Edit.textEdited.connect(self.update_rule10)
+        rule10Layout = QHBoxLayout()
+        rule10Layout.addWidget(QLabel("Rule"))
+        rule10Layout.addWidget(self.rule10Edit)
+
+        self.resetButton = QPushButton("&amp;Reset")
+        self.resetButton.clicked.connect(self.reset)
+        self.randomInitButton = QPushButton("&amp;Random init")
+        self.randomInitButton.clicked.connect(self.randomInit)
+        self.nextButton = QPushButton("&amp;Next")
+        self.nextButton.clicked.connect(self.do_next)
+        self.prevButton = QPushButton("&amp;Prev")
+        self.prevButton.clicked.connect(self.do_prev)
+        self.autoButton = QPushButton("&amp;Auto")
+        self.autoButton.clicked.connect(self.auto)
+        self.stopButton = QPushButton("&amp;Stop")
+        self.stopButton.clicked.connect(self.stop)
+        buttonLayout = QVBoxLayout()
+        buttonLayout.addWidget(self.resetButton)
+        buttonLayout.addWidget(self.randomInitButton)
+        buttonLayout.addWidget(self.nextButton)
+        buttonLayout.addWidget(self.prevButton)
+        buttonLayout.addWidget(self.autoButton)
+        buttonLayout.addWidget(self.stopButton)
+
+        propertyLayout = QVBoxLayout()
+        propertyLayout.setAlignment(Qt.AlignTop)
+        propertyLayout.addLayout(ruleLayout)
+        propertyLayout.addLayout(rule10Layout)
+        propertyLayout.addLayout(buttonLayout)
+
+        mainLayout = QHBoxLayout()
+        mainLayout.setAlignment(Qt.AlignTop)
+        mainLayout.addWidget(self.graphicsView)
+        mainLayout.addLayout(propertyLayout)
+
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Cellular Automaton")
+        self.updating_rule = False
+        self.rule10Edit.setText("90")
+        self.update_rule10()
+        self.timer = None
+
+    def update_rule(self):
+        if self.updating_rule: return
+        rule = 0
+        for i in range(8):
+            n = self.ruleEdits[i].text()
+            if n == "": return
+            rule = (rule &lt;&lt; 1) + int(n)
+        self.updating_rule = True
+        self.rule10Edit.setText(str(rule))
+        self.updating_rule = False
+
+    def update_rule10(self):
+        n = self.rule10Edit.text()
+        if n == "": return
+        rule = int(n)
+        self.updating_rule = True
+        for i in range(7,-1,-1):
+            self.ruleEdits[i].setText(str(rule &amp; 0b1))
+            rule &gt;&gt;= 1
+        self.updating_rule = False
+
+    def do_next(self):
+        n = self.rule10Edit.text()
+        return self.celluarAutomaton.do_next(int(n))
+
+    def do_prev(self):
+        self.celluarAutomaton.do_prev()
+
+    def reset(self):
+        self.celluarAutomaton.reset()
+
+    def randomInit(self):
+        self.celluarAutomaton.randomInit()
+
+    def auto(self):
+        self.timer = QTimer()
+        self.timer.setInterval(100)
+        self.timer.timeout.connect(self.timeout)
+        self.timer.start()
+
+    def timeout(self):
+        r = self.do_next()
+        if not r:
+            self.stop()
+
+    def stop(self):
+        if self.timer:
+            self.timer.stop()
+            self.timer = None
+
+    #def keyPressEvent(self, event):
+    #    key = event.key()
+    #    super(MainWindow, self).keyPressEvent(event)
+
+if __name__ == '__main__':
+    import sys
+    app = QApplication(sys.argv)
+    mainWindow = MainWindow()
+
+    mainWindow.show()
     sys.exit(app.exec())</pre>
 <p>使用 Eric6 開發 PyQt5 GUI 程式:</p>
 <p>參考流程:&nbsp;<a href="http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO">http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO</a>&nbsp;</p>
