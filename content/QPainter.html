@@ -72,7 +72,7 @@ $(function(){
 <p>QWidget 用來繪製典型的 GUI 方形元件, 例如: 按鈕, 查核表單, 下拉式表單等. 因為 QWidget 部件為 QObject 衍生物件, 因此可以直接使用 signals/slots 進行配置.</p>
 <p>QGraphicsScene 則為繪圖場景, 提供場景的上下左右捲動, 縮放與旋轉功能. 而視圖為獨立物件, 因為 QGraphicsItem 並非從 QObject 所衍生, 因此無法直接透過 signals/slots 進行配置, 而必須透過 QGraphicsObject 間接配置.</p>
 <p>QGraphicsScene 繪圖除了使用內建的 lines, rectangles 等外, 若需要執行客製化繪圖, 可利用 QGraphicsItem 物件中的 paint 方法, 以 QPainter 繪圖.</p>
-<p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p>
+<p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 採用 Javascript 技術, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p>
 <h4><a href="http://doc.qt.io/qt-5/qwidget.html#details">QWidget</a></h4>
 <p>Since QWidget is a subclass of QPaintDevice, subclasses can be used to display custom content that is composed using a series of painting operations with an instance of the QPainter class. This approach contrasts with the canvas-style approach used by the Graphics View Framework where items are added to a scene by the application and are rendered by the framework itself.</p>
 <p>Each widget performs all painting operations from within its paintEvent() function. This is called whenever the widget needs to be redrawn, either as a result of some external change or when requested by the application.</p>

@@ -1,7 +1,7 @@
 <h1>簡介</h1>
 <p><span style="background-color: #ffffcc;">請注意: 在 2018.09 正式開課前, 本網站資料內容均尚未定案, 僅為參考草案.</span></p>
 <h4>以 Python 與 PyQt5 為主</h4>
-<p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 PyQt5 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉些許電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p>
+<p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 PyQt5 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉部分電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p>
 <h4>結合 C/C++ 提升運算速度</h4>
 <p>計算機程式課程以 Python 程式語言導入的目的, 在於能讓初學者快速建立用於電腦輔助機械設計流程相關的程式, 而當 Python 程式需要與 C/C++ 程式庫結合時, 則建議利用 <a href="http://www.swig.org/">SWIG</a>&nbsp;(<a href="/downloads/swig_cpp_python.pdf">ref.pdf</a>) 將現成 C/C++ 程式編寫為能讓 Python 直接呼叫執行的動態連結庫.</p>
 <h4>學習用於 V-rep 的 Lua</h4>
@@ -2330,15 +2330,25 @@ print(result)</pre>
 <p>有關 Tiny C Compiler 資料位於&nbsp;<a href="https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc">https://github.com/mdecourse/cp2018/tree/gh-pages/tinyc</a>&nbsp;</p>
 <p></p>
 <h2>Qt</h2>
-<p><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a> 是一個跨平台的 C++ 程式開發框架.&nbsp;</p>
+<p><a href="https://en.wikipedia.org/wiki/Qt_(software)">Qt</a> 是一個跨平台的 C++ 程式開發框架.&nbsp; Qt5 提供 <a href="http://doc.qt.io/qtcreator/index.html">Qt Creator IDE</a> (Integrated Development Environment), <a href="http://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> GUI (Graphics User Interface) builder,&nbsp; <a href="http://doc.qt.io/qt-5/qmake-manual.html">qmake</a> build tool, <a href="http://doc.qt.io/qt-5/qtlinguist-index.html">Qt Linguist</a> tool, <a href="http://doc.qt.io/qt-5/qtassistant-index.html">Qt Document Assistant</a> 等開發工具.</p>
 <p><a href="http://doc.qt.io/qt-5/androidgs.html">Qt for Android</a></p>
 <p>目前只能使用 Jdk 8:&nbsp;<a href="https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed">https://stackoverflow.com/questions/48189272/qt-creator-android-error-platform-sdk-installed</a>&nbsp;</p>
+<h4>Qt Creator</h4>
+<p>Qt Creator is an integrated development environment (IDE) that provides you with tools to design and develop applications with the Qt application framework. Qt is designed for developing applications and user interfaces once and deploying them to several desktop, embedded, and mobile operating systems, such as Android and iOS. It is available for Linux, macOS and Windows operating systems. Qt Creator provides you with tools for accomplishing your tasks throughout the whole application development life-cycle, from creating a project to deploying the application to the target platforms.</p>
+<h4>Qt Designer</h4>
+<p>Qt Designer provides four editing modes: Widget Editing Mode, Signals and Slots Editing Mode, Buddy Editing Mode and Tab Order Editing Mode. When working with Qt Designer, you will always be in one of these four modes. To switch between modes, simply select it from the Edit menu or the toolbar.</p>
+<h4>qmake</h4>
+<p>The qmake tool helps simplify the build process for development projects across different platforms. It automates the generation of Makefiles so that only a few lines of information are needed to create each Makefile. You can use qmake for any software project, whether it is written with Qt or not.</p>
+<p>qmake generates a Makefile based on the information in a project file. Project files are created by the developer, and are usually simple, but more sophisticated project files can be created for complex projects.</p>
+<p>qmake contains additional features to support development with Qt, automatically including build rules for<span>&nbsp;</span><a href="http://doc.qt.io/qt-5/moc.html">moc</a><span>&nbsp;</span>and<span>&nbsp;</span><a href="http://doc.qt.io/qt-5/uic.html">uic</a>.</p>
+<p>qmake can also generate projects for Microsoft Visual studio without requiring the developer to change the project file.</p>
 <p>參考資料:</p>
+<p><a href="http://doc.qt.io/qt-5/topics-app-development.html">http://doc.qt.io/qt-5/topics-app-development.html</a>&nbsp;</p>
 <p><a href="http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/">http://download.qt.io/development_releases/qtcreator/4.7/4.7.0-rc1/</a>&nbsp;</p>
 <p><a href="https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php">https://www.bogotobogo.com/Qt/Qt5_TutorialHelloWorld.php</a>&nbsp;</p>
 <p><a href="https://wiki.qt.io/MSYS2">https://wiki.qt.io/MSYS2</a>&nbsp;</p>
 <p>&nbsp;編程指南:&nbsp;<a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a>&nbsp;</p>
-<p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp;</p><h2>Eirc IDE</h2>
+<p><a href="https://qmlbook.github.io/">https://qmlbook.github.io/</a>&nbsp; (QML 使用 Javascript 技術)</p><h2>Eirc IDE</h2>
 <p>目前 Eric6 18.07 只能配合使用 Python 3.6.5, 一方面 Python 3.7.0 尚無法以 pip install pyqt5-tools 安裝, 且 Python3.7.0 在 Eric6 18.07 尚存 bugs.</p>
 <p>這與 Qt 目前還無法使用 Jdk 9 與 10 的情況相同, 許多工具仍然尚未配合最新版本的 Python 與 Java 解譯或編譯工具進行更改.</p>
 <h2>CMSimfly</h2>
@@ -5382,206 +5392,7 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/jdzFJs-dSJg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></p>
 <p>參考資料:</p>
 <p><a href="https://www.e-education.psu.edu/geog489/l2.html">https://www.e-education.psu.edu/geog489/l2.html</a>&nbsp;</p>
-<h3>PyQt5 實際操作</h3>
-<p><a href="/downloads/Algorithmic%20Problem Solving with Python.pdf">Algorithmic Problem Solving with Python.pdf</a></p>
-<p><a href="https://pythonprogramming.net/basic-gui-pyqt-tutorial/">https://pythonprogramming.net/basic-gui-pyqt-tutorial/</a>&nbsp; (for PyQt4)</p>
-<p><a href="https://github.com/kenwaldek/pythonprogramming">https://github.com/kenwaldek/pythonprogramming</a>&nbsp; (PyQt5 examples)</p>
-<p><a href="https://blog.csdn.net/c3060911030/article/category/6247011/1">https://blog.csdn.net/c3060911030/article/category/6247011/1</a>&nbsp;(PyQt5 教程)</p>
-<p><a href="/downloads/pyqt5tutorial_201603.pdf">pyqt5tutorial_201603.pdf</a></p>
-<p><a href="http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html">PyQt5 class reference</a></p>
-<p>以 QWidget 建立視窗:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
-from PyQt5.QtWidgets import QApplication, QWidget
-
-# 利用 QApplication 類別建立案例
-app = QApplication(sys.argv)
-
-# 無 parent 的部件為視窗
-window = QWidget()
-# 設定視窗屬性
-window.setGeometry(50, 50, 500, 300)
-window.setWindowTitle('第一個 PyQt5 程式')
-
-# 顯示視窗
-window.show()
-# 執行應用程式, 若按右上方 close 按鈕可以 exit
-sys.exit(app.exec())</pre>
-<p>改寫為自建視窗類別物件:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
-from PyQt5.QtWidgets import QApplication, QWidget
-
-class window(QWidget):
-
-    def __init__(self):
-        # 啟始時先執行父物件 (即 QWidget) 的建構子
-        super().__init__()
-        self.setGeometry(50, 50, 500, 300)
-        self.setWindowTitle('第一個 PyQt5 程式')
-        # 案例建立時直接顯示, 也可以建立案例後再顯示
-        self.show()
-
-app = QApplication(sys.argv)
-Gui = window()
-sys.exit(app.exec())</pre>
-<p>以 QMainWindow&nbsp; 類別建立視窗:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
-from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
-
-
-class window(QMainWindow):
-
-    def __init__(self):
-        super().__init__()
-        self.setGeometry(50, 50, 500, 300)
-        self.setWindowTitle('第一個 PyQt5 程式')
-        self.addExitButton()
-
-    def addExitButton(self):
-        btn = QPushButton('退出', self)
-        btn.clicked.connect(QCoreApplication.instance().quit)
-        btn.resize(100, 100)
-        btn.move(100, 100)
-        # 顯示 window
-        self.show()
-
-def run():
-    app = QApplication(sys.argv)
-    Gui = window()
-    sys.exit(app.exec())
-
-run()</pre>
-<p>視窗關閉時列印訊息:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
-from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
-
-
-class window(QMainWindow):
-
-    def __init__(self):
-        super().__init__()
-        self.setGeometry(50, 50, 500, 300)
-        self.setWindowTitle('第一個 PyQt5 程式')
-        self.addQuitButton()
-
-    def addQuitButton(self):
-        btn = QPushButton('退出', self)
-        btn.clicked.connect(self.close_application)
-
-        btn.resize(btn.sizeHint())  #set to acceptable size automatic
-        btn.move(0, 0)
-        self.show()
-
-    def close_application(self):
-        print('關閉應用程式')
-        sys.exit()
-
-def run():
-    app = QApplication(sys.argv)
-    Gui = window()
-    sys.exit(app.exec())
-
-run()</pre>
-<p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3
-
-import sys
-from PyQt5.QtCore import QDateTime, Qt
-# stage 1
-#from PyQt5.QtWidgets import QApplication, QWidget
-# stage 2
-#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
-# stage 3
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenu
-from PyQt5.QtGui import QIcon
-
-now = QDateTime.currentDateTime()
-
-print("Today:", now.toString(Qt.ISODate))
-print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))
-print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))
-
-print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))
-print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))
-print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))
-
-class Example(QMainWindow):
-    
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-        
-        
-    def initUI(self):               
-        '''
-        # stage 1
-        self.statusBar().showMessage('Ready')
-        
-        self.setGeometry(300, 300, 250, 150)
-        self.setWindowTitle('Statusbar')    
-        self.show()
-        '''
-        
-        '''
-        # stage 2
-        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)        
-        exitAct.setShortcut('Ctrl+Q')
-        exitAct.setStatusTip('Exit application')
-        exitAct.triggered.connect(qApp.quit)
-
-        self.statusBar()
-
-        menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&amp;File')
-        fileMenu.addAction(exitAct)
-        
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Simple menu')    
-        self.show()
-        '''
-        
-        menubar = self.menuBar()
-        fileMenu = menubar.addMenu('File')
-        
-        impMenu = QMenu('Import', self)
-        impAct = QAction('Import mail', self) 
-        impMenu.addAction(impAct)
-        
-        # 加入 QAction
-        newAct = QAction('New', self)        
-        fileMenu.addAction(newAct)
-        
-        newAct1 = QAction('New1', self)        
-        fileMenu.addAction(newAct1)
-        
-        # 加入 QMenu
-        fileMenu.addMenu(impMenu)
-        
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Submenu')    
-        self.show()
-
-
-if __name__ == '__main__':
-    '''
-    app = QApplication(sys.argv)
-
-    w = QWidget()
-    w.resize(250, 150)
-    w.move(300, 300)
-    w.setWindowTitle('Simple')
-    w.show()
-    '''
-    app = QApplication(sys.argv)
-    ex = Example()
-    
-    sys.exit(app.exec())<br><br><br>
-</pre>
-<p>有關&nbsp; if __name__ == '__main__':</p>
-<p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p>
-<p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p>
-<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
+<h3>PyQt5 實際操作</h3><p><a href="/downloads/Algorithmic%20Problem Solving with Python.pdf">Algorithmic Problem Solving with Python.pdf</a></p><p><a href="https://pythonprogramming.net/basic-gui-pyqt-tutorial/">https://pythonprogramming.net/basic-gui-pyqt-tutorial/</a>&nbsp; (for PyQt4)</p><p><a href="https://github.com/kenwaldek/pythonprogramming">https://github.com/kenwaldek/pythonprogramming</a>&nbsp; (PyQt5 examples)</p><p><a href="https://blog.csdn.net/c3060911030/article/category/6247011/1">https://blog.csdn.net/c3060911030/article/category/6247011/1</a>&nbsp;(PyQt5 教程)</p><p><a href="/downloads/pyqt5tutorial_201603.pdf">pyqt5tutorial_201603.pdf</a> (PyQt5 Tutorial Documentation)</p><p><a href="https://pythonspot.com/pyqt5/">https://pythonspot.com/pyqt5/</a>&nbsp; (Collection of PyQt5 articles)</p><p><a href="/downloads/pyqt5_intro1.pdf">pyqt5_intro1.pdf</a> (<a href="/downloads/pyqt5_intro1_french.pdf">法文原稿</a>)</p><p><a href="/downloads/pyqt5_intro2.pdf">pyqt5_intro2.pdf</a> (<a href="/downloads/pyqt5_intro2_french.pdf">法文原稿</a>)</p><p><a href="http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html">PyQt5 class reference</a></p><p>以 QWidget 建立視窗:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QApplication, QWidget# 利用 QApplication 類別建立案例app = QApplication(sys.argv)# 無 parent 的部件為視窗window = QWidget()# 設定視窗屬性window.setGeometry(50, 50, 500, 300)window.setWindowTitle('第一個 PyQt5 程式')# 顯示視窗window.show()# 執行應用程式, 若按右上方 close 按鈕可以 exitsys.exit(app.exec())</pre><p>改寫為自建視窗類別物件:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtWidgets import QApplication, QWidgetclass window(QWidget):    def __init__(self):        # 啟始時先執行父物件 (即 QWidget) 的建構子        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        # 案例建立時直接顯示, 也可以建立案例後再顯示        self.show()app = QApplication(sys.argv)Gui = window()sys.exit(app.exec())</pre><p>以 QMainWindow&nbsp; 類別建立視窗:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtCore import QCoreApplicationfrom PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButtonclass window(QMainWindow):    def __init__(self):        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        self.addExitButton()    def addExitButton(self):        btn = QPushButton('退出', self)        btn.clicked.connect(QCoreApplication.instance().quit)        btn.resize(100, 100)        btn.move(100, 100)        # 顯示 window        self.show()def run():    app = QApplication(sys.argv)    Gui = window()    sys.exit(app.exec())run()</pre><p>視窗關閉時列印訊息:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sysfrom PyQt5.QtCore import QCoreApplicationfrom PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButtonclass window(QMainWindow):    def __init__(self):        super().__init__()        self.setGeometry(50, 50, 500, 300)        self.setWindowTitle('第一個 PyQt5 程式')        self.addQuitButton()    def addQuitButton(self):        btn = QPushButton('退出', self)        btn.clicked.connect(self.close_application)        btn.resize(btn.sizeHint())  #set to acceptable size automatic        btn.move(0, 0)        self.show()    def close_application(self):        print('關閉應用程式')        sys.exit()def run():    app = QApplication(sys.argv)    Gui = window()    sys.exit(app.exec())run()</pre><p><a href="http://zetcode.com/gui/pyqt5/">http://zetcode.com/gui/pyqt5/</a>&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3import sysfrom PyQt5.QtCore import QDateTime, Qt# stage 1#from PyQt5.QtWidgets import QApplication, QWidget# stage 2#from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication# stage 3from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QMenufrom PyQt5.QtGui import QIconnow = QDateTime.currentDateTime()print("Today:", now.toString(Qt.ISODate))print("Adding 12 days: {0}".format(now.addDays(12).toString(Qt.ISODate)))print("Subtracting 22 days: {0}".format(now.addDays(-22).toString(Qt.ISODate)))print("Adding 50 seconds: {0}".format(now.addSecs(50).toString(Qt.ISODate)))print("Adding 3 months: {0}".format(now.addMonths(3).toString(Qt.ISODate)))print("Adding 12 years: {0}".format(now.addYears(12).toString(Qt.ISODate)))class Example(QMainWindow):        def __init__(self):        super().__init__()        self.initUI()                    def initUI(self):                       '''        # stage 1        self.statusBar().showMessage('Ready')                self.setGeometry(300, 300, 250, 150)        self.setWindowTitle('Statusbar')            self.show()        '''                '''        # stage 2        exitAct = QAction(QIcon('exit.png'), '&amp;Exit', self)                exitAct.setShortcut('Ctrl+Q')        exitAct.setStatusTip('Exit application')        exitAct.triggered.connect(qApp.quit)        self.statusBar()        menubar = self.menuBar()        fileMenu = menubar.addMenu('&amp;File')        fileMenu.addAction(exitAct)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Simple menu')            self.show()        '''                menubar = self.menuBar()        fileMenu = menubar.addMenu('File')                impMenu = QMenu('Import', self)        impAct = QAction('Import mail', self)         impMenu.addAction(impAct)                # 加入 QAction        newAct = QAction('New', self)                fileMenu.addAction(newAct)                newAct1 = QAction('New1', self)                fileMenu.addAction(newAct1)                # 加入 QMenu        fileMenu.addMenu(impMenu)                self.setGeometry(300, 300, 300, 200)        self.setWindowTitle('Submenu')            self.show()if __name__ == '__main__':    '''    app = QApplication(sys.argv)    w = QWidget()    w.resize(250, 150)    w.move(300, 300)    w.setWindowTitle('Simple')    w.show()    '''    app = QApplication(sys.argv)    ex = Example()        sys.exit(app.exec())<br><br><br></pre><p>有關&nbsp; if __name__ == '__main__':</p><p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p><p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p><p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
 <p>oauth2 模組:</p>
 <p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
 <p>or</p>
@@ -7444,7 +7255,7 @@ if __name__ == "__main__":
 <p>QWidget 用來繪製典型的 GUI 方形元件, 例如: 按鈕, 查核表單, 下拉式表單等. 因為 QWidget 部件為 QObject 衍生物件, 因此可以直接使用 signals/slots 進行配置.</p>
 <p>QGraphicsScene 則為繪圖場景, 提供場景的上下左右捲動, 縮放與旋轉功能. 而視圖為獨立物件, 因為 QGraphicsItem 並非從 QObject 所衍生, 因此無法直接透過 signals/slots 進行配置, 而必須透過 QGraphicsObject 間接配置.</p>
 <p>QGraphicsScene 繪圖除了使用內建的 lines, rectangles 等外, 若需要執行客製化繪圖, 可利用 QGraphicsItem 物件中的 paint 方法, 以 QPainter 繪圖.</p>
-<p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p>
+<p>QtQuick 則是最新加入的繪圖 API, 自 Qt5 版本才納入, 採用 Javascript 技術, 繪圖效率比前兩項更高.採用 QML 而非 C++, 因此可以簡單快速完成所需繪圖內容. QtQuick 除了使用 QML 場景繪圖外, 也可以採 QPainter 繪圖.</p>
 <h4><a href="http://doc.qt.io/qt-5/qwidget.html#details">QWidget</a></h4>
 <p>Since QWidget is a subclass of QPaintDevice, subclasses can be used to display custom content that is composed using a series of painting operations with an instance of the QPainter class. This approach contrasts with the canvas-style approach used by the Graphics View Framework where items are added to a scene by the application and are rendered by the framework itself.</p>
 <p>Each widget performs all painting operations from within its paintEvent() function. This is called whenever the widget needs to be redrawn, either as a result of some external change or when requested by the application.</p>
@@ -7944,7 +7755,124 @@ class Screenshot(QWebEngineView):
         self._loaded = True</pre>
 <p>Reference:</p>
 <p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a>&nbsp;</p>
-<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>靜態繪圖</h3><h4>Canvas based 繪圖</h4><p>參考:&nbsp;<a href="http://doc.qt.io/qt-5/graphicsview.html">http://doc.qt.io/qt-5/graphicsview.html</a>&nbsp;</p><p>QtWidgets.QGraphicsScene (場景)</p><p>QtWidgets.QGraphicsView (顯示區)</p><p>QtWidgets.QGraphicsItem (場景中的元件) - <a href="http://doc.qt.io/qt-5/qgraphicsitem.html#details">客製化</a>需要建立 boundingRect() 與 paint()</p><p>Qt 內建採&nbsp;<span><a href="https://en.wikipedia.org/wiki/Binary_space_partitioning">Binary Space Partitioning Tree</a>&nbsp; 方式管理場景中的元件, 可以即時顯示非常多的場景元件.</span></p><p><span>同一場景可以透過多個不同的 View 加以顯示, 而座標系統則分為: 以 Item 中心為原點的 Item 座標系統、Scene 座標系統, 以及 View 座標系統等三種.&nbsp; View 座標系統可以透過 mapToScene() 方法轉為 Scene 座標系統.</span></p><p>繪圖片段:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">super(Dialog, self).__init__(parent)self.setupUi(self)scene = QtWidgets.QGraphicsScene()self.graphicsView.setScene(scene)pen = QtGui.QPen(QtCore.Qt.blue)side = 20for i in range(16):    for j in range(16):        r = QtCore.QRectF(QtCore.QPointF(i*side, j*side), QtCore.QSizeF(side, side))        scene.addRect(r, pen)</pre><h4>動態繪圖</h4><p><a href="http://doc.qt.io/qt-5/animation-overview.html">http://doc.qt.io/qt-5/animation-overview.html</a>&nbsp;</p><p>ball.png</p><p><img src="/images/ball.png" width="20" height="20" alt=""></p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3# -*- coding: utf-8 -*-'''ZetCode Advanced PyQt5 tutorialThis programs animates a ball object along a curve.Author: Jan BodnarWebsite: zetcode.comLast edited: August 2017'''from PyQt5.QtWidgets import QApplication, QWidget, QLabelfrom PyQt5.QtGui import QPainter, QPixmap, QPainterPathfrom PyQt5.QtCore import QObject, QPointF, QPropertyAnimation, pyqtPropertyimport sys                              class Ball(QLabel):        def __init__(self, parent):        super().__init__(parent)                pix = QPixmap("ball.png")        self.h = pix.height()        self.w = pix.width()                self.setPixmap(pix)            def _set_pos(self, pos):                self.move(pos.x() - self.w/2, pos.y() - self.h/2)    pos = pyqtProperty(QPointF, fset=_set_pos)              class Example(QWidget):        def __init__(self):        super().__init__()        self.initView()        self.initAnimation()                    def initView(self):                    self.path = QPainterPath()        self.path.moveTo(30, 30)        self.path.cubicTo(30, 30, 200, 350, 350, 30)                        self.ball = Ball(self)        self.ball.pos = QPointF(30, 30)                self.setWindowTitle("Animation along curve")        self.setGeometry(300, 300, 400, 300)        self.show()                    def paintEvent(self, e):                    qp = QPainter()        qp.begin(self)        qp.setRenderHint(QPainter.Antialiasing)           qp.drawPath(self.path)        qp.end()                         def initAnimation(self):                self.anim = QPropertyAnimation(self.ball, b'pos')        self.anim.setDuration(7000)                self.anim.setStartValue(QPointF(30, 30))                vals = [p/100 for p in range(0, 101)]        for i in vals:            self.anim.setKeyValueAt(i, self.path.pointAtPercent(i))                          self.anim.setEndValue(QPointF(350, 30))                self.anim.start()                          if __name__ == '__main__':        app = QApplication(sys.argv)    ex = Example()    sys.exit(app.exec())</pre><p></p><h3>Moveblocks</h3>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a>&nbsp;</p><h3>靜態繪圖</h3>
+<h4>Canvas based 繪圖</h4>
+<p>參考:&nbsp;<a href="http://doc.qt.io/qt-5/graphicsview.html">http://doc.qt.io/qt-5/graphicsview.html</a>&nbsp;</p>
+<p>QtWidgets.QGraphicsScene (場景)</p>
+<p>QtWidgets.QGraphicsView (顯示區)</p>
+<p>QtWidgets.QGraphicsItem (場景中的元件) - <a href="http://doc.qt.io/qt-5/qgraphicsitem.html#details">客製化</a>需要建立 boundingRect() 與 paint()</p>
+<p>Qt 內建採&nbsp;<span><a href="https://en.wikipedia.org/wiki/Binary_space_partitioning">Binary Space Partitioning Tree</a>&nbsp; 方式管理場景中的元件, 可以即時顯示非常多的場景元件.</span></p>
+<p><span>同一場景可以透過多個不同的 View 加以顯示, 而座標系統則分為: 以 Item 中心為原點的 Item 座標系統、Scene 座標系統, 以及 View 座標系統等三種.&nbsp; View 座標系統可以透過 mapToScene() 方法轉為 Scene 座標系統.</span></p>
+<p>繪圖片段:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">super(Dialog, self).__init__(parent)
+self.setupUi(self)
+scene = QtWidgets.QGraphicsScene()
+self.graphicsView.setScene(scene)
+pen = QtGui.QPen(QtCore.Qt.blue)
+
+side = 20
+
+for i in range(16):
+    for j in range(16):
+        r = QtCore.QRectF(QtCore.QPointF(i*side, j*side), QtCore.QSizeF(side, side))
+        scene.addRect(r, pen)</pre>
+<h4>動態繪圖</h4>
+<p><a href="http://doc.qt.io/qt-5/animation-overview.html">http://doc.qt.io/qt-5/animation-overview.html</a>&nbsp;</p>
+<p>ball.png</p>
+<p><img src="/images/ball.png" width="20" height="20" alt=""></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+'''
+ZetCode Advanced PyQt5 tutorial
+
+This programs animates a ball object 
+along a curve.
+
+Author: Jan Bodnar
+Website: zetcode.com
+Last edited: August 2017
+'''
+
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtGui import QPainter, QPixmap, QPainterPath
+from PyQt5.QtCore import QObject, QPointF, QPropertyAnimation, pyqtProperty
+import sys
+
+                              
+class Ball(QLabel):
+    
+    def __init__(self, parent):
+        super().__init__(parent)
+        
+        pix = QPixmap("ball.png")
+        self.h = pix.height()
+        self.w = pix.width()
+        
+        self.setPixmap(pix)
+        
+    def _set_pos(self, pos):
+        
+        self.move(pos.x() - self.w/2, pos.y() - self.h/2)
+
+    pos = pyqtProperty(QPointF, fset=_set_pos)   
+       
+    
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+
+        self.initView()
+        self.initAnimation()
+        
+        
+    def initView(self):    
+        
+        self.path = QPainterPath()
+        self.path.moveTo(30, 30)
+        self.path.cubicTo(30, 30, 200, 350, 350, 30)        
+        
+        self.ball = Ball(self)
+
+        self.ball.pos = QPointF(30, 30)
+        
+        self.setWindowTitle("Animation along curve")
+        self.setGeometry(300, 300, 400, 300)
+        self.show()
+        
+        
+    def paintEvent(self, e):    
+        
+        qp = QPainter()
+        qp.begin(self)
+        qp.setRenderHint(QPainter.Antialiasing)   
+        qp.drawPath(self.path)
+        qp.end()             
+
+        
+    def initAnimation(self):
+        
+        self.anim = QPropertyAnimation(self.ball, b'pos')
+        self.anim.setDuration(7000)
+        
+        self.anim.setStartValue(QPointF(30, 30))
+        
+        vals = [p/100 for p in range(0, 101)]
+
+        for i in vals:
+            self.anim.setKeyValueAt(i, self.path.pointAtPercent(i))  
+                
+        self.anim.setEndValue(QPointF(350, 30))        
+        self.anim.start()
+        
+                  
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())</pre>
+<p></p><h3>Moveblocks</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtCore import (QAbstractTransition, QEasingCurve, QEvent,
         QParallelAnimationGroup, QPropertyAnimation, qrand, QRect,
         QSequentialAnimationGroup, qsrand, QState, QStateMachine, Qt, QTime,
