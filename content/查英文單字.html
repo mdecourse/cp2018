@@ -258,4 +258,29 @@ for item in top:
 
 檔案.write(all_text)
 print("done")</pre>
-<br />讀寫網頁內容 << <a href='讀寫網頁內容.html'>Previous</a> <a href='docx 轉 pdf.html'>Next</a> >> docx 轉 pdf</section></div></body></html>
+<h4>英文字典檔案處理</h4>
+<p><a href="https://github.com/mdecourse/2016fallcadp/blob/gh-pages/data/WebsterUnabridgedDictionary.txt">WebsterUnabridgedDictionary.txt</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#coding: utf-8
+# 檔案內容讀取範例
+檔案 = open("WebsterUnabridgedDictionary.txt",encoding="UTF-8")
+count = 0
+所有資料 = 檔案.readlines()
+print("這個檔案共有:"+str(len(所有資料))+"行")
+
+for 行數 in range(len(所有資料)):
+    # 若該行的所有字母都是大寫, 表示為單字開頭
+    行資料 = 所有資料[行數].rstrip()
+    if(行資料.isupper()):
+        # 列出單字
+        #print(行資料.encode("UTF-8"))
+        count += 1
+    else:
+        # 列出單字的所屬解釋
+        #print("解釋", end="")
+        #print(行資料.encode("UTF-8"))
+        continue
+
+print("單字數共有:"+str(count)+"個")
+檔案.close() # 關閉檔案
+</pre>
+<p></p><br />讀寫網頁內容 << <a href='讀寫網頁內容.html'>Previous</a> <a href='docx 轉 pdf.html'>Next</a> >> docx 轉 pdf</section></div></body></html>
