@@ -103,8 +103,8 @@ $(function(){
 <!-- 啟動 Brython 時, 設定 pythonpath 為 /static/, 並將共用 .py 放入, 可以在隨後的程式中導入使用 -->
 <p><!-- 導入 brython --></p>
 <p>
-<script type="text/javascript" src="/static/brython.js"></script>
-<script type="text/javascript" src="/static/brython_stdlib.js"></script>
+<script type="text/javascript" src="./../static/ace/brython.js"></script>
+<script type="text/javascript" src="./../static/ace/brython_stdlib.js"></script>
 <script>
 window.onload=function(){
 brython({debug:1, pythonpath:['/static/']});
@@ -113,15 +113,15 @@ brython({debug:1, pythonpath:['/static/']});
 </p>
 <p><!-- 導入 FileSaver 與 filereader --></p>
 <p>
-<script type="text/javascript" src="/static/ace/FileSaver.min.js"></script>
-<script type="text/javascript" src="/static/ace/filereader.js"></script>
+<script type="text/javascript" src="./../static/ace/FileSaver.min.js"></script>
+<script type="text/javascript" src="./../static/ace/filereader.js"></script>
 </p>
 <p><!-- 導入 ace --></p>
 <p>
-<script type="text/javascript" src="/static/ace/ace.js"></script>
-<script type="text/javascript" src="/static/ace/ext-language_tools.js"></script>
-<script type="text/javascript" src="/static/ace/mode-python3.js"></script>
-<script type="text/javascript" src="/static/ace/snippets/python.js"></script>
+<script type="text/javascript" src="./../static/ace/ace.js"></script>
+<script type="text/javascript" src="./../static/ace/ext-language_tools.js"></script>
+<script type="text/javascript" src="./../static/ace/mode-python3.js"></script>
+<script type="text/javascript" src="./../static/ace/snippets/python.js"></script>
 </p>
 <p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
 <p>

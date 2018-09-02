@@ -42,8 +42,8 @@
 <v t="leo.20180701205822.1"><vh>editorhead 修改</vh></v>
 <v t="leo.20180701212101.1"><vh>有關 Cango library</vh></v>
 <v t="leo.20180726212905.1"><vh>存檔時移除所有 tag of title</vh></v>
-<v t="leo.20180728154823.1"><vh>利用 flake8 查驗格式</vh></v>
 <v t="leo.20180902120757.1"><vh>有關 Brython</vh></v>
+<v t="leo.20180728154823.1"><vh>利用 flake8 查驗格式</vh></v>
 </v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
 <v t="amd.20160717220157.1"><vh>Flask 開講</vh></v>
@@ -2261,6 +2261,8 @@ def get_page2(heading, head, edit):
     # 直接在此將 /images/ 換為 ./../images/, /downloads/ 換為 ./../downloads/, 以 content 為基準的相對目錄設定
     page = [w.replace('/images/', './../images/') for w in page]
     page = [w.replace('/downloads/', './../downloads/') for w in page]
+    # 假如有 /static/ace/ 則換為 ./../static/ace/
+    page = [w.replace('/static/ace/', './../static/ace/') for w in page]
     directory = render_menu2(head, level, page)
     if heading is None:
         heading = head[0]
@@ -2777,6 +2779,8 @@ bug 180726</t>
 但是因為引入 brython.js 的模式, 在動態系統必須以絕對目錄導入, 而在靜態系統則需以相對目錄導入,
 因此若決定要將 brython 放在各自的頁面, 則需要再行測試兩態是否可以相容
 
-目前在 Python 頁面使用 /static/brython.js 導入, 可以用於動態與靜態網頁</t>
+目前在 Python 頁面使用 /static/brython.js 導入, 近端使用時, 可以用於動態與靜態網頁
+
+但是轉換後,  靜態網頁在 Github Pages 無法正常運作, 因此 generate_pages 時必須進行轉換</t>
 </tnodes>
 </leo_file>
