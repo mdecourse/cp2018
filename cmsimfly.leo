@@ -2262,7 +2262,7 @@ def get_page2(heading, head, edit):
     page = [w.replace('/images/', './../images/') for w in page]
     page = [w.replace('/downloads/', './../downloads/') for w in page]
     # 假如有 /static/ace/ 則換為 ./../static/ace/
-    page = [w.replace('/static/ace/', './../static/ace/') for w in page]
+    page = [w.replace('/static/', './../static/') for w in page]
     directory = render_menu2(head, level, page)
     if heading is None:
         heading = head[0]
