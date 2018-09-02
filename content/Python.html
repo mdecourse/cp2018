@@ -337,7 +337,7 @@ prog2 = beditor.editor("""# 導入 math 模組後, 使用模組方法
 import math
 print(math.factorial(20))
 """, "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")
-prog2.setValue()
+#prog2.setValue()
 doc["prog2"].bind('click', prog2.prog)
 doc['prog2_run'].bind('click', prog2.run)
 doc['prog2_show_console'].bind('click', prog2.show_console)
@@ -345,4 +345,51 @@ doc['prog2_clear_console'].bind('click', prog2.clear_console)
 </script>
 </p>
 <p><!-- ***************************** prog2 end --></p>
-<p><button id="prog2">prog2</button><button id="hello2">hello2</button></p><br />C++ << <a href='C++.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
+<!-- ********************************** sum start -->
+<p>
+<script type="text/python3">
+from browser import document as doc
+import beditor
+sum = beditor.editor('''# from m sum to n
+def sumToN(n):
+    """recursion
+    https://link.springer.com/book/10.1007/978-3-642-23303-6
+    page 40
+    """
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1 
+    return sumToN(n-1) + n
+
+def sumToN2(n):
+    """In Python 3, they made the / operator 
+    do a floating-point division, and added 
+    the // operator to do integer division 
+    (i.e. quotient without remainder); 
+    flooring division
+    """
+    return n*(n+1)//2
+    
+def sumFromMToN_byFormula(m, n):
+    return (sumToN(n) - sumToN(m-1))
+
+def sumFromMToN(m, n):
+    if m < n:
+        sum = 0
+        for i in range(m, n+1):
+            sum += i
+        return sum
+    else:
+        return "Error"
+    
+print(sumToN(10))
+print(sumToN2(10))
+print(sumFromMToN_byFormula(1, 10))
+print(sumFromMToN(-10, 10))
+''', "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")
+sum.setValue()
+doc["sum"].bind('click', sum.prog)
+</script>
+</p>
+<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><br />C++ << <a href='C++.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
