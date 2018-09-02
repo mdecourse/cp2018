@@ -43,6 +43,7 @@
 <v t="leo.20180701212101.1"><vh>有關 Cango library</vh></v>
 <v t="leo.20180726212905.1"><vh>存檔時移除所有 tag of title</vh></v>
 <v t="leo.20180728154823.1"><vh>利用 flake8 查驗格式</vh></v>
+<v t="leo.20180902120757.1"><vh>有關 Brython</vh></v>
 </v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
 <v t="amd.20160717220157.1"><vh>Flask 開講</vh></v>
@@ -130,38 +131,6 @@
 <v t="leo.20180630233136.1"><vh>syntaxhighlight2</vh></v>
 <v t="amd.20160714231606.1"><vh>tinymce_editor (#4)</vh></v>
 <v t="amd.20160714232232.1"><vh>unique</vh></v>
-</v>
-</v>
-<v t="leo.20180711113847.1" a="E"><vh>編輯 reveal</vh>
-<v t="leo.20180711113949.1" a="E"><vh>@path reveal</vh>
-<v t="leo.20180711113902.1" a="E"><vh>@clean index.html</vh>
-<v t="leo.20180711113902.2" a="E"><vh>html</vh>
-<v t="leo.20180711113902.3"><vh>head</vh></v>
-<v t="leo.20180711113902.4" a="E"><vh>body</vh>
-<v t="leo.20180711113902.5" a="E"><vh>reveal div</vh>
-<v t="leo.20180711113902.6" a="E"><vh>slides div</vh>
-<v t="leo.20180711113902.7" a="E"><vh>封面投影片</vh>
-<v t="leo.20180711113902.8"><vh>封面投影片內容</vh></v>
-</v>
-<v t="leo.20180711113902.9" a="E"><vh>快捷鍵</vh>
-<v t="leo.20180711113902.10"><vh>投影片快捷鍵</vh></v>
-</v>
-<v t="leo.20180711113902.11"><vh>各式內容引用範例</vh>
-<v t="leo.20180711113902.12" a="E"><vh>導入數學符號與方程式</vh>
-<v t="leo.20180711113902.13"><vh>LaTeX 格式方程式</vh></v>
-</v>
-<v t="leo.20180711113902.14" a="E"><vh>導入縮排程式碼</vh>
-<v t="leo.20180711113902.15"><vh>引用程式碼</vh></v>
-</v>
-<v t="leo.20180711113902.16" a="E"><vh>導入影片</vh>
-<v t="leo.20180711113902.17"><vh>iframe 導入影片</vh></v>
-</v>
-</v>
-</v>
-</v>
-</v>
-</v>
-</v>
 </v>
 </v>
 </vnodes>
@@ -2705,209 +2674,6 @@ def reveal(path):
 
 
 </t>
-<t tx="leo.20180711113847.1"></t>
-<t tx="leo.20180711113902.1">@language xml
-@tabwidth -4
-@others
-
-</t>
-<t tx="leo.20180711113902.10"># 投影片快捷鍵
-
-* 利用箭頭上下前後換頁
-* 按 f 鍵進入全螢幕模式 (full screen)
-* 按 s 鍵可以顯示投影片筆記 (show)
-* 按 o 鍵可以切換單張或全域檢視 (overview)
-* 按 b 或 . 鍵可以切換螢幕黑屏 (black)
-* 按 Esc 可以退出全螢幕或全域檢視 (Escape)
-
-</t>
-<t tx="leo.20180711113902.11">&lt;section&gt;
-@others
-&lt;/section&gt;
-
-</t>
-<t tx="leo.20180711113902.12">&lt;section data-markdown&gt;
-    &lt;script type="text/template"&gt;
-&lt;!-- 請注意, @others 不可以內縮 --&gt;
-@others
-    &lt;/script&gt;
-&lt;/section&gt;
-
-
-
-						
-</t>
-<t tx="leo.20180711113902.13"># 數學符號與方程式
-
-Inline math equations go in like so: $\omega = d\phi / dt$. Display
-math should get its own line and be put in in double-dollarsigns:
-
-$$I = \int \rho R^{2} dV$$
-</t>
-<t tx="leo.20180711113902.14">&lt;section data-markdown&gt;
-    &lt;script type="text/template"&gt;
-&lt;!-- 請注意, @others 不可以內縮 --&gt;
-@others
-    &lt;/script&gt;
-&lt;/section&gt;
-
-
-
-						
-</t>
-<t tx="leo.20180711113902.15">## 利用 Markdown 寫投影片
-以下利用 Markdown 格式展示 Python 程式碼:
-```
-@language python
-# use threading and subprocess to threading the make process
-import os
-import subprocess
-import threading
-
-def domake():
-    
-    path = "../exposed/api/exposed"
-    ubuntu = "../Ubuntu"
-    
-    # create obj path
-    
-    if not os.path.exists(path+"/../obj"):
-        os.makedirs(path+"/../obj")
-    
-    subprocess.call(["make", "clean"], cwd=path)
-    subprocess.call("make", cwd=path)
-    subprocess.call(["cp", "{libslvs.so, _slvs.so, slvs.py}", ubuntu], cwd=path)
-    subprocess.call(["python3", "circle_ex.py"], cwd=path+"/"+ubuntu)
-    
-make = threading.Thread(target=domake)
-make.start()
-```
-</t>
-<t tx="leo.20180711113902.16">&lt;section data-markdown&gt;
-    &lt;script type="text/template"&gt;
-@others
-    &lt;/script&gt;
-&lt;/section&gt;
-
-
-						
-</t>
-<t tx="leo.20180711113902.17">## 使用 iframe 導入影片
-
-### 導入影片 template
-
-&lt;iframe src="https://player.vimeo.com/video/183950627" width="640" height="492" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
-</t>
-<t tx="leo.20180711113902.2">&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-@others
-&lt;/html&gt;
-</t>
-<t tx="leo.20180711113902.3">&lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-&lt;title&gt;
-2018 Fall 機械設計工程系計算機程式
-&lt;/title&gt;
-    &lt;meta name="description" content="A framework for easily creating beautiful presentations using HTML"&gt;
-    &lt;meta name="author" content="Hakim El Hattab"&gt;
-    
-    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
-    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
-    
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;
-    
-    &lt;link rel="stylesheet" href="css/reveal.css"&gt;
-    &lt;link rel="stylesheet" href="css/theme/black.css" id="theme"&gt;
-    
-    &lt;!-- Theme used for syntax highlighting of code --&gt;
-    &lt;link rel="stylesheet" href="lib/css/zenburn.css"&gt;
-
-    &lt;!-- Printing and PDF exports --&gt;
-    &lt;script&gt;
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    &lt;/script&gt;
-
-    &lt;!--[if lt IE 9]&gt;
-    &lt;script src="lib/js/html5shiv.js"&gt;&lt;/script&gt;
-    &lt;![endif]--&gt;
-&lt;/head&gt;
-
-</t>
-<t tx="leo.20180711113902.4">&lt;body&gt;
-@others
-&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/reveal.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-        // More info https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-            center: true,
-
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-            // More info https://github.com/hakimel/reveal.js#dependencies
-            dependencies: [
-                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                { src: 'plugin/zoom-js/zoom.js', async: true },
-                { src: 'plugin/notes/notes.js', async: true },
-                { src: 'plugin/math/math.js', async: true }
-            ]
-        });
-&lt;/script&gt;
-&lt;/body&gt;
-
-</t>
-<t tx="leo.20180711113902.5">&lt;div class="reveal"&gt;
-@others
-&lt;/div&gt;
-
-</t>
-<t tx="leo.20180711113902.6">&lt;!-- Any section element inside of this container is displayed as a slide --&gt;
-&lt;div class="slides"&gt;
-@others
-&lt;/div&gt;
-
-</t>
-<t tx="leo.20180711113902.7">&lt;section data-markdown&gt;
-    &lt;script type="text/template"&gt;
-@others
-    &lt;/script&gt;
-&lt;/section&gt;
-
-
-						
-</t>
-<t tx="leo.20180711113902.8">## 2018Fall 計算機程式課程
-
-### 虎科大機械設計工程系
-
-&lt;small&gt;
-Created by [KMOLab](http://lab.kmol.info/)
-&lt;/small&gt;
-
-[計算機程式課程網誌](./../blog/index.html)
-
-
-</t>
-<t tx="leo.20180711113902.9">&lt;section data-markdown&gt;
-    &lt;script type="text/template"&gt;
-@others
-    &lt;/script&gt;
-&lt;/section&gt;
-
-
-						
-</t>
-<t tx="leo.20180711113949.1"></t>
 <t tx="leo.20180711121340.1"># blog 方法主要將位於 blog目錄下的檔案送回瀏覽器
 '''
 目前在 CMSimfly 管理模式下已經無需透過 Flask 送回 reveal 與 Pelican blog 資料
@@ -3006,5 +2772,11 @@ bug 180726</t>
 
 
 </t>
+<t tx="leo.20180902120757.1">目前將 Brython 相關的 js 導入放在各自的頁面原始碼中, 以避免每一頁面均需下載 brython.js 與 brython_stdlib.js
+
+但是因為引入 brython.js 的模式, 在動態系統必須以絕對目錄導入, 而在靜態系統則需以相對目錄導入,
+因此若決定要將 brython 放在各自的頁面, 則需要再行測試兩態是否可以相容
+
+目前在 Python 頁面使用 /static/brython.js 導入, 可以用於動態與靜態網頁</t>
 </tnodes>
 </leo_file>
