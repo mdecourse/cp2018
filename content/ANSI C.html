@@ -83,9 +83,75 @@ int main()
 <p>進行編譯後, 可以得到 hello.exe, 執行 hello.exe 後, 可以列印出 Hello ANSI C!</p>
 <p>上述程式碼也可以直接複製到 SCiTE中, 存為 hello.c 後, 以 Tools-&gt;Go 執行.</p>
 <p>也可以直接在&nbsp;<a href="https://www.onlinegdb.com/online_c_compiler">https://www.onlinegdb.com/online_c_compiler</a>&nbsp;中執行.</p>
-<p>接下來利用&nbsp;<a href="http://learn.onlinegdb.com/learn_c_programming">http://learn.onlinegdb.com/learn_c_programming</a>&nbsp;學習 C 程式語言.</p>
+<p>接下來利用&nbsp;<a href="http://learn.onlinegdb.com/learn_c_programming">http://learn.onlinegdb.com/learn_c_programming</a>&nbsp;與 <a href="https://www.codingunit.com/category/c-tutorials">codingunit</a> 學習 C 程式語言.</p>
+<p>函式定義與呼叫:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+int sum(x, y, z){
+    return x+y+z;
+}
+
+main()
+{
+    int i;
+    int x;
+    int y = 1;
+    x = 1;
+    y = sum(x, 2, 3);
+    // formated print
+    printf("%d\n", y);
+    
+    // for loop
+    for (i=0; i&lt;10; i++){
+        printf("Hello World\n");
+    }
+}</pre>
+<p>格式化列印:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+    int a,b;
+    float c,d;
+
+    a = 15;
+    b = a / 2;
+    printf("%d\n",b);
+    printf("%3d\n",b);
+    printf("%03d\n",b);
+
+    c = 15.3;
+    d = c / 3;
+    printf("%3.2f\n",d);
+}</pre>
+<p>格式化列印 2:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+	printf("The color: %s\n", "blue");
+	printf("First number: %d\n", 12345);
+	printf("Second number: %04d\n", 25);
+	printf("Third number: %i\n", 1234);
+	printf("Float number: %3.2f\n", 3.14159);
+	printf("Hexadecimal: %x\n", 255);
+	printf("Octal: %o\n", 255);
+	printf("Unsigned value: %u\n", 150);
+	printf("Just print the percentage sign %%\n", 10);
+}</pre>
+<p>華氏溫度與攝式溫度轉換:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+	int Fahrenheit;
+
+	for (Fahrenheit = 0; Fahrenheit &lt;= 300; Fahrenheit = Fahrenheit + 20)
+		printf("%3d %06.3f\n", Fahrenheit, (5.0/9.0)*(Fahrenheit-32));
+}</pre>
 <p>參考資料:</p>
 <p>Programming for Engineers:&nbsp;A Foundational Approach to Learning C and Matlab (<a href="https://link.springer.com/book/10.1007/978-3-642-23303-6">https://link.springer.com/book/10.1007/978-3-642-23303-6</a>)</p>
+<p><a href="https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf">https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf</a>&nbsp;</p>
 <p><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm</a>&nbsp;</p>
 <p><a href="http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml">http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml</a>&nbsp;</p>
 <p><a href="http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/">http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/</a>&nbsp;</p>
