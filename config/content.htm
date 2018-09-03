@@ -98,7 +98,97 @@
 <li>協同資料擷取便性議題</li>
 <li>資料版本及歷程長期保存議題</li>
 <li>如何尋求可持續改進的電腦輔助設計與工程分析架構與協同機制</li>
-</ol><h2>ANSI C</h2><p>Hello ANSIC:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;int main(){    printf("Hello, ANSI C!\n");    return 0;}</pre><p>存為 hello.c</p><p>然後啟動 Qt 隨身程式系統 (<a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> (或 <a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 下載</a>, 解開後容量為 20GB)), 可以擷取到 <a href="https://www.msys2.org/">MSYS2</a> 64 位元的 <a href="https://gcc.gnu.org/onlinedocs/gcc.pdf">gcc</a> 編譯器, 以隨身系統啟動的命令列執行:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">gcc -o hello hello.c</pre><p>進行編譯後, 可以得到 hello.exe, 執行 hello.exe 後, 可以列印出 Hello ANSI C!</p><p>上述程式碼也可以直接複製到 SCiTE中, 存為 hello.c 後, 以 Tools-&gt;Go 執行.</p><p>也可以直接在&nbsp;<a href="https://www.onlinegdb.com/online_c_compiler">https://www.onlinegdb.com/online_c_compiler</a>&nbsp;中執行.</p><p>接下來利用&nbsp;<a href="http://learn.onlinegdb.com/learn_c_programming">http://learn.onlinegdb.com/learn_c_programming</a>&nbsp;與 <a href="https://www.codingunit.com/category/c-tutorials">codingunit</a> 學習 C 程式語言.</p><p>函式定義與呼叫:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;int sum(x, y, z){    return x+y+z;}main(){    int i;    int x;    int y = 1;    x = 1;    y = sum(x, 2, 3);    // formated print    printf("%d\n", y);        // for loop    for (i=0; i&lt;10; i++){        printf("Hello World\n");    }}</pre><p>格式化列印:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;main(){    int a,b;    float c,d;    a = 15;    b = a / 2;    printf("%d\n",b);    printf("%3d\n",b);    printf("%03d\n",b);    c = 15.3;    d = c / 3;    printf("%3.2f\n",d);}</pre><p>格式化列印 2:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;main(){	printf("The color: %s\n", "blue");	printf("First number: %d\n", 12345);	printf("Second number: %04d\n", 25);	printf("Third number: %i\n", 1234);	printf("Float number: %3.2f\n", 3.14159);	printf("Hexadecimal: %x\n", 255);	printf("Octal: %o\n", 255);	printf("Unsigned value: %u\n", 150);	printf("Just print the percentage sign %%\n", 10);}</pre><p>華氏溫度與攝式溫度轉換:</p><pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;main(){	int Fahrenheit;	for (Fahrenheit = 0; Fahrenheit &lt;= 300; Fahrenheit = Fahrenheit + 20)		printf("%3d %06.3f\n", Fahrenheit, (5.0/9.0)*(Fahrenheit-32));}</pre><p>參考資料:</p><p>Programming for Engineers:&nbsp;A Foundational Approach to Learning C and Matlab (<a href="https://link.springer.com/book/10.1007/978-3-642-23303-6">https://link.springer.com/book/10.1007/978-3-642-23303-6</a>)</p><p><a href="https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf">https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf</a>&nbsp;</p><p><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm</a>&nbsp;</p><p><a href="http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml">http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml</a>&nbsp;</p><p><a href="http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/">http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/</a>&nbsp;</p><p><a href="https://www.codestepbystep.com/about">https://www.codestepbystep.com/about</a>&nbsp;</p><p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a>&nbsp;</p><p><a href="https://www.programiz.com/c-programming">https://www.programiz.com/c-programming</a>&nbsp;</p><h2>指標教材</h2>
+</ol><h2>ANSI C</h2>
+<p>Hello ANSIC:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello, ANSI C!\n");
+
+    return 0;
+}</pre>
+<p>存為 hello.c</p>
+<p>然後啟動 Qt 隨身程式系統 (<a href="http://wcmg3.kmol.info/downloads/Qt_20180714.7z">http://wcmg3.kmol.info/downloads/Qt_20180714.7z</a> (或 <a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 下載</a>, 解開後容量為 20GB)), 可以擷取到 <a href="https://www.msys2.org/">MSYS2</a> 64 位元的 <a href="https://gcc.gnu.org/onlinedocs/gcc.pdf">gcc</a> 編譯器, 以隨身系統啟動的命令列執行:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">gcc -o hello hello.c</pre>
+<p>進行編譯後, 可以得到 hello.exe, 執行 hello.exe 後, 可以列印出 Hello ANSI C!</p>
+<p>上述程式碼也可以直接複製到 SCiTE中, 存為 hello.c 後, 以 Tools-&gt;Go 執行.</p>
+<p>也可以直接在&nbsp;<a href="https://www.onlinegdb.com/online_c_compiler">https://www.onlinegdb.com/online_c_compiler</a>&nbsp;中執行.</p>
+<p>接下來利用&nbsp;<a href="http://learn.onlinegdb.com/learn_c_programming">http://learn.onlinegdb.com/learn_c_programming</a>&nbsp;與 <a href="https://www.codingunit.com/category/c-tutorials">codingunit</a> 學習 C 程式語言.</p>
+<p>函式定義與呼叫:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+int sum(x, y, z){
+    return x+y+z;
+}
+
+main()
+{
+    int i;
+    int x;
+    int y = 1;
+    x = 1;
+    y = sum(x, 2, 3);
+    // formated print
+    printf("%d\n", y);
+    
+    // for loop
+    for (i=0; i&lt;10; i++){
+        printf("Hello World\n");
+    }
+}</pre>
+<p>格式化列印:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+    int a,b;
+    float c,d;
+
+    a = 15;
+    b = a / 2;
+    printf("%d\n",b);
+    printf("%3d\n",b);
+    printf("%03d\n",b);
+
+    c = 15.3;
+    d = c / 3;
+    printf("%3.2f\n",d);
+}</pre>
+<p>格式化列印 2:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+	printf("The color: %s\n", "blue");
+	printf("First number: %d\n", 12345);
+	printf("Second number: %04d\n", 25);
+	printf("Third number: %i\n", 1234);
+	printf("Float number: %3.2f\n", 3.14159);
+	printf("Hexadecimal: %x\n", 255);
+	printf("Octal: %o\n", 255);
+	printf("Unsigned value: %u\n", 150);
+	printf("Just print the percentage sign %%\n", 10);
+}</pre>
+<p>華氏溫度與攝式溫度轉換:</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include&lt;stdio.h&gt;
+
+main()
+{
+	int Fahrenheit;
+
+	for (Fahrenheit = 0; Fahrenheit &lt;= 300; Fahrenheit = Fahrenheit + 20)
+		printf("%3d %06.3f\n", Fahrenheit, (5.0/9.0)*(Fahrenheit-32));
+}</pre>
+<p>參考資料:</p>
+<p>Programming for Engineers:&nbsp;A Foundational Approach to Learning C and Matlab (<a href="https://link.springer.com/book/10.1007/978-3-642-23303-6">https://link.springer.com/book/10.1007/978-3-642-23303-6</a>)</p>
+<p><a href="https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf">https://dspace.lboro.ac.uk/dspace-jspui/bitstream/2134/10054/6/Programming-in-ANSI-C.pdf</a>&nbsp;</p>
+<p><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm</a>&nbsp;</p>
+<p><a href="http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml">http://web.stanford.edu/dept/cs_edu/qt-creator/qt-creator-windows.shtml</a>&nbsp;</p>
+<p><a href="http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/">http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/</a>&nbsp;</p>
+<p><a href="https://www.codestepbystep.com/about">https://www.codestepbystep.com/about</a>&nbsp;</p>
+<p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a>&nbsp;</p>
+<p><a href="https://www.programiz.com/c-programming">https://www.programiz.com/c-programming</a>&nbsp;</p><h2>指標教材</h2>
 <p>指標: <a href="http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html">C 程式語言的指標與陣列</a></p>
 <p><a href="/downloads/pointers.pdf">指標教材.pdf</a>&nbsp;(英文)</p>
 <p>若您想要專精於利用 C 程式語言編寫程式碼, 就必須徹底了解如何使用指標. 然而, C 指標對初學者而言, 經常是一項障礙, 尤其對於從其他程式語言轉進的學習者.</p>
@@ -1439,332 +1529,7 @@ int compare_long(const void *m, const void *n)
 <p>另外, 我們也將參考&nbsp;<a href="https://web.stanford.edu/class/cs106l/">https://web.stanford.edu/class/cs106l/</a>&nbsp;課程中的資料:</p>
 <p><a href="/downloads/stanford_cs106L_full_course_reader.pdf">Standard C++ Programming Laboratory full reader.pdf</a></p>
 <p>最後, 在 C++ 計算機程式語言的學習, 針對最新 C++ 的程式標準, 請參考&nbsp;<a href="http://pages.cs.wisc.edu/~gerald/cs368/">http://pages.cs.wisc.edu/~gerald/cs368/</a>&nbsp;課程中的資料:</p>
-<p><a href="/downloads/TeachModernC++.pdf">Teach Modern C++.pdf</a></p><h2>Python</h2>
-<p>根據 Google 的搜尋, 以及 IEEE Spectrum 資料分析, Python 為目前最流行的計算機程式語言之一.</p>
-<p><a href="http://pypl.github.io/PYPL.html">http://pypl.github.io/PYPL.html</a></p>
-<p><a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p>
-<p><a href="/downloads/AE1205-Python-Tutorial-v3.11.pdf">/downloads/AE1205-Python-Tutorial-v3.11.pdf</a> 在機械設計相關技術開發方面, Python 結合 <a href="https://www.riverbankcomputing.com/software/pyqt/download5">PyQt5</a> 與演化分析, 可用來建立機構模擬與合成套件: <a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a></p>
-<p>Python 也可以套用 Flask 框架, 建立簡單的網際內容管理系統: <a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a> 或結合 oauth2 與 ORM 資料庫模組, 建立網際協同群組軟體: <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a></p>
-<p>Python 也被用於自動化特定流程: <a href="https://automatetheboringstuff.com/">https://automatetheboringstuff.com/</a></p>
-<p>Python 工程教材:&nbsp;<a href="http://homepage.tudelft.nl/7p97s/docs/AE1205-Python-Tutorial-v3.11.pdf">http://homepage.tudelft.nl/7p97s/docs/AE1205-Python-Tutorial-v3.11.pdf</a>&nbsp;(將 AE1205-Python-Tutorial-v3.1.1.pdf 改寫為 Python3)</p>
-<p><a href="/downloads/python3_import_modules.pdf">Python3 import and modules.pdf</a></p>
-<p>2015 An Introduction to Python and Computer Programming:</p>
-<p><a href="https://link.springer.com/book/10.1007/978-981-287-609-6">https://link.springer.com/book/10.1007/978-981-287-609-6</a>&nbsp;</p>
-<p>其他參考資料:</p>
-<p><a href="https://www.cs.cmu.edu/~112/">https://www.cs.cmu.edu/~112/</a>&nbsp; (2018 Fall)</p>
-<p><a href="http://stanfordpython.com/">Stanford 2017</a></p>
-<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/">MIT 2016 Fall</a></p>
-<p><a href="https://help.uis.cam.ac.uk/service/help-support/training/downloads/course-files/programming-student-files/python-courses/pythonab/pythonab-files/python3-notes.pdf">Cambridge Python3 notes</a></p>
-<h4>Python 程式語言</h4>
-<p><a href="https://brython.info/">Brython</a> 是一套能讓使用者在網頁中執行 Python3 程式的 Javascript 程式庫, 與 C 所編寫的 Python 3.7 差異比較:</p>
-<p><a href="https://www.brython.info/static_doc/en/stdlib.html">https://www.brython.info/static_doc/en/stdlib.html</a>&nbsp;</p>
-<p>本課程為了提升 Python3 初學者執行程式碼的方便性, 在 <a href="https://github.com/chiamingyen/cmsimfly">CMSimfly</a> 內容管理系統中導入 <a href="https://brython.info/">Brython</a>. 使用者可以利用以下編輯區執行 <a href="https://brython.info/">Brython</a> 程式.</p>
-<p>Python 是一種非常適合初學者學習的電腦程式語言, 變數資料或字串的列印, 可以直接使用 print() 函式執行.</p>
-<p>由於 Python 解譯系統在設計的過程, 保留了部分的關鍵字, 因此使用者在學習 Python 時, 必須了解有那些關鍵字, 不能被用來設定為程式中變數設計的名稱.</p>
-<p>上面的敘述, 提到程式中的術語有變數, 字串, print () 函式, <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">解譯系統</a>與關鍵字.</p>
-<p>變數 (<a href="https://en.wikipedia.org/wiki/Variable_(computer_science)">Variables</a>), 在 Wikipedia 說明如下:</p>
-<p>In computer programming, a variable or scalar is a storage location (identified by a memory address) paired with an associated symbolic name (an identifier), which contains some known or unknown quantity of information referred to as a value.</p>
-<p>The variable name is the usual way to reference the stored value, in addition to referring to the variable itself, depending on the context. This separation of name and content allows the name to be used independently of the exact information it represents.</p>
-<p>The identifier in computer source code can be bound to a value during run time, and the value of the variable may thus change during the course of program execution.</p>
-<p>Variables in programming may not directly correspond to the concept of variables in mathematics. The latter is abstract, having no reference to a physical object such as storage location. The value of a computing variable is not necessarily part of an equation or formula as in mathematics.</p>
-<p>Variables in computer programming are frequently given long names to make them relatively descriptive of their use, whereas variables in mathematics often have terse, one- or two-character names for brevity in transcription and manipulation.</p>
-<p>A variable's storage location may be referred by several different identifiers, a situation known as aliasing. Assigning a value to the variable using one of the identifiers will change the value that can be accessed through the other identifiers.</p>
-<p>Compilers have to replace variables' symbolic names with the actual locations of the data. While a variable's name, type, and location often remain fixed, the data stored in the location may be changed during program execution.</p>
-<p>print() 函式, 可以接受多個列印資料輸入, 且可透過 end 與 sep 輸入變數的設定, 決定列印結尾與分隔對應字串.</p>
-<p>參考: <a href="https://www.cs.cmu.edu/~112/notes/notes-getting-started.html">Get Started</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-data-and-exprs.html">Data and Expressions</a></p>
-<!-- 啟動 Brython 時, 設定 pythonpath 為 /static/, 並將共用 .py 放入, 可以在隨後的程式中導入使用 -->
-<p><!-- 導入 brython --></p>
-<p>
-<script type="text/javascript" src="/static/brython.js"></script>
-<script type="text/javascript" src="/static/brython_stdlib.js"></script>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['/static/']});
-}
-</script>
-</p>
-<p><!-- 導入 FileSaver 與 filereader --></p>
-<p>
-<script type="text/javascript" src="/static/ace/FileSaver.min.js"></script>
-<script type="text/javascript" src="/static/ace/filereader.js"></script>
-</p>
-<p><!-- 導入 ace --></p>
-<p>
-<script type="text/javascript" src="/static/ace/ace.js"></script>
-<script type="text/javascript" src="/static/ace/ext-language_tools.js"></script>
-<script type="text/javascript" src="/static/ace/mode-python3.js"></script>
-<script type="text/javascript" src="/static/ace/snippets/python.js"></script>
-</p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/javascript">
-function doSave(storage_id, filename){
-    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
-    filename = document.getElementById(filename).value
-    saveAs(blob, filename+".py");
-}
-</script>
-</p>
-<p><!-- 印出版次與關鍵字程式 --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
-Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
-
-Ace.editor.setValue("""# 導入 sys 模組
-import sys
-# 導入 keyword 模組
-import keyword
-
-# 利用 sys 模組中的 version_info 印出 Python 版次
-print("Python version: ", sys.version_info)
-# 利用 keyword 模組中的 kwlist 印出關鍵字
-print("Python keywords: ", keyword.kwlist)
-""")
-Ace.editor.scrollToRow(0)
-Ace.editor.gotoLine(0)
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run'].bind('click', Ace.run)
-doc['kw_show_console'].bind('click', Ace.show_console)
-doc['kw_clear_console'].bind('click', Ace.clear_console)
-</script>
-</p>
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<form><label>Filename: <input type="text" id="kw_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('kw_py_src', 'kw_filename');"></form>
-<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除</button></p>
-<div style="width: 100%; height: 100%;"><textarea id="kw_console" autocomplete="off"></textarea></div>
-<p><!-- ****************************** keyword start -->
-<script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
-import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 kw1
-kw1 = beditor.editor("""# 導入 sys 模組
-import sys
-# 導入 keyword 模組
-import keyword
-
-# 利用 sys 模組中的 version_info 印出 Python 版次
-print("Python version: ", sys.version_info)
-# 利用 keyword 模組中的 kwlist 印出關鍵字
-print("Python keywords: ", keyword.kwlist)
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-# id 為 "keyword" 的按鈕點按時, 執行 kw1 物件中的 prog 方法
-doc["keyword"].bind('click', kw1.prog)
-</script>
-</p>
-<p><!-- ****************************** keyword end --></p>
-<p></p>
-<p><!-- ****************************** for1 start --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import beditor
-for1 = beditor.editor("""#for1 簡單的 for 迴圈範例
-for i in range(10):
-    print(i)
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-doc['for1'].bind('click',for1.prog)
-</script>
-<!-- ****************************** for1 end --></p>
-<p><!-- ***************************** hello start -->
-<script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
-import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hello
-hello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行
-def helloWorld():
-    print("Hello World!")
-    # 同行列印
-    print("first string ", end="")
-    print("second string")
-
-helloWorld()
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法
-doc["hello"].bind('click', hello.prog)
-</script>
-<!-- ***************************** hello end --></p>
-<p><!-- ***************************** input start --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
-import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 inputEx
-inputEx = beditor.editor("""# 利用 input() 取使用者輸入
-name = input("Enter your name: ")
-print("Your name is:", name)
-#x = int(input("Enter a number: "))
-#print("One half of", x, "=", x/2)
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-# id 為 "inputEx" 的按鈕點按時, 執行 inputEx 物件中的 prog 方法
-doc["inputEx"].bind('click', inputEx.prog)
-</script>
-</p>
-<p><!-- ***************************** input end --></p>
-<p></p>
-<p><!-- ***************************** math start --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import beditor
-inputEx = beditor.editor("""# 導入 math 模組後, 使用模組方法
-import math
-print(math.factorial(20))
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-doc["mathEx"].bind('click', inputEx.prog)
-</script>
-</p>
-<p><!-- ***************************** math end --></p>
-<p><button id="keyword">keyword</button><button id="for1">for1</button><button id="hello">hello</button><button id="inputEx">input</button><button id="mathEx">math</button></p>
-<p>初步了解 print() 函式的應用後,&nbsp; 接下來學習如何自定函式與呼叫函式, 了解 Python 程式如何能夠不需像 C/C++ 使用 {} 來界定執行從屬關係, 且如何利用函式中的 return 傳回有用的資料.</p>
-<p>參考資料: <a href="https://www.cs.cmu.edu/~112/notes/notes-writing-functions.html">Functions</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-conditionals.html">Conditionals</a></p>
-<!-- ********************************************************************************************* -->
-<p><!-- 用來顯示 prog1 程式碼的 editor 區域 --></p>
-<div id="prog1_editor" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<form><label>Filename: <input type="text" id="prog1_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('prog1_py_src', 'prog1_filename');"></form>
-<p><button id="prog1_run">Run</button> <button id="prog1_show_console">Output</button> <button id="prog1_clear_console">清除</button></p>
-<div style="width: 100%; height: 100%;"><textarea id="prog1_console" autocomplete="off"></textarea></div>
-<p><!-- ***************************** hello start -->
-<script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
-import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hello
-hello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行
-def helloWorld():
-    print("Hello World!")
-    # 同行列印
-    print("first string ", end="")
-    print("second string")
-
-helloWorld()
-""", "prog1_editor", "prog1_console", "prog1__container", "prog1_py_src")
-hello.setValue()
-# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法
-doc["hello1"].bind('click', hello.prog)
-</script>
-<!-- ***************************** hello end --></p>
-<!-- prog1 編輯器中, 會以最後引用物件的程式碼為顯示內容, 即下列的 prog1 -->
-<p><!-- ***************************** prog1 start --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import beditor
-prog1 = beditor.editor("""# 導入 math 模組後, 使用模組方法
-import math
-print(math.factorial(20))
-""", "prog1_editor", "prog1_console", "prog1__container", "prog1_py_src")
-doc["prog1"].bind('click', prog1.prog)
-doc['prog1_run'].bind('click', prog1.run)
-doc['prog1_show_console'].bind('click', prog1.show_console)
-doc['prog1_clear_console'].bind('click', prog1.clear_console)
-</script>
-</p>
-<p><!-- ***************************** prog1 end --></p>
-<p><button id="prog1">prog1</button><button id="hello1">hello1</button></p>
-<p>Python 程式中的迴圈.</p>
-<p>參考資料: <a href="https://www.cs.cmu.edu/~112/notes/notes-loops.html">Loops</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-debugging.html">Debugging</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-testing-and-exceptions.html">Testing and Exceptions</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-strings.html">Strings</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-algorithmic-thinking.html">Algorithmic Thinking</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-style.html">Style</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-1d-lists.html">1D Lists and Tuples</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-2d-lists.html">2D Lists</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-sets.html">Sets</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-dictionaries.html">Dictionalry</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-efficiency.html">Efficiency</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-oop.html">OOP</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-recursion-part1.html">Recursion</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-recursion-part2.html">Recursion2</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-design-and-documentation.html">Large Project Design and Documentation</a></p>
-<!-- ********************************************************************************************* -->
-<p><!-- 用來顯示 prog2 程式碼的 editor 區域 --></p>
-<div id="prog2_editor" style="width: 600px; height: 300px;"></div>
-<form><label>Filename: <input type="text" id="prog2_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('prog2_py_src', 'prog2_filename');"></form>
-<p><button id="prog2_run">Run</button> <button id="prog2_show_console">Output</button> <button id="prog2_clear_console">清除</button></p>
-<div style="width: 100%; height: 100%;"><textarea id="prog2_console" autocomplete="off"></textarea></div>
-<p><!-- ***************************** hello start -->
-<script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
-import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hello
-hello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行
-def helloWorld():
-    print("Hello World!")
-    # 同行列印
-    print("first string ", end="")
-    print("second string")
-
-helloWorld()
-""", "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")
-# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法
-doc["hello2"].bind('click', hello.prog)
-</script>
-<!-- ***************************** hello end --></p>
-<!-- prog2 編輯器中, 會以最後引用物件的程式碼為顯示內容, 即下列的 prog2 -->
-<p><!-- ***************************** prog2 start --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import beditor
-prog2 = beditor.editor("""# 導入 math 模組後, 使用模組方法
-import math
-print(math.factorial(20))
-""", "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")
-#prog2.setValue()
-doc["prog2"].bind('click', prog2.prog)
-doc['prog2_run'].bind('click', prog2.run)
-doc['prog2_show_console'].bind('click', prog2.show_console)
-doc['prog2_clear_console'].bind('click', prog2.clear_console)
-</script>
-</p>
-<p><!-- ***************************** prog2 end --></p>
-<!-- ********************************** sum start -->
-<p>
-<script type="text/python3">
-from browser import document as doc
-import beditor
-sum = beditor.editor('''# from m sum to n
-def sumToN(n):
-    """recursion
-    https://link.springer.com/book/10.1007/978-3-642-23303-6
-    page 40
-    """
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1 
-    return sumToN(n-1) + n
-
-def sumToN2(n):
-    """In Python 3, they made the / operator 
-    do a floating-point division, and added 
-    the // operator to do integer division 
-    (i.e. quotient without remainder); 
-    flooring division
-    """
-    return n*(n+1)//2
-    
-def sumFromMToN_byFormula(m, n):
-    return (sumToN(n) - sumToN(m-1))
-
-def sumFromMToN(m, n):
-    if m < n:
-        sum = 0
-        for i in range(m, n+1):
-            sum += i
-        return sum
-    else:
-        return "Error"
-    
-print(sumToN(10))
-print(sumToN2(10))
-print(sumFromMToN_byFormula(1, 10))
-print(sumFromMToN(-10, 10))
-''', "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")
-sum.setValue()
-doc["sum"].bind('click', sum.prog)
-</script>
-</p>
-<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><h3>what is new</h3>
+<p><a href="/downloads/TeachModernC++.pdf">Teach Modern C++.pdf</a></p><h2>Python</h2><p>根據 Google 的搜尋, 以及 IEEE Spectrum 資料分析, Python 為目前最流行的計算機程式語言之一.</p><p><a href="http://pypl.github.io/PYPL.html">http://pypl.github.io/PYPL.html</a></p><p><a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p><p><a href="/downloads/AE1205-Python-Tutorial-v3.11.pdf">/downloads/AE1205-Python-Tutorial-v3.11.pdf</a> 在機械設計相關技術開發方面, Python 結合 <a href="https://www.riverbankcomputing.com/software/pyqt/download5">PyQt5</a> 與演化分析, 可用來建立機構模擬與合成套件: <a href="https://github.com/KmolYuan/Pyslvs-PyQt5">https://github.com/KmolYuan/Pyslvs-PyQt5</a></p><p>Python 也可以套用 Flask 框架, 建立簡單的網際內容管理系統: <a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a> 或結合 oauth2 與 ORM 資料庫模組, 建立網際協同群組軟體: <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a></p><p>Python 也被用於自動化特定流程: <a href="https://automatetheboringstuff.com/">https://automatetheboringstuff.com/</a></p><p>Python 工程教材:&nbsp;<a href="http://homepage.tudelft.nl/7p97s/docs/AE1205-Python-Tutorial-v3.11.pdf">http://homepage.tudelft.nl/7p97s/docs/AE1205-Python-Tutorial-v3.11.pdf</a>&nbsp;(將 AE1205-Python-Tutorial-v3.1.1.pdf 改寫為 Python3)</p><p><a href="/downloads/python3_import_modules.pdf">Python3 import and modules.pdf</a></p><p>2015 An Introduction to Python and Computer Programming:</p><p><a href="https://link.springer.com/book/10.1007/978-981-287-609-6">https://link.springer.com/book/10.1007/978-981-287-609-6</a>&nbsp;</p><p>其他參考資料:</p><p><a href="https://www.youtube.com/playlist?list=PL-g0fdC5RMboYEyt6QS2iLb_1m7QcgfHk">Python 入門課程教學影片</a></p><p><a href="https://www.cs.cmu.edu/~112/">https://www.cs.cmu.edu/~112/</a>&nbsp; (2018 Fall)</p><p><a href="http://stanfordpython.com/">Stanford 2017</a></p><p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/">MIT 2016 Fall</a></p><p><a href="https://help.uis.cam.ac.uk/service/help-support/training/downloads/course-files/programming-student-files/python-courses/pythonab/pythonab-files/python3-notes.pdf">Cambridge Python3 notes</a></p><h4>Python 程式語言</h4><p><a href="https://brython.info/">Brython</a> 是一套能讓使用者在網頁中執行 Python3 程式的 Javascript 程式庫, 與 C 所編寫的 Python 3.7 差異比較:</p><p><a href="https://www.brython.info/static_doc/en/stdlib.html">https://www.brython.info/static_doc/en/stdlib.html</a>&nbsp;</p><p>本課程為了提升 Python3 初學者執行程式碼的方便性, 在 <a href="https://github.com/chiamingyen/cmsimfly">CMSimfly</a> 內容管理系統中導入 <a href="https://brython.info/">Brython</a>. 使用者可以利用以下編輯區執行 <a href="https://brython.info/">Brython</a> 程式.</p><p>Python 是一種非常適合初學者學習的電腦程式語言, 變數資料或字串的列印, 可以直接使用 print() 函式執行.</p><p>由於 Python 解譯系統在設計的過程, 保留了部分的關鍵字, 因此使用者在學習 Python 時, 必須了解有那些關鍵字, 不能被用來設定為程式中變數設計的名稱.</p><p>上面的敘述, 提到程式中的術語有變數, 字串, print () 函式, <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">解譯系統</a>與關鍵字.</p><p>變數 (<a href="https://en.wikipedia.org/wiki/Variable_(computer_science)">Variables</a>), 在 Wikipedia 說明如下:</p><p>In computer programming, a variable or scalar is a storage location (identified by a memory address) paired with an associated symbolic name (an identifier), which contains some known or unknown quantity of information referred to as a value.</p><p>The variable name is the usual way to reference the stored value, in addition to referring to the variable itself, depending on the context. This separation of name and content allows the name to be used independently of the exact information it represents.</p><p>The identifier in computer source code can be bound to a value during run time, and the value of the variable may thus change during the course of program execution.</p><p>Variables in programming may not directly correspond to the concept of variables in mathematics. The latter is abstract, having no reference to a physical object such as storage location. The value of a computing variable is not necessarily part of an equation or formula as in mathematics.</p><p>Variables in computer programming are frequently given long names to make them relatively descriptive of their use, whereas variables in mathematics often have terse, one- or two-character names for brevity in transcription and manipulation.</p><p>A variable's storage location may be referred by several different identifiers, a situation known as aliasing. Assigning a value to the variable using one of the identifiers will change the value that can be accessed through the other identifiers.</p><p>Compilers have to replace variables' symbolic names with the actual locations of the data. While a variable's name, type, and location often remain fixed, the data stored in the location may be changed during program execution.</p><p>print() 函式, 可以接受多個列印資料輸入, 且可透過 end 與 sep 輸入變數的設定, 決定列印結尾與分隔對應字串.</p><p>參考: <a href="https://www.cs.cmu.edu/~112/notes/notes-getting-started.html">Get Started</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-data-and-exprs.html">Data and Expressions</a></p><!-- 啟動 Brython 時, 設定 pythonpath 為 /static/, 並將共用 .py 放入, 可以在隨後的程式中導入使用 --><p><!-- 導入 brython --></p><p><script type="text/javascript" src="/static/brython.js"></script><script type="text/javascript" src="/static/brython_stdlib.js"></script><script>window.onload=function(){brython({debug:1, pythonpath:['/static/']});}</script></p><p><!-- 導入 FileSaver 與 filereader --></p><p><script type="text/javascript" src="/static/ace/FileSaver.min.js"></script><script type="text/javascript" src="/static/ace/filereader.js"></script></p><p><!-- 導入 ace --></p><p><script type="text/javascript" src="/static/ace/ace.js"></script><script type="text/javascript" src="/static/ace/ext-language_tools.js"></script><script type="text/javascript" src="/static/ace/mode-python3.js"></script><script type="text/javascript" src="/static/ace/snippets/python.js"></script></p><p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p><p><script type="text/javascript">function doSave(storage_id, filename){    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});    filename = document.getElementById(filename).value    saveAs(blob, filename+".py");}</script></p><p><!-- 印出版次與關鍵字程式 --></p><p><script type="text/python3">from browser import document as docimport ace# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 idAce = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )Ace.editor.setValue("""# 導入 sys 模組import sys# 導入 keyword 模組import keyword# 利用 sys 模組中的 version_info 印出 Python 版次print("Python version: ", sys.version_info)# 利用 keyword 模組中的 kwlist 印出關鍵字print("Python keywords: ", keyword.kwlist)""")Ace.editor.scrollToRow(0)Ace.editor.gotoLine(0)# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定doc['kw_run'].bind('click', Ace.run)doc['kw_show_console'].bind('click', Ace.show_console)doc['kw_clear_console'].bind('click', Ace.clear_console)</script></p><p><!-- 用來顯示程式碼的 editor 區域 --></p><div id="kw_editor" style="width: 600px; height: 300px;"></div><p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p><form><label>Filename: <input type="text" id="kw_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('kw_py_src', 'kw_filename');"></form><p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除</button></p><div style="width: 100%; height: 100%;"><textarea id="kw_console" autocomplete="off"></textarea></div><p><!-- ****************************** keyword start --><script type="text/python3">from browser import document as doc# 導入位於 static 目錄下的 beditor.py import beditor# 利用 beditor.py 中的 editor 類別建立案例, 對應到 kw1kw1 = beditor.editor("""# 導入 sys 模組import sys# 導入 keyword 模組import keyword# 利用 sys 模組中的 version_info 印出 Python 版次print("Python version: ", sys.version_info)# 利用 keyword 模組中的 kwlist 印出關鍵字print("Python keywords: ", keyword.kwlist)""", "kw_editor", "kw_console", "kw__container", "kw_py_src")# id 為 "keyword" 的按鈕點按時, 執行 kw1 物件中的 prog 方法doc["keyword"].bind('click', kw1.prog)</script></p><p><!-- ****************************** keyword end --></p><p></p><p><!-- ****************************** for1 start --></p><p><script type="text/python3">from browser import document as docimport beditorfor1 = beditor.editor("""#for1 簡單的 for 迴圈範例for i in range(10):    print(i)""", "kw_editor", "kw_console", "kw__container", "kw_py_src")doc['for1'].bind('click',for1.prog)</script><!-- ****************************** for1 end --></p><p><!-- ***************************** hello start --><script type="text/python3">from browser import document as doc# 導入位於 static 目錄下的 beditor.py import beditor# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hellohello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行def helloWorld():    print("Hello World!")    # 同行列印    print("first string ", end="")    print("second string")helloWorld()""", "kw_editor", "kw_console", "kw__container", "kw_py_src")# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法doc["hello"].bind('click', hello.prog)</script><!-- ***************************** hello end --></p><p><!-- ***************************** input start --></p><p><script type="text/python3">from browser import document as doc# 導入位於 static 目錄下的 beditor.py import beditor# 利用 beditor.py 中的 editor 類別建立案例, 對應到 inputExinputEx = beditor.editor("""# 利用 input() 取使用者輸入name = input("Enter your name: ")print("Your name is:", name)#x = int(input("Enter a number: "))#print("One half of", x, "=", x/2)""", "kw_editor", "kw_console", "kw__container", "kw_py_src")# id 為 "inputEx" 的按鈕點按時, 執行 inputEx 物件中的 prog 方法doc["inputEx"].bind('click', inputEx.prog)</script></p><p><!-- ***************************** input end --></p><p></p><p><!-- ***************************** math start --></p><p><script type="text/python3">from browser import document as docimport beditorinputEx = beditor.editor("""# 導入 math 模組後, 使用模組方法import mathprint(math.factorial(20))""", "kw_editor", "kw_console", "kw__container", "kw_py_src")doc["mathEx"].bind('click', inputEx.prog)</script></p><p><!-- ***************************** math end --></p><p><button id="keyword">keyword</button><button id="for1">for1</button><button id="hello">hello</button><button id="inputEx">input</button><button id="mathEx">math</button></p><p>初步了解 print() 函式的應用後,&nbsp; 接下來學習如何自定函式與呼叫函式, 了解 Python 程式如何能夠不需像 C/C++ 使用 {} 來界定執行從屬關係, 且如何利用函式中的 return 傳回有用的資料.</p><p>參考資料: <a href="https://www.cs.cmu.edu/~112/notes/notes-writing-functions.html">Functions</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-conditionals.html">Conditionals</a></p><!-- ********************************************************************************************* --><p><!-- 用來顯示 prog1 程式碼的 editor 區域 --></p><div id="prog1_editor" style="width: 600px; height: 300px;"></div><p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p><form><label>Filename: <input type="text" id="prog1_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('prog1_py_src', 'prog1_filename');"></form><p><button id="prog1_run">Run</button> <button id="prog1_show_console">Output</button> <button id="prog1_clear_console">清除</button></p><div style="width: 100%; height: 100%;"><textarea id="prog1_console" autocomplete="off"></textarea></div><p><!-- ***************************** hello start --><script type="text/python3">from browser import document as doc# 導入位於 static 目錄下的 beditor.py import beditor# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hellohello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行def helloWorld():    print("Hello World!")    # 同行列印    print("first string ", end="")    print("second string")helloWorld()""", "prog1_editor", "prog1_console", "prog1__container", "prog1_py_src")hello.setValue()# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法doc["hello1"].bind('click', hello.prog)</script><!-- ***************************** hello end --></p><!-- prog1 編輯器中, 會以最後引用物件的程式碼為顯示內容, 即下列的 prog1 --><p><!-- ***************************** prog1 start --></p><p><script type="text/python3">from browser import document as docimport beditorprog1 = beditor.editor("""# 導入 math 模組後, 使用模組方法import mathprint(math.factorial(20))""", "prog1_editor", "prog1_console", "prog1__container", "prog1_py_src")doc["prog1"].bind('click', prog1.prog)doc['prog1_run'].bind('click', prog1.run)doc['prog1_show_console'].bind('click', prog1.show_console)doc['prog1_clear_console'].bind('click', prog1.clear_console)</script></p><p><!-- ***************************** prog1 end --></p><p><button id="prog1">prog1</button><button id="hello1">hello1</button></p><p>Python 程式中的迴圈.</p><p>參考資料: <a href="https://www.cs.cmu.edu/~112/notes/notes-loops.html">Loops</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-debugging.html">Debugging</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-testing-and-exceptions.html">Testing and Exceptions</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-strings.html">Strings</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-algorithmic-thinking.html">Algorithmic Thinking</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-style.html">Style</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-1d-lists.html">1D Lists and Tuples</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-2d-lists.html">2D Lists</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-sets.html">Sets</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-dictionaries.html">Dictionalry</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-efficiency.html">Efficiency</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-oop.html">OOP</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-recursion-part1.html">Recursion</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-recursion-part2.html">Recursion2</a>, <a href="https://www.cs.cmu.edu/~112/notes/notes-design-and-documentation.html">Large Project Design and Documentation</a></p><!-- ********************************************************************************************* --><p><!-- 用來顯示 prog2 程式碼的 editor 區域 --></p><div id="prog2_editor" style="width: 600px; height: 300px;"></div><form><label>Filename: <input type="text" id="prog2_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('prog2_py_src', 'prog2_filename');"></form><p><button id="prog2_run">Run</button> <button id="prog2_show_console">Output</button> <button id="prog2_clear_console">清除</button></p><div style="width: 100%; height: 100%;"><textarea id="prog2_console" autocomplete="off"></textarea></div><p><!-- ***************************** hello start --><script type="text/python3">from browser import document as doc# 導入位於 static 目錄下的 beditor.py import beditor# 利用 beditor.py 中的 editor 類別建立案例, 對應到 hellohello = beditor.editor("""# 定義 helloWorld 函式, 然後呼叫執行def helloWorld():    print("Hello World!")    # 同行列印    print("first string ", end="")    print("second string")helloWorld()""", "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")# id 為 "hello" 的按鈕點按時, 執行 hello 物件中的 prog 方法doc["hello2"].bind('click', hello.prog)</script><!-- ***************************** hello end --></p><!-- prog2 編輯器中, 會以最後引用物件的程式碼為顯示內容, 即下列的 prog2 --><p><!-- ***************************** prog2 start --></p><p><script type="text/python3">from browser import document as docimport beditorprog2 = beditor.editor("""# 導入 math 模組後, 使用模組方法import mathprint(math.factorial(20))""", "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")#prog2.setValue()doc["prog2"].bind('click', prog2.prog)doc['prog2_run'].bind('click', prog2.run)doc['prog2_show_console'].bind('click', prog2.show_console)doc['prog2_clear_console'].bind('click', prog2.clear_console)</script></p><p><!-- ***************************** prog2 end --></p><!-- ********************************** sum start --><p><script type="text/python3">from browser import document as docimport beditorsum = beditor.editor('''# from m sum to ndef sumToN(n):    """recursion    https://link.springer.com/book/10.1007/978-3-642-23303-6    page 40    """    if n == 0:        return 0    if n == 1:        return 1     return sumToN(n-1) + ndef sumToN2(n):    """In Python 3, they made the / operator     do a floating-point division, and added     the // operator to do integer division     (i.e. quotient without remainder);     flooring division    """    return n*(n+1)//2    def sumFromMToN_byFormula(m, n):    return (sumToN(n) - sumToN(m-1))def sumFromMToN(m, n):    if m < n:        sum = 0        for i in range(m, n+1):            sum += i        return sum    else:        return "Error"    print(sumToN(10))print(sumToN2(10))print(sumFromMToN_byFormula(1, 10))print(sumFromMToN(-10, 10))''', "prog2_editor", "prog2_console", "prog2__container", "prog2_py_src")sum.setValue()doc["sum"].bind('click', sum.prog)</script></p><p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><h3>what is new</h3>
 <p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p>
 <p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
 <p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p>
