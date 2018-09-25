@@ -24,7 +24,40 @@
 <v t="leo.20180902120523.9" a="E"><vh>封面投影片</vh>
 <v t="leo.20180902120523.10"><vh>封面投影片內容</vh></v>
 </v>
-<v t="leo.20180902120523.11" a="E"><vh>快捷鍵</vh>
+<v t="leo.20180925212450.1"><vh>隨身碟是否已經置入 P37 可攜系統?</vh>
+<v t="leo.20180925212450.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213351.1" a="E"><vh>上課有沒有抄筆記?耳機帶了沒?</vh>
+<v t="leo.20180925213351.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213559.1" a="E"><vh>回去有沒有看教學影片?</vh>
+<v t="leo.20180925213559.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925212905.1" a="E"><vh>決定期中成績的作業倉儲是否時時更新?</vh>
+<v t="leo.20180925212905.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213131.1" a="E"><vh>每週操作過程是否留下佐證的 Youtube 影片?</vh>
+<v t="leo.20180925213131.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213647.1" a="E"><vh>瞭不瞭解為何要使用 Git? Github?</vh>
+<v t="leo.20180925213647.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213812.1"><vh>到底會不會使用 Git? Github?</vh>
+<v t="leo.20180925213812.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925214342.1" a="E"><vh>要怎麼收穫?</vh>
+<v t="leo.20180925214342.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925214422.1" a="E"><vh>先那麼栽!</vh>
+<v t="leo.20180925214422.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925213846.1"><vh>終於可以開始學 Python 程式了!</vh>
+<v t="leo.20180925213846.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180925215116.1" a="E"><vh>Python.html</vh>
+<v t="leo.20180925215116.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180902120523.11"><vh>快捷鍵</vh>
 <v t="leo.20180902120523.12"><vh>投影片快捷鍵</vh></v>
 </v>
 <v t="leo.20180902120523.13"><vh>各式內容引用範例</vh>
@@ -326,5 +359,180 @@ QLineEdit#editorLabel {
 }</t>
 <t tx="leo.20180902120538.3">horizontal: body pane to the left
 vertical: body pane on the botton</t>
+<t tx="leo.20180925212450.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925212450.2">
+
+### 隨身碟是否已經置入 P37 可攜系統?
+
+
+
+</t>
+<t tx="leo.20180925212905.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925212905.2">
+
+#### 決定期中成績的作業倉儲是否至少每週更新一次?
+
+
+
+</t>
+<t tx="leo.20180925213131.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213131.2">
+
+#### 每週練習操作? 過程留下佐證的 Youtube 影片?
+
+
+
+</t>
+<t tx="leo.20180925213351.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213351.2">
+
+### 上課有沒有抄筆記? 耳機帶了沒?
+
+
+
+</t>
+<t tx="leo.20180925213559.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213559.2">
+
+## 回去有沒有看教學影片?
+
+
+
+</t>
+<t tx="leo.20180925213647.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213647.2">
+
+### 瞭不瞭解為何要使用 Git? Github?
+
+
+
+</t>
+<t tx="leo.20180925213812.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213812.2">
+
+### 到底會不會使用 Git? Github?
+
+
+
+</t>
+<t tx="leo.20180925213846.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925213846.2">
+
+### 終於可以開始學 Python 程式了!
+
+
+
+</t>
+<t tx="leo.20180925214342.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925214342.2">
+
+# 要怎麼收穫?
+
+
+
+</t>
+<t tx="leo.20180925214422.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925214422.2">
+
+# 先那麼栽!
+
+
+
+</t>
+<t tx="leo.20180925215116.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180925215116.2">
+
+### 課程內容 - [Python.html](./../content/Python.html)
+
+
+</t>
 </tnodes>
 </leo_file>
