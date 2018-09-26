@@ -1855,7 +1855,7 @@ sum.setValue()
 doc["sum"].bind('click', sum.prog)
 </script>
 </p>
-<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><h3>what is new</h3>
+<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><h3>Python 教材</h3><p>本教材根據&nbsp;<a href="https://www.cs.cmu.edu/~112/">https://www.cs.cmu.edu/~112/</a>&nbsp;內容改寫, 文中英文單字請使用 <a href="https://en.wikipedia.org/wiki/Merriam-Webster">Merriam-Webster</a> 英英線上或手機 App 字典查詢, 並網羅用來解釋特定英文生字的相關常用單字, 以提升自我的英文閱讀能力.</p><p><a href="https://www.cs.cmu.edu/~112/notes/notes-getting-started.html">https://www.cs.cmu.edu/~112/notes/notes-getting-started.html</a>&nbsp;中提到的</p><p><a href="https://www.merriam-webster.com/dictionary/logistics">Logistics</a> 與 <a href="https://www.merriam-webster.com/dictionary/preliminary">Preliminary</a>&nbsp;的解釋中,&nbsp; 就包含&nbsp;<span><a href="https://www.merriam-webster.com/dictionary/procurement">procurement</a>,&nbsp;<a href="https://www.merriam-webster.com/dictionary/maintenance">maintenance</a>,&nbsp;<a href="https://www.merriam-webster.com/dictionary/facilities">facilities</a> 與&nbsp;<a href="https://www.merriam-webster.com/dictionary/campaign">campaign</a> 等常用單字. 假如學員願意花點時間研究這些英文單字的相關意涵, 並多次復習, 就能持續不斷改進自我的英文閱讀能力,&nbsp; 自行查詢網路上所提供的眾多 Python 英文教學資料.</span></p><p><span><a href="https://www.merriam-webster.com/dictionary/logistics">Logistics</a> 指後勤物流, 在上課教材中, 指的是與課程有關的"事物"及"流程"說明介紹, 其中包括課程目標、課程網站、課程政策、教學大綱與上課時程安排等內容.</span></p><p><span><a href="https://www.merriam-webster.com/dictionary/preliminary">Preliminary</a> 則是指將對課程的進行方式與基本上課模式, 進行初步的說明介紹.</span></p><p><span>Python 教材的建置目的, 是希望學員在學習九週之後, 能夠六人一組, 嘗試開發有用的程式.</span></p><p><span>這些程式專案可以是任何主題, 或者直接與往後的機電資整合產品開發流程相關.</span></p><h3>what is new</h3>
 <p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a>&nbsp;</p>
 <p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
 <p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p>
@@ -6244,7 +6244,423 @@ if __name__ == '__main__':
 <p>有關&nbsp; if __name__ == '__main__':</p>
 <p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a>&nbsp;</p>
 <p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p>
-<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2><p>Flask Hello World 程式:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 導入 Flask 類別from flask import Flask'''If you are using a single module (as in thisexample), you should use __name__ because depending on if it&rsquo;s started as applicationor imported as module the name will be different ('__main__' versusthe actual import name). This is needed so that Flask knows where to look fortemplates, static files, and so on. For more information have a look at the Flaskdocumentation.'''# 利用 Flask 類別建立 app 案例app = Flask(__name__)'''The route decorator is used to register a view function for a given URL rule.This does the same thing as add_url_rule() but is intended for decorator.'''# 利用 decorator 設定 URL 連結@app.route('/')def hello_world():    # 傳回字串    return 'Hello, World!'# app 在本機埠號 5000 執行, 且開啟 debug 模式app.run(host='127.0.0.1', port=5000, debug=True)</pre><p>有關 decorator:&nbsp;</p><p><a href="https://realpython.com/primer-on-python-decorators/">https://realpython.com/primer-on-python-decorators/</a>&nbsp;</p><p>根據&nbsp;<a href="https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/">https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/</a>&nbsp;說明:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@my_decoratordef my_func(stuff):    do_things()</pre><p>等同</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def my_func(stuff):    do_things()my_func = my_decorator(my_func)</pre><p>因此可以先編寫:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import abort# wraps 是一個製作 Decorator 好工具，也可以把參數傳入from functools import wrapsdef check_login():    # 做一些檢查def login_required(fun):    """    Required user to login    """    @wraps(fun)    # wraps 可協助傳入參數做操作    def wrapper(*args, **kwds):        if check_login() is None:            return abort(403)        return fun(*args, **kwds)    return wrapper</pre><p>然後再透過 decorator 設計下列程式, 代表有驗證登入者才能看到該頁面:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@payment_blueprint.route('/payment')@login_requireddef get_payment_page():    return render_template('payment/index.html')</pre><p>oauth2 模組:</p><p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p><p>or</p><p>google-api-python-client</p><p>google-auth</p><p>google-auth-httplib2</p><p>google-auth-oauthlib<br><br>使用 requests-oauthlib 模組:</p><p>參考:&nbsp;<a href="https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e">https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e</a>&nbsp;</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import osimport jsonimport datetimefrom flask import Flask, url_for, redirect, \    render_template, session, requestfrom flask.ext.sqlalchemy import SQLAlchemyfrom flask.ext.login import LoginManager, login_required, login_user, \    logout_user, current_user, UserMixinfrom requests_oauthlib import OAuth2Sessionfrom requests.exceptions import HTTPErrorbasedir = os.path.abspath(os.path.dirname(__file__))"""App Configuration"""class Auth:    """Google Project Credentials"""    CLIENT_ID = ('688061596571-3c13n0uho6qe34hjqj2apincmqk86ddj'                 '.apps.googleusercontent.com')    CLIENT_SECRET = 'JXf7Ic_jfCam1S7lBJalDyPZ'    REDIRECT_URI = 'https://localhost:5000/gCallback'    AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'    TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'    USER_INFO = 'https://www.googleapis.com/userinfo/v2/me'    SCOPE = ['profile', 'email']class Config:    """Base config"""    APP_NAME = "Test Google Login"    SECRET_KEY = os.environ.get("SECRET_KEY") or "somethingsecret"class DevConfig(Config):    """Dev config"""    DEBUG = True    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "test.db")class ProdConfig(Config):    """Production config"""    DEBUG = False    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "prod.db")config = {    "dev": DevConfig,    "prod": ProdConfig,    "default": DevConfig}"""APP creation and configuration"""app = Flask(__name__)app.config.from_object(config['dev'])db = SQLAlchemy(app)login_manager = LoginManager(app)login_manager.login_view = "login"login_manager.session_protection = "strong"""" DB Models """class User(db.Model, UserMixin):    __tablename__ = "users"    id = db.Column(db.Integer, primary_key=True)    email = db.Column(db.String(100), unique=True, nullable=False)    name = db.Column(db.String(100), nullable=True)    avatar = db.Column(db.String(200))    tokens = db.Column(db.Text)    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())@login_manager.user_loaderdef load_user(user_id):    return User.query.get(int(user_id))""" OAuth Session creation """def get_google_auth(state=None, token=None):    if token:        return OAuth2Session(Auth.CLIENT_ID, token=token)    if state:        return OAuth2Session(            Auth.CLIENT_ID,            state=state,            redirect_uri=Auth.REDIRECT_URI)    oauth = OAuth2Session(        Auth.CLIENT_ID,        redirect_uri=Auth.REDIRECT_URI,        scope=Auth.SCOPE)    return oauth@app.route('/')@login_requireddef index():    return render_template('index.html')@app.route('/login')def login():    if current_user.is_authenticated:        return redirect(url_for('index'))    google = get_google_auth()    auth_url, state = google.authorization_url(        Auth.AUTH_URI, access_type='offline')    session['oauth_state'] = state    return render_template('login.html', auth_url=auth_url)@app.route('/gCallback')def callback():    if current_user is not None and current_user.is_authenticated:        return redirect(url_for('index'))    if 'error' in request.args:        if request.args.get('error') == 'access_denied':            return 'You denied access.'        return 'Error encountered.'    if 'code' not in request.args and 'state' not in request.args:        return redirect(url_for('login'))    else:        google = get_google_auth(state=session['oauth_state'])        try:            token = google.fetch_token(                Auth.TOKEN_URI,                client_secret=Auth.CLIENT_SECRET,                authorization_response=request.url)        except HTTPError:            return 'HTTPError occurred.'        google = get_google_auth(token=token)        resp = google.get(Auth.USER_INFO)        if resp.status_code == 200:            user_data = resp.json()            email = user_data['email']            user = User.query.filter_by(email=email).first()            if user is None:                user = User()                user.email = email            user.name = user_data['name']            print(token)            user.tokens = json.dumps(token)            user.avatar = user_data['picture']            db.session.add(user)            db.session.commit()            login_user(user)            return redirect(url_for('index'))        return 'Could not fetch your information.'@app.route('/logout')@login_requireddef logout():    logout_user()    return redirect(url_for('index'))</pre><p>使用 google 相關模組, 擷取 google drive 資料:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># -*- coding: utf-8 -*-import osimport flaskimport requestsimport google.oauth2.credentialsimport google_auth_oauthlib.flowimport googleapiclient.discoveryimport ssl# 即使在近端仍希望以 https 模式下執行context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)context.load_cert_chain('localhost.crt', 'localhost.key')# This variable specifies the name of a file that contains the OAuth 2.0# information for this application, including its client_id and client_secret.CLIENT_SECRETS_FILE = "client_secret.json"# This OAuth 2.0 access scope allows for full read/write access to the# authenticated user's account and requires requests to use an SSL connection.SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']API_SERVICE_NAME = 'drive'API_VERSION = 'v2'app = flask.Flask(__name__)# Note: A secret key is included in the sample so that it works.# If you use this code in your application, replace this with a truly secret# key. See http://flask.pocoo.org/docs/0.12/quickstart/#sessions.app.secret_key = 'A0Zr9@8j/3yX R~XHH!jmN]LWX/,?R@T'@app.route('/')def index():  return print_index_table()@app.route('/test')def test_api_request():  if 'credentials' not in flask.session:    return flask.redirect('authorize')  # Load credentials from the session.  credentials = google.oauth2.credentials.Credentials(      **flask.session['credentials'])  drive = googleapiclient.discovery.build(      API_SERVICE_NAME, API_VERSION, credentials=credentials)  files = drive.files().list().execute()  # Save credentials back to session in case access token was refreshed.  # ACTION ITEM: In a production app, you likely want to save these  #              credentials in a persistent database instead.  flask.session['credentials'] = credentials_to_dict(credentials)  return flask.jsonify(**files)@app.route('/authorize')def authorize():  # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.  flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(      CLIENT_SECRETS_FILE, scopes=SCOPES)  flow.redirect_uri = flask.url_for('callback', _external=True)  authorization_url, state = flow.authorization_url(      # Enable offline access so that you can refresh an access token without      # re-prompting the user for permission. Recommended for web server apps.      access_type='offline',      # Enable incremental authorization. Recommended as a best practice.      include_granted_scopes='true')  # Store the state so the callback can verify the auth server response.  flask.session['state'] = state  return flask.redirect(authorization_url)@app.route('/callback')def callback():  # Specify the state when creating the flow in the callback so that it can  # verified in the authorization server response.  state = flask.session['state']  flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(      CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)  flow.redirect_uri = flask.url_for('callback', _external=True)  # Use the authorization server's response to fetch the OAuth 2.0 tokens.  authorization_response = flask.request.url  flow.fetch_token(authorization_response=authorization_response)  # Store credentials in the session.  # ACTION ITEM: In a production app, you likely want to save these  #              credentials in a persistent database instead.  credentials = flow.credentials  flask.session['credentials'] = credentials_to_dict(credentials)  return flask.redirect(flask.url_for('test_api_request'))@app.route('/revoke')def revoke():  if 'credentials' not in flask.session:    return ('You need to &lt;a href="/authorize"&gt;authorize&lt;/a&gt; before ' +            'testing the code to revoke credentials.')  credentials = google.oauth2.credentials.Credentials(    **flask.session['credentials'])  revoke = requests.post('https://accounts.google.com/o/oauth2/revoke',      params={'token': credentials.token},      headers = {'content-type': 'application/x-www-form-urlencoded'})  status_code = getattr(revoke, 'status_code')  if status_code == 200:    return('Credentials successfully revoked.' + print_index_table())  else:    return('An error occurred.' + print_index_table())@app.route('/clear')def clear_credentials():  if 'credentials' in flask.session:    del flask.session['credentials']  return ('Credentials have been cleared.&lt;br&gt;&lt;br&gt;' +          print_index_table())def credentials_to_dict(credentials):  return {'token': credentials.token,          'refresh_token': credentials.refresh_token,          'token_uri': credentials.token_uri,          'client_id': credentials.client_id,          'client_secret': credentials.client_secret,          'scopes': credentials.scopes}def print_index_table():  return ('&lt;table&gt;' +          '&lt;tr&gt;&lt;td&gt;&lt;a href="/test"&gt;Test an API request&lt;/a&gt;&lt;/td&gt;' +          '&lt;td&gt;Submit an API request and see a formatted JSON response. ' +          '    Go through the authorization flow if there are no stored ' +          '    credentials for the user.&lt;/td&gt;&lt;/tr&gt;' +          '&lt;tr&gt;&lt;td&gt;&lt;a href="/authorize"&gt;Test the auth flow directly&lt;/a&gt;&lt;/td&gt;' +          '&lt;td&gt;Go directly to the authorization flow. If there are stored ' +          '    credentials, you still might not be prompted to reauthorize ' +          '    the application.&lt;/td&gt;&lt;/tr&gt;' +          '&lt;tr&gt;&lt;td&gt;&lt;a href="/revoke"&gt;Revoke current credentials&lt;/a&gt;&lt;/td&gt;' +          '&lt;td&gt;Revoke the access token associated with the current user ' +          '    session. After revoking credentials, if you go to the test ' +          '    page, you should see an &lt;code&gt;invalid_grant&lt;/code&gt; error.' +          '&lt;/td&gt;&lt;/tr&gt;' +          '&lt;tr&gt;&lt;td&gt;&lt;a href="/clear"&gt;Clear Flask session credentials&lt;/a&gt;&lt;/td&gt;' +          '&lt;td&gt;Clear the access token currently stored in the user session. ' +          '    After clearing the token, if you &lt;a href="/test"&gt;test the ' +          '    API request&lt;/a&gt; again, you should go back to the auth flow.' +          '&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')if __name__ == '__main__':  # When running locally, disable OAuthlib's HTTPs verification.  # ACTION ITEM for developers:  #     When running in production *do not* leave this option enabled.  os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'  # Specify a hostname and port that are set as a valid redirect URI  # for your API project in the Google API Console.  app.run('localhost', 7443, debug=True, ssl_context=context)</pre><p>因為在此要使用 SQLite 資料庫, 可以使用&nbsp;<a href="https://portableapps.com/apps/development/sqlite_database_browser_portable">https://portableapps.com/apps/development/sqlite_database_browser_portable</a>&nbsp;開啟 SQLite 資料庫檔案.</p><p>利用 pybean 建立 user 資料表:</p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import osfrom pybean import Store, SQLiteWriter# if no content.db, create database file with cms tabledata_dir = "./"if not os.path.isfile(data_dir+"content.db"):    library = Store(SQLiteWriter(data_dir+"content.db", frozen=False))    # 資料表 user    user = library.new("user")    user.studid = "123"    user.password = "123"    user.memo = "user 123"    library.save(user)    library.commit()</pre><p>操作步驟:</p><p><a href="https://console.developers.google.com/">https://console.developers.google.com/</a>&nbsp;</p><p>&nbsp;建立專案,&nbsp;&nbsp;<span>APIs and Auth -&gt; Credentials,&nbsp;&nbsp;Add Credentials and then select OAuth 2.0 client ID</span></p><p><span>get client id and client secret.</span></p><p><span>python -m pip install&nbsp;Flask-Login</span></p><p><span>之後可以使用:</span></p><pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask_login import LoginManager, login_required, login_user, \    logout_user, current_user, UserMixin</pre><p></p><h1>應用範例</h1>
+<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,&nbsp; __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
+<p>Flask Hello World 程式:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 導入 Flask 類別
+from flask import Flask
+'''
+If you are using a single module (as in this
+example), you should use __name__ because depending on if it&rsquo;s started as application
+or imported as module the name will be different ('__main__' versus
+the actual import name). This is needed so that Flask knows where to look for
+templates, static files, and so on. For more information have a look at the Flask
+documentation.
+'''
+# 利用 Flask 類別建立 app 案例
+app = Flask(__name__)
+
+'''
+The route decorator is used to register a view function for a given URL rule.
+This does the same thing as add_url_rule() but is intended for decorator.
+'''
+# 利用 decorator 設定 URL 連結
+@app.route('/')
+def hello_world():
+    # 傳回字串
+    return 'Hello, World!'
+
+# app 在本機埠號 5000 執行, 且開啟 debug 模式
+app.run(host='127.0.0.1', port=5000, debug=True)</pre>
+<p>有關 decorator:&nbsp;</p>
+<p><a href="https://realpython.com/primer-on-python-decorators/">https://realpython.com/primer-on-python-decorators/</a>&nbsp;</p>
+<p>根據&nbsp;<a href="https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/">https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/</a>&nbsp;說明:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@my_decorator
+def my_func(stuff):
+    do_things()</pre>
+<p>等同</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def my_func(stuff):
+    do_things()
+my_func = my_decorator(my_func)</pre>
+<p>因此可以先編寫:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import abort
+# wraps 是一個製作 Decorator 好工具，也可以把參數傳入
+from functools import wraps
+def check_login():
+    # 做一些檢查
+def login_required(fun):
+    """
+    Required user to login
+    """
+    @wraps(fun)
+    # wraps 可協助傳入參數做操作
+    def wrapper(*args, **kwds):
+        if check_login() is None:
+            return abort(403)
+        return fun(*args, **kwds)
+    return wrapper</pre>
+<p>然後再透過 decorator 設計下列程式, 代表有驗證登入者才能看到該頁面:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@payment_blueprint.route('/payment')
+@login_required
+def get_payment_page():
+    return render_template('payment/index.html')</pre>
+<p>oauth2 模組:</p>
+<p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
+<p>or</p>
+<p>google-api-python-client</p>
+<p>google-auth</p>
+<p>google-auth-httplib2</p>
+<p>google-auth-oauthlib<br><br>使用 requests-oauthlib 模組:</p>
+<p>參考:&nbsp;<a href="https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e">https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e</a>&nbsp;</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+import json
+import datetime
+
+from flask import Flask, url_for, redirect, \
+    render_template, session, request
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager, login_required, login_user, \
+    logout_user, current_user, UserMixin
+from requests_oauthlib import OAuth2Session
+from requests.exceptions import HTTPError
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+"""App Configuration"""
+
+
+class Auth:
+    """Google Project Credentials"""
+    CLIENT_ID = ('688061596571-3c13n0uho6qe34hjqj2apincmqk86ddj'
+                 '.apps.googleusercontent.com')
+    CLIENT_SECRET = 'JXf7Ic_jfCam1S7lBJalDyPZ'
+    REDIRECT_URI = 'https://localhost:5000/gCallback'
+    AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
+    TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
+    USER_INFO = 'https://www.googleapis.com/userinfo/v2/me'
+    SCOPE = ['profile', 'email']
+
+
+class Config:
+    """Base config"""
+    APP_NAME = "Test Google Login"
+    SECRET_KEY = os.environ.get("SECRET_KEY") or "somethingsecret"
+
+
+class DevConfig(Config):
+    """Dev config"""
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "test.db")
+
+
+class ProdConfig(Config):
+    """Production config"""
+    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "prod.db")
+
+
+config = {
+    "dev": DevConfig,
+    "prod": ProdConfig,
+    "default": DevConfig
+}
+
+"""APP creation and configuration"""
+app = Flask(__name__)
+app.config.from_object(config['dev'])
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.session_protection = "strong"
+
+""" DB Models """
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    name = db.Column(db.String(100), nullable=True)
+    avatar = db.Column(db.String(200))
+    tokens = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+""" OAuth Session creation """
+
+
+def get_google_auth(state=None, token=None):
+    if token:
+        return OAuth2Session(Auth.CLIENT_ID, token=token)
+    if state:
+        return OAuth2Session(
+            Auth.CLIENT_ID,
+            state=state,
+            redirect_uri=Auth.REDIRECT_URI)
+    oauth = OAuth2Session(
+        Auth.CLIENT_ID,
+        redirect_uri=Auth.REDIRECT_URI,
+        scope=Auth.SCOPE)
+    return oauth
+
+
+@app.route('/')
+@login_required
+def index():
+    return render_template('index.html')
+
+
+@app.route('/login')
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    google = get_google_auth()
+    auth_url, state = google.authorization_url(
+        Auth.AUTH_URI, access_type='offline')
+    session['oauth_state'] = state
+    return render_template('login.html', auth_url=auth_url)
+
+
+@app.route('/gCallback')
+def callback():
+    if current_user is not None and current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if 'error' in request.args:
+        if request.args.get('error') == 'access_denied':
+            return 'You denied access.'
+        return 'Error encountered.'
+    if 'code' not in request.args and 'state' not in request.args:
+        return redirect(url_for('login'))
+    else:
+        google = get_google_auth(state=session['oauth_state'])
+        try:
+            token = google.fetch_token(
+                Auth.TOKEN_URI,
+                client_secret=Auth.CLIENT_SECRET,
+                authorization_response=request.url)
+        except HTTPError:
+            return 'HTTPError occurred.'
+        google = get_google_auth(token=token)
+        resp = google.get(Auth.USER_INFO)
+        if resp.status_code == 200:
+            user_data = resp.json()
+            email = user_data['email']
+            user = User.query.filter_by(email=email).first()
+            if user is None:
+                user = User()
+                user.email = email
+            user.name = user_data['name']
+            print(token)
+            user.tokens = json.dumps(token)
+            user.avatar = user_data['picture']
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            return redirect(url_for('index'))
+        return 'Could not fetch your information.'
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))</pre>
+<p>使用 google 相關模組, 擷取 google drive 資料:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># -*- coding: utf-8 -*-
+
+import os
+import flask
+import requests
+
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
+import ssl
+
+# 即使在近端仍希望以 https 模式下執行
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain('localhost.crt', 'localhost.key')
+
+# This variable specifies the name of a file that contains the OAuth 2.0
+# information for this application, including its client_id and client_secret.
+CLIENT_SECRETS_FILE = "client_secret.json"
+
+# This OAuth 2.0 access scope allows for full read/write access to the
+# authenticated user's account and requires requests to use an SSL connection.
+SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+API_SERVICE_NAME = 'drive'
+API_VERSION = 'v2'
+
+app = flask.Flask(__name__)
+# Note: A secret key is included in the sample so that it works.
+# If you use this code in your application, replace this with a truly secret
+# key. See http://flask.pocoo.org/docs/0.12/quickstart/#sessions.
+app.secret_key = 'A0Zr9@8j/3yX R~XHH!jmN]LWX/,?R@T'
+
+
+@app.route('/')
+def index():
+  return print_index_table()
+
+@app.route('/test')
+def test_api_request():
+  if 'credentials' not in flask.session:
+    return flask.redirect('authorize')
+
+  # Load credentials from the session.
+  credentials = google.oauth2.credentials.Credentials(
+      **flask.session['credentials'])
+
+  drive = googleapiclient.discovery.build(
+      API_SERVICE_NAME, API_VERSION, credentials=credentials)
+
+  files = drive.files().list().execute()
+
+  # Save credentials back to session in case access token was refreshed.
+  # ACTION ITEM: In a production app, you likely want to save these
+  #              credentials in a persistent database instead.
+  flask.session['credentials'] = credentials_to_dict(credentials)
+
+  return flask.jsonify(**files)
+
+
+@app.route('/authorize')
+def authorize():
+  # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
+  flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+      CLIENT_SECRETS_FILE, scopes=SCOPES)
+
+  flow.redirect_uri = flask.url_for('callback', _external=True)
+
+  authorization_url, state = flow.authorization_url(
+      # Enable offline access so that you can refresh an access token without
+      # re-prompting the user for permission. Recommended for web server apps.
+      access_type='offline',
+      # Enable incremental authorization. Recommended as a best practice.
+      include_granted_scopes='true')
+
+  # Store the state so the callback can verify the auth server response.
+  flask.session['state'] = state
+
+  return flask.redirect(authorization_url)
+
+
+@app.route('/callback')
+def callback():
+  # Specify the state when creating the flow in the callback so that it can
+  # verified in the authorization server response.
+  state = flask.session['state']
+
+  flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+      CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
+  flow.redirect_uri = flask.url_for('callback', _external=True)
+
+  # Use the authorization server's response to fetch the OAuth 2.0 tokens.
+  authorization_response = flask.request.url
+  flow.fetch_token(authorization_response=authorization_response)
+
+  # Store credentials in the session.
+  # ACTION ITEM: In a production app, you likely want to save these
+  #              credentials in a persistent database instead.
+  credentials = flow.credentials
+  flask.session['credentials'] = credentials_to_dict(credentials)
+
+  return flask.redirect(flask.url_for('test_api_request'))
+
+
+@app.route('/revoke')
+def revoke():
+  if 'credentials' not in flask.session:
+    return ('You need to &lt;a href="/authorize"&gt;authorize&lt;/a&gt; before ' +
+            'testing the code to revoke credentials.')
+
+  credentials = google.oauth2.credentials.Credentials(
+    **flask.session['credentials'])
+
+  revoke = requests.post('https://accounts.google.com/o/oauth2/revoke',
+      params={'token': credentials.token},
+      headers = {'content-type': 'application/x-www-form-urlencoded'})
+
+  status_code = getattr(revoke, 'status_code')
+  if status_code == 200:
+    return('Credentials successfully revoked.' + print_index_table())
+  else:
+    return('An error occurred.' + print_index_table())
+
+
+@app.route('/clear')
+def clear_credentials():
+  if 'credentials' in flask.session:
+    del flask.session['credentials']
+  return ('Credentials have been cleared.&lt;br&gt;&lt;br&gt;' +
+          print_index_table())
+
+
+def credentials_to_dict(credentials):
+  return {'token': credentials.token,
+          'refresh_token': credentials.refresh_token,
+          'token_uri': credentials.token_uri,
+          'client_id': credentials.client_id,
+          'client_secret': credentials.client_secret,
+          'scopes': credentials.scopes}
+
+def print_index_table():
+  return ('&lt;table&gt;' +
+          '&lt;tr&gt;&lt;td&gt;&lt;a href="/test"&gt;Test an API request&lt;/a&gt;&lt;/td&gt;' +
+          '&lt;td&gt;Submit an API request and see a formatted JSON response. ' +
+          '    Go through the authorization flow if there are no stored ' +
+          '    credentials for the user.&lt;/td&gt;&lt;/tr&gt;' +
+          '&lt;tr&gt;&lt;td&gt;&lt;a href="/authorize"&gt;Test the auth flow directly&lt;/a&gt;&lt;/td&gt;' +
+          '&lt;td&gt;Go directly to the authorization flow. If there are stored ' +
+          '    credentials, you still might not be prompted to reauthorize ' +
+          '    the application.&lt;/td&gt;&lt;/tr&gt;' +
+          '&lt;tr&gt;&lt;td&gt;&lt;a href="/revoke"&gt;Revoke current credentials&lt;/a&gt;&lt;/td&gt;' +
+          '&lt;td&gt;Revoke the access token associated with the current user ' +
+          '    session. After revoking credentials, if you go to the test ' +
+          '    page, you should see an &lt;code&gt;invalid_grant&lt;/code&gt; error.' +
+          '&lt;/td&gt;&lt;/tr&gt;' +
+          '&lt;tr&gt;&lt;td&gt;&lt;a href="/clear"&gt;Clear Flask session credentials&lt;/a&gt;&lt;/td&gt;' +
+          '&lt;td&gt;Clear the access token currently stored in the user session. ' +
+          '    After clearing the token, if you &lt;a href="/test"&gt;test the ' +
+          '    API request&lt;/a&gt; again, you should go back to the auth flow.' +
+          '&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')
+
+
+if __name__ == '__main__':
+  # When running locally, disable OAuthlib's HTTPs verification.
+  # ACTION ITEM for developers:
+  #     When running in production *do not* leave this option enabled.
+  os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+  # Specify a hostname and port that are set as a valid redirect URI
+  # for your API project in the Google API Console.
+  app.run('localhost', 7443, debug=True, ssl_context=context)</pre>
+<p>因為在此要使用 SQLite 資料庫, 可以使用&nbsp;<a href="https://portableapps.com/apps/development/sqlite_database_browser_portable">https://portableapps.com/apps/development/sqlite_database_browser_portable</a>&nbsp;開啟 SQLite 資料庫檔案.</p>
+<p>利用 pybean 建立 user 資料表:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+from pybean import Store, SQLiteWriter
+# if no content.db, create database file with cms table
+data_dir = "./"
+if not os.path.isfile(data_dir+"content.db"):
+    library = Store(SQLiteWriter(data_dir+"content.db", frozen=False))
+    # 資料表 user
+    user = library.new("user")
+    user.studid = "123"
+    user.password = "123"
+    user.memo = "user 123"
+    library.save(user)
+    library.commit()</pre>
+<p>操作步驟:</p>
+<p><a href="https://console.developers.google.com/">https://console.developers.google.com/</a>&nbsp;</p>
+<p>&nbsp;建立專案,&nbsp;&nbsp;<span>APIs and Auth -&gt; Credentials,&nbsp;&nbsp;Add Credentials and then select OAuth 2.0 client ID</span></p>
+<p><span>get client id and client secret.</span></p>
+<p><span>python -m pip install&nbsp;Flask-Login</span></p>
+<p><span>之後可以使用:</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask_login import LoginManager, login_required, login_user, \
+    logout_user, current_user, UserMixin</pre>
+<p></p><h1>應用範例</h1>
 <p>學習計算機程式的目的在利用數位科技技術解決問題, 所謂數位科技技術包括程式套件、網路與資料庫等元件的組合.</p>
 <p>基本流程為:</p>
 <ol>
