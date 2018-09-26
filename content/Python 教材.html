@@ -74,4 +74,41 @@ $(function(){
 <p><span><a href="https://www.merriam-webster.com/dictionary/logistics">Logistics</a> 指後勤物流, 在上課教材中, 指的是與課程有關的"事物"及"流程"說明介紹, 其中包括課程目標、課程網站、課程政策、教學大綱與上課時程安排等內容.</span></p>
 <p><span><a href="https://www.merriam-webster.com/dictionary/preliminary">Preliminary</a> 則是指將對課程的進行方式與基本上課模式, 進行初步的說明介紹.</span></p>
 <p><span>Python 教材的建置目的, 是希望學員在學習九週之後, 能夠六人一組, 嘗試開發有用的程式.</span></p>
-<p><span>這些程式專案可以是任何主題, 或者直接與往後的機電資整合產品開發流程相關.</span></p><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
+<p><span>這些程式專案可以是任何主題, 或者直接與往後的機電資整合產品開發流程相關.</span></p>
+<h4><span>先來一段 git 的基本練習</span></h4>
+<p><span>啟動 p37 可攜系統</span></p>
+<p><span>在其中一個 Dos 命令列中, 輸入:</span></p>
+<p><span>&nbsp; &nbsp; c:</span></p>
+<p><span>表示要從 y: 槽切換到 c: 槽, 然後再下:</span></p>
+<p><span>&nbsp; &nbsp; cd \</span></p>
+<p><span>表示要更換目錄到 c: 槽的根目錄. 接下來建立一個 test 目錄:</span><span></span></p>
+<p><span>&nbsp; &nbsp; mkdir test</span></p>
+<p><span>然後更換目錄到此 test 目錄中.</span></p>
+<p><span>&nbsp; &nbsp; cd test</span></p>
+<p><span>接下來要執行 git 指令, 表示要將 test 起始為 Git 的倉儲:</span></p>
+<p><span>&nbsp; &nbsp; git init</span></p>
+<p><span>這時, c:\test 目錄中會新增一個 .git 目錄, 表示現在這個 c:\test 已經是 Git 倉儲.</span></p>
+<p><span>接下來要利用 SciTE 編輯器, 在 test 目錄中建立一個 myprogram.txt 文字檔案, 在此之前, 請利用 SciTE 的下拉式功能表 Options 中的 Open Global Options File 開啟 SciTEGlobal.properties 設定檔案, 找到第 137 行的</span></p>
+<p><span>&nbsp; &nbsp; load.on.activate=1</span></p>
+<p><span>去掉原先最前頭的 "#" 符號, 然後存檔, 之後關閉所有開啟的 SciTE 編輯器, 如此, 可以讓 SciTE 所開啟的檔案, 內容有修改時, 可以即時呈現在編輯區中.</span></p>
+<p><span>接著, 重新在 Dos 命令列中輸入:</span></p>
+<p><span>&nbsp; &nbsp; y:\SciTE\bin\Sc1.exe&nbsp;</span></p>
+<p><span>開啟已經修改 SciTEGlobal.properties 設定檔案之後的 SciTE 邊及區,&nbsp;</span><span>並且在&nbsp; myprogram.txt 檔案中, 只加入一行:</span><span></span></p>
+<p><span>&nbsp; &nbsp; my program</span></p>
+<p><span>接著存檔, 這時 c:\test 目錄中除了有 .git 目錄, 又多了一個 myprogram.txt 檔案.</span></p>
+<p>接下來要對 c:\test 倉儲進行新增與提交流程, 將 myprogram.txt 納入 .git 的版次管理.</p>
+<p>&nbsp; &nbsp; git add myprogram.txt</p>
+<p>&nbsp; &nbsp; git commit -m "initial add"</p>
+<p>這時, c:\test 倉儲中已經有一個改版的記錄, 接下來再編輯 myprogram.txt&nbsp; 檔案. 在其中的 "my program" 字串後, 連按兩個 Enter 後, 加入:</p>
+<p>&nbsp; &nbsp; first function</p>
+<p>然後存檔, 接著再執行 git add 與 git commit:</p>
+<p>&nbsp; &nbsp; git add .</p>
+<p>&nbsp; &nbsp; git commit -m "add first function"</p>
+<p>接著重覆上述編輯動作, 新增 "second function"</p>
+<p>然後, 再執行 git add 與 git commit :</p>
+<p>&nbsp; &nbsp; git add .</p>
+<p>&nbsp; &nbsp; git commit -m "add second function"</p>
+<p>這時, 使用者已經可以利用:</p>
+<p>&nbsp; &nbsp; git log</p>
+<p>看到倉儲中已經有兩個提交.</p>
+<pre><code>&nbsp;   git log --graph --oneline --all<br><br><a href="./../downloads/cp_w3_test_repo.7z">cp_w3_test_repo.7z</a></code></pre><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
