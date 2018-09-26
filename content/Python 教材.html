@@ -49,6 +49,11 @@ init_mathjax();
 <script src="https://scrum-3.github.io/web/brython/brython.js"></script>
 <script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
 -->
+<style>
+img {
+    border: 3px solid red;
+}
+</style>
 
 <script src="./../static/jquery.js"></script>
 <script type="text/javascript">
@@ -110,5 +115,40 @@ $(function(){
 <p>&nbsp; &nbsp; git commit -m "add second function"</p>
 <p>這時, 使用者已經可以利用:</p>
 <p>&nbsp; &nbsp; git log</p>
-<p>看到倉儲中已經有兩個提交.</p>
-<pre><code>&nbsp;   git log --graph --oneline --all<br><br><a href="./../downloads/cp_w3_test_repo.7z">cp_w3_test_repo.7z</a></code></pre><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
+<p>看到倉儲中已經有三個提交. 分別為:</p>
+<p>&nbsp; &nbsp; a3a2eb3 add second function<br>&nbsp; &nbsp; 9295dfd add first function<br>&nbsp; &nbsp; 3019d3f initial add</p>
+<p>這時若希望在加入 first function 版本狀態時, 新增一個測試功能, 若通過測試符合需求, 則併入已經納入 second function 的版本中, 若不符合需求, 則可將該測試分支刪除.</p>
+<p>先準備將工作目錄, 導回 "add first function" 的提交版本.</p>
+<p>&nbsp; &nbsp; git checkout&nbsp;9295dfd</p>
+<p>然後以此提交版本內容, 新增一個 dev 分支:</p>
+<p>&nbsp; &nbsp; git branch dev</p>
+<p>接下來, 對 myprogram.txt 改版, 在 first function 字串後,&nbsp; 連按兩個 Enter&nbsp; 後, 輸入:</p>
+<p>&nbsp; &nbsp; add test function</p>
+<p>myprogram.txt 存檔後, 接著, 進行另一次的新增與提交.</p>
+<p>&nbsp; &nbsp; git add .</p>
+<p>&nbsp; &nbsp; git commit -m "add test function"</p>
+<p>這時若希望看到各提交點間的關係, 可以利用:</p>
+<p>&nbsp; &nbsp; git log --graph --oneline --all</p>
+<p>然後, 假設該測試功能已經通過, 準備與 add&nbsp; second function 後的版本進行合併, 這時 git 出現 myprogram.txt 合併衝突, 因為 first function 後, 已經加入 seconf function, 但是 dev 分支是在 first function 加入後所導出的版本, 因此使用者在合併當下,&nbsp; 必須決定 add second function 與 add test function, 是只保留其中一項功能, 或者同時保留.</p>
+<p>&nbsp; &nbsp; git checkout master</p>
+<p>將工作目錄轉為 master 的版本, 然後將 dev 分支的內容合併進來:</p>
+<p>&nbsp; &nbsp; git merge dev</p>
+<p>這時的 myprogram.txt 內容為:</p>
+<p><img src="./../images/myprogram_master_dev_conflict.png" width="231" height="273" alt=""><br>必須要刪除衝突標註符號, 同時保留 add second function 與 add test function, 存檔後成為:</p>
+<p><img src="./../images/myprogram_master_dev_conflict_resolved.png" width="210" height="205" alt=""></p>
+<p>最後對此一合併後的版本, 進行新增與提交:</p>
+<p>&nbsp; &nbsp; git add .</p>
+<p>&nbsp; &nbsp; git commit -m "complete first, second and test functions adding"</p>
+<p>再以 git log --oneline --graph --all 檢查各提交間的關聯, 畫面如下圖所示:</p>
+<p><img src="./../images/git_log_graph_oneline_all.png" width="635" height="221" alt=""><a href="./../downloads/cp_w3_test_repo.7z"></a></p>
+<p>最後要將工作目錄導向最初 initial add 提交時的版本:</p>
+<p>&nbsp; &nbsp; git checkout 9439e67</p>
+<p>導回 add first function 時的版本:</p>
+<p>&nbsp; &nbsp; git checkout 5fcdac9</p>
+<p>導回 add second function 時的版本:</p>
+<p>&nbsp; &nbsp; git checkout fb092cc</p>
+<p>導回 dev 時的狀態:</p>
+<p>&nbsp; &nbsp; git checkout 1c3d5ff</p>
+<p>將工作目錄導回最後 master 合併 dev 分支的版本:</p>
+<p>&nbsp; &nbsp; git checkout ace97d7</p>
+<p>將上述 test (畫面中為 test1) 目錄壓縮後:&nbsp;<a href="./../downloads/cp_w3_test_repo.7z">cp_w3_test_repo.7z</a></p><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
