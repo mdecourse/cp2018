@@ -98,7 +98,7 @@ $(function(){
 <p><span>去掉原先最前頭的 "#" 符號, 然後存檔, 之後關閉所有開啟的 SciTE 編輯器, 如此, 可以讓 SciTE 所開啟的檔案, 內容有修改時, 可以即時呈現在編輯區中.</span></p>
 <p><span>接著, 重新在 Dos 命令列中輸入:</span></p>
 <p><span>&nbsp; &nbsp; y:\SciTE\bin\Sc1.exe&nbsp;</span></p>
-<p><span>開啟已經修改 SciTEGlobal.properties 設定檔案之後的 SciTE 邊及區,&nbsp;</span><span>並且在&nbsp; myprogram.txt 檔案中, 只加入一行:</span><span></span></p>
+<p><span>開啟已經修改 SciTEGlobal.properties 設定檔案之後的 SciTE 編輯區,&nbsp;</span><span>並且在&nbsp; myprogram.txt 檔案中, 只加入一行:</span><span></span></p>
 <p><span>&nbsp; &nbsp; my program</span></p>
 <p><span>接著存檔, 這時 c:\test 目錄中除了有 .git 目錄, 又多了一個 myprogram.txt 檔案.</span></p>
 <p>接下來要對 c:\test 倉儲進行新增與提交流程, 將 myprogram.txt 納入 .git 的版次管理.</p>
@@ -141,6 +141,7 @@ $(function(){
 <p>&nbsp; &nbsp; git commit -m "complete first, second and test functions adding"</p>
 <p>再以 git log --oneline --graph --all 檢查各提交間的關聯, 畫面如下圖所示:</p>
 <p><img src="./../images/git_log_graph_oneline_all.png" width="635" height="221" alt=""><a href="./../downloads/cp_w3_test_repo.7z"></a></p>
+<p>利用以上方式管理檔案版次的好處是, 使用者可以透過高效能的 Git 工具, 導出各提交點的版本, 或者從任一版本建立分支進行各種測試, 不會影響到其他提交版本資料的發布, 等到近端的 git 倉儲進一步推送到遠端的伺服器時, 遠端倉儲不僅可以提供協同, 也可提升資料保全效益, 無論是近端或遠端電腦硬碟發生問題, 都可以從任一參與協同的倉儲中回復所有已經提交的各版本內容.</p>
 <p>最後要將工作目錄導向最初 initial add 提交時的版本:</p>
 <p>&nbsp; &nbsp; git checkout 9439e67</p>
 <p>導回 add first function 時的版本:</p>
