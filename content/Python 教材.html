@@ -152,4 +152,119 @@ $(function(){
 <p>&nbsp; &nbsp; git checkout 1c3d5ff</p>
 <p>將工作目錄導回最後 master 合併 dev 分支的版本:</p>
 <p>&nbsp; &nbsp; git checkout ace97d7</p>
-<p>將上述 test (畫面中為 test1) 目錄壓縮後:&nbsp;<a href="./../downloads/cp_w3_test_repo.7z">cp_w3_test_repo.7z</a></p><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
+<p>將上述 test (畫面中為 test1) 目錄壓縮後:&nbsp;<a href="./../downloads/cp_w3_test_repo.7z">cp_w3_test_repo.7z</a></p>
+<p>經過上述的 Git 近端指令操作, 可以了解在程式開發過程, 可以透過&nbsp; Git 分散式版本管理系統的功能, 以非常具有彈性的流程進行程式碼的編寫, 尤其當協同開發人員眾多時,&nbsp; Git 與 Github 將更能發揮其條理開發的特定, 並且安全地保存各版次資料內容.</p>
+<p>除了 Git 與 Github, 在計算機程式課程中還推薦另一項使用者較容易全盤主導的分散式版次管理工具: <a href="https://fossil-scm.org">Fossil SCM</a>.</p>
+<p><a href="https://fossil-scm.org">Fossil SCM</a> 的功能類似 Git, 而且近端工具與遠端工具都只需要一個檔案: fossil.exe (目前的最新版本為 2.7 版, 可以從&nbsp;<a href="https://fossil-scm.org/index.html/uv/download.html">https://fossil-scm.org/index.html/uv/download.html</a>&nbsp;下載)</p>
+<p>等大家都熟悉如何使用 Git 與 Github 來管理所開發的 Python 程式碼之後, 我們將在分組協同專案執行過程, 介紹如何在自建的 Ubuntu 伺服器上安裝 <a href="https://fossil-scm.org">Fossil SCM</a>.</p>
+<h4>&nbsp;Python 程式課程說明</h4>
+<p>在&nbsp;<a href="https://www.cs.cmu.edu/~112/">https://www.cs.cmu.edu/~112/</a>&nbsp;中的課程說明如下:</p>
+<p style="padding-left: 30px;"><span>A technical introduction to the fundamentals of programming with an emphasis on producing clear, robust, and reasonably efficient code using top-down design, informal analysis, and effective testing and debugging. Starting from first principles, we will cover a large subset of the Python programming language, including its standard libraries and programming paradigms. We will also target numerous deployment scenarios, including standalone programs, shell scripts, and web-based applications. This course assumes no prior programming experience. Even so, it is a fast-paced and rigorous preparation for 15-122. Students seeking a more gentle introduction to computer science should consider first taking 15-110. NOTE: students must achieve a C or better in order to use this course to satisfy the pre-requisite for any subsequent Computer Science course.</span></p>
+<p><span>而課程學習目標:</span></p>
+<ol>
+<li><span>Develop computational problem-solving skills using Python as a tool to be applied to new problems, especially in the student's home academic discipline</span></li>
+<li><span>Produce clear, robust, and efficient code in Python by</span>
+<ul>
+<li>employing modular, top-down design</li>
+<li>using sequential, conditional, and loop statements where appropriate</li>
+<li>using strings, lists, tuples, and dictionaries where appropriate</li>
+<li>using objects and classes where appropriate</li>
+<li>integrating recursive functions where appropriate</li>
+<li>proactively designing and writing test cases to effectively test and debug code</li>
+</ul>
+</li>
+<li><span>Develop an effective programming style based on established standards, practices, and guidelines</span></li>
+<li><span>Describe the difference between programming and Computer Science, and gain exposure to some of the Big Ideas of Computer Science (e.g., Computability)</span></li>
+<li><span>Explain and analyze the efficiency of algorithms by:</span>
+<ul>
+<li><span>proving the running time (Big-O) of various well-known searching and sorting algorithms</span></li>
+<li><span>determining (not proving) the running time (Big-O) of a small piece of code</span></li>
+<li><span>describing the difference between small code optimizations and more substantive algorithmic optimizations</span><span></span></li>
+</ul>
+</li>
+<li><span>Design and implement event-based graphical animations</span></li>
+<li><span>Develop and write a substantial (500-1500 line) program in Python to implement a solution to a term project of their choosing over three to four weeks</span></li>
+</ol>
+<h4><span></span>如何執行 Python 程式</h4>
+<p>在本課程中, 至少有三種方法可以執行 Python 程式:</p>
+<ol>
+<li>啟動 <a href="https://drive.google.com/file/d/1DWtyoUhl8CycKJ8uulB3viRXE39KqpE1/view?usp=sharing">P37</a> 可攜程式系統後, 以 SciTE 編輯器開啟或新建副檔名為 py 的檔案, 使用下拉式功能表 Tools -&gt; Go, 就可以執行 Python 程式.</li>
+<li>使用可攜系統所啟動的 Dos 命令列, 在 .py 程式碼所在的目錄, 以 python 程式碼檔名.py, 按下 Enter, 就可以執行該 Python 程式.</li>
+<li>部分原生 Python 程式碼與 <a href="https://brython.info/">Brython</a> 特有程式用法, 可以在導入 <a href="https://brython.info/">Brython</a> 解譯器的網頁中執行與 Python 相容的程式碼.</li>
+</ol>
+<!-- 啟動 Brython 時, 設定 pythonpath 為 ./../static/, 並將共用 .py 放入, 可以在隨後的程式中導入使用 -->
+<p><!-- 導入 brython --></p>
+<p>
+<script type="text/javascript" src="./../static/brython.js"></script>
+<script type="text/javascript" src="./../static/brython_stdlib.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../static/']});
+}
+</script>
+</p>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script type="text/javascript" src="./../static/ace/FileSaver.min.js"></script>
+<script type="text/javascript" src="./../static/ace/filereader.js"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script type="text/javascript" src="./../static/ace/ace.js"></script>
+<script type="text/javascript" src="./../static/ace/ext-language_tools.js"></script>
+<script type="text/javascript" src="./../static/ace/mode-python3.js"></script>
+<script type="text/javascript" src="./../static/ace/snippets/python.js"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<h4>開始練習 print() 用法, 並著手建立函式</h4>
+<p><!-- 印出版次與關鍵字程式 --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import ace
+
+# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
+Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
+
+Ace.editor.setValue("""# 導入 sys 模組
+import sys
+# 導入 keyword 模組
+import keyword
+
+def helloWorld():
+    print("Hello World!")
+
+helloWorld()
+
+# 利用 sys 模組中的 version_info 印出 Python 版次
+print("Python version: ", sys.version_info)
+# 利用 keyword 模組中的 kwlist 印出關鍵字
+print("Python keywords: ", keyword.kwlist)
+""")
+Ace.editor.scrollToRow(0)
+Ace.editor.gotoLine(0)
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run'].bind('click', Ace.run)
+doc['kw_show_console'].bind('click', Ace.show_console)
+doc['kw_clear_console'].bind('click', Ace.clear_console)
+</script>
+</p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<form><label>Filename: <input type="text" id="kw_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('kw_py_src', 'kw_filename');"></form>
+<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除</button></p>
+<div style="width: 100%; height: 100%;"><textarea id="kw_console" autocomplete="off"></textarea></div>
+<h4>認識 Syntax, Runtime 與 Logical Errors</h4>
+<h4>利用 input() 取得使用者輸入</h4>
+<h4>了解如何導入模組</h4><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
