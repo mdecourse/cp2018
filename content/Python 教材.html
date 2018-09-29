@@ -267,6 +267,70 @@ doc['kw_clear_console'].bind('click', Ace.clear_console)
 <form><label>Filename: <input type="text" id="kw_filename" placeholder="input file name">.py</label> <input type="submit" value="Save" onclick="doSave('kw_py_src', 'kw_filename');"></form>
 <p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除</button></p>
 <div style="width: 100%; height: 100%;"><textarea id="kw_console" autocomplete="off"></textarea></div>
+<p><!-- ****************************** keyword start -->
+<script type="text/python3">
+from browser import document as doc
+# 導入位於 static 目錄下的 beditor.py 
+import beditor
+# 利用 beditor.py 中的 editor 類別建立案例, 對應到 kw1
+kw1 = beditor.editor("""# 導入 sys 模組
+import sys
+# 導入 keyword 模組
+import keyword
+
+# 利用 sys 模組中的 version_info 印出 Python 版次
+print("Python version: ", sys.version_info)
+# 利用 keyword 模組中的 kwlist 印出關鍵字
+print("Python keywords: ", keyword.kwlist)
+""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
+# id 為 "keyword" 的按鈕點按時, 執行 kw1 物件中的 prog 方法
+doc["keyword"].bind('click', kw1.prog)
+</script>
+</p>
+<p><!-- ****************************** keyword end --></p>
+<p><!-- ***************************** slide ex1 start --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import beditor
+Ex1 = beditor.editor("""# 導入 Ex1 原始碼
+a = 0
+def my_print(n, input_str):
+    print("以下將重覆列印 '", input_str + "' " + str(n) + "次")
+    for i in range(n):
+        print(i, input_str)
+
+my_print(5, "Hello World!")
+the_str = "開始學習 Python"
+num = input("請輸入要列印的次數!")
+my_print(int(num), the_str)
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+
+def myfun():
+    yield 1
+    yield 2
+    yield 3
+
+for i in myfun():
+    print(i)
+
+x = iter(myfun())
+y = list(myfun())
+
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+print(x.__next__())
+print(x.__next__())
+print(x.__next__())
+print(y)
+""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
+# id 為 "ex1" 的按鈕點按時, 執行 Ex1 物件中的 prog 方法
+doc["ex1"].bind('click', Ex1.prog)
+</script>
+</p>
+<p><!-- ***************************** slide ex1 end --></p>
+<p><button id="keyword">Keyword</button><button id="ex1">Ex1</button></p>
 <h4>認識 Syntax, Runtime 與 Logical Errors</h4>
 <h4>利用 input() 取得使用者輸入</h4>
 <h4>了解如何導入模組</h4><br />Python << <a href='Python.html'>Previous</a> <a href='what is new.html'>Next</a> >> what is new</section></div></body></html>
