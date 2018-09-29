@@ -15,6 +15,9 @@
 </v>
 <v t="leo.20180902120523.1" a="E"><vh>編輯 reveal</vh>
 <v t="leo.20180902120523.2" a="E"><vh>@path ./../reveal</vh>
+<v t="leo.20180929175104.1" a="E"><vh>@path css</vh>
+<v t="leo.20180929175117.1"><vh>@edit reveal.css</vh></v>
+</v>
 <v t="leo.20180902120523.3" a="E"><vh>@clean index.html</vh>
 <v t="leo.20180902120523.4" a="E"><vh>html</vh>
 <v t="leo.20180902120523.5"><vh>head</vh></v>
@@ -57,10 +60,28 @@
 <v t="leo.20180925215116.1" a="E"><vh>Python.html</vh>
 <v t="leo.20180925215116.2"><vh>投影片內容</vh></v>
 </v>
-<v t="leo.20180902120523.11"><vh>快捷鍵</vh>
+<v t="leo.20180929180508.1"><vh>Print, input, def and for loop</vh>
+<v t="leo.20180929180508.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180929214822.1"><vh>內建函式範例</vh>
+<v t="leo.20180929214822.2"><vh>引用程式碼</vh></v>
+</v>
+<v t="leo.20180929221348.1" a="E"><vh>關鍵字與變數命名</vh>
+<v t="leo.20180929221348.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20180929213840.1" a="E"><vh>Iterable and Iterator</vh>
+<v t="leo.20180929213820.1"><vh>Iterable and Iterator</vh></v>
+</v>
+<v t="leo.20180929214137.1"><vh>Iterable and Iterator</vh>
+<v t="leo.20180929214137.2"><vh>Iterable and Iterator</vh></v>
+</v>
+<v t="leo.20180929223658.1" a="E"><vh>Reveal.js slides</vh>
+<v t="leo.20180929223637.1"><vh>Reveal.js slides</vh></v>
+</v>
+<v t="leo.20180902120523.11" a="E"><vh>快捷鍵</vh>
 <v t="leo.20180902120523.12"><vh>投影片快捷鍵</vh></v>
 </v>
-<v t="leo.20180902120523.13"><vh>各式內容引用範例</vh>
+<v t="leo.20180902120523.13" a="E"><vh>各式內容引用範例</vh>
 <v t="leo.20180902120523.14" a="E"><vh>導入數學符號與方程式</vh>
 <v t="leo.20180902120523.15"><vh>LaTeX 格式方程式</vh></v>
 </v>
@@ -90,6 +111,7 @@ Created by [KMOLab](http://lab.kmol.info/)
 &lt;/small&gt;
 
 [計算機程式課程網誌](./../blog/index.html)
+
 
 
 </t>
@@ -534,5 +556,123 @@ vertical: body pane on the botton</t>
 
 
 </t>
+<t tx="leo.20180929175104.1"></t>
+<t tx="leo.20180929180508.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180929180508.2"># 從[內建函式](https://docs.python.org/3.7/library/functions.html)開始
+
+* 列印函式 print(vars, sep="", end="")
+* 重覆執行迴圈 for i in range(10):
+* 取使用者輸入函式 input("prompt_str")
+* 函式定義與呼叫 def fun_name(input_vars):
+* 函式 return 以及 yield
+
+
+</t>
+<t tx="leo.20180929213820.1">## An ITERABLE is:
+
+* anything that can be looped over (i.e. you can loop over a string or file) or
+* anything that can appear on the right-side of a for-loop:  for x in iterable: ... or
+* anything you can call with iter() that will return an ITERATOR:  iter(obj) or
+* an object that defines `__iter__` that returns a fresh ITERATOR, or it may have a `__getitem__` method suitable for indexed lookup.
+</t>
+<t tx="leo.20180929213840.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;</t>
+<t tx="leo.20180929214137.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;</t>
+<t tx="leo.20180929214137.2">## An ITERATOR is an object:
+
+* with state that remembers where it is during iteration,
+* with a `__next__` method that:
+  * returns the next value in the iteration
+  * updates the state to point at the next value
+  * signals when it is done by raising StopIteration
+* and that is self-iterable (meaning that it has an `__iter__` method that returns self).</t>
+<t tx="leo.20180929214822.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+&lt;!-- 請注意, @others 不可以內縮 --&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+
+						
+</t>
+<t tx="leo.20180929214822.2">## 內建函式與自訂函式:
+```
+@language python
+a = 0
+def my_print(n, input_str):
+    print("以下將重覆列印 \"", input_str + "\" " + str(n) + "次")
+    for i in range(n):
+        print(i, input_str)
+
+my_print(5, "Hello World!")
+the_str = "開始學習 Python"
+num = input("請輸入要列印的次數!")
+my_print(int(num), the_str)
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+
+def myfun():
+    yield 1
+    yield 2
+    yield 3
+
+for i in myfun():
+    print(i)
+
+x = iter(myfun())
+y = list(myfun())
+
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+print(x.__next__())
+print(x.__next__())
+print(x.__next__())
+print(y)
+```
+</t>
+<t tx="leo.20180929221348.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20180929221348.2"># 關鍵字與變數命名
+
+* Python 3.7.0 有哪些關鍵字?
+* 變數要如何命名較好? [PEP 8](https://www.python.org/dev/peps/pep-0008/)
+* [PEP 257](https://www.python.org/dev/peps/pep-0257/), [PEP 3333](https://www.python.org/dev/peps/pep-3333/), [PEP 537](https://www.python.org/dev/peps/pep-0537/), [PEP 484](https://www.python.org/dev/peps/pep-0484/)
+* 最好的參考資料 - [Python Tutorial](https://docs.python.org/3.7/tutorial/index.html)
+
+
+</t>
+<t tx="leo.20180929223637.1"># Reveal.js 投影片
+
+* https://kripken.github.io/slides/
+* http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/</t>
+<t tx="leo.20180929223658.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;</t>
 </tnodes>
 </leo_file>

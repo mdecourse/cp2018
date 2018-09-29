@@ -50,6 +50,7 @@ Created by [KMOLab](http://lab.kmol.info/)
 [計算機程式課程網誌](./../blog/index.html)
 
 
+
     </script>
 </section>
 
@@ -197,6 +198,114 @@ Created by [KMOLab](http://lab.kmol.info/)
 
 
 						
+<section data-markdown>
+    <script type="text/template">
+# 從[內建函式](https://docs.python.org/3.7/library/functions.html)開始
+
+* 列印函式 print(vars, sep="", end="")
+* 重覆執行迴圈 for i in range(10):
+* 取使用者輸入函式 input("prompt_str")
+* 函式定義與呼叫 def fun_name(input_vars):
+* 函式 return 以及 yield
+
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+<!-- 請注意, @others 不可以內縮 -->
+## 內建函式與自訂函式:
+```
+a = 0
+def my_print(n, input_str):
+    print("以下將重覆列印 \"", input_str + "\" " + str(n) + "次")
+    for i in range(n):
+        print(i, input_str)
+
+my_print(5, "Hello World!")
+the_str = "開始學習 Python"
+num = input("請輸入要列印的次數!")
+my_print(int(num), the_str)
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+
+def myfun():
+    yield 1
+    yield 2
+    yield 3
+
+for i in myfun():
+    print(i)
+
+x = iter(myfun())
+y = list(myfun())
+
+a = a + 1
+print("(" + str(a) + ")", "_" * 25)
+print(x.__next__())
+print(x.__next__())
+print(x.__next__())
+print(y)
+```
+    </script>
+</section>
+
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+# 關鍵字與變數命名
+
+* Python 3.7.0 有哪些關鍵字?
+* 變數要如何命名較好? [PEP 8](https://www.python.org/dev/peps/pep-0008/)
+* [PEP 257](https://www.python.org/dev/peps/pep-0257/), [PEP 3333](https://www.python.org/dev/peps/pep-3333/), [PEP 537](https://www.python.org/dev/peps/pep-0537/), [PEP 484](https://www.python.org/dev/peps/pep-0484/)
+* 最好的參考資料 - [Python Tutorial](https://docs.python.org/3.7/tutorial/index.html)
+
+
+    </script>
+</section>
+
+
+						
+<section data-markdown>
+    <script type="text/template">
+## An ITERABLE is:
+
+* anything that can be looped over (i.e. you can loop over a string or file) or
+* anything that can appear on the right-side of a for-loop:  for x in iterable: ... or
+* anything you can call with iter() that will return an ITERATOR:  iter(obj) or
+* an object that defines `__iter__` that returns a fresh ITERATOR, or it may have a `__getitem__` method suitable for indexed lookup.
+    </script>
+</section>
+
+<section data-markdown>
+    <script type="text/template">
+## An ITERATOR is an object:
+
+* with state that remembers where it is during iteration,
+* with a `__next__` method that:
+  * returns the next value in the iteration
+  * updates the state to point at the next value
+  * signals when it is done by raising StopIteration
+* and that is self-iterable (meaning that it has an `__iter__` method that returns self).
+
+    </script>
+</section>
+
+<section data-markdown>
+    <script type="text/template">
+# Reveal.js 投影片
+
+* https://kripken.github.io/slides/
+* http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/
+
+    </script>
+</section>
+
 <section data-markdown>
     <script type="text/template">
 # 投影片快捷鍵
