@@ -1391,6 +1391,11 @@ def parse_config():
     return site_title, password
 
 
+def _remove_h123_attrs(soup):
+    for tag in soup.findAll(['h1', 'h2', 'h3']): 
+        tag.attrs = None
+    return soup
+
 def parse_content():
     """use bs4 and re module functions to parse content.htm"""
     #from pybean import Store, SQLiteWriter
@@ -1426,6 +1431,17 @@ def parse_content():
     page_list = []
     # make the soup out of the html content
     soup = BeautifulSoup(subject, 'html.parser')
+    # 嘗試移除 h 標註中的任何 attributes 設定
+    soup = _remove_h123_attrs(soup)
+    # 這裡還需要將 h1~h3 的內容中可能出現的各種標註去除
+    # 目前仍無法處理標題中的 <p> 標註
+    for title_tags in soup.find_all(['h1', 'h2', 'h3']):
+        title_text = title_tags.get_text()
+        title_tags.string.replace_with(title_text)
+    # 改寫 content.htm 後重新取 subject
+    with open(config_dir + "content.htm", "wb") as f:
+        f.write(soup.encode("utf-8"))
+    subject = file_get_contents(config_dir+"content.htm")
     # get all h1, h2, h3 tags into list
     htag= soup.find_all(['h1', 'h2', 'h3'])
     n = len(htag)
@@ -1442,7 +1458,11 @@ def parse_content():
             # i from 1 to i-1
             for i in range(1, len(htag)):
                 # add the first page title
-                head_list.append(htag[i-1].text.strip())
+                soup = BeautifulSoup(htag[i-1].text.strip())
+                title_text = soup.get_text()
+                # 原先只有下列一行, 改為上面兩行與下面一行
+                #head_list.append(htag[i-1].text.strip())
+                head_list.append(title_text)
                 # use name attribute of h* tag to get h1, h2 or h3
                 # the number of h1, h2 or h3 is the level of page menu
                 level_list.append(htag[i-1].name[1])
@@ -1457,7 +1477,13 @@ def parse_content():
                 page_list.append(cut)
     # last i
     # add the last page title
-    head_list.append(htag[n-1].text.strip())
+    # 再利用 bs4 移除標題中可能的其他標註
+    soup = BeautifulSoup(htag[n-1].text.strip())
+    title_text = soup.get_text()
+    # 原先只有下列一行
+    #head_list.append(htag[n-1].text.strip())
+    # 配合上上兩行, 改為下一行
+    head_list.append(title_text)
     # add the last level
     level_list.append(htag[n-1].name[1])
     temp_data = subject.split(str(htag[n-1]))

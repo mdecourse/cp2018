@@ -107,6 +107,7 @@
 <v t="amd.20160714232921.1"><vh>login</vh></v>
 <v t="amd.20160715154321.1"><vh>logout</vh></v>
 <v t="amd.20160714231619.1"><vh>parse_config</vh></v>
+<v t="leo.20180930104355.1"><vh>_remove_h123_attrs</vh></v>
 <v t="leo.20180801114917.1"><vh>parse_content</vh></v>
 <v t="amd.20160714231359.1"><vh>render_menu</vh></v>
 <v t="leo.20180630203542.1"><vh>render_menu2</vh></v>
@@ -2741,6 +2742,17 @@ bug 180726</t>
     page_list = []
     # make the soup out of the html content
     soup = BeautifulSoup(subject, 'html.parser')
+    # 嘗試移除 h 標註中的任何 attributes 設定
+    soup = _remove_h123_attrs(soup)
+    # 這裡還需要將 h1~h3 的內容中可能出現的各種標註去除
+    # 目前仍無法處理標題中的 &lt;p&gt; 標註
+    for title_tags in soup.find_all(['h1', 'h2', 'h3']):
+        title_text = title_tags.get_text()
+        title_tags.string.replace_with(title_text)
+    # 改寫 content.htm 後重新取 subject
+    with open(config_dir + "content.htm", "wb") as f:
+        f.write(soup.encode("utf-8"))
+    subject = file_get_contents(config_dir+"content.htm")
     # get all h1, h2, h3 tags into list
     htag= soup.find_all(['h1', 'h2', 'h3'])
     n = len(htag)
@@ -2757,7 +2769,11 @@ bug 180726</t>
             # i from 1 to i-1
             for i in range(1, len(htag)):
                 # add the first page title
-                head_list.append(htag[i-1].text.strip())
+                soup = BeautifulSoup(htag[i-1].text.strip())
+                title_text = soup.get_text()
+                # 原先只有下列一行, 改為上面兩行與下面一行
+                #head_list.append(htag[i-1].text.strip())
+                head_list.append(title_text)
                 # use name attribute of h* tag to get h1, h2 or h3
                 # the number of h1, h2 or h3 is the level of page menu
                 level_list.append(htag[i-1].name[1])
@@ -2772,7 +2788,13 @@ bug 180726</t>
                 page_list.append(cut)
     # last i
     # add the last page title
-    head_list.append(htag[n-1].text.strip())
+    # 再利用 bs4 移除標題中可能的其他標註
+    soup = BeautifulSoup(htag[n-1].text.strip())
+    title_text = soup.get_text()
+    # 原先只有下列一行
+    #head_list.append(htag[n-1].text.strip())
+    # 配合上上兩行, 改為下一行
+    head_list.append(title_text)
     # add the last level
     level_list.append(htag[n-1].name[1])
     temp_data = subject.split(str(htag[n-1]))
@@ -2794,5 +2816,9 @@ bug 180726</t>
 目前在 Python 頁面使用 /static/brython.js 導入, 近端使用時, 可以用於動態與靜態網頁
 
 但是轉換後,  靜態網頁在 Github Pages 無法正常運作, 因此 generate_pages 時必須進行轉換</t>
+<t tx="leo.20180930104355.1">def _remove_h123_attrs(soup):
+    for tag in soup.findAll(['h1', 'h2', 'h3']): 
+        tag.attrs = None
+    return soup</t>
 </tnodes>
 </leo_file>
