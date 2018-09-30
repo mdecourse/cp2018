@@ -58,7 +58,8 @@
 <p>學習 C 用於 <a href="https://www.tinkercad.com/">Tinkercad</a> Arduino 控制卡模擬:</p>
 <p>學習 Lua 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
 <p>學習 Javascript 與  <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 用於網頁動態模擬:</p>
-<p><img alt="" height="367" src="/images/three_gears.png" width="790"/></p><h2>機械設計</h2>
+<p><img alt="" height="367" src="/images/three_gears.png" width="790"/></p>
+<h2>機械設計</h2>
 <p>機械設計與表達</p>
 <p>設計是一種明確與具體的表達, 而且是在仔細思考、多方考量後所完成的表達, 表達具有六種形式, 包括口語、文字、2D、3D、數學與實體表達, 設計的結果可以讓執行者有所依循, 根據指示執行後, 可得預期之結果.</p>
 <p>機械是一種器物, 而且是由固體、流體與軟體元件精巧組合而成, 可互動運作, 達成特定功能之器物.</p>
@@ -98,7 +99,8 @@
 <li>協同資料擷取便性議題</li>
 <li>資料版本及歷程長期保存議題</li>
 <li>如何尋求可持續改進的電腦輔助設計與工程分析架構與協同機制</li>
-</ol><h2>ANSI C</h2>
+</ol>
+<h2>ANSI C</h2>
 <p>Hello ANSIC:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 
@@ -188,11 +190,13 @@ main()
 <p><a href="http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/">http://web.stanford.edu/class/archive/cs/cs106b/cs106b.1182/lectures/</a> </p>
 <p><a href="https://www.codestepbystep.com/about">https://www.codestepbystep.com/about</a> </p>
 <p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a> </p>
-<p><a href="https://www.programiz.com/c-programming">https://www.programiz.com/c-programming</a> </p><h2>指標教材</h2>
+<p><a href="https://www.programiz.com/c-programming">https://www.programiz.com/c-programming</a> </p>
+<h2>指標教材</h2>
 <p>指標: <a href="http://cad-lab.github.io/manual/post/c-cheng-shi-yu-yan-de-zhi-biao-yu-zhen-lie-dao-yin-zhong-wen-fan-yi.html">C 程式語言的指標與陣列</a></p>
 <p><a href="/downloads/pointers.pdf">指標教材.pdf</a> (英文)</p>
 <p>若您想要專精於利用 C 程式語言編寫程式碼, 就必須徹底了解如何使用指標. 然而, C 指標對初學者而言, 經常是一項障礙, 尤其對於從其他程式語言轉進的學習者.</p>
-<p>這份資料旨在幫助初學者了解指標. 為了能讓這份資料發揮最大功能, 使用者最好能夠實際執行文章中所列出的各個程式. 因此所有的程式碼都採 ANSI 標準, 以便讓任何符合 ANSI 標準的編譯器都能執行這些程式碼. 內文與程式碼之間, 也特別加以區分開來, 以便使用者可以直接利用複製的方式, 取的各段落的程式碼, 套用到其他系統中進行編譯. 如此才能確實了解這裡所提供的資料.</p><h3>ch1何謂指標</h3>
+<p>這份資料旨在幫助初學者了解指標. 為了能讓這份資料發揮最大功能, 使用者最好能夠實際執行文章中所列出的各個程式. 因此所有的程式碼都採 ANSI 標準, 以便讓任何符合 ANSI 標準的編譯器都能執行這些程式碼. 內文與程式碼之間, 也特別加以區分開來, 以便使用者可以直接利用複製的方式, 取的各段落的程式碼, 套用到其他系統中進行編譯. 如此才能確實了解這裡所提供的資料.</p>
+<h3>ch1何謂指標</h3>
 <p>C 語言初學者必須面對的難題之一, 就是指標 (pointer) 的用法.</p>
 <p>這份教材的目的, 就是針對初學者簡介指標及其應用.</p>
 <p>其實初學者會對指標產生疑惑, 大多源自於在學習 C 語言時, 對於變數的概念經常一知半解.</p>
@@ -286,7 +290,8 @@ int main(void)
 <li><span class="nt">變數的左值為被用來存放在記憶體中的位址值</span><span class="o">,</span> <span class="nt">而變數的右值則式被存放在該位址的數值</span><span class="o">.</span></li>
 </ol>
 <p>參考資料:</p>
-<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p><h3>ch2指標型別與陣列</h3>
+<p>"The C Programming Language" 2nd Edition B. Kernighan and D. Ritchie Prentice Hall ISBN 0-13-110362-8</p>
+<h3>ch2指標型別與陣列</h3>
 <p>接著讓我們來看看, 為何需要指定指標指向變數的型別, 例如: int *ptr; 原因之一是, 宣告之後, 可以透過指向, 寫成:</p>
 <p>*ptr = 2;</p>
 <p>編譯器就會知道要配置多少記憶體給 ptr 變數, 假如 ptr 宣告為指向整數, 電腦就會複製 4 位元的資料, 其它的浮點與雙浮點變數也是相同. 定義指向變數型別的另外一個用途就是編譯器可以解譯程式碼. 例如, 記憶區中存放 10 個連續的整數資料時, 需要 40 位元的記憶體.</p>
@@ -1529,7 +1534,8 @@ int compare_long(const void *m, const void *n)
 <p>另外, 我們也將參考 <a href="https://web.stanford.edu/class/cs106l/">https://web.stanford.edu/class/cs106l/</a> 課程中的資料:</p>
 <p><a href="/downloads/stanford_cs106L_full_course_reader.pdf">Standard C++ Programming Laboratory full reader.pdf</a></p>
 <p>最後, 在 C++ 計算機程式語言的學習, 針對最新 C++ 的程式標準, 請參考 <a href="http://pages.cs.wisc.edu/~gerald/cs368/">http://pages.cs.wisc.edu/~gerald/cs368/</a> 課程中的資料:</p>
-<p><a href="/downloads/TeachModernC++.pdf">Teach Modern C++.pdf</a></p><h2>Python</h2>
+<p><a href="/downloads/TeachModernC++.pdf">Teach Modern C++.pdf</a></p>
+<h2>Python</h2>
 <p>根據 Google 的搜尋, 以及 IEEE Spectrum 資料分析, Python 為目前最流行的計算機程式語言之一.</p>
 <p><a href="http://pypl.github.io/PYPL.html">http://pypl.github.io/PYPL.html</a></p>
 <p><a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p>
@@ -1855,7 +1861,8 @@ sum.setValue()
 doc["sum"].bind('click', sum.prog)
 </script>
 </p>
-<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p><h3>Python 教材</h3>
+<p><button id="prog2">prog2</button><button id="hello2">hello2</button><button id="sum">sum</button></p>
+<h3>Python 教材</h3>
 <p>本教材根據 <a href="https://www.cs.cmu.edu/~112/">https://www.cs.cmu.edu/~112/</a> 內容改寫, 文中英文單字請使用 <a href="https://en.wikipedia.org/wiki/Merriam-Webster">Merriam-Webster</a> 英英線上或手機 App 字典查詢, 並網羅用來解釋特定英文生字的相關常用單字, 以提升自我的英文閱讀能力.</p>
 <p><a href="https://www.cs.cmu.edu/~112/notes/notes-getting-started.html">https://www.cs.cmu.edu/~112/notes/notes-getting-started.html</a> 中提到的</p>
 <p><a href="https://www.merriam-webster.com/dictionary/logistics">Logistics</a> 與 <a href="https://www.merriam-webster.com/dictionary/preliminary">Preliminary</a> 的解釋中,  就包含 <span><a href="https://www.merriam-webster.com/dictionary/procurement">procurement</a>, <a href="https://www.merriam-webster.com/dictionary/maintenance">maintenance</a>, <a href="https://www.merriam-webster.com/dictionary/facilities">facilities</a> 與 <a href="https://www.merriam-webster.com/dictionary/campaign">campaign</a> 等常用單字. 假如學員願意花點時間研究這些英文單字的相關意涵, 並多次復習, 就能持續不斷改進自我的英文閱讀能力,  自行查詢網路上所提供的眾多 Python 英文教學資料.</span></p>
@@ -2116,7 +2123,8 @@ doc["ex1"].bind('click', Ex1.prog)
 <p><button id="keyword">Keyword</button><button id="ex1">Ex1</button></p>
 <h4>認識 Syntax, Runtime 與 Logical Errors</h4>
 <h4>利用 input() 取得使用者輸入</h4>
-<h4>了解如何導入模組</h4><h3>what is new</h3>
+<h4>了解如何導入模組</h4>
+<h3>what is new</h3>
 <p><a href="https://docs.python.org/3.0/whatsnew/3.0.html">https://docs.python.org/3.0/whatsnew/3.0.html</a> </p>
 <p><a href="https://docs.python.org/3/whatsnew/3.4.html">https://docs.python.org/3/whatsnew/3.4.html</a></p>
 <p><a href="https://docs.python.org/3/whatsnew/3.5.html">https://docs.python.org/3/whatsnew/3.5.html</a></p>
@@ -2130,7 +2138,8 @@ doc["ex1"].bind('click', Ex1.prog)
 <p><a href="https://www.python-course.eu/python3_modules_and_modular_programming.php">https://www.python-course.eu/python3_modules_and_modular_programming.php</a> </p>
 <h4>Python 3.7 Data Classes</h4>
 <p><a href="https://www.python.org/dev/peps/pep-0557/">https://www.python.org/dev/peps/pep-0557/</a> </p>
-<p><a href="https://stackoverflow.com/questions/47955263/what-are-data-classes-and-how-are-they-different-from-common-classes">https://stackoverflow.com/questions/47955263/what-are-data-classes-and-how-are-they-different-from-common-classes</a> </p><h3>style guide</h3>
+<p><a href="https://stackoverflow.com/questions/47955263/what-are-data-classes-and-how-are-they-different-from-common-classes">https://stackoverflow.com/questions/47955263/what-are-data-classes-and-how-are-they-different-from-common-classes</a> </p>
+<h3>style guide</h3>
 <p>Python docstring conventions:</p>
 <p><a href="https://www.python.org/dev/peps/pep-0257/">https://www.python.org/dev/peps/pep-0257/</a> </p>
 <p>One line docstring:</p>
@@ -2298,7 +2307,8 @@ class TestUM(unittest.TestCase):
  
 if __name__ == '__main__':
     unittest.main()</pre>
-<p></p><h3>lark</h3>
+<p></p>
+<h3>lark</h3>
 <p><a href="https://github.com/lark-parser/lark">https://github.com/lark-parser/lark</a> </p>
 <p><a href="http://blog.erezsh.com/how-to-write-a-dsl-in-python-with-lark/">http://blog.erezsh.com/how-to-write-a-dsl-in-python-with-lark/</a> </p>
 <p>如何利用 python lark 模組寫 DSL (Domain Specific Language)</p>
@@ -2552,7 +2562,8 @@ fill { repeat 36 {
 <p>Conclusion</p>
 <p>In this tutorial, we implemented a parser and an interpreter in few lines of code, and without having to know many technical details.</p>
 <p>We implemented a very small language, but it's easy to extend. Adding commands should be very simple, since the template for that already exists. Adding variables that can be used in expressions won't be much of a challenge either. You can see how Lark's calculator example does exactly that with relative ease. Combining these two grammars with a little bit of glue code, will result in something that feels like a real programming language, albeit simplistic.</p>
-<p>I hope I inspired to go and write a DSL for your project. If you need any help in doing so, or if Lark is missing a feature you need dearly, drop me a line and I'll be happy to assist you. You can reach me at erezshin at gmail com.</p><h2>Kotlin</h2>
+<p>I hope I inspired to go and write a DSL for your project. If you need any help in doing so, or if Lark is missing a feature you need dearly, drop me a line and I'll be happy to assist you. You can reach me at erezshin at gmail com.</p>
+<h2>Kotlin</h2>
 <p><a href="https://kotlinlang.org/">https://kotlinlang.org/</a> 是最近幾年崛起的計算機程式語言.</p>
 <p><a href="http://kotlinlang.org/docs/kotlin-docs.pdf">http://kotlinlang.org/docs/kotlin-docs.pdf</a> (<a href="http://www.liying-cn.net/kotlin/docs/kotlin-docs.pdf">中文翻譯.pdf</a>)</p>
 <p><a href="https://www.tutorialspoint.com/kotlin/kotlin_tutorial.pdf">https://www.tutorialspoint.com/kotlin/kotlin_tutorial.pdf</a> </p>
@@ -2560,9 +2571,11 @@ fill { repeat 36 {
 <p><a href="https://www.uv.es/capgeminiuv/documents/Kotlin_for_Android_Development.pdf">https://www.uv.es/capgeminiuv/documents/Kotlin_for_Android_Development.pdf</a> </p>
 <p><a href="https://ithelp.ithome.com.tw/users/20107165/ironman/1351">https://ithelp.ithome.com.tw/users/20107165/ironman/1351</a> (脫魯實錄)</p>
 <p><a href="http://steve-yegge.blogspot.com/2017/05/why-kotlin-is-better-than-whatever-dumb.html">http://steve-yegge.blogspot.com/2017/05/why-kotlin-is-better-than-whatever-dumb.html</a> (<a href="https://medium.com/@steve.yegge">Steve Yegge</a>)</p>
-<p><img alt="" height="398" src="/images/nice_kotlin.png" width="600"/></p><h2>Red Lang</h2>
+<p><img alt="" height="398" src="/images/nice_kotlin.png" width="600"/></p>
+<h2>Red Lang</h2>
 <p><a href="https://www.red-lang.org/">https://www.red-lang.org/</a> </p>
-<p><a href="http://www.mycode4fun.co.uk/About-Red-Programming">http://www.mycode4fun.co.uk/About-Red-Programming</a> </p><h1>工具</h1>
+<p><a href="http://www.mycode4fun.co.uk/About-Red-Programming">http://www.mycode4fun.co.uk/About-Red-Programming</a> </p>
+<h1>工具</h1>
 <p>
 <script src="https://scrum-3.github.io/web/brython/brython.js"></script>
 <script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
@@ -2743,7 +2756,8 @@ python wsgi.py</pre>
 <p style="padding-left: 30px;">CMSimfly: 網際內容管理系統, 屬於電子書章節明確的三層次網際資料管理.</p>
 <p style="padding-left: 30px;">Pelican: 靜態網誌產生系統, 可分類, 以關鍵字架構及時間序建立的網際流程紀錄.</p>
 <p style="padding-left: 30px;">Reveal.js: 網際簡報系統,, 可引用  CMSimfly 及 Pelican Blog 內容的網際簡報系統.</p>
-<p>Python 非官方 Windows 模組: <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a> </p><h2>Git</h2>
+<p>Python 非官方 Windows 模組: <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a> </p>
+<h2>Git</h2>
 <p><a href="https://git-scm.com/">https://git-scm.com/</a> </p>
 <p><a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a> </p>
 <p><a href="https://github.com/">https://github.com/</a> </p>
@@ -3179,7 +3193,8 @@ if __name__ == '__main__':
 <p>參考: </p>
 <p><a href="/downloads/pse_kivy_05_rel.zip">pse 0.5.zip</a></p>
 <p><a href="https://stackoverflow.com/questions/44219563/kivy-not-working-error-unable-to-find-any-valuable-window-provider">https://stackoverflow.com/questions/44219563/kivy-not-working-error-unable-to-find-any-valuable-window-provider</a> </p>
-<p><a href="https://www.researchgate.net/project/pse-Python-Simulation-Environment">https://www.researchgate.net/project/pse-Python-Simulation-Environment</a> </p><h2>Eirc IDE</h2>
+<p><a href="https://www.researchgate.net/project/pse-Python-Simulation-Environment">https://www.researchgate.net/project/pse-Python-Simulation-Environment</a> </p>
+<h2>Eirc IDE</h2>
 <p>目前 Eric6 18.07 只能配合使用 Python 3.6.5, 一方面 Python 3.7.0 尚無法以 pip install pyqt5-tools 安裝, 且 Python3.7.0 在 Eric6 18.07 尚存 bugs.</p>
 <p>這與 Qt 目前還無法使用 Jdk 9 與 10 的情況相同, 許多工具仍然尚未配合最新版本的 Python 與 Java 解譯或編譯工具進行更改.</p>
 <h2>CMSimfly</h2>
@@ -3925,7 +3940,8 @@ double evaluate(int D, double tmp[], long *nfeval)
   return volume;
 }
  </pre>
-<p></p><h2>CMSimfly 操作</h2>
+<p></p>
+<h2>CMSimfly 操作</h2>
 <p>操作目的:</p>
 <p style="padding-left: 30px;">讓學員透過 <a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly</a> 的程式編寫架構與使用, 了解如何利用 Python 與  Flask 網際框架, 自行建構網際內容管理系統.</p>
 <p>所欲解決問題:</p>
@@ -3958,7 +3974,8 @@ double evaluate(int D, double tmp[], long *nfeval)
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-0241-8">https://link.springer.com/book/10.1007/978-1-4842-0241-8</a> </p>
 <p><a href="/downloads/Algorithmic_Problem_Solving_with_Python.pdf">2015 Algorithmic Problem Solving with Python.pdf</a></p>
 <p></p>
-<p></p><h2>Pygrouf 操作</h2>
+<p></p>
+<h2>Pygrouf 操作</h2>
 <p>操作目的:</p>
 <p style="padding-left: 30px;">讓學員了解如何利用 Python、Flask 網際框架與 MySQL (SQLite 或 PostgreSQL) 資料庫管理群組產品開發過程中的資料.</p>
 <p>所欲解決的問題:</p>
@@ -5822,7 +5839,8 @@ volume.run(1000, 50)
 <p>Genetic Algorithm Essentials</p>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-3-319-52156-5">https://link.springer.com/book/10.1007/978-3-319-52156-5</a> </p>
 <p>Differential Evolution in Electromagnetics</p>
-<p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-3-642-12869-1">https://link.springer.com/book/10.1007/978-3-642-12869-1</a> </p><h2>Qt C++ 計算器程式</h2>
+<p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-3-642-12869-1">https://link.springer.com/book/10.1007/978-3-642-12869-1</a> </p>
+<h2>Qt C++ 計算器程式</h2>
 <p><a href="/downloads/qt5_calculator_proj.7z">Ｑt5 Calculator project.7z</a></p>
 <p><img alt="" height="455" src="/images/Qt5_creator_calculator_proj.png" width="600"/></p>
 <p>calculator.pro</p>
@@ -6271,7 +6289,8 @@ bool Calculator::calculate(double rightOperand, const QString &amp;pendingOperat
 <p><a href="http://www.bogotobogo.com/Qt/Qt5_Creating_QtQuick2_QML_Application_Animation_A.php">http://www.bogotobogo.com/Qt/Qt5_Creating_QtQuick2_QML_Application_Animation_A.php</a> </p>
 <p>Qt5 編程指南: <a href="https://qtguide.ustclug.org/">https://qtguide.ustclug.org/</a></p>
 <p>Qt5 PDF viewer: <a href="https://github.com/yshurik/qpdfjs">https://github.com/yshurik/qpdfjs</a></p>
-<p>Qt5 瀏覽器: <a href="https://otter-browser.org/">https://otter-browser.org/</a> </p><h2>PyQt 計算器程式</h2>
+<p>Qt5 瀏覽器: <a href="https://otter-browser.org/">https://otter-browser.org/</a> </p>
+<h2>PyQt 計算器程式</h2>
 <p>PyQt Version History</p>
 <p>1994, Qt</p>
 <p>November 1998 SIP, and released PyQt 0.1 supporting Qt 1.41</p>
@@ -6505,7 +6524,8 @@ if __name__ == '__main__':
 <p>有關  if __name__ == '__main__':</p>
 <p><a href="https://stackoverflow.com/questions/419163/what-does-if-name-main-do">https://stackoverflow.com/questions/419163/what-does-if-name-main-do</a> </p>
 <p>當 Python 解譯器讀取原始碼時, 會執行其中的所有程式碼. 而在執行這些程式碼之前, 會定義一些特殊變數的值, 例如: 當該程式碼執行時, 是以主程式的位階直接執行時, Python 就會將 __name__ 這個變數設為 __main__.</p>
-<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,  __name__ 變數就會被設為該模組的名稱.</p><h2>Flask 網際程式</h2>
+<p>假如這個程式碼檔案並非以主程式的位階直接執行, 而是被導入其他程式中, 以模組的位階執行,  __name__ 變數就會被設為該模組的名稱.</p>
+<h2>Flask 網際程式</h2>
 <p>Flask Hello World 程式:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 導入 Flask 類別
 from flask import Flask
@@ -6921,7 +6941,8 @@ if not os.path.isfile(data_dir+"content.db"):
 <p><span>之後可以使用:</span></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask_login import LoginManager, login_required, login_user, \
     logout_user, current_user, UserMixin</pre>
-<p></p><h1>應用範例</h1>
+<p></p>
+<h1>應用範例</h1>
 <p>學習計算機程式的目的在利用數位科技技術解決問題, 所謂數位科技技術包括程式套件、網路與資料庫等元件的組合.</p>
 <p>基本流程為:</p>
 <ol>
@@ -8027,7 +8048,8 @@ for 行數 in range(len(所有資料)):
 print("單字數共有:"+str(count)+"個")
 檔案.close() # 關閉檔案
 </pre>
-<p></p><h2>docx 轉 pdf</h2>
+<p></p>
+<h2>docx 轉 pdf</h2>
 <p>用來學習 Onshape 的教學檔案格式為 docx, 以下使用 Windows 環境下的 Python3 程式, 自動進入各教學檔案目錄, 將 docx 轉為 pdf</p>
 <p>首先必須以 pip install comtypes 安裝 comtypes 模組, 然後以 SciTE, 在教學檔案目錄中, 利用以下程式碼建立 docx2pdf.py 後執行, 即可將所有 56 個 docx 轉出 pdf 檔案. 之後, 可以再設法利用 <a href="https://github.com/coolwanglu/pdf2htmlEX">https://github.com/coolwanglu/pdf2htmlEX</a> 以程式方法, 直接將 pdf 轉為 html. </p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
@@ -8070,7 +8092,8 @@ for root, dirs, files in os.walk(os.getcwd()):
 #print(count)
 #docx2pdf(in_file, out_file)
 print("done")</pre>
-<p></p><h2>網際繪圖</h2>
+<p></p>
+<h2>網際繪圖</h2>
 <p>網頁中有三種基本元素 HTML5, CSS 與 Javascript, 透過 <a href="https://brython.info/">Brython</a> 或 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以使用 Python 及 Lua 替代 Javascript.</p>
 <h4>Canvas 程式庫:</h4>
 <p><a href="https://github.com/konvajs/konva">https://github.com/konvajs/konva</a></p>
@@ -8363,7 +8386,8 @@ cal2 &lt;= html.BR() + html.BR()
     // add the layer to the stage
     stage.add(layer);
   </script>
-</p><h2>GUI 繪圖</h2>
+</p>
+<h2>GUI 繪圖</h2>
 <p>PyQt5 與 matplotlib:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python
 #-*- coding:utf-8 -*-
@@ -8950,7 +8974,8 @@ class Screenshot(QWebEngineView):
         self._loaded = True</pre>
 <p>Reference:</p>
 <p><a href="https://github.com/pyqt/examples">https://github.com/pyqt/examples</a> </p>
-<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a> </p><h3>靜態繪圖</h3>
+<p><a href="https://github.com/mfitzp/15-minute-apps">https://github.com/mfitzp/15-minute-apps</a> </p>
+<h3>靜態繪圖</h3>
 <h4>Canvas based 繪圖</h4>
 <p>參考: <a href="http://doc.qt.io/qt-5/graphicsview.html">http://doc.qt.io/qt-5/graphicsview.html</a> </p>
 <p>QtWidgets.QGraphicsScene (場景)</p>
@@ -9067,7 +9092,8 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Example()
     sys.exit(app.exec())</pre>
-<p></p><h3>Moveblocks</h3>
+<p></p>
+<h3>Moveblocks</h3>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PyQt5.QtCore import (QAbstractTransition, QEasingCurve, QEvent,
         QParallelAnimationGroup, QPropertyAnimation, qrand, QRect,
         QSequentialAnimationGroup, qsrand, QState, QStateMachine, Qt, QTime,
@@ -10956,7 +10982,8 @@ if __name__ == '__main__':
     sys.exit(app.exec())</pre>
 <p>使用 Eric6 開發 PyQt5 GUI 程式:</p>
 <p>參考流程: <a href="http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO">http://www.science.smith.edu/dftwiki/index.php/PyQt5_Tutorial:_A_Window_Application_with_File_IO</a> </p>
-<p><a href="/downloads/qt_designer_tutorial.pdf">Qt Designer 教學.pdf</a></p><h3>STetris</h3>
+<p><a href="/downloads/qt_designer_tutorial.pdf">Qt Designer 教學.pdf</a></p>
+<h3>STetris</h3>
 <p>StApp.py</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sys
 from StTetris import StTetris
@@ -12164,7 +12191,8 @@ woocommerce</pre>
 <p><a href="https://github.com/occipital/openni2">https://github.com/occipital/openni2</a> </p>
 <p><a href="https://skanect.occipital.com/">https://skanect.occipital.com/</a> </p>
 <p><a href="https://en.wikipedia.org/wiki/OpenNI">https://en.wikipedia.org/wiki/OpenNI</a> </p>
-<p><iframe allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/nFyT2q8f_i4" width="560"></iframe></p><h2>輔助設計套件</h2>
+<p><iframe allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/nFyT2q8f_i4" width="560"></iframe></p>
+<h2>輔助設計套件</h2>
 <p>MCAD 套件</p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-what-is-computer-aided-design.html</a> </p>
 <p>一般常見的機械電腦輔助設計套件包括法國<span> </span><a href="https://www.3ds.com/">Dassault</a><span> </span>公司的<span> </span><a href="https://www.3ds.com/products-services/solidworks/">SolidWorks</a><span> </span>與<span> </span><a href="https://www.3ds.com/products-services/catia/">Catia</a>, 美國<span> </span><a href="https://www.autodesk.com.tw/">AutoDesk</a><span> </span>公司的<span> </span><a href="https://www.autodesk.com.tw/products/autocad/">AutoCAD</a><span> </span>與<span> </span><a href="https://www.autodesk.com/products/inventor/overview">Inventor</a>, 德國<span> </span><a href="https://www.siemens.com/tw/zh/home.html">Siemens</a><span> </span>公司的<span> </span><a href="https://www.plm.automation.siemens.com/en/products/solid-edge/">Solid Edge</a><span> </span>與<span> </span><a href="https://www.plm.automation.siemens.com/zh/products/nx/index.shtml">NX</a>, 美國<span> </span><a href="http://www.ptc-taiwan.com/">PTC</a><span> </span>公司的<span> </span><a href="http://www.ptc-taiwan.com/cad">Creo</a>, 以及 2015 年推出的<span> </span><a href="https://www.onshape.com/">Onshape</a></p>
@@ -12684,7 +12712,8 @@ def example():
 
 if __name__ == '__main__':
     example()</pre>
-<p></p><h3>NURB-Python</h3>
+<p></p>
+<h3>NURB-Python</h3>
 <p><a href="https://github.com/orbingol/NURBS-Python">https://github.com/orbingol/NURBS-Python</a> </p>
 <p><a href="https://github.com/orbingol/NURBS-Python_Examples">https://github.com/orbingol/NURBS-Python_Examples</a> </p>
 <h3>libfive</h3>
@@ -13172,7 +13201,8 @@ if __name__ == "__main__":
 &lt;/ui&gt;</pre>
 <p>參考資料</p>
 <p><a href="https://github.com/Panda-Lewandowski/Computer-graphics">https://github.com/Panda-Lewandowski/Computer-graphics</a> </p>
-<p><a href="https://github.com/chiamingyen/PythonCAD_py3">https://github.com/chiamingyen/PythonCAD_py3</a> </p><h1>分組專題</h1>
+<p><a href="https://github.com/chiamingyen/PythonCAD_py3">https://github.com/chiamingyen/PythonCAD_py3</a> </p>
+<h1>分組專題</h1>
 <p>分組專題報告</p>
 <p>章節</p>
 <ul>
@@ -13497,7 +13527,8 @@ def generate_pages():
     # generate each page html under content directory
     return "已經將網站轉為靜態網頁. &lt;a href='/'&gt;Home&lt;/a&gt;"
 </pre>
-<p></p><h3>CMSimfly 開發</h3>
+<p></p>
+<h3>CMSimfly 開發</h3>
 <p>以下為可行的開發項目:</p>
 <ol>
 <li>採用 SQLite 資料庫儲存內容資料, 以允許重複頁面標題.</li>
@@ -13591,7 +13622,8 @@ processes = 4
 threads = 2
 chdir = /home/cadlab/cmsimfly2
 wsgi-file = /home/cadlab/cmsimfly2/wsgi.py</pre>
-<p></p><h2>Pygrouf 解析</h2>
+<p></p>
+<h2>Pygrouf 解析</h2>
 <p><a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>  為多人群組軟體, 使用者可以透過 Gmail 帳號登入, 以類似討論版的方式進行網際互動.</p>
 <p>Pygrouf 採用 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, <a href="https://github.com/coleifer/peewee">peewee</a> ORM, <a href="https://github.com/authomatic/authomatic">authomatic</a> (可能已經不再維護), <a href="http://www.makotemplates.org/">mako</a> (可能已經不再維護), <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a>.</p>
 <h2>Pyslvs 解析</h2>
@@ -13814,7 +13846,8 @@ plt.ylabel('y coordinate')
 plt.show()</pre>
 <h3>機構設計參考</h3>
 <p><a href="/downloads/2014_nsysu_design_linkage_type_foot_exercise_machine.pdf">Computer Aided Design of Eight-bar Linkages.pdf</a> (2014)</p>
-<p></p><h2>Pyquino 解析</h2>
+<p></p>
+<h2>Pyquino 解析</h2>
 <p><a href="https://github.com/kmolLin/Pyquino">https://github.com/kmolLin/Pyquino</a> </p>
 <h2>Solvespace 解析</h2>
 <p><a href="http://solvespace.com">http://solvespace.com</a> </p>
@@ -14748,7 +14781,8 @@ timer.set_interval(draw,20)
 <p>python -m pip install kivy.deps.gstreamer (not needed for pse)</p>
 <hr/>
 <p>p37 額外安裝模組:</p>
-<p>python -m pip install flake8 <a href="https://drive.google.com/file/d/161sbTVFRiyjsJohSa4q95oGCYq5Wt35v/view?usp=sharing">可攜 Vivaldi 瀏覽器.7z</a> (under mdecourse At Gmail)</p><h2>帳號整合</h2>
+<p>python -m pip install flake8 <a href="https://drive.google.com/file/d/161sbTVFRiyjsJohSa4q95oGCYq5Wt35v/view?usp=sharing">可攜 Vivaldi 瀏覽器.7z</a> (under mdecourse At Gmail)</p>
+<h2>帳號整合</h2>
 <p>目前用於 oauth2 開發用的 https://localhost:6443 以<span> 2016springwcm 郵件帳號登記憑證</span></p>
 <p><span>coggle 心智圖則以 scrum1 AT mde 登記</span></p>
 <p><span>上課 github 則以 mdecourse 登記</span></p>

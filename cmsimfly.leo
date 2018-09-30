@@ -2819,6 +2819,8 @@ bug 180726</t>
 <t tx="leo.20180930104355.1">def _remove_h123_attrs(soup):
     for tag in soup.findAll(['h1', 'h2', 'h3']): 
         tag.attrs = None
-    return soup</t>
+    return soup
+
+</t>
 </tnodes>
 </leo_file>
