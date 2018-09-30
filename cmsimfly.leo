@@ -1072,6 +1072,7 @@ a.xhfbfile:hover{
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
 &lt;title&gt;計算機程式教材&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
+&lt;link rel="icon" href="/static/favicon.ico" type="image/x-icon" /&gt;
 ''' + syntaxhighlight()
 
     outstring += '''
@@ -2399,6 +2400,7 @@ def get_page2(heading, head, edit):
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
 &lt;title&gt;計算機程式教材&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="./../static/cmsimply.css"&gt;
+&lt;link rel="icon" href="./../static/favicon.ico" type="image/x-icon" /&gt;
 ''' + syntaxhighlight2()
 
     outstring += '''

@@ -54,7 +54,7 @@
 <v t="leo.20180925214422.1" a="E"><vh>先那麼栽!</vh>
 <v t="leo.20180925214422.2"><vh>投影片內容</vh></v>
 </v>
-<v t="leo.20180925213846.1"><vh>終於可以開始學 Python 程式了!</vh>
+<v t="leo.20180925213846.1" a="E"><vh>終於可以開始學 Python 程式了!</vh>
 <v t="leo.20180925213846.2"><vh>投影片內容</vh></v>
 </v>
 <v t="leo.20180925215116.1" a="E"><vh>Python.html</vh>
@@ -240,7 +240,7 @@ make.start()
     
     &lt;!-- Theme used for syntax highlighting of code --&gt;
     &lt;link rel="stylesheet" href="lib/css/zenburn.css"&gt;
-
+    &lt;link rel="icon" href="favicon.ico" type="image/x-icon" /&gt;
     &lt;!-- Printing and PDF exports --&gt;
     &lt;script&gt;
         var link = document.createElement( 'link' );
@@ -587,12 +587,17 @@ vertical: body pane on the botton</t>
     &lt;script type="text/template"&gt;
 @others
     &lt;/script&gt;
-&lt;/section&gt;</t>
+&lt;/section&gt;
+
+</t>
 <t tx="leo.20180929214137.1">&lt;section data-markdown&gt;
     &lt;script type="text/template"&gt;
 @others
+
     &lt;/script&gt;
-&lt;/section&gt;</t>
+&lt;/section&gt;
+
+</t>
 <t tx="leo.20180929214137.2">## An ITERATOR is an object:
 
 * with state that remembers where it is during iteration,
@@ -600,7 +605,8 @@ vertical: body pane on the botton</t>
   * returns the next value in the iteration
   * updates the state to point at the next value
   * signals when it is done by raising StopIteration
-* and that is self-iterable (meaning that it has an `__iter__` method that returns self).</t>
+* and that is self-iterable (meaning that it has an `__iter__` method that returns self).
+</t>
 <t tx="leo.20180929214822.1">&lt;section data-markdown&gt;
     &lt;script type="text/template"&gt;
 &lt;!-- 請注意, @others 不可以內縮 --&gt;
@@ -668,11 +674,15 @@ print(y)
 <t tx="leo.20180929223637.1"># Reveal.js 投影片
 
 * https://kripken.github.io/slides/
-* http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/</t>
+* http://htmlcheats.com/reveal-js/reveal-js-tutorial-reveal-js-for-beginners/
+</t>
 <t tx="leo.20180929223658.1">&lt;section data-markdown&gt;
     &lt;script type="text/template"&gt;
 @others
+
     &lt;/script&gt;
-&lt;/section&gt;</t>
+&lt;/section&gt;
+
+</t>
 </tnodes>
 </leo_file>
