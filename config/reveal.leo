@@ -27,7 +27,7 @@
 <v t="leo.20180902120523.9" a="E"><vh>封面投影片</vh>
 <v t="leo.20180902120523.10"><vh>封面投影片內容</vh></v>
 </v>
-<v t="leo.20180925212450.1"><vh>隨身碟是否已經置入 P37 可攜系統?</vh>
+<v t="leo.20180925212450.1" a="E"><vh>隨身碟是否已經置入 P37 可攜系統?</vh>
 <v t="leo.20180925212450.2"><vh>投影片內容</vh></v>
 </v>
 <v t="leo.20180925213351.1" a="E"><vh>上課有沒有抄筆記?耳機帶了沒?</vh>
@@ -63,20 +63,80 @@
 <v t="leo.20180929180508.1"><vh>Print, input, def and for loop</vh>
 <v t="leo.20180929180508.2"><vh>投影片內容</vh></v>
 </v>
-<v t="leo.20180929214822.1"><vh>內建函式範例</vh>
+<v t="leo.20180929214822.1" a="E"><vh>內建函式範例</vh>
 <v t="leo.20180929214822.2"><vh>引用程式碼</vh></v>
 </v>
-<v t="leo.20180929221348.1" a="E"><vh>關鍵字與變數命名</vh>
+<v t="leo.20180929221348.1"><vh>關鍵字與變數命名</vh>
 <v t="leo.20180929221348.2"><vh>投影片內容</vh></v>
 </v>
-<v t="leo.20180929213840.1" a="E"><vh>Iterable and Iterator</vh>
+<v t="leo.20180929213840.1"><vh>Iterable and Iterator</vh>
 <v t="leo.20180929213820.1"><vh>Iterable and Iterator</vh></v>
 </v>
 <v t="leo.20180929214137.1"><vh>Iterable and Iterator</vh>
 <v t="leo.20180929214137.2"><vh>Iterable and Iterator</vh></v>
 </v>
-<v t="leo.20180929223658.1" a="E"><vh>Reveal.js slides</vh>
+<v t="leo.20180929223658.1"><vh>Reveal.js slides</vh>
 <v t="leo.20180929223637.1"><vh>Reveal.js slides</vh></v>
+</v>
+<v t="leo.20181002222803.1"><vh>說實話</vh>
+<v t="leo.20181002222803.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002222841.1" a="E"><vh>壓根就從來不會想到</vh>
+<v t="leo.20181002222841.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002222918.1"><vh>在操作 CMSimfly 時</vh>
+<v t="leo.20181002222918.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002222954.1"><vh>會想要將一張圖片當作標題</vh>
+<v t="leo.20181002222954.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223030.1"><vh>可是</vh>
+<v t="leo.20181002223030.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223050.1"><vh>初學者哪裡會知道?</vh>
+<v t="leo.20181002223050.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223125.1" a="E"><vh>拿一張圖片當作標題</vh>
+<v t="leo.20181002223125.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223208.1"><vh>並沒有錯</vh>
+<v t="leo.20181002223208.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223236.1"><vh>假如我們怪初學者</vh>
+<v t="leo.20181002223236.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223313.1"><vh>說</vh>
+<v t="leo.20181002223313.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223329.1"><vh>你怎麼這樣笨</vh>
+<v t="leo.20181002223329.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223409.1"><vh>這麼簡單的操作都不會</vh>
+<v t="leo.20181002223409.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223433.1"><vh>那麼</vh>
+<v t="leo.20181002223433.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223454.1"><vh>我們寫的程式就平白丟失了</vh>
+<v t="leo.20181002223454.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223544.1"><vh>一個修正錯誤, 提升功能的機會!</vh>
+<v t="leo.20181002223544.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223617.1"><vh>要承認是程式功能不夠強</vh>
+<v t="leo.20181002223617.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223705.1"><vh>因為</vh>
+<v t="leo.20181002223705.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223727.1"><vh>創新不能自我設限</vh>
+<v t="leo.20181002223727.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002223750.1"><vh>大家必須不斷努力, 持續改進!</vh>
+<v t="leo.20181002223750.2"><vh>投影片內容</vh></v>
+</v>
+<v t="leo.20181002224101.1" a="E"><vh>讓我們所寫的程式, 功能越來越強!</vh>
+<v t="leo.20181002224101.2"><vh>投影片內容</vh></v>
 </v>
 <v t="leo.20180902120523.11" a="E"><vh>快捷鍵</vh>
 <v t="leo.20180902120523.12"><vh>投影片快捷鍵</vh></v>
@@ -267,6 +327,8 @@ make.start()
             progress: true,
             history: true,
             center: true,
+            autoSlide: 3000,
+            loop: true,
 
             transition: 'slide', // none/fade/slide/convex/concave/zoom
 
@@ -682,6 +744,326 @@ print(y)
 
     &lt;/script&gt;
 &lt;/section&gt;
+
+</t>
+<t tx="leo.20181002222803.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002222803.2">
+
+# 說實話
+
+
+
+</t>
+<t tx="leo.20181002222841.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002222841.2">
+
+## 壓根就從來不會想到
+
+
+
+</t>
+<t tx="leo.20181002222918.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002222918.2">
+
+# 在操作 CMSimfly 時
+
+
+
+</t>
+<t tx="leo.20181002222954.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002222954.2">
+
+# 會想要將一張圖片當作標題
+
+
+
+</t>
+<t tx="leo.20181002223030.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223030.2">
+
+# 可是
+
+
+
+</t>
+<t tx="leo.20181002223050.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223050.2">
+
+# 初學者哪裡會知道?
+
+
+
+</t>
+<t tx="leo.20181002223125.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223125.2">
+
+## 拿一張圖片當作標題!!
+
+
+
+</t>
+<t tx="leo.20181002223208.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223208.2">
+
+# 並沒有錯
+
+
+
+</t>
+<t tx="leo.20181002223236.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223236.2">
+
+# 假如我們怪初學者
+
+
+
+</t>
+<t tx="leo.20181002223313.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223313.2">
+
+# 說
+
+
+
+</t>
+<t tx="leo.20181002223329.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223329.2">
+
+# 你怎麼這樣笨
+
+
+
+</t>
+<t tx="leo.20181002223409.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223409.2">
+
+# 這麼簡單的操作都不會
+
+
+
+</t>
+<t tx="leo.20181002223433.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223433.2">
+
+# 那麼
+
+
+
+</t>
+<t tx="leo.20181002223454.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223454.2">
+
+# 我們寫的程式就平白丟失了
+
+
+
+</t>
+<t tx="leo.20181002223544.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223544.2">
+
+# 一個修正錯誤, 提升功能的機會!
+
+
+
+</t>
+<t tx="leo.20181002223617.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223617.2">
+
+# 要承認是程式功能不夠強
+
+
+
+</t>
+<t tx="leo.20181002223705.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223705.2">
+
+# 因為
+
+
+
+</t>
+<t tx="leo.20181002223727.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223727.2">
+
+# 創新不能自我設限
+
+
+
+</t>
+<t tx="leo.20181002223750.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002223750.2">
+
+# 大家必須不斷努力, 持續改進!
+
+
+
+</t>
+<t tx="leo.20181002224101.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20181002224101.2">
+
+# 讓我們所寫的程式, 功能越來越強!
+
+
 
 </t>
 </tnodes>
