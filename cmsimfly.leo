@@ -37,7 +37,7 @@
 <v t="leo.20180712144340.1"><vh>改回手動轉靜態網頁</vh></v>
 </v>
 </v>
-<v t="leo.20180701102916.1" a="E"><vh>2018Summer 改版</vh>
+<v t="leo.20180701102916.1"><vh>2018Summer 改版</vh>
 <v t="leo.20180702104314.1"><vh>整合設定檔案</vh></v>
 <v t="leo.20180701205822.1"><vh>editorhead 修改</vh></v>
 <v t="leo.20180701212101.1"><vh>有關 Cango library</vh></v>
@@ -45,6 +45,7 @@
 <v t="leo.20180902120757.1"><vh>有關 Brython</vh></v>
 <v t="leo.20180728154823.1"><vh>利用 flake8 查驗格式</vh></v>
 </v>
+<v t="leo.20181002174823.1"><vh>2018Fall 改版</vh></v>
 <v t="amd.20160718002238.1"><vh>參考資料</vh></v>
 <v t="amd.20160717220157.1"><vh>Flask 開講</vh></v>
 </v>
@@ -108,7 +109,9 @@
 <v t="amd.20160715154321.1"><vh>logout</vh></v>
 <v t="amd.20160714231619.1"><vh>parse_config</vh></v>
 <v t="leo.20180930104355.1"><vh>_remove_h123_attrs</vh></v>
-<v t="leo.20180801114917.1"><vh>parse_content</vh></v>
+<v t="leo.20181002170450.1"><vh>good_parse_content</vh></v>
+<v t="leo.20180801114917.1"><vh>bad_parse_content</vh></v>
+<v t="leo.20181002170543.1"><vh>parse_content</vh></v>
 <v t="amd.20160714231359.1"><vh>render_menu</vh></v>
 <v t="leo.20180630203542.1"><vh>render_menu2</vh></v>
 <v t="leo.20180711105804.1"><vh>reveal</vh></v>
@@ -2707,7 +2710,7 @@ def blog(path):
 
 bug 180726</t>
 <t tx="leo.20180728154823.1">將程式碼逐一修改為 flake8 查驗無誤</t>
-<t tx="leo.20180801114917.1">def parse_content():
+<t tx="leo.20180801114917.1">def bad_parse_content():
     """use bs4 and re module functions to parse content.htm"""
     #from pybean import Store, SQLiteWriter
     # if no content.db, create database file with cms table
@@ -2769,11 +2772,11 @@ bug 180726</t>
             # i from 1 to i-1
             for i in range(1, len(htag)):
                 # add the first page title
-                soup = BeautifulSoup(htag[i-1].text.strip())
-                title_text = soup.get_text()
+                #soup = BeautifulSoup(htag[i-1].text.strip())
+                #title_text = soup.get_text()
                 # 原先只有下列一行, 改為上面兩行與下面一行
-                #head_list.append(htag[i-1].text.strip())
-                head_list.append(title_text)
+                head_list.append(htag[i-1].text.strip())
+                #head_list.append(title_text)
                 # use name attribute of h* tag to get h1, h2 or h3
                 # the number of h1, h2 or h3 is the level of page menu
                 level_list.append(htag[i-1].name[1])
@@ -2789,12 +2792,12 @@ bug 180726</t>
     # last i
     # add the last page title
     # 再利用 bs4 移除標題中可能的其他標註
-    soup = BeautifulSoup(htag[n-1].text.strip())
-    title_text = soup.get_text()
+    #soup = BeautifulSoup(htag[n-1].text.strip())
+    #title_text = soup.get_text()
     # 原先只有下列一行
-    #head_list.append(htag[n-1].text.strip())
+    head_list.append(htag[n-1].text.strip())
     # 配合上上兩行, 改為下一行
-    head_list.append(title_text)
+    #head_list.append(title_text)
     # add the last level
     level_list.append(htag[n-1].name[1])
     temp_data = subject.split(str(htag[n-1]))
@@ -2818,9 +2821,106 @@ bug 180726</t>
 但是轉換後,  靜態網頁在 Github Pages 無法正常運作, 因此 generate_pages 時必須進行轉換</t>
 <t tx="leo.20180930104355.1">def _remove_h123_attrs(soup):
     for tag in soup.findAll(['h1', 'h2', 'h3']): 
-        tag.attrs = None
+        # 去除標註中的所有 attributes
+        tag.attrs = {}
+        # 標註內容只留下字串
+        tag.string = tag.get_text()
     return soup
 
 </t>
+<t tx="leo.20181002170450.1">def good_parse_content():
+    """use bs4 and re module functions to parse content.htm"""
+    #from pybean import Store, SQLiteWriter
+    # if no content.db, create database file with cms table
+    '''
+    if not os.path.isfile(config_dir+"content.db"):
+        library = Store(SQLiteWriter(config_dir+"content.db", frozen=False))
+        cms = library.new("cms")
+        cms.follow = 0
+        cms.title = "head 1"
+        cms.content = "content 1"
+        cms.memo = "first memo"
+        library.save(cms)
+        library.commit()
+    '''
+    # if no content.htm, generate a head 1 and content 1 file
+    if not os.path.isfile(config_dir+"content.htm"):
+        # create content.htm if there is no content.htm
+        File = open(config_dir + "content.htm", "w", encoding="utf-8")
+        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
+        File.close()
+    subject = file_get_contents(config_dir+"content.htm")
+    # deal with content without content
+    if subject == "":
+        # create content.htm if there is no content.htm
+        File = open(config_dir + "content.htm", "w", encoding="utf-8")
+        File.write("&lt;h1&gt;head 1&lt;/h1&gt;content 1")
+        File.close()
+        subject = "&lt;h1&gt;head 1&lt;/h1&gt;content 1"
+    # initialize the return lists
+    head_list = []
+    level_list = []
+    page_list = []
+    # make the soup out of the html content
+    soup = BeautifulSoup(subject, 'html.parser')
+    # get all h1, h2, h3 tags into list
+    htag= soup.find_all(['h1', 'h2', 'h3'])
+    n = len(htag)
+    # get all h tags
+    # g.es(soup.find_all(re.compile(r"^h\d$")))
+    # get the page content to split subject using each h tag
+    # i = 0
+    temp_data = subject.split(str(htag[0]))
+    if len(temp_data) &gt; 2:
+        subject = str(htag[0]).join(temp_data[1:])
+    else:
+        subject = temp_data[1]
+    if n &gt;1:
+            # i from 1 to i-1
+            for i in range(1, len(htag)):
+                # add the first page title
+                head_list.append(htag[i-1].text.strip())
+                # use name attribute of h* tag to get h1, h2 or h3
+                # the number of h1, h2 or h3 is the level of page menu
+                level_list.append(htag[i-1].name[1])
+                temp_data = subject.split(str(htag[i]))
+                if len(temp_data) &gt; 2:
+                    subject = str(htag[i]).join(temp_data[1:])
+                else:
+                    subject = temp_data[1]
+                # cut the other page content out of htag from 1 to i-1
+                cut = temp_data[0]
+                # add the page content
+                page_list.append(cut)
+    # last i
+    # add the last page title
+    head_list.append(htag[n-1].text.strip())
+    # add the last level
+    level_list.append(htag[n-1].name[1])
+    temp_data = subject.split(str(htag[n-1]))
+    # the last subject
+    subject = temp_data[0]
+    # cut the last page content out
+    cut = temp_data[0]
+    # the last page content
+    page_list.append(cut)
+    return head_list, level_list, page_list</t>
+<t tx="leo.20181002170543.1">def parse_content():
+    try:
+        return good_parse_content()
+    except:
+        return bad_parse_content()</t>
+<t tx="leo.20181002174823.1">利用 _remove_h123_attrs 與
+good_parse_content
+bad_parse_content
+parse_content 
+等函式, 嘗試處理使用者誤將 attributes 與標註當作 h1, h2 或 h3 的標題內容
+
+因為 CMSimfly 目前採用 bs4 進行分割各頁面的標題與內文, 先前的分割法若標註中帶有 attributes, 將會分割失敗, 且標註中的內文帶有其他標註, 也會產生分割失敗, 因此先在 cp2018 中的 CMSimfly 測試是否可以正確利用 
+try:
+
+except:
+
+將頁面分割在一般正常情況下, 使用 good_parse_content, 而特殊情況下則使用 bad_parse_content</t>
 </tnodes>
 </leo_file>

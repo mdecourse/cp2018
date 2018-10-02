@@ -90,9 +90,9 @@ import os
 import sys</pre>
 <p>What Are Dunder Methods?</p>
 <p>In Python, special methods are a set of predefined methods you can use to enrich your classes. They are easy to recognize because they start and end with double underscores, for example __init__ or __str__.</p>
-<p>As it quickly became tiresome to say under-under-method-under-under Pythonistas adopted the term &ldquo;dunder methods&rdquo;, a short form of &ldquo;double under.&rdquo;</p>
-<p>These &ldquo;dunders&rdquo; or &ldquo;special methods&rdquo; in Python are also sometimes called &ldquo;magic methods.&rdquo; But using this terminology can make them seem more complicated than they really are&mdash;at the end of the day there&rsquo;s nothing &ldquo;magical&rdquo; about them. You should treat these methods like a normal language feature.</p>
-<p>Dunder methods let you emulate the behavior of built-in types. For example, to get the length of a string you can call len('string'). But an empty class definition doesn&rsquo;t support this behavior out of the box:</p>
+<p>As it quickly became tiresome to say under-under-method-under-under Pythonistas adopted the term “dunder methods”, a short form of “double under.”</p>
+<p>These “dunders” or “special methods” in Python are also sometimes called “magic methods.” But using this terminology can make them seem more complicated than they really are—at the end of the day there’s nothing “magical” about them. You should treat these methods like a normal language feature.</p>
+<p>Dunder methods let you emulate the behavior of built-in types. For example, to get the length of a string you can call len('string'). But an empty class definition doesn’t support this behavior out of the box:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">class NoLenSupport:
     pass
 
@@ -107,7 +107,7 @@ TypeError: "object of type 'NoLenSupport' has no len()"</pre>
 &gt;&gt;&gt; obj = LenSupport()
 &gt;&gt;&gt; len(obj)
 42</pre>
-<p>Another example is slicing. You can implement a __getitem__ method which allows you to use Python&rsquo;s list slicing syntax: obj[start:stop].</p>
+<p>Another example is slicing. You can implement a __getitem__ method which allows you to use Python’s list slicing syntax: obj[start:stop].</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#括號後與括號前不要有空白)
 spam(ham[1], {eggs: 2}) 
 
@@ -158,5 +158,5 @@ initialize(FILES,
            error=True,
            )</pre>
 <p>Reference</p>
-<p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a>&nbsp;</p>
+<p><a href="https://dbader.org/blog/python-dunder-methods">https://dbader.org/blog/python-dunder-methods</a> </p>
 <br />typing << <a href='typing.html'>Previous</a> <a href='Flake8.html'>Next</a> >> Flake8</section></div></body></html>
