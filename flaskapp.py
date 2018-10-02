@@ -1395,8 +1395,14 @@ def _remove_h123_attrs(soup):
     for tag in soup.findAll(['h1', 'h2', 'h3']): 
         # 去除標註中的所有 attributes
         tag.attrs = {}
-        # 標註內容只留下字串
-        tag.string = tag.get_text()
+        # 標註內容只留下字串, 必須要額外處理無字串的標題
+        # 例如: <p> 或 <img> 等標註, 若 h1, h2, h3 contents 中有 img, 則
+        # 利用 tag.replaceWithChildren() 只保留 img, 去除 h 標註
+        if (tag.string is not None) and (tag.get_text() is not None):
+            tag.string = tag.get_text()
+        else:
+            # 只保留標題內容,  去除 h1, h2 或 h3 標註
+            tag.replaceWithChildren()
     return soup
 
 def good_parse_content():
