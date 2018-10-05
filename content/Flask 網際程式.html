@@ -79,7 +79,7 @@ $(function(){
 from flask import Flask
 '''
 If you are using a single module (as in this
-example), you should use __name__ because depending on if it&rsquo;s started as application
+example), you should use __name__ because depending on if it’s started as application
 or imported as module the name will be different ('__main__' versus
 the actual import name). This is needed so that Flask knows where to look for
 templates, static files, and so on. For more information have a look at the Flask
@@ -100,9 +100,9 @@ def hello_world():
 
 # app 在本機埠號 5000 執行, 且開啟 debug 模式
 app.run(host='127.0.0.1', port=5000, debug=True)</pre>
-<p>有關 decorator:&nbsp;</p>
-<p><a href="https://realpython.com/primer-on-python-decorators/">https://realpython.com/primer-on-python-decorators/</a>&nbsp;</p>
-<p>根據&nbsp;<a href="https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/">https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/</a>&nbsp;說明:</p>
+<p>有關 decorator: </p>
+<p><a href="https://realpython.com/primer-on-python-decorators/">https://realpython.com/primer-on-python-decorators/</a> </p>
+<p>根據 <a href="https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/">https://blog.techbridge.cc/2018/06/15/python-decorator-introduction/</a> 說明:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@my_decorator
 def my_func(stuff):
     do_things()</pre>
@@ -133,13 +133,13 @@ def login_required(fun):
 def get_payment_page():
     return render_template('payment/index.html')</pre>
 <p>oauth2 模組:</p>
-<p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>&nbsp; (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
+<p><a href="https://github.com/requests/requests-oauthlib">https://github.com/requests/requests-oauthlib</a>  (<a href="https://requests-oauthlib.readthedocs.io/en/latest/">doc</a>)</p>
 <p>or</p>
 <p>google-api-python-client</p>
 <p>google-auth</p>
 <p>google-auth-httplib2</p>
-<p>google-auth-oauthlib<br><br>使用 requests-oauthlib 模組:</p>
-<p>參考:&nbsp;<a href="https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e">https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e</a>&nbsp;</p>
+<p>google-auth-oauthlib<br/><br/>使用 requests-oauthlib 模組:</p>
+<p>參考: <a href="https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e">https://medium.com/@bittu/add-google-oauth2-login-in-your-flask-web-app-9f455695341e</a> </p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
 import json
 import datetime
@@ -466,7 +466,7 @@ if __name__ == '__main__':
   # Specify a hostname and port that are set as a valid redirect URI
   # for your API project in the Google API Console.
   app.run('localhost', 7443, debug=True, ssl_context=context)</pre>
-<p>因為在此要使用 SQLite 資料庫, 可以使用&nbsp;<a href="https://portableapps.com/apps/development/sqlite_database_browser_portable">https://portableapps.com/apps/development/sqlite_database_browser_portable</a>&nbsp;開啟 SQLite 資料庫檔案.</p>
+<p>因為在此要使用 SQLite 資料庫, 可以使用 <a href="https://portableapps.com/apps/development/sqlite_database_browser_portable">https://portableapps.com/apps/development/sqlite_database_browser_portable</a> 開啟 SQLite 資料庫檔案.</p>
 <p>利用 pybean 建立 user 資料表:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
 from pybean import Store, SQLiteWriter
@@ -482,11 +482,12 @@ if not os.path.isfile(data_dir+"content.db"):
     library.save(user)
     library.commit()</pre>
 <p>操作步驟:</p>
-<p><a href="https://console.developers.google.com/">https://console.developers.google.com/</a>&nbsp;</p>
-<p>&nbsp;建立專案,&nbsp;&nbsp;<span>APIs and Auth -&gt; Credentials,&nbsp;&nbsp;Add Credentials and then select OAuth 2.0 client ID</span></p>
+<p><a href="https://console.developers.google.com/">https://console.developers.google.com/</a> </p>
+<p> 建立專案,  <span>APIs and Auth -&gt; Credentials,  Add Credentials and then select OAuth 2.0 client ID</span></p>
 <p><span>get client id and client secret.</span></p>
-<p><span>python -m pip install&nbsp;Flask-Login</span></p>
+<p><span>python -m pip install Flask-Login</span></p>
 <p><span>之後可以使用:</span></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask_login import LoginManager, login_required, login_user, \
     logout_user, current_user, UserMixin</pre>
-<p></p><br />PyQt5 實際操作 << <a href='PyQt5 實際操作.html'>Previous</a> <a href='應用範例.html'>Next</a> >> 應用範例</section></div></body></html>
+<p></p>
+<br />PyQt5 實際操作 << <a href='PyQt5 實際操作.html'>Previous</a> <a href='應用範例.html'>Next</a> >> 應用範例</section></div></body></html>
