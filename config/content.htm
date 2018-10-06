@@ -1,8 +1,11 @@
 <h1>簡介</h1>
 <h4>以 Python 與 PyQt5 為主</h4>
-<p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 PyQt5 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉部分電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p>
+<p>這裡是國立虎尾科技大學機械設計工程系計算機程式課程教材, 主要從 Python 程式語言的學習切入, 並透過 <a href="https://pypi.org/project/PyQt5/">PyQt5</a> 圖形介面程式庫建立視窗程式, 由於目前的機械設計相關產品, 除了機構元件設計外, 還牽涉部分電子電機與資訊元件的網際協同整合, 因此在視窗程式還加入可執行遠端伺服器運算, 本課程採 <a href="http://flask.pocoo.org/">Flask</a> 網際框架, 並輔以 <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 等網際 Python 與 Lua 程式語法.</p>
+<p>機械設計工程系的電腦軟體應用, 在培育具有編寫近端單機 <a href="https://pypi.org/project/PyQt5/">PyQt5</a> 程式套件能力, 並且利用多執行緒啟動網際伺服功能, 讓其他參與協同產品設計者, 能夠利用單機視窗程式客戶端或瀏覽器, 與遠端伺服器互換資料, 並且由近端或遠端套件中的模組, 送出致動指令, 驅動 <a href="http://www.coppeliarobotics.com/">V-rep</a> 上的各種機電整合系統模型. 一旦相關機電資產品的動態控制與模擬完成後, 再藉由各式 3D 列印機製作組合出系統原型.</p>
 <h4>結合 C/C++ 提升運算速度</h4>
 <p>計算機程式課程以 Python 程式語言導入的目的, 在於能讓初學者快速建立用於電腦輔助機械設計流程相關的程式, 而當 Python 程式需要與 C/C++ 程式庫結合時, 則建議利用 <a href="http://www.swig.org/">SWIG</a> (<a href="/downloads/swig_cpp_python.pdf">ref.pdf</a>) 將現成 C/C++ 程式編寫為能讓 Python 直接呼叫執行的動態連結庫.</p>
+<p>註: 目前能自動編譯 C++ 程式為 Python 可呼叫的動態程式庫技術為:</p>
+<p><a href="/downloads/AutoWIG%20-%20automatic%20generation%20of%20python%20bindings%20for%20Cpp%20libraries.pdf">AutoWIG - automatic generation of python bindings for Cpp libraries.pdf</a></p>
 <h4>學習用於 V-rep 的 Lua</h4>
 <p>本課程提及 Lua 程式語言的原因, 在於隨後課程所使用的 <a href="http://www.coppeliarobotics.com/">V-rep</a> 嵌入程式採用 <a href="http://www.coppeliarobotics.com/helpFiles/en/scripts.htm">Lua</a> 程式與 C++ 結合, 因使用 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a>, 使用者可以直接在<a href="http://mde.tw/vecp2018/lua/SchoolProject/">網際 Lua 平台</a>練習基本程式語法.</p>
 <p>至於以 Python 語言編寫的某些數值分析程式, 為了提高執行效率, 也提及可以使用 <a href="http://cython.org/">Cython</a> 將這些 Python 程式庫轉為 C 之後, 再編譯為能與主 Python 程式結合的動態連結庫.</p>
@@ -39,7 +42,7 @@
 <p>為了讓機械設計工程師了解, 該如何利用電腦與網路進行機械設計. 總共安排了四門課程:</p>
 <p>計算機程式 - 內容分為 C, Python, Lua, Html5, CSS, Javascript 等,  利用可攜系統, Git, Fossil SCM, Windows 10 電腦, Ubuntu 電腦與網路的技術, 進行各種問題的解決.</p>
 <p>最佳化設計問題: <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html</a> </p>
-<p>網際內容管理 - 在 Windows 10 與 Ubuntu 電腦, 建立 CMSimfly 與 Pygrouf 環境.</p>
+<p>網際內容管理 - 在 Windows 10 與 Ubuntu 電腦, 建立 <a href="https://github.com/chiamingyen/cmsimfly">CMSimfly</a> 與 <a href="https://github.com/chiamingyen/pygrouf">Pygrouf</a> 環境.</p>
 <p>電腦輔助設計實習 - 加入電腦輔助機械設計零組件繪製與機器人模擬與製作技術研習.</p>
 <p>協同產品設計實習 - 全面利用近端與雲端資源的整合, 進行機電資系統開發.</p>
 <p><a href="https://coggle.it/diagram/WzOQWjCAbuRWow6A/t/%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A8%8B%E5%BC%8F/544030eebbbe4f0d10aff84c8ee2e10a8c36faa1270808c275dc189d98cfcc3e">2018 Fall 計算機程式課程規劃心智圖</a> (under scrum1 At mde)</p>
@@ -53,15 +56,14 @@
 <li>人工智慧應用: 車牌辨識、專家系統與創新設計, 計算機程式經歷輔助式 (Assistant)、導引式 (Guidance) 的發展, 已經逐步進入自主式 (Autonomous) 創新世代.</li>
 </ol>
 <p>課程採用可攜程式系統, 使用者可以下載一般版 <a href="https://drive.google.com/file/d/1DWtyoUhl8CycKJ8uulB3viRXE39KqpE1/view?usp=sharing">p37.7z</a> (240MB  解開後約 1GB) , 或較<span>完整的進階版 </span><span><a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt 可攜系統 .7z</a> (8GB, 解開後約 21GB).</span></p>
-<p>學習 Python 與 PyQt 用於視窗程式開發:</p>
-<p>利用 Python 與 PyQt 可開發 Windows 10 環境執行的視窗程式, 利用 Python 與 Flask 結合 Brython 開發網際程式.</p>
-<p>學習 C 用於 <a href="https://www.tinkercad.com/">Tinkercad</a> Arduino 控制卡模擬:</p>
-<p>學習 Lua 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
+<p>學習 Python 與 <a href="https://pypi.org/project/PyQt5/">PyQt5</a> 用於視窗程式開發:</p>
+<p>利用 Python 與 <a href="https://pypi.org/project/PyQt5/">PyQt5</a> 可開發 Windows 10 環境執行的視窗程式, 利用 Python 與 <a href="http://flask.pocoo.org/">Flask</a> 結合 <a href="https://brython.info/">Brython</a> 開發網際程式.</p>
+<p>學習 C 用於 <a href="https://www.tinkercad.com/">Tinkercad</a> <a href="https://www.arduino.cc/">Arduino</a> 控制卡模擬:</p>
+<p>學習 <a href="https://www.lua.org/">Lua</a> 用於 <a href="http://www.coppeliarobotics.com/">V-rep</a> 機器人模擬:</p>
 <p>學習 Javascript 與  <a href="https://brython.info/">Brython</a> 與 <a href="https://github.com/fengari-lua/fengari-web">Fengari-web</a> 用於網頁動態模擬:</p>
-<p><img alt="" height="367" src="/images/three_gears.png" width="790"/></p>
-<h2>機械設計</h2>
+<p><img alt="" height="367" src="/images/three_gears.png" width="790"/></p><h2>機械設計</h2>
 <p>機械設計與表達</p>
-<p>設計是一種明確與具體的表達, 而且是在仔細思考、多方考量後所完成的表達, 表達具有六種形式, 包括口語、文字、2D、3D、數學與實體表達, 設計的結果可以讓執行者有所依循, 根據指示執行後, 可得預期之結果.</p>
+<p>從工程(細密規劃, 專精巧飾, 運用科學原理達創造目的之特定流程)的角度而言, 設計是一種明確與具體的表達, 而且是在仔細思考、多方考量後所完成的表達, 表達具有六種形式, 包括口語、文字、2D、3D、數學與實體表達, 設計的結果可以讓執行者有所依循, 根據指示執行後, 可得預期之結果.</p>
 <p>機械是一種器物, 而且是由固體、流體與軟體元件精巧組合而成, 可互動運作, 達成特定功能之器物.</p>
 <p>因此機械設計就是靈活運用六種表達, 明確說明如何透過固體、流體與軟體元件之互動運作, 而能達成預定結果之明確與具體表達.</p>
 <p>參與機械設計的工程師, 為順利完成任務, 解決產品開發過程所面臨的各項問題, 展現創造力的三種必備能力: 自學能力、執行能力與想像能力.</p>
@@ -74,7 +76,7 @@
 <h4>身體力行</h4>
 <p>開課教師如何使用計算機程式相關技術?</p>
 <ol>
-<li>利用 Python 建立 <a href="https://github.com/chiamingyen/cmsimfly">CMSimfly</a>, 將課程內容部署在 Github  倉儲</li>
+<li>利用 Python 建立 <a href="https://github.com/chiamingyen/cmsimfly">CMSimfly</a>, 將課程內容部署在 <a href="https://github.com/">Github</a>  倉儲</li>
 <li>使用 <a href="https://www.leoeditor.com/">Leo Editor</a> IDE 管理與課程相關的所有資料</li>
 <li>指導學生利用 Python 建立 <a href="https://github.com/KmolYuan/Pyslvs-PyQt5">Pyslvs</a>, 用於平面機構設計與分析模擬</li>
 <li>利用批次檔案建立 USB 可攜程式套件, <a href="https://drive.google.com/file/d/1DWtyoUhl8CycKJ8uulB3viRXE39KqpE1/view?usp=sharing">p37.7z</a> (240MB, 解開 1GB), <a href="https://drive.google.com/file/d/12BLN4daAPlO1KjCTDFi1kqJZ6f5k7Y5k/view?usp=sharing">Qt</a> (8GB, 解開 21 GB).</li>
@@ -99,8 +101,7 @@
 <li>協同資料擷取便性議題</li>
 <li>資料版本及歷程長期保存議題</li>
 <li>如何尋求可持續改進的電腦輔助設計與工程分析架構與協同機制</li>
-</ol>
-<h2>ANSI C</h2>
+</ol><h2>ANSI C</h2>
 <p>Hello ANSIC:</p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 
@@ -2120,19 +2121,438 @@ doc["ex1"].bind('click', Ex1.prog)
 </script>
 </p>
 <p><!-- ***************************** slide ex1 end --></p>
-<p><button id="keyword">Keyword</button><button id="ex1">Ex1</button></p>
+<p><!-- ***************************** slide ex2 start --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import beditor
+Ex2 = beditor.editor("""# Python 的內建資料型別
+import math
+def f():
+    print("This is a user-defined function")
+    return 42
+
+print("Some basic types in Python:")
+print(type(2))           # int
+print(type(2.2))         # float
+print(type("2.2"))       # str  (string)
+print(type(2 < 2.2))     # bool (boolean)
+print(type(math))        # module
+print(type(math.tan))    # builtin_function_or_method ("function" in Brython)
+print(type(f))           # function (user-defined function)
+print(type(type(42)))    # type
+
+print("#####################################################")
+
+print("And some other types we will see later in the course...")
+print(type(Exception())) # Exception
+print(type(range(5)))    # range
+print(type([1,2,3]))     # list
+print(type((1,2,3)))     # tuple
+print(type({1,2}))       # set
+print(type({1:42}))      # dict (dictionary or map)
+print(type(2+3j))        # complex  (complex number) (we may not see this type)
+""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
+# id 為 "ex2" 的按鈕點按時, 執行 Ex2 物件中的 prog 方法
+doc["ex2"].bind('click', Ex2.prog)
+</script>
+</p>
+<p><!-- ***************************** slide ex2 end --></p>
+<p><!-- ***************************** slide ex3 start --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import beditor
+Ex3 = beditor.editor("""# Python 的內建常數與函式
+# 內建常數
+print("Some builtin constants:")
+print(True)
+print(False)
+print(None)
+
+print("And some more constants in the math module:")
+import math
+print(math.pi)
+print(math.e)
+# 內建函式
+print("Type conversion functions:")
+print(bool(0))   # convert to boolean (True or False)
+print(float(42)) # convert to a floating point number
+print(int(2.8))  # convert to an integer (int)
+
+print("And some basic math functions:")
+print(abs(-5))   # absolute value
+print(max(2,3))  # return the max value
+print(min(2,3))  # return the min value
+print(pow(2,3))  # raise to the given power (pow(x,y) == x**y)
+print(round(2.354, 1)) # round with the given number of digits
+# other examples
+print(3 * 2)
+print(3 * "abc")
+print(3 + 2)
+print("abc" + "def")
+print(3 + "def")
+# Type Affect Semantics
+print(3 * 2)
+print(3 * "abc")
+print(3 + 2)
+print("abc" + "def")
+print(3 + "def")
+# Integer Division
+print("The / operator does 'normal' float division:")
+print(" 5/3  =", ( 5/3))
+print()
+print("The // operator does integer division:")
+print(" 5//3 =", ( 5//3))
+print(" 2//3 =", ( 2//3))
+print("-1//3 =", (-1//3))
+print("-4//3 =", (-4//3))
+# Modulus or Remainder Operator (%)
+print(" 6%3 =", ( 6%3))
+print(" 5%3 =", ( 5%3))
+print(" 2%3 =", ( 2%3))
+print(" 0%3 =", ( 0%3))
+print("-4%3 =", (-4%3))
+print(" 3%0 =", ( 3%0))
+# Verify that (a%b) is equivalent to (a-(a//b)*b)
+def mod(a, b):
+  return a - (a//b)*b
+print(41%14, mod(41,14))
+print(14%41, mod(14,41))
+print(-32%9, mod(-32,9))
+print(32%-9, mod(32,-9))
+# Operator Order (Precedence and Associativity)
+print("Precedence:")
+print(2+3*4)  # prints 14, not 20
+print(5+4%3)  # prints  6, not 0 (% has same precedence as *, /, and //)
+print(2**3*4) # prints 32, not 4096 (** has higher precedence than *, /, //, and %)
+
+print()
+
+print("Associativity:")
+print(5-4-3)   # prints -2, not 4 (- associates left-to-right)
+print(4**3**2) # prints 262144, not 4096 (** associates right-to-left)
+# Approximate Values of Floating-Point Numbers
+print(0.1 + 0.1 == 0.2)        # True, but...
+print(0.1 + 0.1 + 0.1 == 0.3)  # False!
+print(0.1 + 0.1 + 0.1)         # prints 0.30000000000000004 (uh oh)
+print((0.1 + 0.1 + 0.1) - 0.3) # prints 5.55111512313e-17 (tiny, but non-zero!)
+# Equality Testing with math.isclose
+print("The problem....")
+d1 = 0.1 + 0.1 + 0.1
+d2 = 0.3
+print(d1 == d2)                # False (never use == with floats!)
+
+print()
+print("The solution...")
+import math
+print(math.isclose(d1, d2))  # True!
+# math.isclose checks if the two numbers are ALMOST equal, within a small error
+# Short-Circuit Evaluation
+def yes():
+    return True
+
+def no():
+    return False
+
+def crash():
+    return 1/0 # crashes!
+
+print(no() and crash()) # Works!
+print(crash() and no()) # Crashes!
+print (yes() and crash()) # Never runs (due to crash), but would also crash (without short-circuiting)
+# Or operator
+def yes():
+    return True
+
+def no():
+    return False
+
+def crash():
+    return 1/0 # crashes!
+
+print(yes() or crash()) # Works!
+print(crash() or yes()) # Crashes!
+print(no() or crash())  # Never runs (due to crash), but would also crash (without short-circuiting)
+# more examples
+def isPositive(n):
+    result = (n > 0)
+    print("isPositive(",n,") =", result)
+    return result
+
+def isEven(n):
+    result = (n % 2 == 0)
+    print("isEven(",n,") =", result)
+    return result
+
+print("Test 1: isEven(-4) and isPositive(-4))")
+print(isEven(-4) and isPositive(-4)) # Calls both functions
+print("----------")
+print("Test 2: isEven(-3) and isPositive(-3)")
+print(isEven(-3) and isPositive(-3)) # Calls only one function!
+# type vs isinstance
+# Both type and isinstance can be used to type-check
+# In general, (isinstance(x, T)) will be more robust than (type(x) == T)
+
+print(type("abc") == str)
+print(isinstance("abc", str))
+
+# We'll see better reasons for this when we cover OOP + inheritance later
+# in the course.  For now, here is one reason:  say you wanted to check
+# if a value is any kind of number (int, float, complex, etc). 
+# You could do:
+
+def isNumber(x):
+    return ((type(x) == int) or
+            (type(x) == float)) # are we sure this is ALL kinds of numbers?
+
+print(isNumber(1), isNumber(1.1), isNumber(1+2j), isNumber("wow"))
+
+# But this is cleaner, and works for all kinds of numbers, including
+# complex numbers for example:
+
+import numbers
+def isNumber(x):
+    return isinstance(x, numbers.Number) # works for any kind of number
+
+print(isNumber(1), isNumber(1.1), isNumber(1+2j), isNumber("wow"))
+""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
+# id 為 "ex3" 的按鈕點按時, 執行 Ex3 物件中的 prog 方法
+doc["ex3"].bind('click', Ex3.prog)
+</script>
+</p>
+<p><!-- ***************************** slide ex3 end --></p>
+<p><!-- ***************************** slide ex4 start --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import beditor
+Ex4 = beditor.editor("""# Python 函式
+# Vocabulary
+x = 5
+def f(y, z):
+    result = x + y + z
+    return result
+print(f(1, 2)) # 8
+print(f(3, 4)) # 12
+
+# Vocabulary:
+#   variables: global vs. local
+#   statements vs. expressions
+#   function definitions vs. function calls
+#   parameters vs. arguments
+
+# Return Statements
+# Basic example
+
+def isPositive(x):
+    return (x > 0)
+
+print(isPositive(5))  # True
+print(isPositive(-5)) # False
+print(isPositive(0))  # False
+
+# Return ends the function immediately
+def isPositive(x):
+    print("Hello!")   # runs
+    return (x > 0)
+    print("Goodbye!") # does not run ("dead code")
+
+print(isPositive(5))  # prints Hello, then True
+
+# No return statement --> return None
+def f(x):
+    x + 42
+
+print(f(5)) # None
+
+def f2(x):
+    result = x + 42
+
+print(f2(5)) # None
+
+# Print versus Return
+# This is a common early mistake (confusing print and return):
+def cubed(x):
+    print(x**3) # Here is the error!
+
+cubed(2)          # seems to work!
+print(cubed(3))   # sort of works (but prints None, which is weird)
+print(2*cubed(4)) # Error!
+
+# Once again (correctly)
+def cubed2(x):
+    return (x**3) # That's better!
+
+cubed2(2)          # seems to be ignored (why?)
+print(cubed2(3))   # works!
+print(2*cubed2(4)) # works!
+
+# Different Parameter and Return Types
+def hypotenuse(a, b):
+    return ((a**2) + (b**2))**0.5
+
+print(hypotenuse(3, 4)) # 5.0 (not 5)
+print("---------------------")
+
+def xor(b1, b2):
+    return ((b1 and (not b2)) or (b2 and (not b1)))  # same as (b1 != b2)
+
+print(xor(True,  True))  # False
+print(xor(True,  False)) # True
+print(xor(False, True))  # True
+print(xor(False, False)) # False
+print("---------------------")
+
+def isPositive(n):
+    return (n > 0)
+
+print(isPositive(10))     # True
+print(isPositive(-1.234)) # False
+
+# Function Composition
+def f(w):
+    return 10*w
+
+def g(x, y):
+    return f(3*x) + y
+
+def h(z):
+    return f(g(z, f(z+1)))
+
+print(h(1)) # hint: try the "visualize" feature
+
+# Helper Functions 
+def onesDigit(n):
+    return n%10
+
+def largerOnesDigit(x, y):
+    return max(onesDigit(x), onesDigit(y))
+
+print(largerOnesDigit(134, 672)) # 4
+print(largerOnesDigit(132, 674)) # Still 4
+
+# Test Functions
+# A broken test function
+def onesDigit(n):
+    return n%10
+
+def testOnesDigit():
+    print("Testing onesDigit()...", end="")
+    assert(onesDigit(5) == 5)
+    assert(onesDigit(123) == 3)
+    assert(onesDigit(100) == 0)
+    assert(onesDigit(999) == 9)
+    print("Passed!")
+
+testOnesDigit() # Passed!  Why is this bad?
+
+# A better version
+def onesDigit2(n):
+    return n%10
+
+def testOnesDigit2():
+    print("Testing onesDigit()...", end="")
+    assert(onesDigit2(5) == 5)
+    assert(onesDigit2(123) == 3)
+    assert(onesDigit2(100) == 0)
+    assert(onesDigit2(999) == 9)
+    assert(onesDigit2(-123) == 3) # Added this test
+    print("Passed!")
+
+testOnesDigit2() # Crashed!  So the test function worked!
+
+# Local Variable Scope
+def f(x):
+    print("In f, x =", x)
+    x += 5
+    return x
+
+def g(x):
+    return f(x*2) + f(x*3)
+
+print(g(2))
+
+# Another example
+def f(x):
+    print("In f, x =", x)
+    x += 7
+    return round(x / 3)
+
+def g(x):
+    x *= 10
+    return 2 * f(x)
+
+def h(x):
+    x += 3
+    return f(x+4) + g(x)
+
+print(h(f(1)))
+
+# Global Variable Scope
+# In general, you should avoid using global variables.
+# You will even lose style points if you use them!
+# Still, you need to understand how they work, since others
+# will use them, and there may also be some very few occasions
+# where you should use them, too!
+
+g = 100
+
+def f(x):
+    return x + g
+
+print(f(5)) # 105
+print(f(6)) # 106
+print(g)    # 100
+
+# Another exampl
+g = 100
+
+def f(x):
+    # If we modify a global variable, we must declare it as global.
+    # Otherwise, Python will assume it is a local variable.
+    global g
+    g += 1
+    return x + g
+
+print(f(5)) # 106
+print(f(6)) # 108
+print(g)    # 102
+
+# Default arguments
+# Sometimes, a function has a parameter that has a natural default
+# We can specify that default value in the function definition,
+# then choose whether or not to include it in the function call.
+
+def f(x, y=10):
+    return x + y
+
+print(f(5))   # 15
+print(f(5,1)) # 6
+""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
+# id 為 "ex3" 的按鈕點按時, 執行 Ex3 物件中的 prog 方法
+doc["ex4"].bind('click', Ex4.prog)
+</script>
+</p>
+<p><!-- ***************************** slide ex4 end --></p>
+<p><button id="keyword">Keyword</button><button id="ex1">Ex1</button><button id="ex2">Ex2</button><button id="ex3">Ex3</button><button id="ex4">Ex4</button></p>
 <h4>認識 Syntax, Runtime 與 Logical Errors</h4>
 <p>Syntax errors, also known as parsing errors, 指 Python 解譯器在解讀程式碼的過程所發生的語法錯誤. 例如: 在 if , elif , else , for , while , class ,def 宣告時未能加上":".</p>
 <p>比較操作符未能使用 "==".</p>
 <p>因為界定程式執行範圍的縮排單位不一致.</p>
-<p>整數或浮點數與字串以 + 串接時, 忘記利用 str() 轉為字串, 或字串與整數運算時, 忘記利用 int() 將字串轉為整數.</p>
+<p>整數或浮點數與字串以 + 串接時, 忘記利用 <a href="https://docs.python.org/3.7/library/functions.html#func-str">str()</a> 轉為字串, 或字串與整數運算時, 忘記利用 <a href="https://docs.python.org/3.7/library/functions.html#int">int()</a> 將字串轉為整數.</p>
 <p>字串設定未能使用單引號, 雙引號或三引號界定.</p>
 <p>變數命名錯誤, 例如: 以數字開頭變數命名, 或誤用關鍵字作為變數名稱.</p>
 <p>數列引用超出範圍.</p>
 <p>參考資料:</p>
 <p><a href="http://inventwithpython.com/blog/2012/07/09/16-common-python-runtime-errors-beginners-find/">http://inventwithpython.com/blog/2012/07/09/16-common-python-runtime-errors-beginners-find/</a> </p>
 <h4>利用 input() 取得使用者輸入</h4>
-<h4>了解如何導入模組</h4>
+<p style="padding-left: 30px;">在網頁中透過 <a href="https://brython.info/">Brython</a>, 可以讓<a href="https://docs.python.org/3.7/library/functions.html#input"> input()</a> 函式的執行跳出視窗表單, 讓使用者以互動方式執行 Python 程式. 經由 <a href="https://docs.python.org/3.7/library/functions.html#input">input()</a> 取得的資料型別為字串, 若要將取得的變數當作整數使用, 必須利用 <a href="https://docs.python.org/3.7/library/functions.html#int">int()</a> 將字串轉為整數. 若需轉為浮點數, 則可使用 <a href="https://docs.python.org/3.7/library/functions.html#float">float()</a>.</p>
+<p style="padding-left: 30px;">若在程式執行, 需要將整數型別資料轉為字串, 可以使用 <a href="https://docs.python.org/3.7/library/functions.html#func-str">str()</a> 函式轉換.</p>
+<h4>Python 3 的內建函式</h4>
+<p style="padding-left: 30px;"><a href="https://docs.python.org/3.7/library/functions.html">https://docs.python.org/3.7/library/functions.html</a> </p>
+<h4>了解如何導入與建立模組</h4>
+<p style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/modules.html">https://docs.python.org/3/tutorial/modules.html</a> </p>
 <h4>如何吸引更多人運用計算機程式工具</h4>
 <p style="padding-left: 30px;"><a href="/downloads/How%20to make teenage girls love coding using Python and the visual arts orienting language Processing.pdf">How to make teenage girls love coding using Python and the visual arts orienting language Processing.pdf</a></p>
 <p>參考資料</p>
