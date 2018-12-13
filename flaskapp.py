@@ -1165,8 +1165,9 @@ return 'images/';
 @app.route('/')
 def index():
     head, level, page = parse_content()
-    # fix first Chinese heading error
-    return redirect("/get_page/" + urllib.parse.quote_plus(head[0]))
+    # 2018.12.13, 將空白轉為"+" 號, 會導致連線錯誤, 改為直接取頁面標題
+    #return redirect("/get_page/" + urllib.parse.quote_plus(head[0], encoding="utf-8"))
+    return redirect("/get_page/" + head[0])
     # the following will never execute
     directory = render_menu(head, level, page)
     if heading is None:
@@ -1783,7 +1784,7 @@ def set_admin_css():
     outstring = '''<!doctype html>
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
-<title>計算機程式教材</title> \
+<title>''' + init.Init.site_title + '''</title> \
 <link rel="stylesheet" type="text/css" href="/static/cmsimply.css">
 ''' + syntaxhighlight()
 
@@ -1834,7 +1835,7 @@ def set_css():
     outstring = '''<!doctype html>
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
-<title>計算機程式教材</title> \
+<title>''' + init.Init.site_title + '''</title> \
 <link rel="stylesheet" type="text/css" href="/static/cmsimply.css">
 <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
 ''' + syntaxhighlight()
@@ -1892,7 +1893,7 @@ def set_css2():
     outstring = '''<!doctype html>
 <html><head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
-<title>計算機程式教材</title> \
+<title>''' + init.Init.site_title + '''</title> \
 <link rel="stylesheet" type="text/css" href="./../static/cmsimply.css">
 <link rel="icon" href="./../static/favicon.ico" type="image/x-icon" />
 ''' + syntaxhighlight2()

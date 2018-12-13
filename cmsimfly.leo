@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Created by Leo: http://leoeditor.com/leo_toc.html -->
 <leo_file xmlns:leo="http://leoeditor.com/namespaces/leo-python-editor/1.1" >
-<leo_header file_format="2" tnodes="0" max_tnode_index="0" clone_windows="0"/>
-<globals body_outline_ratio="0.5" body_secondary_ratio="0.5">
-	<global_window_position top="50" left="50" height="500" width="700"/>
-	<global_log_window_position top="0" left="0" height="0" width="0"/>
-</globals>
+<leo_header file_format="2"/>
+<globals/>
 <preferences/>
 <find_panel_settings/>
 <vnodes>
@@ -22,17 +19,17 @@
 <v t="leo.20180702145458.1"><vh>@button stop http.server</vh></v>
 </v>
 <v t="leo.20180703102027.1"><vh>@edit README.md</vh></v>
-<v t="amd.20160714225245.2" a="E"><vh>about cmsimfly</vh>
+<v t="amd.20160714225245.2"><vh>about cmsimfly</vh>
 <v t="amd.20160714225847.1"><vh>@edit README.md</vh></v>
 <v t="amd.20160714230137.1"><vh>@edit .gitignore</vh></v>
 <v t="amd.20160714230155.1"><vh>@edit LICENSE</vh></v>
-<v t="amd.20160715000709.1" a="E"><vh>註解</vh>
+<v t="amd.20160715000709.1"><vh>註解</vh>
 <v t="amd.20160715211540.1"><vh>處理 url 與 edit</vh></v>
 <v t="amd.20160715213810.1"><vh>必須處理 downloads 與 images 目錄</vh></v>
-<v t="leo.20180625155103.1" a="E"><vh>改為 pybean based</vh>
+<v t="leo.20180625155103.1"><vh>改為 pybean based</vh>
 <v t="leo.20180625155310.1"><vh>資料庫設計</vh></v>
 </v>
-<v t="leo.20180630135634.1" a="E"><vh>新增 generate_pages 功能</vh>
+<v t="leo.20180630135634.1"><vh>新增 generate_pages 功能</vh>
 <v t="leo.20180630211407.1"><vh>必須修改頁面內容</vh></v>
 <v t="leo.20180712144340.1"><vh>改回手動轉靜態網頁</vh></v>
 </v>
@@ -56,18 +53,18 @@
 <v t="leo.20180625155248.1"><vh>@edit pybean.py</vh></v>
 <v t="leo.20180625155728.1"><vh>@edit schema.sql</vh></v>
 <v t="amd.20160718130611.1"><vh>@edit .gitignore</vh></v>
-<v t="amd.20160717222221.1" a="E"><vh>@path static</vh>
+<v t="amd.20160717222221.1"><vh>@path static</vh>
 <v t="leo.20180718091411.1"><vh>@edit cmsimply.css</vh></v>
 <v t="amd.20160717222242.1"><vh>@edit axuploader.js</vh></v>
 <v t="amd.20160718125932.1"><vh>@edit viewstl.html</vh></v>
 <v t="amd.20160718125943.1"><vh>@edit stlviewer.js</vh></v>
 <v t="amd.20160718212341.1"><vh>@edit jsc3d.js</vh></v>
 </v>
-<v t="amd.20160714230058.1" a="E"><vh>@clean wsgi.py</vh>
+<v t="amd.20160714230058.1"><vh>@clean wsgi.py</vh>
 <v t="amd.20160714230122.1"><vh>wsgi declarations</vh></v>
 </v>
-<v t="amd.20160714230833.1" a="E"><vh>編輯 flaskapp.py</vh>
-<v t="amd.20160714230833.2" a="E"><vh>@clean flaskapp.py</vh>
+<v t="amd.20160714230833.1"><vh>編輯 flaskapp.py</vh>
+<v t="amd.20160714230833.2"><vh>@clean flaskapp.py</vh>
 <v t="amd.20160714230833.3"><vh>&lt;&lt;declarations&gt;&gt;</vh></v>
 <v t="amd.20160714233131.1"><vh>checkLogin</vh></v>
 <v t="amd.20160717235504.1"><vh>delete_file</vh></v>
@@ -845,7 +842,7 @@ def set_admin_css():
     outstring = '''&lt;!doctype html&gt;
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
-&lt;title&gt;計算機程式教材&lt;/title&gt; \
+&lt;title&gt;''' + init.Init.site_title + '''&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
 ''' + syntaxhighlight()
 
@@ -1074,7 +1071,7 @@ a.xhfbfile:hover{
     outstring = '''&lt;!doctype html&gt;
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
-&lt;title&gt;計算機程式教材&lt;/title&gt; \
+&lt;title&gt;''' + init.Init.site_title + '''&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="/static/cmsimply.css"&gt;
 &lt;link rel="icon" href="/static/favicon.ico" type="image/x-icon" /&gt;
 ''' + syntaxhighlight()
@@ -1195,8 +1192,9 @@ def edit_page(edit):
 <t tx="amd.20160715152825.1">@app.route('/')
 def index():
     head, level, page = parse_content()
-    # fix first Chinese heading error
-    return redirect("/get_page/" + urllib.parse.quote_plus(head[0]))
+    # 2018.12.13, 將空白轉為"+" 號, 會導致連線錯誤, 改為直接取頁面標題
+    #return redirect("/get_page/" + urllib.parse.quote_plus(head[0], encoding="utf-8"))
+    return redirect("/get_page/" + head[0])
     # the following will never execute
     directory = render_menu(head, level, page)
     if heading is None:
@@ -2405,7 +2403,7 @@ def get_page2(heading, head, edit):
     outstring = '''&lt;!doctype html&gt;
 &lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
-&lt;title&gt;計算機程式教材&lt;/title&gt; \
+&lt;title&gt;''' + init.Init.site_title + '''&lt;/title&gt; \
 &lt;link rel="stylesheet" type="text/css" href="./../static/cmsimply.css"&gt;
 &lt;link rel="icon" href="./../static/favicon.ico" type="image/x-icon" /&gt;
 ''' + syntaxhighlight2()
